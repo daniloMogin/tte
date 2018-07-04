@@ -1,18 +1,18 @@
 import { Request } from 'express';
-import GroupModel from '../../models/group.server.model';
+import GameModel from '../../models/game.server.model';
 import * as fromInterfaces from './../../models/interfaces/index';
 
-export default class GroupDBCalls {
+export default class GameDBCalls {
     /**
      * 
                         'teams createdBy modifiedBy score',
                         '-password -__v'
      */
-    public findGroup() {
+    public findGame() {
         return new Promise(resolve => {
             try {
-                GroupModel.find()
-                    .populate('createdBy modifiedBy', '-password -__v')
+                GameModel.find()
+                    .populate('teams createdBy modifiedBy', '-password -__v')
                     .then(data => {
                         resolve(data);
                     })
@@ -25,10 +25,10 @@ export default class GroupDBCalls {
         });
     }
 
-    public findGroupById(req: Request) {
+    public findGameById(req: Request) {
         return new Promise(resolve => {
             try {
-                GroupModel.findById(req.params.id)
+                GameModel.findById(req.params.id)
                     .populate(
                         'teams createdBy modifiedBy score',
                         '-password -__v'
@@ -51,10 +51,10 @@ export default class GroupDBCalls {
                         'teams createdBy modifiedBy score',
                         '-password -__v'
      */
-    public findGroupByName(name) {
+    public findGameByName(name) {
         return new Promise(resolve => {
             try {
-                GroupModel.findOne({ name })
+                GameModel.findOne({ name })
                     .populate('createdBy modifiedBy', '-password -__v')
                     .then(data => {
                         resolve(data);
@@ -68,18 +68,20 @@ export default class GroupDBCalls {
         });
     }
 
-    public createGroup(group: fromInterfaces.IGroup) {
+    public createGame(game: fromInterfaces.IGame) {
         return new Promise(resolve => {
             try {
-                const result: fromInterfaces.IGroup = new GroupModel({
-                    name: group.name,
-                    description: group.description,
-                    active: group.active,
-                    teams: group.teams,
-                    createdBy: group.createdBy,
-                    modifiedBy: group.createdBy,
-                    score: group.score
+                const result: fromInterfaces.IGame = new GameModel({
+                    name: game.name,
+                    description: game.description,
+                    active: game.active,
+                    teams: game.teams,
+                    createdBy: game.createdBy,
+                    modifiedBy: game.modifiedBy,
+                    createdAt: game.createdAt
                 });
+                console.log(`result`);
+                console.log(result);
                 result
                     .save()
                     .then(data => {
@@ -94,22 +96,21 @@ export default class GroupDBCalls {
         });
     }
 
-    public updateGroup(group: fromInterfaces.IGroup, req: Request) {
+    public updateGame(game: fromInterfaces.IGame, req: Request) {
         return new Promise(resolve => {
             try {
                 const result = {
-                    name: group.name,
-                    description: group.description,
-                    active: group.active,
-                    createdBy: group.createdBy,
-                    modifiedBy: group.modifiedBy,
-                    teams: group.teams,
-                    score: group.score
+                    name: game.name,
+                    description: game.description,
+                    active: game.active,
+                    teams: game.teams,
+                    score: game.score,
+                    modifiedBy: game.modifiedBy,
+                    updatedAt: game.updatedAt
                 };
                 console.log(`result`);
                 console.log(result);
-                return;
-                GroupModel.findByIdAndUpdate(req.params.id, result)
+                GameModel.findByIdAndUpdate(req.params.id, result)
                     .then(data => {
                         resolve(data);
                     })
@@ -122,10 +123,10 @@ export default class GroupDBCalls {
         });
     }
 
-    public deleteGroup(req: Request) {
+    public deleteGame(req: Request) {
         return new Promise(resolve => {
             try {
-                GroupModel.findByIdAndRemove(req.params.id)
+                GameModel.findByIdAndRemove(req.params.id)
                     .then(data => {
                         resolve(data);
                     })

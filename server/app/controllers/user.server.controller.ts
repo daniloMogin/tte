@@ -1,16 +1,13 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import * as passport from 'passport';
 import * as _ from 'lodash';
 
-const config = require('./../config/constants/constants');
-
 import UserModel from '../models/user.server.model';
 import { IUser } from './../models/interfaces/user.server.interface';
-import { decode } from '../../node_modules/@types/jwt-simple/index';
 
-const UserDBCalls = require('../repo/user_repo/user.server.repo');
-const RoleDBCalls = require('../repo/role_repo/role.server.repo');
-const Functions = require('../share/functions.server');
+import UserDBCalls from '../repo/user_repo/user.server.repo';
+import RoleDBCalls from '../repo/role_repo/role.server.repo';
+import Functions from '../share/functions.server';
 
 const user_db = new UserDBCalls();
 const role_db = new RoleDBCalls();
@@ -22,7 +19,7 @@ class UserController {
         console.log('Rendering register... (register.server.controller.ts 34)');
         console.log('=================================================');
         res.render('register', {
-            title: 'Be SMART DOIT'
+            title: 'Table Tennis EnLight'
         });
     };
 
@@ -31,10 +28,10 @@ class UserController {
         console.log('=================================================');
         console.log('Rendering user... (user.server.controller.ts 34)');
         console.log('=================================================');
-        const findUser = await user_db.findUser();
+        const findUser: any = await user_db.findUser(res);
         if (findUser.length > 0) {
             res.render('listUsers', {
-                title: 'Be SMART DOIT',
+                title: 'Table Tennis EnLight',
                 user: findUser
             });
         } else {
@@ -48,7 +45,7 @@ class UserController {
         if (token) {
             const tempUser: string = func.decodeToken(token);
             try {
-                const findUser = await user_db.findUser();
+                const findUser: any = await user_db.findUser(res);
                 if (findUser.length > 0) {
                     res.status(200).json({ success: true, user: findUser });
                 } else {
@@ -72,7 +69,7 @@ class UserController {
         const token: string = func.getToken(req.headers);
         if (token) {
             try {
-                const findUserById = await user_db.findUserById(req);
+                const findUserById = await user_db.findUserById(req, res);
                 if (findUserById != null) {
                     res.status(200).json({ success: true, user: findUserById });
                 } else {
@@ -113,32 +110,6 @@ class UserController {
                         msg: findUserByUsername
                     });
                 }
-            } catch (error) {
-                res.status(500).json({
-                    success: false,
-                    msg: error
-                });
-            }
-        } else {
-            return res
-                .status(403)
-                .send({ success: false, msg: 'User is not authenticated!' });
-        }
-    });
-
-    public getUserByCompany = (passport.authenticate('jwt', { session: false }),
-    async (req: Request, res: Response) => {
-        const token: string = func.getToken(req.headers);
-        if (token) {
-            try {
-                const findUsers = await user_db
-                    .findUsersByCompanyName(req, res)
-                    .then(data => {
-                        res.status(200).json({ success: true, user: data });
-                    })
-                    .catch(error => {
-                        res.status(500).json({ success: false, msg: error });
-                    });
             } catch (error) {
                 res.status(500).json({
                     success: false,
@@ -195,8 +166,9 @@ class UserController {
                 const roleArr: string[] = req.body.role.split(',');
                 let roleIdArr: number[] = [];
                 for (let i: number = 0; i < roleArr.length; i++) {
-                    const findRoleByName = await role_db.findRoleByName(
-                        roleArr[i].trim()
+                    const findRoleByName: any = await role_db.findRoleByName(
+                        roleArr[i].trim(),
+                        res
                     );
                     roleIdArr.push(findRoleByName._id);
                 }
@@ -208,26 +180,26 @@ class UserController {
                 const active: string = req.body.active;
                 const DoB: string = req.body.DoB;
                 const additionalInfo: string = req.body.username;
-                const user = [
-                    {
-                        name,
-                        lastname,
-                        username,
-                        password,
-                        email,
-                        active,
-                        DoB,
-                        additionalInfo,
-                        roleIdArr
-                    }
-                ];
+                const user = {
+                    name,
+                    lastname,
+                    username,
+                    password,
+                    email,
+                    active,
+                    DoB,
+                    additionalInfo,
+                    roleIdArr
+                };
+
                 const validate_register = await func.validateRegister(
-                    ...user,
+                    user,
                     res
                 );
                 if (_.isNil(validate_register.error)) {
-                    const createUser = await user_db.createUser(
-                        validate_register
+                    const createUser: any = await user_db.createUser(
+                        validate_register,
+                        res
                     );
                     if (_.isNil(createUser.errmsg)) {
                         res.status(200).json({
@@ -261,8 +233,9 @@ class UserController {
             const roleArr: string[] = req.body.role.split(',');
             let roleIdArr: number[] = [];
             for (let i: number = 0; i < roleArr.length; i++) {
-                const findRoleByName = await role_db.findRoleByName(
-                    roleArr[i].trim()
+                const findRoleByName: any = await role_db.findRoleByName(
+                    roleArr[i].trim(),
+                    res
                 );
                 if (!_.isNil(findRoleByName)) {
                     roleIdArr.push(findRoleByName._id);
@@ -283,30 +256,28 @@ class UserController {
             const DoB: string = req.body.DoB;
             const additionalInfo: string = req.body.additionalInfo;
 
-            const user = [
-                {
-                    name,
-                    lastname,
-                    username,
-                    password,
-                    email,
-                    status,
-                    city,
-                    country,
-                    locationChange,
-                    jobType,
-                    experience,
-                    gender,
-                    DoB,
-                    additionalInfo,
-                    role: roleIdArr
-                }
-            ];
+            const user = {
+                name,
+                lastname,
+                username,
+                password,
+                email,
+                status,
+                city,
+                country,
+                locationChange,
+                jobType,
+                experience,
+                gender,
+                DoB,
+                additionalInfo,
+                role: roleIdArr
+            };
 
             try {
-                const findUserById = await user_db.findUserById(req);
+                const findUserById = await user_db.findUserById(req, res);
                 if (findUserById != null) {
-                    const updateUser = await user_db.updateUser(...user, req);
+                    const updateUser = await user_db.updateUser(user, req, res);
                     res.status(201).json({ success: true, user: updateUser });
                 } else {
                     res.status(500).json({ success: false, msg: findUserById });
@@ -328,13 +299,12 @@ class UserController {
         try {
             const validate_login = await func.validateLogin(
                 req.body.username,
-                req.body.password,
-                res
+                req.body.password
             );
 
             if (_.isNil(validate_login.error)) {
                 const authenticate_user_email = await user_db.findUserByUsername(
-                    validate_login.username
+                    validate_login.username, res
                 );
                 if (!_.isNil(authenticate_user_email)) {
                     const authenticate_user_password = await user_db.authenticateUserPassword(
@@ -375,8 +345,8 @@ class UserController {
                 const roleArr: string[] = req.body.role.split(',');
                 let roleIdArr: number[] = [];
                 for (let i: number = 0; i < roleArr.length; i++) {
-                    const findRoleByName = await role_db.findRoleByName(
-                        roleArr[i].trim()
+                    const findRoleByName: any = await role_db.findRoleByName(
+                        roleArr[i].trim(), res
                     );
                     roleIdArr.push(findRoleByName._id);
                 }
@@ -388,7 +358,7 @@ class UserController {
                 const active: string = req.body.active;
                 const DoB: string = req.body.DoB;
                 const additionalInfo: string = req.body.username;
-                const user = [
+                const user = 
                     {
                         name,
                         lastname,
@@ -400,14 +370,12 @@ class UserController {
                         additionalInfo,
                         roleIdArr
                     }
-                ];
                 const validate_register = await func.validateRegister(
-                    ...user,
-                    res
+                    user, res
                 );
                 if (_.isNil(validate_register.error)) {
-                    const createUser = await user_db.createUser(
-                        validate_register
+                    const createUser: any = await user_db.createUser(
+                        validate_register, res
                     );
                     if (!_.isNil(createUser.errmsg)) {
                         res.status(200).json({
@@ -440,7 +408,7 @@ class UserController {
         const token: string = func.getToken(req.headers);
         if (token) {
             try {
-                const decodedUser = await func.decodeToken(token);
+                const decodedUser: any = await func.decodeToken(token);
                 const userId = decodedUser._id;
                 UserModel.findById(userId, '-password -__v')
                     .populate('company role job.jobId', '-__v')

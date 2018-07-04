@@ -4,8 +4,8 @@ import * as _ from 'lodash';
 import CupDBCalls from '../repo/cup_repo/cup.server.repo';
 import GroupDBCalls from '../repo/group_repo/group.server.repo';
 import * as fromInterfaces from './../models/interfaces/index';
+import Functions from '../share/functions.server';
 
-const Functions = require('../share/functions.server');
 const cupDB = new CupDBCalls();
 const groupDB = new GroupDBCalls();
 const func = new Functions();
@@ -133,7 +133,7 @@ export default class CupController {
             // }
             console.log(`req.body`);
             console.log(req.body);
-            const user = await func.decodeToken(token);
+            const user: any = await func.decodeToken(token);
             const cup: any = {
                 name: req.body.name,
                 description: req.body.description,
@@ -171,7 +171,7 @@ export default class CupController {
     async (req: Request, res: Response) => {
         const token: string = func.getToken(req.headers);
         if (token) {
-            const user = await func.decodeToken(token);
+            const user: any = await func.decodeToken(token);
             const cup: fromInterfaces.ICup | any = {
                 name: req.body.name,
                 description: req.body.description,

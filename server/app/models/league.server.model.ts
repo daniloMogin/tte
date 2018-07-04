@@ -38,9 +38,16 @@ export const LeagueSchema: mongoose.Schema = new mongoose.Schema(
                 ref: 'Game',
                 required: false
             }
-        ]
-    },
-    { timestamps: true }
+        ],
+        createdAt: {
+            type: Date,
+            required: false
+        },
+        updatedAt: {
+            type: Date,
+            required: false
+        }
+    }
 );
 
 export default mongoose.model<fromInterfaces.ILeague>('League', LeagueSchema);

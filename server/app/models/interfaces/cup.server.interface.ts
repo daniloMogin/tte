@@ -6,6 +6,8 @@ export interface ICup extends mongoose.Document {
     description: string;
     active: boolean;
     groups: fromInterfaces.IGroup[];
+    createdAt: Date;
+    updatedAt: Date;
     createdBy?: fromInterfaces.IUser;
     modifiedBy?: fromInterfaces.IUser;
 }

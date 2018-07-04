@@ -6,6 +6,8 @@ export interface IGroup extends mongoose.Document {
     description: string;
     active: string;
     teams: fromInterfaces.IUser[];
+    createdAt: Date;
+    updatedAt: Date;
     createdBy: fromInterfaces.IUser;
     modifiedBy: fromInterfaces.IUser;
     score: fromInterfaces.IGame;

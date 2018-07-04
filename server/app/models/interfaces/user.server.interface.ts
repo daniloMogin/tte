@@ -11,4 +11,10 @@ export interface IUser extends mongoose.Document {
     DoB: string;
     additionalInfo: string;
     role: fromInterface.IRole[];
+    winRation: string;
+    games: fromInterface.IGame[];
+    createdAt: Date;
+    updatedAt: Date;
+    createdBy: fromInterface.IUser;
+    modifiedBy: fromInterface.IUser;
 }

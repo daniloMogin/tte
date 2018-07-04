@@ -4,8 +4,8 @@ import { Request, Response, NextFunction } from 'express';
 import RoleModel from '../../models/role.server.model';
 // import UserRoleModel from '../models/user-role.server.model';
 
-class RoleDBCalls {
-    public findRole = (req: Request, res: Response) => {
+export default class RoleDBCalls {
+    public findRole = (res: Response) => {
         return new Promise(resolve => {
             try {
                 RoleModel.find()
@@ -21,7 +21,7 @@ class RoleDBCalls {
         });
     };
 
-    public findRoleByName = (name, req: Request, res: Response) => {
+    public findRoleByName = (name, res: Response) => {
         return new Promise(resolve => {
             try {
                 RoleModel.findOne({ name })
@@ -53,7 +53,7 @@ class RoleDBCalls {
         });
     };
 
-    public createRole = (role, req: Request, res: Response) => {
+    public createRole = (role, res: Response) => {
         return new Promise(resolve => {
             try {
                 const result = new RoleModel({
@@ -100,5 +100,3 @@ class RoleDBCalls {
         });
     };
 }
-
-export = RoleDBCalls;

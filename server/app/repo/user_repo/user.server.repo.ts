@@ -1,17 +1,16 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jwt-simple';
-import * as _ from 'lodash';
 
 const config = require('./../../config/constants/constants');
 import UserModel from '../../models/user.server.model';
-const Functions = require('../../share/functions.server');
+import Functions from '../../share/functions.server';
 const func = new Functions();
 
 const salt = bcrypt.genSaltSync(10);
 
-class UserDBCalls {
-    public findUser = (req: Request, res: Response) => {
+export default class UserDBCalls {
+    public findUser = (res: Response) => {
         return new Promise(resolve => {
             try {
                 UserModel.find()
@@ -106,7 +105,7 @@ class UserDBCalls {
         });
     }
 
-    public createUser = (user, req: Request, res: Response) => {
+    public createUser = (user, res: Response) => {
         return new Promise(resolve => {
             try {
                 const passHash: string = bcrypt.hashSync(user.password);
@@ -175,7 +174,7 @@ class UserDBCalls {
         });
     };
 
-    private authenticateUserPassword = (
+    public authenticateUserPassword = (
         authenticate_user_email,
         req_password: string,
         res: Response
@@ -262,5 +261,3 @@ class UserDBCalls {
         });
     };
 }
-
-export = UserDBCalls;

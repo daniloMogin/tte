@@ -19,7 +19,7 @@ interface DoB {
     message: string;
 }
 
-class Functions {
+export default class Functions {
     /**
      * Function retrive token from http header
      * @param headers - http header
@@ -626,4 +626,3 @@ class Functions {
         return isActiveTemp;
     };
 }
-export = Functions;

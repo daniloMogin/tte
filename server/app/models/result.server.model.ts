@@ -5,7 +5,8 @@ export const ResultSchema: mongoose.Schema = new mongoose.Schema(
     {
         score: {
             type: String,
-            required: true
+            required: false,
+            default: '0 - 0'
         },
         description: {
             type: String,
@@ -17,9 +18,26 @@ export const ResultSchema: mongoose.Schema = new mongoose.Schema(
                 ref: 'User',
                 required: true
             }
-        ]
-    },
-    { timestamps: true }
+        ],
+        createdBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
+        modifiedBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
+        createdAt: {
+            type: Date,
+            required: false
+        },
+        updatedAt: {
+            type: Date,
+            required: false
+        }
+    }
 );
 
 export default mongoose.model<fromInterfaces.IResult>('Result', ResultSchema);

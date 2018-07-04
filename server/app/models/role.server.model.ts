@@ -10,9 +10,26 @@ export const RoleSchema: mongoose.Schema = new mongoose.Schema(
         description: {
             type: String,
             required: false
+        },
+        createdBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
+        modifiedBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
+        createdAt: {
+            type: Date,
+            required: false
+        },
+        updatedAt: {
+            type: Date,
+            required: false
         }
-    },
-    { timestamps: true }
+    }
 );
 
 export default mongoose.model<fromInterfaces.IRole>('Role', RoleSchema);
