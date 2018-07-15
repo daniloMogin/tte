@@ -50,7 +50,7 @@ export const UserSchema: mongoose.Schema = new mongoose.Schema({
             required: true
         }
     ],
-    winRation: {
+    winRatio: {
         type: String,
         required: false
     },

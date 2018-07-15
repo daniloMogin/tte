@@ -189,12 +189,26 @@ export default class GroupController {
         const token: string = func.getToken(req.headers);
         if (token) {
             const user: any = await func.decodeToken(token);
+
+            
+            const teamsArr: string[] = req.body.teams.split(',');
+            let teamsIdArr: number[] = [];
+            for (let i: number = 0; i < teamsArr.length; i++) {
+                const findUserByUsername: any = await userDB.findUserByUsername(
+                    teamsArr[i].trim(),
+                    res
+                );
+                if (!_.isNil(findUserByUsername)) {
+                    teamsIdArr.push(findUserByUsername._id);
+                }
+            }
+
             const group: fromInterfaces.IGroup | any = {
                 name: req.body.name,
                 description: req.body.description,
                 active: req.body.active,
                 modifiedBy: user._id,
-                teams: req.body.teams,
+                teams: teamsIdArr,
                 score: req.body.score
             };
             console.log(`group`);

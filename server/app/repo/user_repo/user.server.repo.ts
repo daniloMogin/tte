@@ -1,10 +1,13 @@
 import { Request, Response } from 'express';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jwt-simple';
+import * as _ from 'lodash';
 
 const config = require('./../../config/constants/constants');
 import UserModel from '../../models/user.server.model';
 import Functions from '../../share/functions.server';
+import * as fromInterface from './../../models/interfaces/index';
+import { SaveOptions } from 'mongoose';
 const func = new Functions();
 
 const salt = bcrypt.genSaltSync(10);
@@ -14,8 +17,7 @@ export default class UserDBCalls {
         return new Promise(resolve => {
             try {
                 UserModel.find()
-                    .populate('company role job.jobId', '-__v')
-                    .select('-job._id')
+                    .populate('role games', '-__v')
                     .exec((err, user) => {
                         if (err) throw err;
                         resolve(user);
@@ -26,12 +28,17 @@ export default class UserDBCalls {
         });
     };
 
-    public findUserById = (req: Request, res: Response) => {
+    public findUserById = (req: Request, res: Response, user?) => {
         return new Promise(resolve => {
             try {
-                UserModel.findById(req.params.userId, '-password -__v')
-                    .populate('company role job.jobId', '-__v')
-                    .select('-job._id')
+                let userId: number = 0;
+                if (_.isNil(user)) {
+                    userId = req.params.userId;
+                } else {
+                    userId = user.userId;
+                }
+                UserModel.findById(userId, '-password -__v')
+                    .populate('role games', '-__v')
                     .exec((err, user) => {
                         if (err) throw err;
                         resolve(user);
@@ -46,8 +53,7 @@ export default class UserDBCalls {
         return new Promise(resolve => {
             try {
                 UserModel.findOne({ username: username })
-                    .populate('company role job.jobId', '-__v')
-                    .select('-job._id')
+                    .populate('role games', '-__v')
                     .then(data => {
                         resolve(data);
                     })
@@ -64,8 +70,7 @@ export default class UserDBCalls {
         return new Promise((resolve, reject) => {
             try {
                 UserModel.find()
-                    .populate('company role job.jobId', '-__v')
-                    .select('-job._id')
+                    .populate('role games', '-__v')
                     .then((users: any[]) => {
                         let data: any[] = [];
                         for (let i: number = 0; i < users.length; i++) {
@@ -144,19 +149,73 @@ export default class UserDBCalls {
                     username: user.username,
                     password: passHash,
                     email: user.email,
-                    status: user.status,
-                    city: user.city,
-                    country: user.country,
-                    locationChange: user.locationChange,
-                    jobType: user.jobType,
-                    experience: user.experience,
-                    gender: user.gender,
+                    active: user.active,
                     DoB: user.DoB,
                     additionalInfo: user.additionalInfo,
-                    role: user.role
+                    role: user.role,
+                    updatedAt: Date.now()
                 };
                 UserModel.findByIdAndUpdate(
                     req.params.userId,
+                    { $set: result },
+                    {
+                        select: '-password',
+                        upsert: false,
+                        new: true
+                    },
+                    (err, doc) => {
+                        if (err) throw err;
+                        resolve(doc);
+                    }
+                );
+            } catch (error) {
+                res.status(500).json({ error });
+            }
+        });
+    };
+
+    public updateUserGame = (
+        userId: fromInterface.IUser,
+        gameId: number[],
+        userIdL,
+        res: Response
+    ) => {
+        return new Promise(resolve => {
+            try {
+                const result = {
+                    games: gameId,
+                    updatedAt: Date.now(),
+                    modifiedBy: userIdL
+                };
+                UserModel.findByIdAndUpdate(
+                    userId._id,
+                    { $set: result },
+                    {
+                        select: '-password',
+                        upsert: false,
+                        new: true
+                    },
+                    (err, doc) => {
+                        if (err) throw err;
+                        resolve(doc);
+                    }
+                );
+            } catch (error) {
+                res.status(500).json({ error });
+            }
+        });
+    };
+
+    public updateUserWinRatio = (user, userId, res: Response) => {
+        return new Promise(resolve => {
+            try {
+                const result = {
+                    winRatio: user.winRatio,
+                    updatedAt: Date.now(),
+                    modifiedBy: userId
+                };
+                UserModel.findByIdAndUpdate(
+                    user.userId,
                     { $set: result },
                     {
                         select: '-password',

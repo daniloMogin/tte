@@ -1,5 +1,6 @@
 import { Request } from 'express';
 import GameModel from '../../models/game.server.model';
+import UserModel from '../../models/user.server.model';
 import * as fromInterfaces from './../../models/interfaces/index';
 
 export default class GameDBCalls {
@@ -80,8 +81,6 @@ export default class GameDBCalls {
                     modifiedBy: game.modifiedBy,
                     createdAt: game.createdAt
                 });
-                console.log(`result`);
-                console.log(result);
                 result
                     .save()
                     .then(data => {
@@ -99,18 +98,21 @@ export default class GameDBCalls {
     public updateGame(game: fromInterfaces.IGame, req: Request) {
         return new Promise(resolve => {
             try {
-                const result = {
+                const gameUpdate = {
                     name: game.name,
                     description: game.description,
                     active: game.active,
                     teams: game.teams,
                     score: game.score,
+                    winner: game.winner,
                     modifiedBy: game.modifiedBy,
                     updatedAt: game.updatedAt
                 };
-                console.log(`result`);
-                console.log(result);
-                GameModel.findByIdAndUpdate(req.params.id, result)
+                GameModel.findByIdAndUpdate(req.params.id, gameUpdate, {
+                    select: '-password',
+                    upsert: false,
+                    new: true
+                })
                     .then(data => {
                         resolve(data);
                     })

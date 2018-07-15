@@ -12,7 +12,10 @@ export default class GroupDBCalls {
         return new Promise(resolve => {
             try {
                 GroupModel.find()
-                    .populate('createdBy modifiedBy', '-password -__v')
+                    .populate(
+                        'teams score createdBy modifiedBy',
+                        '-password -__v'
+                    )
                     .then(data => {
                         resolve(data);
                     })
@@ -30,7 +33,7 @@ export default class GroupDBCalls {
             try {
                 GroupModel.findById(req.params.id)
                     .populate(
-                        'teams createdBy modifiedBy score',
+                        'teams score createdBy modifiedBy',
                         '-password -__v'
                     )
                     .then(data => {
@@ -55,7 +58,10 @@ export default class GroupDBCalls {
         return new Promise(resolve => {
             try {
                 GroupModel.findOne({ name })
-                    .populate('createdBy modifiedBy', '-password -__v')
+                    .populate(
+                        'teams score createdBy modifiedBy',
+                        '-password -__v'
+                    )
                     .then(data => {
                         resolve(data);
                     })
@@ -101,15 +107,16 @@ export default class GroupDBCalls {
                     name: group.name,
                     description: group.description,
                     active: group.active,
-                    createdBy: group.createdBy,
+                    updatedAt: Date.now(),
                     modifiedBy: group.modifiedBy,
                     teams: group.teams,
                     score: group.score
                 };
-                console.log(`result`);
-                console.log(result);
-                return;
-                GroupModel.findByIdAndUpdate(req.params.id, result)
+                GroupModel.findByIdAndUpdate(req.params.id, result, {
+                    select: '-password',
+                    upsert: false,
+                    new: true
+                })
                     .then(data => {
                         resolve(data);
                     })

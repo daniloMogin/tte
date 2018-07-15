@@ -112,11 +112,13 @@ export default class GameController {
         }
     });
 
+    // TODO: update user game nista nisam uradio sa response samo je upisan u niz
     public createGame = (passport.authenticate('jwt', { session: false }),
     async (req: Request, res: Response) => {
         const token: string = func.getToken(req.headers);
         if (token) {
             try {
+                let teamsObjectArr: fromInterfaces.IUser[] = [];
                 const teamsArr: string[] = req.body.teams.split(',');
                 let teamsIdArr: number[] = [];
                 for (let i: number = 0; i < teamsArr.length; i++) {
@@ -127,6 +129,7 @@ export default class GameController {
                     if (!_.isNil(findUserByUsername)) {
                         teamsIdArr.push(findUserByUsername._id);
                     }
+                    teamsObjectArr.push(findUserByUsername);
                 }
                 const user: any = await func.decodeToken(token);
                 const game: any = {
@@ -138,12 +141,18 @@ export default class GameController {
                     modifiedBy: user._id,
                     createdAt: Date.now()
                 };
-                console.log(`game`);
-                console.log(game);
-
                 const createGame: any = await gameDB.createGame(game);
-                console.log(`createGame`);
-                console.log(createGame);
+                const updateUser = [];
+                for (const i of teamsObjectArr) {
+                    updateUser.push(
+                        userDB.updateUserGame(
+                            i,
+                            createGameIdArray(i, createGame),
+                            user._id,
+                            res
+                        )
+                    );
+                }
                 if (_.isNil(createGame.errors)) {
                     res.status(200).json({
                         success: true,
@@ -168,44 +177,66 @@ export default class GameController {
         }
     });
 
-    // TODO 1: Kada se update-uje utakmica treba da se
-    // edituju i igraci koji su igrali.
-    // treba da se upise u niz utakmica i da se update-uje winRatio
-    // razmisliti kako uraditi score u game tabeli.
-    // mozda odvojeno pobednicki rez i gubitnicki,
-    // ili da osane ovako i da se razdvaja na upisu kod igraca
     public updateGame = (passport.authenticate('jwt', { session: false }),
     async (req: Request, res: Response) => {
         const token: string = func.getToken(req.headers);
         if (token) {
             const user: any = await func.decodeToken(token);
             let game: fromInterfaces.IGame | any;
+            let teamsObjectArr: fromInterfaces.IUser[] = [];
+            let teamsIdArr: number[] = [];
+            let teamsArr: string[];
             if (!_.isNil(req.body.teams)) {
-                let teamsIdArr: number[] = [];
-                const teamsArr: string[] = req.body.teams.split(',');
-                for (let i: number = 0; i < teamsArr.length; i++) {
-                    const findUserByUsername: any = await userDB.findUserByUsername(
-                        teamsArr[i].trim(),
+                try {
+                    teamsArr = req.body.teams.split(',');
+                    for (let i: number = 0; i < teamsArr.length; i++) {
+                        const findUserByUsername: any = await userDB.findUserByUsername(
+                            teamsArr[i].trim(),
+                            res
+                        );
+                        if (!_.isNil(findUserByUsername)) {
+                            teamsIdArr.push(findUserByUsername._id);
+                        }
+                        teamsObjectArr.push(findUserByUsername);
+                    }
+                    const winnerId: any = await userDB.findUserByUsername(
+                        req.body.winner,
                         res
                     );
-                    if (!_.isNil(findUserByUsername)) {
-                        teamsIdArr.push(findUserByUsername._id);
-                    }
+                    game = {
+                        name: req.body.name,
+                        description: req.body.description,
+                        active: req.body.active,
+                        modifiedBy: user._id,
+                        teams: teamsIdArr,
+                        score: req.body.score,
+                        winner: winnerId._id,
+                        updatedAt: Date.now()
+                    };
+                } catch (error) {
+                    res.status(500).json({
+                        success: false,
+                        msg: 'Unable to connect to db and fetch all users.'
+                    });
                 }
-                game = {
-                    name: req.body.name,
-                    description: req.body.description,
-                    active: req.body.active,
-                    modifiedBy: user._id,
-                    teams: teamsIdArr,
-                    score: req.body.score,
-                    updatedAt: Date.now()
-                };
                 try {
                     const updateGame: any = await gameDB.updateGame(game, req);
-                    console.log(`updateGame`);
-                    console.log(updateGame);
-                    console.log(updateGame.message);
+                    let userWithWinRatio: any = [];
+                    let updateUser = [];
+                    for (let i: number = 0; i < teamsArr.length; i++) {
+                        userWithWinRatio = await this.calculateWinRatio(
+                            teamsArr[i].trim(),
+                            req,
+                            res
+                        );
+                        updateUser.push(
+                            await userDB.updateUserWinRatio(
+                                userWithWinRatio,
+                                user._id,
+                                res
+                            )
+                        );
+                    }
                     if (_.isNil(updateGame.message)) {
                         res.status(200).json({
                             success: true,
@@ -269,4 +300,49 @@ export default class GameController {
                 .send({ success: false, msg: 'User is not authenticated!' });
         }
     });
+
+    private calculateWinRatio = async (user, req: Request, res: Response) => {
+        try {
+            let findUserByUsername;
+            let userObj;
+            findUserByUsername = await userDB.findUserByUsername(user, res);
+            userObj = {
+                userId: findUserByUsername._id,
+                user: findUserByUsername.name,
+                games: findUserByUsername.games,
+                gamesLen: findUserByUsername.games.length
+            };
+            let winGames: any = [];
+            for (const game of userObj.games) {
+                if (userObj.userId.toString() === game.winner.toString()) {
+                    winGames.push({
+                        userId: userObj.userId,
+                        user: userObj.user,
+                        games: game
+                    });
+                }
+            }
+            const result = {
+                userId: userObj.userId,
+                user: userObj.user,
+                winRatio: (winGames.length / userObj.gamesLen) * 100
+            };
+            return result;
+        } catch (err) {
+            console.error('Unable to calculate win ratio, Error: ', err);
+        }
+    };
 }
+
+const createGameIdArray = (
+    input: fromInterfaces.IUser,
+    createGame: fromInterfaces.IGame
+): number[] => {
+    const gameIds: number[] = [createGame._id];
+    for (const game of input.games) {
+        if (createGame._id !== game._id) {
+            gameIds.push(game._id);
+        }
+    }
+    return gameIds;
+};

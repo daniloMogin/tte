@@ -16,6 +16,11 @@ export const GameSchema: mongoose.Schema = new mongoose.Schema(
             required: false,
             default: '0 - 0'
         },
+        winner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: false
+        },
         teams: [
             {
                 type: mongoose.Schema.Types.ObjectId,
