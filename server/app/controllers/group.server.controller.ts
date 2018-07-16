@@ -2,11 +2,15 @@ import { Request, Response } from 'express';
 import * as passport from 'passport';
 import * as _ from 'lodash';
 import GroupDBCalls from '../repo/group_repo/group.server.repo';
+import GameDBCalls from '../repo/game_repo/game.server.repo';
 import UserDBCalls from '../repo/user_repo/user.server.repo';
 import * as fromInterfaces from './../models/interfaces/index';
 import Functions from '../share/functions.server';
 
+const robin = require('roundrobin');
+
 const groupDB = new GroupDBCalls();
+const gameDB = new GameDBCalls();
 const userDB = new UserDBCalls();
 const func = new Functions();
 
@@ -117,6 +121,7 @@ export default class GroupController {
         const token: string = func.getToken(req.headers);
         if (token) {
             try {
+                const user: any = await func.decodeToken(token);
                 const findGroupByName: any = await groupDB.findGroupByName(
                     req.body.name
                 );
@@ -132,29 +137,48 @@ export default class GroupController {
                             teamsIdArr.push(findUserByUsername._id);
                         }
                     }
-                    // TODO PRAVLJENJE GRUPA
-                    const teamsIdArrPairs = _(teamsIdArr).reduce(function(
-                        result,
-                        value,
-                        index
-                    ) {
-                        if (index % 2 === 0)
-                            result.push(teamsIdArr.slice(index, index + 2));
+                    const gamesArr = robin(teamsIdArr.length, teamsArr);
+                    const gamesArrId = robin(teamsIdArr.length, teamsIdArr);
+                    let gameObj = [];
+                    for (let i = 0; i < gamesArr.length; i++) {
+                        for (let j = 0; j < gamesArr[i].length; j++) {
+                            gameObj.push({
+                                name: 'groupGame',
+                                description: 'groupGame',
+                                active: req.body.active,
+                                teamsNames: gamesArr[i][j],
+                                teams: gamesArrId[i][j],
+                                createdBy: user._id,
+                                modifiedBy: user._id,
+                                createdAt: Date.now(),
+                                updatedAt: Date.now()
+                            });
+                        }
+                    }
+                    let genGame = [];
+                    for (const game of gameObj) {
+                        genGame.push(
+                            await this.generateGames(game, user._id, req, res)
+                        );
+                    }
+                    const genGameIds: number[] = [];
+                    for (const i of genGame) {
+                        genGameIds.push(i._id);
+                    }
+                    // console.log(`genGame`);
+                    // console.log(genGame);
 
-                        return result;
-                    },
-                    []);
-                    const user: any = await func.decodeToken(token);
                     const group: any = {
                         name: req.body.name,
                         description: req.body.description,
                         active: req.body.active,
                         teams: teamsIdArr,
+                        score: genGameIds,
                         createdBy: user._id,
                         modifiedBy: user._id
                     };
                     const createGroup: any = await groupDB.createGroup(group);
-                    if (_.isNil(createGroup.errors)) {
+                    if (_.isNil(createGroup.message)) {
                         res.status(200).json({
                             success: true,
                             group: createGroup
@@ -184,13 +208,50 @@ export default class GroupController {
         }
     });
 
+    public generateGames = (passport.authenticate('jwt', { session: false }),
+    async (game, userId, req: Request, res: Response) => {
+        try {
+            let teamsObjectArr: fromInterfaces.IUser[] = [];
+            let teamsIdArr: number[] = [];
+            for (let i: number = 0; i < game.teams.length; i++) {
+                const findUserByUsername: any = await userDB.findUserByUsername(
+                    game.teamsNames[i].trim(),
+                    res
+                );
+                if (!_.isNil(findUserByUsername)) {
+                    teamsIdArr.push(findUserByUsername._id);
+                }
+                teamsObjectArr.push(findUserByUsername);
+            }
+
+            let createGame: any = [];
+            const updateUser = [];
+            createGame = await gameDB.createGame(game);
+            for (const i of teamsObjectArr) {
+                updateUser.push(
+                    userDB.updateUserGame(
+                        i,
+                        createGameIdArray(i, createGame),
+                        userId,
+                        res
+                    )
+                );
+            }
+            return createGame;
+        } catch (err) {
+            console.error(
+                'Unable to connect to db and fetch all groups. Error is ',
+                err
+            );
+        }
+    });
+
     public updateGroup = (passport.authenticate('jwt', { session: false }),
     async (req: Request, res: Response) => {
         const token: string = func.getToken(req.headers);
         if (token) {
             const user: any = await func.decodeToken(token);
 
-            
             const teamsArr: string[] = req.body.teams.split(',');
             let teamsIdArr: number[] = [];
             for (let i: number = 0; i < teamsArr.length; i++) {
@@ -211,13 +272,9 @@ export default class GroupController {
                 teams: teamsIdArr,
                 score: req.body.score
             };
-            console.log(`group`);
-            console.log(group);
             try {
                 const updateGroup: any = await groupDB.updateGroup(group, req);
-                console.log(`updateGroup`);
-                console.log(updateGroup);
-                if (_.isNil(updateGroup)) {
+                if (_.isNil(updateGroup.message)) {
                     res.status(200).json({
                         success: true,
                         group: updateGroup
@@ -275,3 +332,20 @@ export default class GroupController {
         }
     });
 }
+
+const createGameIdArray = (
+    input: fromInterfaces.IUser,
+    createGame: fromInterfaces.IGame
+): number[] => {
+    const gameIds: number[] = [createGame._id];
+    if (!_.isNil(input.games)) {
+        for (const game of input.games) {
+            if (!_.isNil(game._id)) {
+                if (createGame._id !== game._id) {
+                    gameIds.push(game._id);
+                }
+            }
+        }
+    }
+    return gameIds;
+};
