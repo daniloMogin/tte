@@ -165,9 +165,6 @@ export default class GroupController {
                     for (const i of genGame) {
                         genGameIds.push(i._id);
                     }
-                    // console.log(`genGame`);
-                    // console.log(genGame);
-
                     const group: any = {
                         name: req.body.name,
                         description: req.body.description,

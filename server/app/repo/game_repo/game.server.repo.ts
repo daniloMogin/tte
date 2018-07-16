@@ -72,9 +72,6 @@ export default class GameDBCalls {
     public createGame(game: fromInterfaces.IGame) {
         return new Promise(resolve => {
             try {
-                // console.log(`======================= game =======================`);
-                // console.log(game);
-                
                 const result: fromInterfaces.IGame = new GameModel({
                     name: game.name,
                     description: game.description,
