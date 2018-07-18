@@ -1,9 +1,9 @@
+//#region Imports
 import { Request, Response } from 'express';
 import * as passport from 'passport';
 import * as _ from 'lodash';
 
 import UserModel from '../models/user.server.model';
-import { IUser } from './../models/interfaces/user.server.interface';
 
 import UserDBCalls from '../repo/user_repo/user.server.repo';
 import RoleDBCalls from '../repo/role_repo/role.server.repo';
@@ -12,6 +12,7 @@ import Functions from '../share/functions.server';
 const user_db = new UserDBCalls();
 const role_db = new RoleDBCalls();
 const func = new Functions();
+//#endregion
 
 class UserController {
     public renderRegister = (req: Request, res: Response) => {
@@ -304,7 +305,8 @@ class UserController {
 
             if (_.isNil(validate_login.error)) {
                 const authenticate_user_email = await user_db.findUserByUsername(
-                    validate_login.username, res
+                    validate_login.username,
+                    res
                 );
                 if (!_.isNil(authenticate_user_email)) {
                     const authenticate_user_password = await user_db.authenticateUserPassword(
@@ -346,7 +348,8 @@ class UserController {
                 let roleIdArr: number[] = [];
                 for (let i: number = 0; i < roleArr.length; i++) {
                     const findRoleByName: any = await role_db.findRoleByName(
-                        roleArr[i].trim(), res
+                        roleArr[i].trim(),
+                        res
                     );
                     roleIdArr.push(findRoleByName._id);
                 }
@@ -358,24 +361,25 @@ class UserController {
                 const active: string = req.body.active;
                 const DoB: string = req.body.DoB;
                 const additionalInfo: string = req.body.username;
-                const user = 
-                    {
-                        name,
-                        lastname,
-                        username,
-                        password,
-                        email,
-                        active,
-                        DoB,
-                        additionalInfo,
-                        roleIdArr
-                    }
+                const user = {
+                    name,
+                    lastname,
+                    username,
+                    password,
+                    email,
+                    active,
+                    DoB,
+                    additionalInfo,
+                    roleIdArr
+                };
                 const validate_register = await func.validateRegister(
-                    user, res
+                    user,
+                    res
                 );
                 if (_.isNil(validate_register.error)) {
                     const createUser: any = await user_db.createUser(
-                        validate_register, res
+                        validate_register,
+                        res
                     );
                     if (!_.isNil(createUser.errmsg)) {
                         res.status(200).json({

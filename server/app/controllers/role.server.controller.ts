@@ -1,3 +1,4 @@
+//#region Imports
 import { Response, Request } from 'express';
 import * as passport from 'passport';
 import * as _ from 'lodash';
@@ -6,6 +7,7 @@ import FunctionsController from '../share/functions.server';
 
 const role_db = new RoleDBCalls();
 const func = new FunctionsController();
+//#endregion
 
 class RoleController {
     public getRole = (passport.authenticate('jwt', { session: false }),

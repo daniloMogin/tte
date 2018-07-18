@@ -1,23 +1,23 @@
+//#region Imports
 import { Request, Response } from 'express';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jwt-simple';
 import * as _ from 'lodash';
 
-const config = require('./../../config/constants/constants');
 import UserModel from '../../models/user.server.model';
 import Functions from '../../share/functions.server';
 import * as fromInterface from './../../models/interfaces/index';
-import { SaveOptions } from 'mongoose';
-const func = new Functions();
 
-const salt = bcrypt.genSaltSync(10);
+const config = require('./../../config/constants/constants');
+const func = new Functions();
+//#endregion
 
 export default class UserDBCalls {
     public findUser = (res: Response) => {
         return new Promise(resolve => {
             try {
                 UserModel.find()
-                    .populate('role games', '-__v')
+                    .populate('role games createdBy modifiedBy', '-__v')
                     .exec((err, user) => {
                         if (err) throw err;
                         resolve(user);
@@ -38,7 +38,7 @@ export default class UserDBCalls {
                     userId = user.userId;
                 }
                 UserModel.findById(userId, '-password -__v')
-                    .populate('role games', '-__v')
+                    .populate('role games createdBy modifiedBy', '-__v')
                     .exec((err, user) => {
                         if (err) throw err;
                         resolve(user);
@@ -53,7 +53,7 @@ export default class UserDBCalls {
         return new Promise(resolve => {
             try {
                 UserModel.findOne({ username: username })
-                    .populate('role games', '-__v')
+                    .populate('role games createdBy modifiedBy', '-__v')
                     .then(data => {
                         resolve(data);
                     })

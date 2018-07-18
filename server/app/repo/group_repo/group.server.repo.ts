@@ -1,13 +1,10 @@
+//#region Imports
 import { Request } from 'express';
 import GroupModel from '../../models/group.server.model';
 import * as fromInterfaces from './../../models/interfaces/index';
+//#endregion
 
 export default class GroupDBCalls {
-    /**
-     * 
-                        'teams createdBy modifiedBy score',
-                        '-password -__v'
-     */
     public findGroup() {
         return new Promise(resolve => {
             try {
@@ -48,12 +45,6 @@ export default class GroupDBCalls {
         });
     }
 
-    /**
-     * 
-     * @param name 
-                        'teams createdBy modifiedBy score',
-                        '-password -__v'
-     */
     public findGroupByName(name) {
         return new Promise(resolve => {
             try {

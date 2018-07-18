@@ -1,7 +1,9 @@
+//#region Imports
 import * as express from 'express';
 import * as fromRoutes from './../index';
+//#endregion
 
-let app = express();
+const app = express();
 
 class BaseRoutes {
     get routes(): express.Router {

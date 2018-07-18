@@ -1,8 +1,10 @@
+//#region Imports
 import * as express from 'express';
 import GameController from './../controllers/game.server.controller';
 
 const API_URI_ROOT = '/game/';
 const router = express.Router();
+//#endregion
 
 export class GameRoutes {
     constructor(private _gameController = new GameController()) {}

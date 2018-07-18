@@ -1,8 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
-
-// import RoleModel from '../models/user.server.model';
+//#region Imports
+import { Request, Response } from 'express';
 import RoleModel from '../../models/role.server.model';
-// import UserRoleModel from '../models/user-role.server.model';
+//#endregion
 
 export default class RoleDBCalls {
     public findRole = (res: Response) => {

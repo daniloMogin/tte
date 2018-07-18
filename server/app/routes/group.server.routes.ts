@@ -1,8 +1,10 @@
+//#region Imports
 import * as express from 'express';
 import GroupController from './../controllers/group.server.controller';
 
 const API_URI_ROOT = '/group/';
 const router = express.Router();
+//#endregion
 
 export class GroupRoutes {
     constructor(private _groupController = new GroupController()) {}

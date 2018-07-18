@@ -1,14 +1,10 @@
+//#region Imports
 import { Request } from 'express';
 import GameModel from '../../models/game.server.model';
-import UserModel from '../../models/user.server.model';
 import * as fromInterfaces from './../../models/interfaces/index';
+//#endregion
 
 export default class GameDBCalls {
-    /**
-     * 
-                        'teams createdBy modifiedBy score',
-                        '-password -__v'
-     */
     public findGame() {
         return new Promise(resolve => {
             try {
@@ -46,12 +42,6 @@ export default class GameDBCalls {
         });
     }
 
-    /**
-     * 
-     * @param name 
-                        'teams createdBy modifiedBy score',
-                        '-password -__v'
-     */
     public findGameByName(name) {
         return new Promise(resolve => {
             try {

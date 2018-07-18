@@ -1,14 +1,14 @@
+//#region Imports
 import * as express from 'express';
 import * as jwt from 'jwt-simple';
 import * as bcrypt from 'bcryptjs';
 import * as _ from 'lodash';
+import * as fromInterfaces from './../models/interfaces/index';
 
 const moment = require('moment');
 const PhoneNumber = require('awesome-phonenumber');
 const config = require('./../config/constants/constants');
 const letterNumberUnderscoreRegEx: RegExp = /^[\w& .-/+]+$/;
-const numberRegEx: RegExp = /^\d+$/;
-const phoneno: RegExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 // tslint:disable-next-line:max-line-length
 const emailRegEx: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -18,6 +18,7 @@ interface DoB {
     year: number;
     message: string;
 }
+//#endregion
 
 export default class Functions {
     /**
@@ -40,6 +41,23 @@ export default class Functions {
     public decodeToken = (token): string => {
         const decode = jwt.decode(token, config.secret);
         return decode;
+    };
+
+    public createGameIdArray = (
+        input: fromInterfaces.IUser,
+        createGame: fromInterfaces.IGame
+    ): number[] => {
+        const gameIds: number[] = [createGame._id];
+        if (!_.isNil(input.games)) {
+            for (const game of input.games) {
+                if (!_.isNil(game._id)) {
+                    if (createGame._id !== game._id) {
+                        gameIds.push(game._id);
+                    }
+                }
+            }
+        }
+        return gameIds;
     };
 
     /**

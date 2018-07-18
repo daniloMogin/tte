@@ -1,13 +1,22 @@
-import { Request, Response } from 'express';
+//#region Imports
+import { Request } from 'express';
 import CupModel from '../../models/cup.server.model';
 import * as fromInterfaces from './../../models/interfaces/index';
+//#endregion
 
 export default class CupDBCalls {
-    public findCup(req: Request, res: Response) {
+    public findCup() {
         return new Promise(resolve => {
             try {
                 CupModel.find()
-                    .populate('createdBy groups', '-password -__v')
+                    .populate(
+                        'createdBy modifiedBy winner second third',
+                        '-password -__v'
+                    )
+                    .populate({
+                        path: 'groups',
+                        populate: { path: 'teams score createdBy modifiedBy' }
+                    })
                     .then(data => {
                         resolve(data);
                     })
@@ -20,11 +29,18 @@ export default class CupDBCalls {
         });
     }
 
-    public findCupById(req: Request, res: Response) {
+    public findCupById(req: Request) {
         return new Promise(resolve => {
             try {
                 CupModel.findById(req.params.id)
-                    .populate('createdBy groups', '-password -__v')
+                    .populate(
+                        'createdBy modifiedBy winner second third',
+                        '-password -__v'
+                    )
+                    .populate({
+                        path: 'groups',
+                        populate: { path: 'teams score createdBy modifiedBy' }
+                    })
                     .then(data => {
                         resolve(data);
                     })
@@ -37,11 +53,18 @@ export default class CupDBCalls {
         });
     }
 
-    public findCupByName(req: Request, res: Response) {
+    public findCupByName(name: string) {
         return new Promise(resolve => {
             try {
-                CupModel.find({ name: req.params.name })
-                    .populate('createdBy groups', '-password -__v')
+                CupModel.findOne({ name })
+                    .populate(
+                        'groups createdBy modifiedBy winner second third',
+                        '-password -__v'
+                    )
+                    .populate({
+                        path: 'groups',
+                        populate: { path: 'teams score createdBy modifiedBy' }
+                    })
                     .then(data => {
                         resolve(data);
                     })
@@ -54,11 +77,18 @@ export default class CupDBCalls {
         });
     }
 
-    public findCupByGroup(req: Request, res: Response) {
+    public findCupByGroup(req: Request) {
         return new Promise(resolve => {
             try {
                 CupModel.find({ groups: req.params.group })
-                    .populate('createdBy groups', '-password -__v')
+                    .populate(
+                        'createdBy modifiedBy winner second third',
+                        '-password -__v'
+                    )
+                    .populate({
+                        path: 'groups',
+                        populate: { path: 'teams score createdBy modifiedBy' }
+                    })
                     .then(data => {
                         resolve(data);
                     })
@@ -71,21 +101,19 @@ export default class CupDBCalls {
         });
     }
 
-    public createCup(cup: fromInterfaces.ICup, req: Request, res: Response) {
+    public createCup(cup: fromInterfaces.ICup) {
         return new Promise(resolve => {
             try {
-                console.log(`cup+-++*+-*++-*/+-*+/-*+/+*/+-`);
-                console.log(cup);
                 const result: fromInterfaces.ICup = new CupModel({
                     name: cup.name,
                     description: cup.description,
                     active: cup.active,
                     createdBy: cup.createdBy,
+                    createdAt: cup.createdAt,
                     modifiedBy: cup.createdBy,
+                    updatedAt: cup.updatedAt,
                     groups: cup.groups
                 });
-                console.log(`result`);
-                console.log(result);
                 result
                     .save()
                     .then(data => {
@@ -100,18 +128,20 @@ export default class CupDBCalls {
         });
     }
 
-    public updateCup(cup: fromInterfaces.ICup, req: Request, res: Response) {
+    public updateCup(cup: fromInterfaces.ICup, req: Request) {
         return new Promise(resolve => {
             try {
                 const result = {
                     name: cup.name,
                     description: cup.description,
                     active: cup.active,
-                    createdBy: cup.createdBy,
                     modifiedBy: cup.modifiedBy,
-                    groups: cup.groups
+                    updatedAt: cup.updatedAt,
+                    groups: cup.groups,
+                    winner: cup.winner,
+                    second: cup.second,
+                    third: cup.third
                 };
-
                 CupModel.findByIdAndUpdate(req.params.id, result)
                     .then(data => {
                         resolve(data);
@@ -125,7 +155,7 @@ export default class CupDBCalls {
         });
     }
 
-    public deleteCup(req: Request, res: Response) {
+    public deleteCup(req: Request) {
         return new Promise(resolve => {
             try {
                 CupModel.findByIdAndRemove(req.params.id)

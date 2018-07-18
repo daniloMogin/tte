@@ -1,9 +1,11 @@
-import { Request, Response } from 'express';
+//#region Imports
+import { Request } from 'express';
 import LeagueModel from '../../models/league.server.model';
 import * as fromInterfaces from './../../models/interfaces/index';
+//#endregion
 
 export default class LeagueDBCalls {
-    public findLeague(req: Request, res: Response) {
+    public findLeague() {
         return new Promise(resolve => {
             try {
                 LeagueModel.find()
@@ -23,7 +25,7 @@ export default class LeagueDBCalls {
         });
     }
 
-    public findLeagueById(req: Request, res: Response) {
+    public findLeagueById(req: Request) {
         return new Promise(resolve => {
             try {
                 LeagueModel.findById(req.params.id)
@@ -43,7 +45,7 @@ export default class LeagueDBCalls {
         });
     }
 
-    public findLeagueByName(req: Request, res: Response) {
+    public findLeagueByName(req: Request) {
         return new Promise(resolve => {
             try {
                 LeagueModel.find({ name: req.params.name })
@@ -63,7 +65,7 @@ export default class LeagueDBCalls {
         });
     }
 
-    public findLeagueByGroup(req: Request, res: Response) {
+    public findLeagueByGroup(req: Request) {
         return new Promise(resolve => {
             try {
                 LeagueModel.find({ groups: req.params.group })
@@ -83,11 +85,7 @@ export default class LeagueDBCalls {
         });
     }
 
-    public createLeague(
-        league: fromInterfaces.ILeague,
-        req: Request,
-        res: Response
-    ) {
+    public createLeague(league: fromInterfaces.ILeague) {
         return new Promise(resolve => {
             try {
                 const result: fromInterfaces.ILeague = new LeagueModel({
@@ -112,11 +110,7 @@ export default class LeagueDBCalls {
         });
     }
 
-    public updateLeague(
-        league: fromInterfaces.ILeague,
-        req: Request,
-        res: Response
-    ) {
+    public updateLeague(league: fromInterfaces.ILeague, req: Request) {
         return new Promise(resolve => {
             try {
                 const result = {
@@ -141,7 +135,7 @@ export default class LeagueDBCalls {
         });
     }
 
-    public deleteLeague(req: Request, res: Response) {
+    public deleteLeague(req: Request) {
         return new Promise(resolve => {
             try {
                 LeagueModel.findByIdAndRemove(req.params.id)

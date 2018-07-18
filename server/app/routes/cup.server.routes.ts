@@ -1,9 +1,11 @@
+//#region Imports
 import * as express from 'express';
 import CupController from './../controllers/cup.server.controller';
 import UserController = require('./../controllers/user.server.controller');
 
 const API_URI_ROOT = '/cup/';
 const router = express.Router();
+//#endregion
 
 export class CupRoutes {
     constructor(

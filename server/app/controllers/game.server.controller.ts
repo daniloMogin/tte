@@ -1,3 +1,4 @@
+//#region Imports
 import { Request, Response } from 'express';
 import * as passport from 'passport';
 import * as _ from 'lodash';
@@ -9,6 +10,7 @@ import Functions from '../share/functions.server';
 const gameDB = new GameDBCalls();
 const userDB = new UserDBCalls();
 const func = new Functions();
+//#endregion
 
 export default class GameController {
     public getGames = (passport.authenticate('jwt', { session: false }),
@@ -147,7 +149,7 @@ export default class GameController {
                     updateUser.push(
                         userDB.updateUserGame(
                             i,
-                            createGameIdArray(i, createGame),
+                            func.createGameIdArray(i, createGame),
                             user._id,
                             res
                         )
@@ -333,16 +335,3 @@ export default class GameController {
         }
     };
 }
-
-const createGameIdArray = (
-    input: fromInterfaces.IUser,
-    createGame: fromInterfaces.IGame
-): number[] => {
-    const gameIds: number[] = [createGame._id];
-    for (const game of input.games) {
-        if (createGame._id !== game._id) {
-            gameIds.push(game._id);
-        }
-    }
-    return gameIds;
-};

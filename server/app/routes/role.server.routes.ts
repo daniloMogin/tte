@@ -1,9 +1,10 @@
+//#region Imports
 import * as express from 'express';
-
 import RoleController = require('./../controllers/role.server.controller');
 
 const API_URI_ROOT = '/roles/';
 const router = express.Router();
+//#endregion
 
 export class RoleRoutes {
     private _roleController: RoleController;

@@ -1,3 +1,4 @@
+//#region Imports
 import { Request, Response } from 'express';
 import * as passport from 'passport';
 import * as _ from 'lodash';
@@ -13,6 +14,7 @@ const groupDB = new GroupDBCalls();
 const gameDB = new GameDBCalls();
 const userDB = new UserDBCalls();
 const func = new Functions();
+//#endregion
 
 export default class GroupController {
     public getGroups = (passport.authenticate('jwt', { session: false }),
@@ -228,7 +230,7 @@ export default class GroupController {
                 updateUser.push(
                     userDB.updateUserGame(
                         i,
-                        createGameIdArray(i, createGame),
+                        func.createGameIdArray(i, createGame),
                         userId,
                         res
                     )
@@ -329,20 +331,3 @@ export default class GroupController {
         }
     });
 }
-
-const createGameIdArray = (
-    input: fromInterfaces.IUser,
-    createGame: fromInterfaces.IGame
-): number[] => {
-    const gameIds: number[] = [createGame._id];
-    if (!_.isNil(input.games)) {
-        for (const game of input.games) {
-            if (!_.isNil(game._id)) {
-                if (createGame._id !== game._id) {
-                    gameIds.push(game._id);
-                }
-            }
-        }
-    }
-    return gameIds;
-};
