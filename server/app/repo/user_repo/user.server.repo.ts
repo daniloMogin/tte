@@ -39,9 +39,11 @@ export default class UserDBCalls {
                 }
                 UserModel.findById(userId, '-password -__v')
                     .populate('role games createdBy modifiedBy', '-__v')
-                    .exec((err, user) => {
-                        if (err) throw err;
-                        resolve(user);
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        resolve(error);
                     });
             } catch (error) {
                 res.status(500).json({ error });

@@ -1,0 +1,58 @@
+<div class="componentWrap">
+    <!-- AAAAA {{user$ | async | json}} -->
+        <ul>
+            <li *ngFor="let test of (user$.role | async)">
+                aaaaa
+                {{test.name | json}}
+            </li>
+        </ul>
+    <form [formGroup]="userProfileForm" (ngSubmit)="login(userProfileForm)">
+        <mat-form-field>
+            <input matInput placeholder="Name" type="text" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Lastname" type="text" formControlName="lastname">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Username" type="text" formControlName="username">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Email" type="text" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field>
+            <textarea matInput placeholder="Additional Info" formControlName="additionalInfo"></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Win Ratio" type="text" formControlName="winRatio">
+        </mat-form-field>
+
+        <mat-form-field>
+            <div formArrayName="roles">
+                <h3>Roles</h3>
+                <div *ngFor="let role of roles.controls; let i=index">
+                    <label>
+                        Role:
+                        <input matInput type="text" [formControlName]="i">
+                    </label>
+                </div>
+            </div>
+        </mat-form-field>
+
+        <mat-form-field>
+            <div formArrayName="games">
+                <h3>Games</h3>
+                <div *ngFor="let game of games.controls; let i=index">
+                    <label>
+                        Game:
+                        <input matInput type="text" [formControlName]="i">
+                    </label>
+                </div>
+            </div>
+        </mat-form-field>
+    </form>
+</div>

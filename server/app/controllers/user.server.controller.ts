@@ -44,11 +44,10 @@ class UserController {
     async (req: Request, res: Response) => {
         const token: string = func.getToken(req.headers);
         if (token) {
-            const tempUser: string = func.decodeToken(token);
             try {
                 const findUser: any = await user_db.findUser(res);
                 if (findUser.length > 0) {
-                    res.status(200).json({ success: true, user: findUser });
+                    res.status(200).json(findUser);
                 } else {
                     res.status(500).json({ success: false, msg: findUser });
                 }
@@ -70,10 +69,15 @@ class UserController {
         const token: string = func.getToken(req.headers);
         if (token) {
             try {
-                const findUserById = await user_db.findUserById(req, res);
-                if (findUserById != null) {
+                const findUserById: any = await user_db.findUserById(req, res);
+                console.log(`findUserById`);
+                console.log(findUserById);
+                
+                if (_.isNil(findUserById.message)) {
+                    console.log(`AAAAAAAAAAAAAAAAAAAAAAAA`);
                     res.status(200).json({ success: true, user: findUserById });
                 } else {
+                    console.log(`BBBBBBBBBBBBBBBBBBBBBBBB`);
                     res.status(500).json({ success: false, msg: findUserById });
                 }
             } catch (error) {
@@ -302,7 +306,6 @@ class UserController {
                 req.body.username,
                 req.body.password
             );
-
             if (_.isNil(validate_login.error)) {
                 const authenticate_user_email = await user_db.findUserByUsername(
                     validate_login.username,

@@ -316,12 +316,14 @@ export default class GameController {
             };
             let winGames: any = [];
             for (const game of userObj.games) {
-                if (userObj.userId.toString() === game.winner.toString()) {
-                    winGames.push({
-                        userId: userObj.userId,
-                        user: userObj.user,
-                        games: game
-                    });
+                if (!_.isNil(game.winner)) {
+                    if (userObj.userId.toString() === game.winner.toString()) {
+                        winGames.push({
+                            userId: userObj.userId,
+                            user: userObj.user,
+                            games: game
+                        });
+                    }
                 }
             }
             const result = {
