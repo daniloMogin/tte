@@ -3,7 +3,7 @@ import { UserProfile } from './user-profile/user-profile.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserItemComponent } from './user-item/user.component';
 
-export const components: any[] = [
+export const userComponents: any[] = [
     LoginComponent,
     UserProfile,
     UserListComponent,

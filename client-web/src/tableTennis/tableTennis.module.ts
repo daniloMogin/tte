@@ -47,7 +47,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'games',
-        component: fromContainers.UserComponent
+        component: fromContainers.GameComponent
     },
     {
         path: 'games/game-profile/:gameId',
@@ -68,7 +68,7 @@ export const ROUTES: Routes = [
     {
         path: 'cups/cup-profile/:cupId',
         component: fromContainers.UserComponent
-    },
+    }
 ];
 
 @NgModule({
@@ -92,7 +92,15 @@ export const ROUTES: Routes = [
         MatSortModule
     ],
     providers: [...fromServices.services, CookieService],
-    declarations: [...fromContainers.containers, ...fromComponents.components],
-    exports: [...fromContainers.containers, ...fromComponents.components]
+    declarations: [
+        ...fromContainers.containers,
+        ...fromComponents.userComponents,
+        ...fromComponents.gameComponents
+    ],
+    exports: [
+        ...fromContainers.containers,
+        ...fromComponents.userComponents,
+        ...fromComponents.gameComponents
+    ]
 })
 export class TableTennisModule {}
