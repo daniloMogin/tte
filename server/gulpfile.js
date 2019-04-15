@@ -1,64 +1,33 @@
-var gulp = require('gulp'),
+const gulp = require('gulp'),
     nodemon = require('gulp-nodemon'),
-    ts = require('gulp-typescript'),
-    sass = require('gulp-sass'),
-    rename = require('gulp-rename'),
-    sourcemaps = require('gulp-sourcemaps'),
-    path = require('path');
+    ts = require('gulp-typescript');
 
-var paths = {
+const paths = {
     sass: ['./scss/**/*.scss'],
     tsFiles: ['app/**/*.ts']
 };
 
-var tsProject = ts.createProject('app/tsconfig.json');
+const tsProject = ts.createProject('app/tsconfig.json');
 
 /** COMPILE TS */
-gulp.task('ts', function() {
-    var tsResult = tsProject
+gulp.task('ts', () => {
+    const tsResult = tsProject
         .src()
         .pipe(tsProject());
 
     return (
         tsResult.js
-        .pipe(gulp.dest('public'))
+            .pipe(gulp.dest('public'))
     );
 });
 
-gulp.task('watch-ts', function() {
-    gulp.watch(paths.tsFiles, ['ts']);
+gulp.task('watch-ts', () => {
+    gulp.watch(paths.tsFiles, gulp.series('ts'));
 });
 /** END OF COMPILE TS */
 
-/** COMPILE SASS */
-// gulp.task('sass', function(done) {
-//     gulp
-//         .src('./scss/style.scss')
-//         .pipe(sourcemaps.init())
-//         .pipe(sass())
-//         .pipe(gulp.dest('./public/css/'))
-//         .pipe(
-//             minifyCss({
-//                 keepSpecialComments: 0
-//             })
-//         )
-//         .pipe(
-//             rename({
-//                 extname: '.min.css'
-//             })
-//         )
-//         .pipe(sourcemaps.write('.'))
-//         .pipe(gulp.dest('./public/css/'))
-//         .on('end', done);
-// });
-
-// gulp.task('watch-sass', function() {
-//     gulp.watch(paths.sass, ['sass']);
-// });
-/** END OF COMPILE SASS */
-
-gulp.task('default', ['ts', 'watch-ts'], function() {
-    var options = {
+gulp.task('nd', () => {
+    const options = {
         script: 'bin/www',
         delayTime: 1,
         env: {
@@ -66,7 +35,24 @@ gulp.task('default', ['ts', 'watch-ts'], function() {
         }
     };
     return nodemon(options)
-        .on('restart', function(ev) {
+        .on('restart', (ev) => {
             console.log('Restarting...');
         });
+});
+
+gulp.task('default', (done) => {
+    var stream = nodemon({
+        script: 'bin/www'
+        , ext: 'ts'
+        , tasks: ['ts']
+    })
+
+    stream
+        .on('restart', function () {
+            console.log('restarted!')
+        })
+        .on('crash', function () {
+            console.error('Application has crashed!\n')
+            stream.emit('restart', 10)  // restart the server in 10 seconds
+        })
 });

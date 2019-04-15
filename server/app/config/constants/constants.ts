@@ -9,6 +9,8 @@ class Constants {
             "1/bP2o8j3Ddx4xcrdsbgg2g0HsDDwOM9tJAwokq8C6PO0ygp2HT4pMs_GUHUNcF0kE"
     };
 
+    public static port = 3000;
+
     public static dbSettings = {
         development: {
             username: "danilo",

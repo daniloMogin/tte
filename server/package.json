@@ -51,12 +51,12 @@
         "@types/passport": "^0.4.4",
         "@types/pug": "^2.0.4",
         "@types/q": "^1.5.0",
-        "gulp": "^3.9.1",
-        "gulp-nodemon": "^2.2.1",
+        "gulp": "^4.0.0",
+        "gulp-nodemon": "^2.4.1",
         "gulp-rename": "^1.2.2",
         "gulp-sass": "^4.0.1",
-        "gulp-sourcemaps": "^2.6.4",
-        "gulp-typescript": "^4.0.2",
-        "nodemon": "^1.17.5"
+        "gulp-sourcemaps": "^2.6.5",
+        "gulp-typescript": "^5.0.1",
+        "nodemon": "^1.18.11"
     }
 }

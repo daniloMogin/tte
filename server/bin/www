@@ -3,6 +3,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var mid = require('../public/config/middlewares/base/middlewaresBase'),
     express = require('express'),
     http = require('http'),
+    config = require('./../public/config/constants/constants'),
     app = express();
 
 var port = normalizePort(process.env.PORT || config.port);
