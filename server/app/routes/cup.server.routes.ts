@@ -15,7 +15,7 @@ export class CupRoutes {
 
     get routes(): express.Router {
         const controller = this._cupController;
-        const userController = this._userController;
+        const userController = this._userController; 
 
         router.post(`${API_URI_ROOT}`, controller.createCup);
         router.get(`${API_URI_ROOT}`, controller.getCups);
