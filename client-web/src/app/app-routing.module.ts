@@ -1,8 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { Routes, RouterModule } from '@angular/router';
 import { CupsComponent } from './components/cups/cups.component';
 import { CupDetailComponent } from './components/cup-detail/cup-detail.component';
 import { GroupsComponent } from './components/groups/groups.component';
@@ -14,25 +11,22 @@ import { GameDetailComponent } from './components/game-detail/game-detail.compon
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
+const routes: Routes = [
+  { path: 'cups', component: CupsComponent },
+  { path: 'cups/:id', component: CupDetailComponent },
+  { path: 'groups', component: GroupsComponent },
+  { path: 'groups/:id', component: GroupDetailComponent },
+  { path: 'teams', component: TeamsComponent },
+  { path: 'teams/:id', component: TeamDetailComponent },
+  { path: 'games', component: GamesComponent },
+  { path: 'games/:id', component: GameDetailComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: '/cups', pathMatch: 'full' }
+];
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    CupsComponent,
-    CupDetailComponent,
-    GroupsComponent,
-    GroupDetailComponent,
-    TeamsComponent,
-    TeamDetailComponent,
-    GamesComponent,
-    GameDetailComponent,
-    LoginComponent,
-    RegisterComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppModule { }
+export class AppRoutingModule { }
