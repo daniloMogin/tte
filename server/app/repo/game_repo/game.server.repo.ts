@@ -26,10 +26,6 @@ export default class GameDBCalls {
         return new Promise(resolve => {
             try {
                 GameModel.findById(req.params.id)
-                    .populate(
-                        'teams createdBy modifiedBy score',
-                        '-password -__v'
-                    )
                     .then(data => {
                         resolve(data);
                     })
