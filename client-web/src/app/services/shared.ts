@@ -1,4 +1,5 @@
 import { Observable, of } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 export const API_ROOT = 'http://localhost:3000/API/';
 
@@ -9,4 +10,10 @@ export function handleError<T>(operation = 'operation', result?: T) {
         console.error(error);
         return of(result as T);
     };
+}
+
+export function getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+        Authorization: 'Bearer ' + this.authToken
+    });
 }

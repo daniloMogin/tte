@@ -1,34 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders  } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { API_ROOT, authToken, handleError } from './shared';
+import { ApiService } from './api-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CupsService {
+export class CupsService extends ApiService {
 
-  private API_CUP_URL = API_ROOT + 'cup/';
+  private API_CUP_URL = this.API_ROOT + 'cup/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    super();
+  }
 
   getCups(): Observable<any> {
 
-    const header = new HttpHeaders({
-      Authorization: 'Bearer ' + authToken.replace('JWT ', '')
-    });
-
-    return this.http.get<any>(this.API_CUP_URL,  { headers: header })
+    return this.http.get<any>(this.API_CUP_URL,  { headers: this.getHeaders() })
     .pipe(
-      catchError(handleError<any>('getCup'))
+      catchError(this.handleError<any>('getCup'))
     );
   }
 
   createCup(cup: object): Observable<any> {
     return this.http.post<any>(this.API_CUP_URL, cup)
     .pipe(
-      catchError(handleError<any>('createCup'))
+      catchError(this.handleError<any>('createCup'))
     );
 
   }
@@ -36,21 +34,21 @@ export class CupsService {
   getCupById(id: string): Observable<any> {
     return this.http.get<any>(this.API_CUP_URL + id)
     .pipe(
-      catchError(handleError<any>('getCupById'))
+      catchError(this.handleError<any>('getCupById'))
     );
   }
 
   updateCup(id: string, cup: object): Observable<any> {
     return this.http.put<any>(this.API_CUP_URL + id , cup)
     .pipe(
-      catchError(handleError<any>('updateCup'))
+      catchError(this.handleError<any>('updateCup'))
     );
   }
 
   deleteCup(id: string): Observable<any> {
     return this.http.delete<any>(this.API_CUP_URL + id)
     .pipe(
-      catchError(handleError<any>('deleteCup'))
+      catchError(this.handleError<any>('deleteCup'))
     );
   }
 
