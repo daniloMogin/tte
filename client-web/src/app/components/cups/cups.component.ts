@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as apiServices from '../../services';
+import * as api from '../../services';
 
 @Component({
   selector: 'app-cups',
@@ -8,9 +8,14 @@ import * as apiServices from '../../services';
 })
 export class CupsComponent implements OnInit {
 
-  constructor(private cupsService: apiServices.CupsService) { }
+  cups: any[];
+
+  constructor(private cupsService: api.CupsService) { }
 
   ngOnInit() {
+
+    this.cupsService.getCups().subscribe(response => this.cups = response.cup);
+
   }
 
 }
