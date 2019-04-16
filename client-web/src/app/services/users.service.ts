@@ -31,7 +31,7 @@ private API_CUP_URL = this.API_ROOT + 'users/';
 
   }
   getUserById(id: string): Observable<any> {
-    return this.http.get<any>(this.API_CUP_URL + id)
+    return this.http.get<any>(this.API_CUP_URL + id, {headers: this.getHeaders() })
     .pipe(
       catchError(this.handleError<any>('getUserById'))
     );

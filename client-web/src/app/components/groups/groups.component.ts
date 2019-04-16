@@ -13,7 +13,7 @@ export class GroupsComponent implements OnInit {
   ngOnInit() {
     this.groupsService.getGroup().subscribe(response => {
       this.groups = response.group;
-      console.log(this.groups);
+      //console.log(this.groups);
 
     })
   }

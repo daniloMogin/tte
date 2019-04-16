@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as api from '../../services';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-group-detail',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./group-detail.component.css']
 })
 export class GroupDetailComponent implements OnInit {
-
-  constructor() { }
+  groups = []
+  constructor(private groupsService: api.GroupsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.groupsService.getGroupById(id).subscribe( response => {
+      this.groups = response.group;
+      console.log(this.groups)
+    })
   }
 
 }

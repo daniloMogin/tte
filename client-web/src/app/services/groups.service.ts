@@ -34,7 +34,7 @@ export class GroupsService extends ApiService {
   }
 
   getGroupById(id: string): Observable<any> {
-    return this.http.get<any>(this.API_GROUP_URL + id)
+    return this.http.get<any>(this.API_GROUP_URL + id, {headers: this.getHeaders() })
       .pipe(
         catchError(this.handleError<any>('getGroupById'))
       );

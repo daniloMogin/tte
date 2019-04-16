@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as api from '../../services';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-team-detail',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./team-detail.component.css']
 })
 export class TeamDetailComponent implements OnInit {
-
-  constructor() { }
+  users = [];
+  constructor(private usersService: api.UsersService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.usersService.getUserById(id).subscribe( response => {
+      this.users = response;
+      console.log(this.users)
+    })
   }
 
 }
