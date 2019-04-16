@@ -1,7 +1,7 @@
 <div>
-  <div *ngFor='let game of games'>
+  <a *ngFor='let game of games' routerLink='/games/{{game._id}}'>
     <div>{{ game.name }}</div>
     <div>{{ game.description }}</div>
     <br>
-  </div>
+  </a>
 </div>
