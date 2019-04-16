@@ -12,7 +12,7 @@ export class CupsService extends ApiService {
   private API_CUP_URL = this.API_ROOT + 'cup/';
 
   constructor(private http: HttpClient) { 
-    super();
+    super()
   }
 
   getCups(): Observable<any> {
