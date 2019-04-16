@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CupsService } from '../../services'
 
 @Component({
   selector: 'app-cup-detail',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CupDetailComponent implements OnInit {
 
-  constructor() { }
+  private cup = {};
+
+  constructor(private route: ActivatedRoute, private cupsService: CupsService) { }
 
   ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.cupsService.getCupById(id).subscribe(response => { 
+      this.cup = response.cup;
+      console.log(this.cup);
+    });
   }
 
 }
