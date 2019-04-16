@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { API_ROOT, handleError } from './shared';
+import { API_ROOT, authToken, handleError } from './shared';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,11 @@ export class GroupsService {
   constructor(private http: HttpClient) { }
 
   getGroup(): Observable<any> {
+    const header = new HttpHeaders({
+      Authorization: 'Bearer ' + authToken
+    });
 
-    return this.http.get<any>(this.API_GROUP_URL)
+    return this.http.get<any>(this.API_GROUP_URL, {headers: header})
       .pipe(
         catchError(handleError<any>('getGroup'))
       );
