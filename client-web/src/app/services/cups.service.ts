@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { API_ROOT, handleError } from './shared';
+import { API_ROOT, authToken, handleError } from './shared';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CupsService {
 
-  private API_CUP_URL = API_ROOT + 'cups/';
+  private API_CUP_URL = API_ROOT + 'cup/';
 
   constructor(private http: HttpClient) { }
 
-  getCup(): Observable<any> {
+  getCups(): Observable<any> {
 
-    return this.http.get<any>(this.API_CUP_URL)
+    const header = new HttpHeaders({
+      Authorization: 'Bearer ' + authToken.replace('JWT ', '')
+    });
+
+    return this.http.get<any>(this.API_CUP_URL,  { headers: header })
     .pipe(
       catchError(handleError<any>('getCup'))
     );
