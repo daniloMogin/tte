@@ -8,15 +8,19 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./group-detail.component.css']
 })
 export class GroupDetailComponent implements OnInit {
-  groups = []
+
+  private group: object = {};
+  private loaded = false;
+
   constructor(private groupsService: api.GroupsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.groupsService.getGroupById(id).subscribe( response => {
-      this.groups = response.group;
-      console.log(this.groups)
-    })
+      this.group = response.group;
+      console.log(this.group);
+      this.loaded = true;
+    });
   }
 
 }

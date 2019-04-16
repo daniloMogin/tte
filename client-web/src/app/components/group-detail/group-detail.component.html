@@ -1,3 +1,29 @@
-<p>
-  group-detail works!
-</p>
+<div *ngIf='loaded'>
+
+  <h1>{{ group.name }}</h1>
+
+  <div>{{ group.description }}</div>
+
+  <br>
+
+  <div>
+    <table>
+      <tr *ngFor='let team of group.teams; let i = index'>
+        <td>{{ i + 1}}</td>
+        <td>{{ team.name + ' ' + team.lastname }}</td>
+        <td>{{ team.winRatio ? team.winRatio : 0 }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <br>
+
+  <div>
+    <table>
+      <tr *ngFor='let game of group.score; let i = index'>
+        <td>{{ game.score }}</td>
+      </tr>
+    </table>
+  </div>
+
+</div>

@@ -10,6 +10,7 @@ import { CupsService } from '../../services';
 export class CupDetailComponent implements OnInit {
 
   private cup: object = {};
+  private loaded = false;
 
   constructor(private route: ActivatedRoute, private cupsService: CupsService) { }
 
@@ -18,6 +19,7 @@ export class CupDetailComponent implements OnInit {
     this.cupsService.getCupById(id).subscribe(response => {
       this.cup = response.cup;
       console.log(this.cup);
+      this.loaded = true;
     });
   }
 
