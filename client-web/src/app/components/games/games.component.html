@@ -1,3 +1,7 @@
-<p>
-  games works!
-</p>
+<div>
+  <div *ngFor='let game of games'>
+    <div>{{ game.name }}</div>
+    <div>{{ game.description }}</div>
+    <br>
+  </div>
+</div>

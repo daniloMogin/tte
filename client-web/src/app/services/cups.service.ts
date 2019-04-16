@@ -11,20 +11,20 @@ export class CupsService extends ApiService {
 
   private API_CUP_URL = this.API_ROOT + 'cup/';
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     super();
   }
 
   getCups(): Observable<any> {
 
-    return this.http.get<any>(this.API_CUP_URL,  { headers: this.getHeaders() })
+    return this.http.get<any>(this.API_CUP_URL, { headers: this.getHeaders() })
     .pipe(
       catchError(this.handleError<any>('getCup'))
     );
   }
 
   createCup(cup: object): Observable<any> {
-    return this.http.post<any>(this.API_CUP_URL, cup)
+    return this.http.post<any>(this.API_CUP_URL, cup, { headers: this.getHeaders() })
     .pipe(
       catchError(this.handleError<any>('createCup'))
     );
@@ -32,21 +32,21 @@ export class CupsService extends ApiService {
   }
 
   getCupById(id: string): Observable<any> {
-    return this.http.get<any>(this.API_CUP_URL + id)
+    return this.http.get<any>(this.API_CUP_URL + id, { headers: this.getHeaders() })
     .pipe(
       catchError(this.handleError<any>('getCupById'))
     );
   }
 
   updateCup(id: string, cup: object): Observable<any> {
-    return this.http.put<any>(this.API_CUP_URL + id , cup)
+    return this.http.put<any>(this.API_CUP_URL + id , cup, { headers: this.getHeaders() })
     .pipe(
       catchError(this.handleError<any>('updateCup'))
     );
   }
 
   deleteCup(id: string): Observable<any> {
-    return this.http.delete<any>(this.API_CUP_URL + id)
+    return this.http.delete<any>(this.API_CUP_URL + id, { headers: this.getHeaders() })
     .pipe(
       catchError(this.handleError<any>('deleteCup'))
     );
