@@ -1,6 +1,20 @@
-<div>
-  <a *ngFor='let cup of cups' routerLink='/cups/{{cup._id}}'>
-    <div>{{ cup.name }}</div>
-    <div>{{ cup.description }}</div>
-  </a>
-</div>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Cups
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <a *ngFor='let cup of cups' routerLink='/cups/{{cup._id}}'>
+      <div>{{ cup.name }}</div>
+      <div>{{ cup.description }}</div>
+    </a>
+  </div>
+</ion-content>
+
