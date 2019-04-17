@@ -27,7 +27,9 @@
       <table>
         <tr *ngFor='let team of group.teams; let i = index'>
           <td>{{ i + 1 }}</td>
-          <td>{{ team.name + ' ' + team.lastname }}</td>
+          <a routerLink='/teams/{{team._id}}'>
+            <td>{{ team.name + ' ' + team.lastname }}</td>
+          </a>
           <td>{{ team.winRatio ? team.winRatio : 0 }}</td>
         </tr>
       </table>

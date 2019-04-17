@@ -1,6 +1,8 @@
 <div>
   <a *ngFor='let game of games' routerLink='/games/{{game._id}}'>
-    <div>{{ game.name }}</div>
+    <a routerLink='/games/{{game._id}}'>
+      <div>{{ game.name }}</div>
+    </a>
     <div>{{ game.description }}</div>
     <br>
   </a>
