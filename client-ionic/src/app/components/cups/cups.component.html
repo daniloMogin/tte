@@ -1,0 +1,6 @@
+<div>
+  <a *ngFor='let cup of cups' routerLink='/cups/{{cup._id}}'>
+    <div>{{ cup.name }}</div>
+    <div>{{ cup.description }}</div>
+  </a>
+</div>

@@ -1,0 +1,16 @@
+<ul>
+  <li>{{users.name + ' ' + users.lastname}}</li>
+  <li>{{users.winRatio}}</li>
+  <li>{{users.DoB}}</li>
+  <li>{{users.email}}</li>
+</ul>
+
+<table>
+  
+    <tr *ngFor='let game of users.games'>
+      <a routerLink='/games/{{game._id}}'>
+        <td>{{game.score}}</td>
+      </a>
+    </tr>
+  
+</table>
