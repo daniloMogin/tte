@@ -5,11 +5,12 @@
   <li>{{users.email}}</li>
 </ul>
 
-
 <table>
   
-    <tr *ngFor='let user of users.games'>
-      <td>{{user.score}}</td>
-        </tr>
+    <tr *ngFor='let game of users.games'>
+      <a routerLink='/games/{{game._id}}'>
+        <td>{{game.score}}</td>
+      </a>
+    </tr>
   
 </table>
