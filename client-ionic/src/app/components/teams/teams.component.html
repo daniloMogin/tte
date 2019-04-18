@@ -10,17 +10,19 @@
 </ion-header>
 
 <ion-content>
-<table class="table table-dark">
+<table class="table table-striped">
   <tr>
     <th>Name</th>
     <th>Date of Birth</th>
     <th>Win Ratio</th>
+    <th></th>
   </tr>
   <tr *ngFor="let user of users">
     <a routerLink='/teams/{{user._id}}'><td>{{user.name + ' ' + user.lastname}}</td></a>
     <td>{{user.DoB}}</td>
     <td *ngIf='user.winRatio'>{{user.winRatio | number: '1.2-2'}}</td>
     <td *ngIf='!user.winRatio'>-</td>
+    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
   </tr>
 </table>
 </ion-content>

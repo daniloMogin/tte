@@ -1,9 +1,16 @@
-<div>
-  <a *ngFor='let game of games' routerLink='/games/{{game._id}}'>
-    <a routerLink='/games/{{game._id}}'>
-      <div>{{ game.name }}</div>
-    </a>
-    <div>{{ game.description }}</div>
-    <br>
-  </a>
-</div>
+<ion-content>
+  <table class="table table-striped">
+    <tr>
+      <th>Game name </th>
+      <th>Score</th>
+      <th></th>
+    </tr>
+    <tr *ngFor='let game of games'>
+      <a routerLink='/games/{{game._id}}'>
+        <td>{{ game.name }}</td>
+      </a>
+      <td>{{ game.score }}</td>
+      <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
+    </tr>
+  </table>
+</ion-content>

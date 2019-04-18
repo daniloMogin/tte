@@ -14,16 +14,16 @@
 
     <ion-col size-xs='12' size-md='6'>
 
-      <ul>
-        <li><strong>Full Name: </strong>{{users.name + ' ' + users.lastname}}</li>
-        <li *ngIf='users.winRatio'><strong>Win Ratio: </strong>{{users.winRatio | number: '1.2-2'}}</li>
-        <li *ngIf='!users.winRatio'><strong>Win Ratio: </strong>-</li>
-        <li><strong>Date Of Birth: </strong>{{users.DoB}}</li>
-        <li><strong>E-mail: </strong>{{users.email}}</li>
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Full Name: </strong>{{users.name + ' ' + users.lastname}}</li>
+        <li class="list-group-item" *ngIf='users.winRatio'><strong>Win Ratio: </strong>{{users.winRatio | number: '1.2-2'}}</li>
+        <li class="list-group-item" *ngIf='!users.winRatio'><strong>Win Ratio: </strong>-</li>
+        <li class="list-group-item"><strong>Date Of Birth: </strong>{{users.DoB}}</li>
+        <li class="list-group-item"><strong>E-mail: </strong>{{users.email}}</li>
       </ul>
     </ion-col>
     <ion-col size-xs='12' size-md='6'>
-      <table class="table table-dark text-center">
+      <table class="table table-striped text-center">
         <tr>
           <th>Games</th>
         </tr>
