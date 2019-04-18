@@ -20,7 +20,7 @@
     <a routerLink='/teams/{{user._id}}'><td>{{user.name + ' ' + user.lastname}}</td></a>
     <td>{{user.DoB}}</td>
     <td *ngIf='user.winRatio'>{{user.winRatio | number: '1.2-2'}}</td>
-    <td *ngIf='!user.winRatio'>/</td>
+    <td *ngIf='!user.winRatio'>-</td>
   </tr>
 </table>
 </ion-content>
