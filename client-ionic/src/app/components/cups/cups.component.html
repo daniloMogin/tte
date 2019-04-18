@@ -10,11 +10,25 @@
 </ion-header>
 
 <ion-content>
-  <div>
-    <a *ngFor='let cup of cups' routerLink='/cups/{{cup._id}}'>
-      <div>{{ cup.name }}</div>
-      <div>{{ cup.description }}</div>
-    </a>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor='let cup of cups' size-xs='12' size-sm='6' size-md='4'>
+        <a routerLink='/cups/{{cup._id}}'>
+          <ion-card>
+            <ion-card-header text-center>
+              <ion-card-subtitle>{{ cup.name }}</ion-card-subtitle>
+              <ion-card-title>{{ cup.description }}</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+              <img>
+            </ion-card-content>
+          </ion-card>
+        </a>
+      </ion-col>
+      <!--  <div>{{ cup.name }}</div>
+        <div>{{ cup.description }}</div> -->
+    </ion-row>
+  </ion-grid>
 </ion-content>
 

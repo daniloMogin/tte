@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content text-center>
 
   <div *ngIf='loaded'>
 
@@ -19,29 +19,61 @@
 
     <br>
 
-    <div>
-      <table>
-        <tr *ngFor='let team of group.teams; let i = index'>
-          <td>{{ i + 1}}</td>
-          <a routerLink='/teams/{{team._id}}'>
-            <td>{{ team.name + ' ' + team.lastname }}</td>
-          </a>
-          <td>{{ team.winRatio ? team.winRatio : 0 }}</td>
-        </tr>
-      </table>
-    </div>
+    <ion-grid>
 
-    <br>
+      <ion-row>
+        
+        <ion-col size-sm='12' size-md='6'>
+          <table>
+            <thead>
+              <tr>
+                <th>Position</th>
+                <th>Name</th>
+                <th>Win ratio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let team of group.teams; let i = index'>
+                <td>{{ team.winRatio ? i + 1 : '-'}}</td>
+                <a routerLink='/teams/{{team._id}}'>
+                  <td>{{ team.name + ' ' + team.lastname }}</td>
+                </a>
+                <td>{{ team.winRatio ? team.winRatio : '-' }}</td>
+              </tr>
+          </tbody>
+          </table>
+        </ion-col>
 
-    <div>
-      <table>
-        <tr *ngFor='let game of group.score; let i = index'>
-          <a routerLink='/games/{{game._id}}'>
-            <td>{{ game.score }}</td>
-          </a>
-        </tr>
-      </table>
-    </div>
+        <br>
+
+        <ion-col size-sm='12' size-md='6'>
+          <table>
+            <thead>
+              <tr>
+                <th>Team 1</th>
+                <th>SCORE</th>
+                <th>Team 2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let game of group.score; let i = index'>
+                <td></td>
+                <td>
+                  <a routerLink='/games/{{game._id}}'>
+                    {{ game.score }}
+                  </a>
+                </td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </ion-col>
+        
+      </ion-row>
+
+    </ion-grid>
+
+    
 
   </div>
 
