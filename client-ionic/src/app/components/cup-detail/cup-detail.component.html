@@ -1,40 +1,55 @@
-<div *ngIf='loaded'>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Details of Cup: {{ cup.name | uppercase }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <h1>{{ cup.name }}</h1>
+<ion-content>
 
-  <br>
+  <div *ngIf='loaded'>
 
-  <div>{{ cup.description }}</div>
+    <h1>{{ cup.name }}</h1>
 
-  <br>
-  
-  <div>
-    <div>WINNER: {{ cup.winner.name + ' ' + cup.winner.lastname }}</div>
-    <div>SECOND PLACE: {{ cup.second.name + ' ' + cup.second.lastname }}</div>
-    <div>THIRD PLACE: {{ cup.third.name + ' ' + cup.third.lastname }}</div>
-  </div>
+    <br>
 
-  <br>
+    <div>{{ cup.description }}</div>
 
-  <div>
-    <div *ngFor='let group of cup.groups'>
-      <a routerLink='/groups/{{group._id}}'>
-        <div>{{ group.name }}</div>
-      </a>
-      
-      <div>{{ group.description }}</div>
-      <br>
-      <table>
-        <tr *ngFor='let team of group.teams; let i = index'>
-          <td>{{ i + 1 }}</td>
-          <a routerLink='/teams/{{team._id}}'>
-            <td>{{ team.name + ' ' + team.lastname }}</td>
-          </a>
-          <td>{{ team.winRatio ? team.winRatio : 0 }}</td>
-        </tr>
-      </table>
-      <br>
+    <br>
+    
+    <div>
+      <div>WINNER: {{ cup.winner.name + ' ' + cup.winner.lastname }}</div>
+      <div>SECOND PLACE: {{ cup.second.name + ' ' + cup.second.lastname }}</div>
+      <div>THIRD PLACE: {{ cup.third.name + ' ' + cup.third.lastname }}</div>
     </div>
+
+    <br>
+
+    <div>
+      <div *ngFor='let group of cup.groups'>
+        <a routerLink='/groups/{{group._id}}'>
+          <div>{{ group.name }}</div>
+        </a>
+        
+        <div>{{ group.description }}</div>
+        <br>
+        <table>
+          <tr *ngFor='let team of group.teams; let i = index'>
+            <td>{{ i + 1 }}</td>
+            <a routerLink='/teams/{{team._id}}'>
+              <td>{{ team.name + ' ' + team.lastname }}</td>
+            </a>
+            <td>{{ team.winRatio ? team.winRatio : 0 }}</td>
+          </tr>
+        </table>
+        <br>
+      </div>
+    </div>
+
   </div>
 
-</div>
+</ion-content>

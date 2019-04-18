@@ -1,5 +1,18 @@
-<ul>
-  <a *ngFor='let group of groups' routerLink='/groups/{{group._id}}'>
-    <li>{{ group._id }}</li>
-  </a>
-</ul>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      List of Groups
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ul>
+    <a *ngFor='let group of groups' routerLink='/groups/{{group._id}}'>
+      <li>{{ group._id }}</li>
+    </a>
+  </ul>
+</ion-content>
