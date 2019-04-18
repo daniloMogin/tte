@@ -15,10 +15,11 @@
     <ion-col size-xs='12' size-md='6'>
 
       <ul>
-        <li>Full Name: {{users.name + ' ' + users.lastname}}</li>
-        <li>Win Ratio: {{users.winRatio}}</li>
-        <li>Date Of Birth: {{users.DoB}}</li>
-        <li>E-mail: {{users.email}}</li>
+        <li><strong>Full Name: </strong>{{users.name + ' ' + users.lastname}}</li>
+        <li *ngIf='users.winRatio'><strong>Win Ratio: </strong>{{users.winRatio | number: '1.2-2'}}</li>
+        <li *ngIf='!users.winRatio'><strong>Win Ratio: </strong>-</li>
+        <li><strong>Date Of Birth: </strong>{{users.DoB}}</li>
+        <li><strong>E-mail: </strong>{{users.email}}</li>
       </ul>
     </ion-col>
     <ion-col size-xs='12' size-md='6'>
