@@ -1,0 +1,14 @@
+ion-card {
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.add-button-container {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 5em;
+  color: #3880ff;
+}
+
