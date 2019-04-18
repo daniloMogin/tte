@@ -10,9 +10,24 @@
 </ion-header>
 
 <ion-content>
-  <ul>
-    <a *ngFor='let group of groups' routerLink='/groups/{{group._id}}'>
-      <li>{{ group._id }}</li>
-    </a>
-  </ul>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor='let group of groups' size-xs='12' size-sm='6' size-md='4'>
+        <a routerLink='/groups/{{group._id}}'>
+          <ion-card>
+            <ion-card-header text-center>
+              <ion-card-subtitle>{{ group.name }}</ion-card-subtitle>
+              <ion-card-title>{{ group.description }}</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+              <img>
+            </ion-card-content>
+          </ion-card>
+        </a>
+      </ion-col>
+      <!--  <div>{{ cup.name }}</div>
+        <div>{{ cup.description }}</div> -->
+    </ion-row>
+  </ion-grid>
 </ion-content>
