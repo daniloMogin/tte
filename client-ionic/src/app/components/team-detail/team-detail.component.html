@@ -1,16 +1,39 @@
-<ul>
-  <li>{{users.name + ' ' + users.lastname}}</li>
-  <li>{{users.winRatio}}</li>
-  <li>{{users.DoB}}</li>
-  <li>{{users.email}}</li>
-</ul>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Details of Team {{users.name | uppercase}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-grid>
+  <ion-row>
 
-<table>
-  
-    <tr *ngFor='let game of users.games'>
-      <a routerLink='/games/{{game._id}}'>
-        <td>{{game.score}}</td>
-      </a>
-    </tr>
-  
-</table>
+    <ion-col size-xs='12' size-md='6'>
+
+      <ul>
+        <li>Full Name: {{users.name + ' ' + users.lastname}}</li>
+        <li>Win Ratio: {{users.winRatio}}</li>
+        <li>Date Of Birth: {{users.DoB}}</li>
+        <li>E-mail: {{users.email}}</li>
+      </ul>
+    </ion-col>
+    <ion-col size-xs='12' size-md='6'>
+      <table>
+        <tr>
+          <th>Games</th>
+        </tr>
+        <tr *ngFor='let game of users.games'>
+          <a routerLink='/games/{{game._id}}'>
+            <td>{{game.score}}</td>
+          </a>
+        </tr>
+
+      </table>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>
