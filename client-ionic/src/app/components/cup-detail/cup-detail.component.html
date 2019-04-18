@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content text-center>
 
   <div *ngIf='loaded'>
 
@@ -27,30 +27,32 @@
       <div>THIRD PLACE: {{ cup.third.name + ' ' + cup.third.lastname }}</div>
     </div>
 
-    <br>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor='let group of cup.groups' size-sm='12' size-md='6'>
+          
+          <a routerLink='/groups/{{group._id}}'>
+            <div>{{ group.name }}</div>
+          </a>
+          <div>{{ group.description }}</div>
 
-    <div>
-      <div *ngFor='let group of cup.groups'>
-        <a routerLink='/groups/{{group._id}}'>
-          <div>{{ group.name }}</div>
-        </a>
-        
-        <div>{{ group.description }}</div>
-        <br>
-        <table>
-          <tbody>
-            <tr *ngFor='let team of group.teams; let i = index'>
-              <td>{{ i + 1 }}</td>
-              <a routerLink='/teams/{{team._id}}'>
-                <td>{{ team.name + ' ' + team.lastname }}</td>
-              </a>
-              <td>{{ team.winRatio ? team.winRatio : 0 }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <br>
-      </div>
-    </div>
+          <table class='table table-bordered table-striped'>
+            <tbody>
+              <tr *ngFor='let team of group.teams; let i = index'>
+                <td>{{ i + 1 }}</td>
+                <td>
+                  <a routerLink='/teams/{{team._id}}'>
+                  {{ team.name + ' ' + team.lastname }}
+                  </a>
+                </td>
+                <td>{{ team.winRatio ? team.winRatio : 0 }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
   </div>
 
