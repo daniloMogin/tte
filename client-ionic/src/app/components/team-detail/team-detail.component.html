@@ -23,11 +23,11 @@
       </ul>
     </ion-col>
     <ion-col size-xs='12' size-md='6'>
-      <table class="table table-stripes">
+      <table class="table table-dark text-center">
         <tr>
           <th>Games</th>
         </tr>
-        <tr *ngFor='let game of users.games'>
+        <tr *ngFor='let game of users.games; let i=index'>
           <a routerLink='/games/{{game._id}}'>
             <td>{{game.score}}</td>
           </a>
