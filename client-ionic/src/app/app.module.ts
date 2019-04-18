@@ -20,6 +20,7 @@ import { GamesComponent } from './components/games/games.component';
 import { GameDetailComponent } from './components/game-detail/game-detail.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { EditModalComponent } from './components/modal/edit-modal/edit-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +34,11 @@ import { RegisterComponent } from './components/register/register.component';
     GamesComponent,
     GameDetailComponent,
     LoginComponent,
-    RegisterComponent],
-  entryComponents: [],
+    RegisterComponent,
+    EditModalComponent
+  ],
+    
+  entryComponents: [EditModalComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
