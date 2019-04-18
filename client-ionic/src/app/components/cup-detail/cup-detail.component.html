@@ -21,23 +21,36 @@
 
     <br>
     
-    <div>
-      <div>WINNER: {{ cup.winner.name + ' ' + cup.winner.lastname }}</div>
-      <div>SECOND PLACE: {{ cup.second.name + ' ' + cup.second.lastname }}</div>
-      <div>THIRD PLACE: {{ cup.third.name + ' ' + cup.third.lastname }}</div>
-    </div>
+    <table class='table table-bordered table-fit'>
+      <tr>
+        <td>WINNER</td><td><a routerLink='/teams/{{cup.winner._id}}'>{{ cup.winner.name + ' ' + cup.winner.lastname }}</a></td>
+      </tr>
+      <tr>
+        <td>SECOND PLACE</td><td><a routerLink='/teams/{{cup.second._id}}'>{{ cup.second.name + ' ' + cup.second.lastname }}</a></td>
+      </tr>
+      <tr>
+        <td>THIRD PLACE</td><td><a routerLink='/teams/{{cup.third._id}}'>{{ cup.third.name + ' ' + cup.third.lastname }}</a></td>
+      </tr>
+    </table>
 
     <ion-grid>
       <ion-row>
         <ion-col *ngFor='let group of cup.groups' size-sm='12' size-md='6'>
           
-          <a routerLink='/groups/{{group._id}}'>
-            <div>{{ group.name }}</div>
-          </a>
-          <div>{{ group.description }}</div>
-
           <table class='table table-bordered table-striped'>
+            <thead>
+              <tr>
+                <th colspan='3'>
+                    <a routerLink='/groups/{{group._id}}'>{{ group.name }}</a>
+                </th>
+              </tr>
+            </thead>
             <tbody>
+              <tr>
+                <td colspan='3'>
+                    {{ group.description }}
+                </td>
+              </tr>
               <tr *ngFor='let team of group.teams; let i = index'>
                 <td>{{ i + 1 }}</td>
                 <td>
@@ -45,7 +58,7 @@
                   {{ team.name + ' ' + team.lastname }}
                   </a>
                 </td>
-                <td>{{ team.winRatio ? team.winRatio : 0 }}</td>
+                <td>{{ (team.winRatio ? team.winRatio : 0) | number: '1.2-2' }}</td>
               </tr>
             </tbody>
           </table>
