@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-modal-teams',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditModalTeamsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public modalCtrl: ModalController ) { }
 
   ngOnInit() {}
+
+  closeModal() {
+    this.modalCtrl.dismiss();
+  }
 
 }
