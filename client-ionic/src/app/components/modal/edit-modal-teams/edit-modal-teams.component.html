@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar text-center>
-    <ion-title>{{modalTitle}}</ion-title>
+    <ion-title>Edit user: {{ user.name + ' ' + user.lastname}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,12 +8,28 @@
   <ion-grid>
     <ion-row>
       <ion-col text-center>
-        ID : {{modelId}}
+        <ion-item>
+          <ion-label position='floating'>Name</ion-label>
+            <ion-input [(ngModel)]='user.name' clearInput></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position='floating'>Last name</ion-label>
+            <ion-input [(ngModel)]='user.lastname' clearInput></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position='floating'>Date of birth</ion-label>
+            <ion-datetime display-format="MMM DD, YYYY" [(ngModel)]='user.DoB'></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label position='floating'>Email</ion-label>
+            <ion-input [(ngModel)]='user.email' clearInput></ion-input>
+          </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col text-center>
-        <ion-button (click)="closeModal()">Close Modal</ion-button>
+        <ion-button (click)='saveData()'>SAVE</ion-button>
+        <ion-button (click)='closeModal()'>Close Modal</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

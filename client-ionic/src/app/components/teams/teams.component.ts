@@ -19,10 +19,10 @@ users = [];
 
   })
 }
-  async openModal() {
+  async openModal(user) {
   const modal = await this.modalCtrl.create({
-    component: EditModalTeamsComponent
-    
+    component: EditModalTeamsComponent,
+    componentProps: user
   });
 
   return await modal.present();
