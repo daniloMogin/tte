@@ -21,7 +21,7 @@
         <td>{{ game.name }}</td>
       </a>
       <td>{{ game.score }}</td>
-      <td text-center><ion-button color="primary">Edit</ion-button> <ion-button color="danger">Delete</ion-button></td>
+      <td text-center><ion-button color="primary" (click)='openModal(game)'>Edit</ion-button> <ion-button color="danger">Delete</ion-button></td>
     </tr>
   </table>
 </ion-content>
