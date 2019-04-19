@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import * as api from '../../services';
-import { EditModalComponent } from '../modal/edit-modal/edit-modal.component';
+import { EditModalTeamsComponent } from '../modal/edit-modal-teams/edit-modal-teams.component';
 
 @Component({
   selector: 'app-teams',
@@ -10,7 +10,7 @@ import { EditModalComponent } from '../modal/edit-modal/edit-modal.component';
 })
 export class TeamsComponent implements OnInit {
 users = [];
-modal = null;
+
   constructor(private userService: api.UsersService, private modalCtrl : ModalController) { }
 
   ngOnInit() {this.userService.getUsers().subscribe(response => {
@@ -20,11 +20,11 @@ modal = null;
   })
 }
   async openModal() {
-  this.modal = await this.modalCtrl.create({
-    component: EditModalComponent
+  const modal = await this.modalCtrl.create({
+    component: EditModalTeamsComponent
     
   });
 
-  this.modal.present();
+  return await modal.present();
 }
 }
