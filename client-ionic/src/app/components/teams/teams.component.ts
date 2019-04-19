@@ -16,15 +16,15 @@ users = [];
   ngOnInit() {this.userService.getUsers().subscribe(response => {
     this.users = response;
     console.log(this.users);
+    });
+  }
 
-  })
-}
   async openModal(user) {
-  const modal = await this.modalCtrl.create({
-    component: EditModalTeamsComponent,
-    componentProps: user
-  });
+    const modal = await this.modalCtrl.create({
+      component: EditModalTeamsComponent,
+      componentProps: user
+    });
 
-  return await modal.present();
-}
+    return await modal.present();
+  }
 }
