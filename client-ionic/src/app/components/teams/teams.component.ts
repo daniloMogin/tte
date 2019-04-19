@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import * as api from '../../services';
 import { EditModalTeamsComponent } from '../modal/edit-modal-teams/edit-modal-teams.component';
 
@@ -11,7 +11,7 @@ import { EditModalTeamsComponent } from '../modal/edit-modal-teams/edit-modal-te
 export class TeamsComponent implements OnInit {
 users = [];
 
-  constructor(private userService: api.UsersService, private modalCtrl : ModalController) { }
+  constructor(private userService: api.UsersService, private modalCtrl : ModalController, private alertController: AlertController) { }
 
   ngOnInit() {this.userService.getUsers().subscribe(response => {
     this.users = response;
@@ -27,4 +27,35 @@ users = [];
 
     return await modal.present();
   }
+  
+  async delete(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const alert = await this.alertController.create({
+      
+        header: 'Alert',
+        subHeader: 'Delete team?',
+        message: 'Are you sure?',
+        buttons: [
+          {
+            text: 'Yes',
+            role: 'yes',
+           handler: () => {
+              console.log('Yes');
+            }
+          }, {
+            text: 'No',
+            role: 'no',
+            handler: () => {
+              console.log('No');
+            }
+          }
+        ]
+      
+    });
+
+    await alert.present();
+  }
+
 }
