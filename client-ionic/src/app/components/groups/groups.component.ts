@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as api from '../../services';
 import { EditModalGroupsComponent } from '../modal/edit-modal-groups/edit-modal-groups.component';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-groups',
@@ -10,7 +10,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class GroupsComponent implements OnInit {
   groups: [];
-  constructor(private groupsService: api.GroupsService, private modalCtrl: ModalController) { }
+  constructor(private groupsService: api.GroupsService, private modalCtrl: ModalController, private alertController: AlertController) { }
 
   ngOnInit() {
     this.groupsService.getGroup().subscribe(response => {
@@ -30,5 +30,35 @@ export class GroupsComponent implements OnInit {
   
     return await modal.present();
   }
+  async delete(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const alert = await this.alertController.create({
+      
+        header: 'Alert',
+        subHeader: 'Delete group?',
+        message: 'Are you sure?',
+        buttons: [
+          {
+            text: 'Yes',
+            role: 'yes',
+           handler: () => {
+              console.log('Yes');
+            }
+          }, {
+            text: 'No',
+            role: 'no',
+            handler: () => {
+              console.log('No');
+            }
+          }
+        ]
+      
+    });
+
+    await alert.present();
+  }
+
 
 }

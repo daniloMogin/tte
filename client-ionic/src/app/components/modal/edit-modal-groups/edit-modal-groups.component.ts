@@ -20,7 +20,7 @@ export class EditModalGroupsComponent implements OnInit {
   closeModal() {
     this.modalCtrl.dismiss();
   }
-  // saveData() {
-  //   this.groupService.updateGroup(this.group._id, this.group).subscribe(response => { console.log(response); });
-  // }
+  saveData() {
+    this.groupService.updateGroup(this.group._id, this.group).subscribe(response => { console.log(response); });
+  }
 }
