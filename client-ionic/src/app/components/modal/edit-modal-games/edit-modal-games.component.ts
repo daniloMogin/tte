@@ -21,4 +21,7 @@ export class EditModalGamesComponent implements OnInit {
   closeModal() {
     this.modalCtrl.dismiss();
   }
+  saveData() {
+    this.gameService.updateGame(this.game._id, this.game).subscribe(response => { console.log(response); });
+  }
 }
