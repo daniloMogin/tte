@@ -1,13 +1,13 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-        List of games
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      List of games
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content text-center>
   <table class="table table-striped">
@@ -17,11 +17,12 @@
       <th></th>
     </tr>
     <tr *ngFor='let game of games'>
-      <a routerLink='/games/{{game._id}}'>
-        <td>{{ game.name }}</td>
-      </a>
+      <td><a routerLink='/games/{{game._id}}'>{{ game.name }}</a></td>
       <td>{{ game.score }}</td>
-      <td text-center><ion-button color="primary" (click)='openModal(game)'>Edit</ion-button> <ion-button color="danger" (click)='delete($event)'>Delete</ion-button></td>
+      <td text-center>
+        <ion-button color="primary" (click)='openModal(game)'>Edit</ion-button>
+        <ion-button color="danger" (click)='delete($event)'>Delete</ion-button>
+      </td>
     </tr>
   </table>
 </ion-content>

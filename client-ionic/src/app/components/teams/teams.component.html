@@ -18,7 +18,7 @@
     <th></th>
   </tr>
   <tr *ngFor="let user of users">
-    <a routerLink='/teams/{{user._id}}'><td>{{user.name + ' ' + user.lastname}}</td></a>
+    <td><a routerLink='/teams/{{user._id}}'>{{user.name + ' ' + user.lastname}}</a></td>
     <td>{{user.DoB}}</td>
     <td *ngIf='user.winRatio'>{{user.winRatio | number: '1.2-2'}}</td>
     <td *ngIf='!user.winRatio'>-</td>
