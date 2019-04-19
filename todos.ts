@@ -12,7 +12,7 @@ statusText: "Internal Server Error"
 url: "http://localhost:3000/API/game/5b4b2efea48ae511946bb975"
 
 
-TODO: kada ciljamo /team/:id sa PUT radi updateovanja team-a/user-a izbaci u consoli (iako GET radi)
+TODO: kada ciljamo /team/:id ili group/:id sa PUT radi updateovanja team-a/user-a ili grupe izbaci u consoli (iako GET radi)
 
 error: {success: false, msg: "User is not authenticated!"}
 headers: HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, lazyInit: ƒ}
