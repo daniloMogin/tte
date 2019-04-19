@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import * as api from '../../services';
 import { EditModalTeamsComponent } from '../modal/edit-modal-teams/edit-modal-teams.component';
+import { AddModalTeamsComponent } from '../modal/add-modal-teams/add-modal-teams.component';
 
 @Component({
   selector: 'app-teams',
@@ -19,10 +20,18 @@ users = [];
     });
   }
 
-  async openModal(user) {
+  async openEditModal(user) {
     const modal = await this.modalCtrl.create({
       component: EditModalTeamsComponent,
       componentProps: user
+    });
+
+    return await modal.present();
+  }
+
+  async openAddModal() {
+    const modal = await this.modalCtrl.create({
+      component: AddModalTeamsComponent
     });
 
     return await modal.present();

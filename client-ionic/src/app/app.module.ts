@@ -28,6 +28,8 @@ import { EditModalCupsComponent } from './components/modal/edit-modal-cups/edit-
 import { EditModalGroupsComponent } from './components/modal/edit-modal-groups/edit-modal-groups.component';
 import { AddModalCupsComponent } from './components/modal/add-modal-cups/add-modal-cups.component';
 import { AddModalGroupsComponent } from './components/modal/add-modal-groups/add-modal-groups.component';
+import { AddModalGamesComponent } from './components/modal/add-modal-games/add-modal-games.component';
+import { AddModalTeamsComponent } from './components/modal/add-modal-teams/add-modal-teams.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { AddModalGroupsComponent } from './components/modal/add-modal-groups/add
     EditModalCupsComponent,
     EditModalGroupsComponent,
     AddModalCupsComponent,
-    AddModalGroupsComponent
+    AddModalGroupsComponent,
+    AddModalGamesComponent,
+    AddModalTeamsComponent
   ],
 
   entryComponents: [
@@ -56,7 +60,9 @@ import { AddModalGroupsComponent } from './components/modal/add-modal-groups/add
     EditModalCupsComponent,
     EditModalGroupsComponent,
     AddModalCupsComponent,
-    AddModalGroupsComponent
+    AddModalGroupsComponent,
+    AddModalGamesComponent,
+    AddModalTeamsComponent
   ],
   imports: [
     BrowserModule,

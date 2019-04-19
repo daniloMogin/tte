@@ -12,6 +12,11 @@
 <ion-content text-center>
 <table class="table table-striped">
   <tr>
+    <td colspan=4>
+      <div class='add-button-container' (click)='openAddModal()'>+</div>
+    </td>
+  </tr>
+  <tr>
     <th>Name</th>
     <th>Date of Birth</th>
     <th>Win Ratio</th>
@@ -22,7 +27,7 @@
     <td>{{user.DoB}}</td>
     <td *ngIf='user.winRatio'>{{user.winRatio | number: '1.2-2'}}</td>
     <td *ngIf='!user.winRatio'>-</td>
-    <td text-center><ion-button color="primary" (click)="openModal(user)">Edit</ion-button> <ion-button color="danger" (click)='delete($event)'>Delete</ion-button></td>
+    <td text-center><ion-button color="primary" (click)="openEditModal(user)">Edit</ion-button> <ion-button color="danger" (click)='delete($event)'>Delete</ion-button></td>
   </tr>
 </table>
 </ion-content>
