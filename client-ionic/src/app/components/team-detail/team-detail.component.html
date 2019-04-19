@@ -28,11 +28,10 @@
           <th>Games</th>
         </tr>
         <tr *ngFor='let game of users.games; let i=index'>
-          <a routerLink='/games/{{game._id}}'>
-            <td>{{game.score}}</td>
-          </a>
+            <td>
+              <a routerLink='/games/{{game._id}}'>{{game.score}}</a>
+            </td>
         </tr>
-
       </table>
     </ion-col>
   </ion-row>
