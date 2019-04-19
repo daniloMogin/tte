@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar text-center>
+    <ion-title>Add new group</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <ion-item>
+          <ion-label position='floating'>Name</ion-label>
+            <ion-input [(ngModel)]='group.name' clearInput></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position='floating'>Description</ion-label>
+            <ion-textarea [(ngModel)]='group.description' clearInput></ion-textarea>
+          </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <ion-button (click)='addGroup()'>ADD</ion-button>
+        <ion-button (click)='closeModal()'>Close Modal</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

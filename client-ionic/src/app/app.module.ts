@@ -26,6 +26,8 @@ import { EditModalTeamsComponent } from './components/modal/edit-modal-teams/edi
 import { EditModalGamesComponent } from './components/modal/edit-modal-games/edit-modal-games.component';
 import { EditModalCupsComponent } from './components/modal/edit-modal-cups/edit-modal-cups.component';
 import { EditModalGroupsComponent } from './components/modal/edit-modal-groups/edit-modal-groups.component';
+import { AddModalCupsComponent } from './components/modal/add-modal-cups/add-modal-cups.component';
+import { AddModalGroupsComponent } from './components/modal/add-modal-groups/add-modal-groups.component';
 
 @NgModule({
   declarations: [
@@ -43,16 +45,25 @@ import { EditModalGroupsComponent } from './components/modal/edit-modal-groups/e
     EditModalTeamsComponent,
     EditModalGamesComponent,
     EditModalCupsComponent,
-    EditModalGroupsComponent
+    EditModalGroupsComponent,
+    AddModalCupsComponent,
+    AddModalGroupsComponent
   ],
 
-  entryComponents: [EditModalTeamsComponent, EditModalGamesComponent, EditModalCupsComponent, EditModalGroupsComponent],
+  entryComponents: [
+    EditModalTeamsComponent,
+    EditModalGamesComponent,
+    EditModalCupsComponent,
+    EditModalGroupsComponent,
+    AddModalCupsComponent,
+    AddModalGroupsComponent
+  ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule
   ],
   providers: [
     StatusBar,
