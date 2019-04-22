@@ -14,9 +14,13 @@ users = [];
 
   constructor(private userService: api.UsersService, private modalCtrl : ModalController, private alertController: AlertController) { }
 
-  ngOnInit() {this.userService.getUsers().subscribe(response => {
-    this.users = response;
-    console.log(this.users);
+  ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.userService.getUsers().subscribe(response => {
+      this.users = response;
+      console.log(this.users);
     });
   }
 
@@ -36,13 +40,13 @@ users = [];
 
     return await modal.present();
   }
-  
+
   async delete(event: Event) {
     event.preventDefault();
     event.stopPropagation();
 
     const alert = await this.alertController.create({
-      
+
         header: 'Alert',
         subHeader: 'Delete team?',
         message: 'Are you sure?',
@@ -61,7 +65,7 @@ users = [];
             }
           }
         ]
-      
+
     });
 
     await alert.present();

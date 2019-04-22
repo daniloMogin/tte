@@ -16,10 +16,12 @@ export class GamesComponent implements OnInit {
   constructor(private gamesService: GamesService, private modalCtrl: ModalController, private alertController: AlertController) { }
 
   ngOnInit() {
-
-    this.gamesService.getGames().subscribe(response => this.games = response.game);
-
   }
+
+  ionViewWillEnter() {
+    this.gamesService.getGames().subscribe(response => this.games = response.game);
+  }
+
   async openModal(game) {
     const modal = await this.modalCtrl.create({
       component: EditModalGamesComponent,

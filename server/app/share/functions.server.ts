@@ -172,11 +172,13 @@ export default class Functions {
         if (_.isObject(email_validate)) {
             return { error: email_validate };
         }
-        const active_validate = this.validateEmptyInputTrim(user.active);
-        if (_.isObject(active_validate)) {
-            return { error: active_validate };
-        }
-        const separatedDoB: DoB = this.separateDoB(user.DoB, 'DD/MM/YYYY');
+        // const active_validate = this.validateEmptyInputTrim(user.active);
+        // console.log(`active_validate`);
+        // console.log(active_validate);
+        // if (_.isObject(active_validate)) {
+        //     return { error: active_validate };
+        // }
+        const separatedDoB: DoB = this.separateDoB(user.DoB, 'L');
         const day_validate = this.validateDayMonth(
             separatedDoB.day,
             'Day',
@@ -226,7 +228,7 @@ export default class Functions {
             username: username_validate,
             password: password_validate,
             email: email_validate,
-            active: active_validate,
+            active: user.active,
             DoB: birthday,
             additionalInfo: additionalInfo_validate,
             role: user.roleIdArr
@@ -236,9 +238,10 @@ export default class Functions {
 
     private separateDoB(dateOfBirth: string, format: string) {
         const delimiter = /['.', '\,', '-', '/']/;
-        const split_input = dateOfBirth.split(delimiter);
+        const formatedDate = moment(dateOfBirth).format(format);
+        const formatedDate_split = formatedDate.split(delimiter);
         let result: DoB;
-        if (split_input[1].length > 2 && Number(split_input[1]) > 12) {
+        if (formatedDate_split[0].length > 2 && Number(formatedDate_split[0]) > 12) {
             result = {
                 day: 0,
                 month: 0,
@@ -249,9 +252,9 @@ export default class Functions {
         }
 
         result = {
-            day: Number(split_input[0]),
-            month: Number(split_input[1]),
-            year: Number(split_input[2]),
+            day: Number(formatedDate_split[1]),
+            month: Number(formatedDate_split[0]),
+            year: Number(formatedDate_split[2]),
             message: 'success'
         };
         return result;
@@ -615,18 +618,26 @@ export default class Functions {
         }
         const full_year_now: Date = new Date();
         const month_name = this.monthNames(monthTemp);
+        // console.log(`month_name`);
+        // console.log(month_name);
         const days_in_month: number = this.daysInMonth(monthTemp, yearTemp);
+        // console.log(`days_in_month`);
+        // console.log(days_in_month);
         const input_to_date: any = new Date(input);
         if (input_to_date.getTime() > full_year_now.getTime()) {
             return {
                 message: 'Date you choose is bigger then today date!'
             };
         }
-        if (!moment(input, 'YYYY-MM-DD').isValid()) {
-            return {
-                message: `Year ${yearTemp}, ${month_name} had ${days_in_month} days. For - Month - you entered - ${dayTemp} -.`
-            };
-        }
+        // console.log(`moment(input, 'L')`);
+        // console.log(moment(input, 'L'));
+        // console.log(`moment(input, 'L').isValid()`);
+        // console.log(moment(input, 'L').isValid());
+        // if (!moment(input, 'L').isValid()) {
+        //     return {
+        //         message: `Year ${yearTemp}, ${month_name} had ${days_in_month} days. For - Day - you entered - ${dayTemp} -.`
+        //     };
+        // }
     };
 
     /**
