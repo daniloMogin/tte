@@ -86,6 +86,8 @@ export default class GameController {
             try {
                 const token: string = func.getToken(req.headers);
                 if (token) {
+                    console.log(`req.body`);
+                    console.log(req.body);
                     const game: any = await gameDB.findGameByName(req.body.name);
                     console.log(`findGames`);
                     console.log(game);
@@ -182,29 +184,48 @@ export default class GameController {
     public updateGame = (passport.authenticate('jwt', { session: false }),
         async (req: Request, res: Response) => {
             const token: string = func.getToken(req.headers);
+            // console.log(`req.body`);
+            // console.log(req.body);
+            console.log(`req.body.teams`);
+            console.log(req.body.teams);
+            console.log(req.body.teams.length);
+            
             if (token) {
                 const user: any = await func.decodeToken(token);
                 let game: fromInterfaces.IGame | any;
                 let teamsObjectArr: fromInterfaces.IUser[] = [];
                 let teamsIdArr: number[] = [];
                 let teamsArr: string[];
-                if (!_.isNil(req.body.teams)) {
+                if (req.body.teams.length > 0) {
                     try {
-                        teamsArr = req.body.teams.split(',');
-                        for (let i: number = 0; i < teamsArr.length; i++) {
+                        // teamsArr = req.body.teams.split(',');
+                        // console.log(`teamsArr`);
+                        // console.log(teamsArr);
+                        for (let i: number = 0; i < req.body.teams.length; i++) {
+                            console.log(`req.body.teams[i].username`);
+                            console.log(req.body.teams[i].username);
+                            
                             const findUserByUsername: any = await userDB.findUserByUsername(
-                                teamsArr[i].trim(),
+                                req.body.teams[i].username.trim(),
                                 res
                             );
+                            console.log(`findUserByUsername`);
+                            console.log(findUserByUsername);
+                            teamsArr.push(req.body.teams[i].username)
                             if (!_.isNil(findUserByUsername)) {
                                 teamsIdArr.push(findUserByUsername._id);
                             }
                             teamsObjectArr.push(findUserByUsername);
                         }
-                        const winnerId: any = await userDB.findUserByUsername(
-                            req.body.winner,
-                            res
-                        );
+                        console.log(`teamsArr`);
+                        console.log(teamsArr);
+                        // const winnerId: any = await userDB.findUserByUsername(
+                        //     req.body.winner,
+                        //     res
+                        // );
+                        console.log(`req.body.name`);
+                        console.log(req.body.name);
+                        const winnerId = '5b3bae1a43bb661294677e5c';
                         game = {
                             name: req.body.name,
                             description: req.body.description,
@@ -212,7 +233,7 @@ export default class GameController {
                             modifiedBy: user._id,
                             teams: teamsIdArr,
                             score: req.body.score,
-                            winner: winnerId._id,
+                            winner: winnerId,
                             updatedAt: Date.now()
                         };
                     } catch (error) {
@@ -222,15 +243,22 @@ export default class GameController {
                         });
                     }
                     try {
+                        console.log(`game`);
+                        console.log(game);
+                        
                         const updateGame: any = await gameDB.updateGame(game, req);
                         let userWithWinRatio: any = [];
                         let updateUser = [];
+                        // console.log(`updateGame`);
+                        // console.log(updateGame);
                         for (let i: number = 0; i < teamsArr.length; i++) {
                             userWithWinRatio = await this.calculateWinRatio(
                                 teamsArr[i].trim(),
                                 req,
                                 res
                             );
+                            console.log(`userWithWinRatio`);
+                            console.log(userWithWinRatio);
                             updateUser.push(
                                 await userDB.updateUserWinRatio(
                                     userWithWinRatio,
@@ -238,6 +266,8 @@ export default class GameController {
                                     res
                                 )
                             );
+                            console.log(`updateUser`);
+                            console.log(updateUser);
                         }
                         if (_.isNil(updateGame.message)) {
                             res.status(200).json({
