@@ -18,43 +18,43 @@
 
           <ion-item>
             <ion-label position='floating'>Name</ion-label>
-            <ion-input type="text" placeholder="Name" name="name" required></ion-input>
+            <ion-input [(ngModel)]="registerUserData.name" type="text" placeholder="Name" name="name" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position='floating'>Last Name</ion-label>
-            <ion-input type="text" placeholder="Last Name" name="last_name" required></ion-input>
+            <ion-input [(ngModel)]="registerUserData.lastname" type="text" placeholder="Last Name" name="lastname" required></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Username</ion-label>
-            <ion-input type="text" placeholder="Username" name="username" required></ion-input>
+            <ion-input [(ngModel)]="registerUserData.username" type="text" placeholder="Username" name="username" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position='floating'>Password</ion-label>
-            <ion-input type="password" placeholder="Password" name="password" required></ion-input>
+            <ion-input [(ngModel)]="registerUserData.password" type="password" placeholder="Password" name="password" required></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>E-mail</ion-label>
-            <ion-input type="email" placeholder="Email" name="email" required></ion-input>
+            <ion-input [(ngModel)]="registerUserData.email" type="email" placeholder="Email" name="email" required></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Active</ion-label>
-              <ion-checkbox></ion-checkbox>
+              <ion-checkbox [(ngModel)]="registerUserData.active" name='active'></ion-checkbox>
             
 
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Date of birth</ion-label>
-            <ion-datetime display-format="MMM DD, YYYY" placeholder='Choose date'></ion-datetime>
+            <ion-datetime [(ngModel)]="registerUserData.DoB" name='DoB' display-format="MMM DD, YYYY" placeholder='Choose date'></ion-datetime>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Additional Info</ion-label>
-            <ion-textarea placeholder='Additional Info...' rows="6" cols="20" clearInput></ion-textarea>
+            <ion-textarea [(ngModel)]="registerUserData.additionalInfo" name='additionalInfo' placeholder='Additional Info...' rows="6" cols="20" clearInput></ion-textarea>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Role</ion-label>
-            <ion-select placeholder="Select One">
+            <ion-select [(ngModel)]="registerUserData.role" name='role' placeholder="Select One">
               <ion-select-option value="player">Player</ion-select-option>
 
             </ion-select>
@@ -63,7 +63,7 @@
         </ion-list>
       </ion-col>
     </ion-row>
-          <ion-button color="primary">Register</ion-button>
+          <ion-button color="primary" (click)='register()'>Register</ion-button>
     
 
   </form>

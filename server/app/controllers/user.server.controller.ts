@@ -184,7 +184,7 @@ class UserController {
                 const email: string = req.body.email;
                 const active: string = req.body.active;
                 const DoB: string = req.body.DoB;
-                const additionalInfo: string = req.body.username;
+                const additionalInfo: string = req.body.additionalInfo;
                 const user = {
                     name,
                     lastname,
