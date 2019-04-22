@@ -9,7 +9,7 @@ import { CupsService } from '../../../services';
 })
 export class AddModalCupsComponent implements OnInit {
 
-  cup: any;
+  cup: any = {};
 
   constructor(public modalCtrl: ModalController, private cupsService: CupsService) { }
 
@@ -21,6 +21,7 @@ export class AddModalCupsComponent implements OnInit {
 
   addCup() {
     console.log("Adding cup");
+    console.log(this.cup);
     return;
     this.cupsService.createCup(this.cup).subscribe(response => console.log(response));
   }
