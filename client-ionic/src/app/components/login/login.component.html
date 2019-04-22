@@ -1,14 +1,32 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-        Login
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-    
-  </ion-content>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col text-center style='max-width: 30em;'>
+        <ion-item>
+          <ion-label position='floating'>Username</ion-label>
+            <ion-input placeholder='Please enter your username' [(ngModel)]='user.username' clearInput></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position='floating'>Password</ion-label>
+            <ion-input type='password' placeholder='Please enter your password' [(ngModel)]='user.password' clearInput></ion-input>
+          </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center padding>
+        <ion-button (click)='login()'>LOGIN</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
