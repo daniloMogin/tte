@@ -11,7 +11,7 @@ import { AddModalCupsComponent } from '../modal/add-modal-cups/add-modal-cups.co
 })
 export class CupsComponent implements OnInit {
 
-  cups: any[];
+  cups: [];
 
   constructor(private cupsService: api.CupsService,  private modalCtrl : ModalController, private alertController: AlertController) { }
 
@@ -20,7 +20,10 @@ export class CupsComponent implements OnInit {
 
   ionViewWillEnter() {
     console.log('Geting cups');
-    this.cupsService.getCups().subscribe(response => this.cups = response.cup);
+    this.cupsService.getCups().subscribe(response => {
+      console.log(response);
+      this.cups = response.cup;
+    });
   }
 
   async openEditModal(event: Event, cup) {

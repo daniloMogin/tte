@@ -20,6 +20,8 @@ export class GroupsComponent implements OnInit {
 
   ionViewWillEnter() {
     this.groupsService.getGroup().subscribe(response => {
+      console.log(response);
+      
       this.groups = response.group;
       console.log(this.groups);
     });

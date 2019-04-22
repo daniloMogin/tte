@@ -251,24 +251,24 @@ export default class GroupController {
         if (token) {
             const user: any = await func.decodeToken(token);
 
-            const teamsArr: string[] = req.body.teams.split(',');
-            let teamsIdArr: number[] = [];
-            for (let i: number = 0; i < teamsArr.length; i++) {
-                const findUserByUsername: any = await userDB.findUserByUsername(
-                    teamsArr[i].trim(),
-                    res
-                );
-                if (!_.isNil(findUserByUsername)) {
-                    teamsIdArr.push(findUserByUsername._id);
-                }
-            }
+            const teamsArr: string[] = req.body.teams//.split(',');
+            // let teamsIdArr: number[] = [];
+            // for (let i: number = 0; i < teamsArr.length; i++) {
+            //     const findUserByUsername: any = await userDB.findUserByUsername(
+            //         teamsArr[i].trim(),
+            //         res
+            //     );
+            //     if (!_.isNil(findUserByUsername)) {
+            //         teamsIdArr.push(findUserByUsername._id);
+            //     }
+            // }
 
             const group: fromInterfaces.IGroup | any = {
                 name: req.body.name,
                 description: req.body.description,
                 active: req.body.active,
                 modifiedBy: user._id,
-                teams: teamsIdArr,
+                teams: teamsArr,
                 score: req.body.score
             };
             try {

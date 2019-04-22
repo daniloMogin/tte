@@ -19,11 +19,11 @@
         </ion-list>
       </ion-content>
       <ion-footer  class="bar-stable">
-        <div>
+        <div *ngIf='!authService.isLoggedIn()'>
           <ion-item nav-clear menu-close routerLink='/login'>Login</ion-item>
           <ion-item nav-clear menu-close routerLink="/register">Register</ion-item>
         </div>
-        <ion-item nav-clear menu-close href='#'>Logout</ion-item>
+        <ion-item *ngIf='authService.isLoggedIn()' style="cursor:pointer" nav-clear menu-close (click)='authService.logoutUser()'>Logout</ion-item>
       </ion-footer>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>

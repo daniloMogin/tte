@@ -3,6 +3,7 @@ import { ApiService } from './api-service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ export class AuthService extends ApiService {
 
   private API_AUTH_URL = this.API_ROOT + 'auth/';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     super();
   }
 
@@ -41,11 +42,12 @@ export class AuthService extends ApiService {
   }
 
   logoutUser() {
-
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 
   isLoggedIn() {
-
+    return localStorage.getItem('token');
   }
 
 }
