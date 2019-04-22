@@ -12,11 +12,14 @@ export class TeamDetailComponent implements OnInit {
   constructor(private usersService: api.UsersService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     const id = this.route.snapshot.paramMap.get('id');
     this.usersService.getUserById(id).subscribe( response => {
       this.users = response.user;
       console.log(this.users)
-    })
+    });
   }
 
 }

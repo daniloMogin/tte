@@ -10,10 +10,15 @@ import { AddModalGroupsComponent } from '../modal/add-modal-groups/add-modal-gro
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
+
   groups: [];
+
   constructor(private groupsService: api.GroupsService, private modalCtrl: ModalController, private alertController: AlertController) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     this.groupsService.getGroup().subscribe(response => {
       this.groups = response.group;
       console.log(this.groups);
@@ -44,7 +49,7 @@ export class GroupsComponent implements OnInit {
     event.stopPropagation();
 
     const alert = await this.alertController.create({
-      
+
         header: 'Alert',
         subHeader: 'Delete group?',
         message: 'Are you sure?',
@@ -63,7 +68,7 @@ export class GroupsComponent implements OnInit {
             }
           }
         ]
-      
+
     });
 
     await alert.present();

@@ -15,9 +15,14 @@ export class GroupDetailComponent implements OnInit {
   constructor(private groupsService: api.GroupsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     const id = this.route.snapshot.paramMap.get('id');
     this.groupsService.getGroupById(id).subscribe( response => {
       this.group = response.group;
+
+      /* retrieving lost teams
       let teams = [];
       this.group.score.forEach(s => {
         if (!teams.includes(s.teams[0])) {
@@ -29,6 +34,8 @@ export class GroupDetailComponent implements OnInit {
       })
       console.log(JSON.stringify(teams));
       console.log(teams);
+      */
+
       console.log(this.group);
       this.loaded = true;
     });

@@ -16,6 +16,10 @@ export class CupsComponent implements OnInit {
   constructor(private cupsService: api.CupsService,  private modalCtrl : ModalController, private alertController: AlertController) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    console.log('Geting cups');
     this.cupsService.getCups().subscribe(response => this.cups = response.cup);
   }
 

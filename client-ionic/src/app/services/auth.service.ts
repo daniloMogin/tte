@@ -16,15 +16,25 @@ export class AuthService extends ApiService {
     super();
   }
 
+  
+  /*setToken(token: string): void {
+    this.authToken = token;
+    console.log('Set token: ' + this.authToken);
+  }
+
+  getToken(): string {
+    return this.authToken;
+  }*/
+
   registerUser(user: object): Observable<any> {
-    return this.http.post<any>(this.API_AUTH_URL + 'register', user, { headers: this.getHeaders() })
+    return this.http.post<any>(this.API_AUTH_URL + 'register', user)
     .pipe(
       catchError(this.handleError<any>('registerUser'))
     )
   }
 
   loginUser(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.API_AUTH_URL + 'login', {username: username, password: password}, { headers: this.getHeaders() })
+    return this.http.post<any>(this.API_AUTH_URL + 'login', {username: username, password: password})
     .pipe(
       catchError(this.handleError<any>('loginUser'))
     );

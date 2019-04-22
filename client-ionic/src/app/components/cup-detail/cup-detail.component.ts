@@ -15,6 +15,9 @@ export class CupDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private cupsService: CupsService) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     const id = this.route.snapshot.paramMap.get('id');
     this.cupsService.getCupById(id).subscribe(response => {
       this.cup = response.cup;

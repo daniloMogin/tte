@@ -11,7 +11,7 @@ export class RolesService extends ApiService {
 
   private API_ROLES_URL = this.API_ROOT + 'roles/';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,) {
     super();
    }
 

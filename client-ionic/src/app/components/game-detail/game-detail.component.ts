@@ -14,6 +14,9 @@ export class GameDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private gamesService: GamesService) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     const id = this.route.snapshot.paramMap.get('id');
     this.gamesService.getGameById(id).subscribe(response => {
       this.game = response.game;
