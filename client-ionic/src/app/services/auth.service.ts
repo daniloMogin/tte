@@ -21,9 +21,9 @@ export class AuthService extends ApiService {
   }
 
   loginUser(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.API_AUTH_URL + 'Login', {username: username, password: password}, { headers: this.getHeaders() })
+    return this.http.post<any>(this.API_AUTH_URL + 'login', {username: username, password: password}, { headers: this.getHeaders() })
     .pipe(
-      catchError(this.handleError<any>('createCup'))
+      catchError(this.handleError<any>('loginUser'))
     );
   }
 
