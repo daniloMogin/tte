@@ -184,11 +184,11 @@ export default class GameController {
     public updateGame = (passport.authenticate('jwt', { session: false }),
         async (req: Request, res: Response) => {
             const token: string = func.getToken(req.headers);
-            console.log(`req.body`);
-            console.log(req.body);
-            // console.log(`req.body.teams`);
-            // console.log(req.body.teams);
-            // console.log(req.body.teams.length);
+            // console.log(`req.body`);
+            // console.log(req.body);
+            console.log(`req.body.teams`);
+            console.log(req.body.teams);
+            console.log(req.body.teams.length);
             
             if (token) {
                 const user: any = await func.decodeToken(token);
@@ -209,16 +209,22 @@ export default class GameController {
                                 req.body.teams[i].username.trim(),
                                 res
                             );
+                            console.log(`findUserByUsername`);
+                            console.log(findUserByUsername);
                             teamsArr.push(req.body.teams[i].username)
                             if (!_.isNil(findUserByUsername)) {
                                 teamsIdArr.push(findUserByUsername._id);
                             }
                             teamsObjectArr.push(findUserByUsername);
                         }
+                        console.log(`teamsArr`);
+                        console.log(teamsArr);
                         // const winnerId: any = await userDB.findUserByUsername(
                         //     req.body.winner,
                         //     res
                         // );
+                        console.log(`req.body.name`);
+                        console.log(req.body.name);
                         const winnerId = '5b3bae1a43bb661294677e5c';
                         game = {
                             name: req.body.name,
@@ -239,8 +245,6 @@ export default class GameController {
                     try {
                         console.log(`game`);
                         console.log(game);
-                        console.log(`teamsArr`);
-                        console.log(teamsArr);
                         
                         const updateGame: any = await gameDB.updateGame(game, req);
                         let userWithWinRatio: any = [];
