@@ -16,7 +16,7 @@ export class ApiService {
 
     protected getHeaders(): HttpHeaders {
         return new HttpHeaders({
-            /*'Content-Type': 'application/json',*/
+            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + this.authToken
         });
     }
