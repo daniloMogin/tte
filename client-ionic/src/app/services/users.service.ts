@@ -24,7 +24,7 @@ private API_CUP_URL = this.API_ROOT + 'users/';
   }
 
   createUsers(user: object): Observable<any> {
-    return this.http.post<any>(this.API_CUP_URL, user)
+    return this.http.post<any>(this.API_CUP_URL, user, {headers: this.getHeaders() })
     .pipe(
       catchError(this.handleError<any>('createUsers'))
     );
@@ -37,13 +37,13 @@ private API_CUP_URL = this.API_ROOT + 'users/';
     );
   }
   getUserByRole(role: string): Observable<any> {
-    return this.http.get<any>(this.API_CUP_URL + 'byRole/' + role)
+    return this.http.get<any>(this.API_CUP_URL + 'byRole/' + role, {headers: this.getHeaders() })
     .pipe(
       catchError(this.handleError<any>('getUserByRole'))
     );
   }
   updateUser(id: string, user: object): Observable<any> {
-    return this.http.put<any>(this.API_CUP_URL + id , user)
+    return this.http.put<any>(this.API_CUP_URL + id , user, {headers: this.getHeaders() })
     .pipe(
       catchError(this.handleError<any>('updateUser'))
     );

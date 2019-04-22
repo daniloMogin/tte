@@ -26,7 +26,7 @@ export class GroupsService extends ApiService {
   }
 
   createGroup(group: object): Observable<any> {
-    return this.http.post<any>(this.API_GROUP_URL, group)
+    return this.http.post<any>(this.API_GROUP_URL, group, {headers: this.getHeaders() })
       .pipe(
         catchError(this.handleError<any>('createGroup'))
       );
@@ -40,15 +40,16 @@ export class GroupsService extends ApiService {
       );
   }
 
-  updateGroup(id: string, group: object): Observable<any> {
-    return this.http.put<any>(this.API_GROUP_URL + id, group)
+  updateGroup(id: string, group: any): Observable<any> {
+    group.teams = group.teams.join(',');
+    return this.http.put<any>(this.API_GROUP_URL + id, group, {headers: this.getHeaders() })
       .pipe(
         catchError(this.handleError<any>('updateGroup'))
       );
   }
 
   deleteGroup(id: string): Observable<any> {
-    return this.http.delete<any>(this.API_GROUP_URL + id)
+    return this.http.delete<any>(this.API_GROUP_URL + id, {headers: this.getHeaders() })
       .pipe(
         catchError(this.handleError<any>('deleteGroup'))
       );
