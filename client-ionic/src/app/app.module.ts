@@ -30,6 +30,7 @@ import { AddModalCupsComponent } from './components/modal/add-modal-cups/add-mod
 import { AddModalGroupsComponent } from './components/modal/add-modal-groups/add-modal-groups.component';
 import { AddModalGamesComponent } from './components/modal/add-modal-games/add-modal-games.component';
 import { AddModalTeamsComponent } from './components/modal/add-modal-teams/add-modal-teams.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { AddModalTeamsComponent } from './components/modal/add-modal-teams/add-m
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

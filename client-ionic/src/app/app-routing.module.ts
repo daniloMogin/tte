@@ -11,6 +11,7 @@ import { GamesComponent } from './components/games/games.component';
 import { GameDetailComponent } from './components/game-detail/game-detail.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from './auth.guard';
 
 // const routes: Routes = [
 //   {
@@ -29,17 +30,59 @@ import { RegisterComponent } from './components/register/register.component';
 // ];
 
 const routes: Routes = [
-  { path: 'cups', component: CupsComponent },
-  { path: 'cups/:id', component: CupDetailComponent },
-  { path: 'groups', component: GroupsComponent },
-  { path: 'groups/:id', component: GroupDetailComponent },
-  { path: 'teams', component: TeamsComponent },
-  { path: 'teams/:id', component: TeamDetailComponent },
-  { path: 'games', component: GamesComponent },
-  { path: 'games/:id', component: GameDetailComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: '', redirectTo: '/cups', pathMatch: 'full' }
+  {
+    path: 'cups',
+    component: CupsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'cups/:id',
+    component: CupDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'groups',
+    component: GroupsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'groups/:id',
+    component: GroupDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'teams',
+    component: TeamsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'teams/:id',
+    component: TeamDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'games',
+    component: GamesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'games/:id',
+    component: GameDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: '',
+    redirectTo: '/cups',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
@@ -48,4 +91,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
