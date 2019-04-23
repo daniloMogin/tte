@@ -9,21 +9,30 @@ import { CupsService } from '../../../services';
 })
 export class AddModalCupsComponent implements OnInit {
 
-  cup: any = {};
+  cup: any = {
+    name: '',
+    description: '',
+    groups: '',
+    active: true
+  };
 
   constructor(public modalCtrl: ModalController, private cupsService: CupsService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   closeModal() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(false);
   }
 
   addCup() {
     console.log("Adding cup");
     console.log(this.cup);
-    return;
-    this.cupsService.createCup(this.cup).subscribe(response => console.log(response));
+    this.cupsService.createCup(this.cup).subscribe(response => {
+      if (response.success) {
+        this.modalCtrl.dismiss(response.cup);
+      }
+    });
   }
 
 }

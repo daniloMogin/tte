@@ -13,3 +13,8 @@
 .modal {
     display: flex !important;
     }
+
+ion-toast.loginToast {
+    --width: 300px;
+    text-align: center;
+}
