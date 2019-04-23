@@ -235,7 +235,7 @@ class UserController {
         async (req: Request, res: Response) => {
             const token: string = func.getToken(req.headers);
             if (token) {
-                const roleArr: string[] = req.body.role.split(',');
+                const roleArr: string[] = req.body.role/*.split(',');
                 let roleIdArr: number[] = [];
                 for (let i: number = 0; i < roleArr.length; i++) {
                     const findRoleByName: any = await role_db.findRoleByName(
@@ -245,7 +245,7 @@ class UserController {
                     if (!_.isNil(findRoleByName)) {
                         roleIdArr.push(findRoleByName._id);
                     }
-                }
+                }*/
                 const name: string = req.body.name;
                 const lastname: string = req.body.lastname;
                 const username: string = req.body.username;
@@ -276,7 +276,7 @@ class UserController {
                     gender,
                     DoB,
                     additionalInfo,
-                    role: roleIdArr
+                    role: roleArr
                 };
 
                 try {

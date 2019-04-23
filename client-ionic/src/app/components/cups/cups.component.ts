@@ -51,7 +51,7 @@ export class CupsComponent implements OnInit {
     modal.onDidDismiss()
       .then((data) => {
         if (data.data) {
-          let cup = data.data;
+          const cup = data.data;
           this.cups.push(cup);
         }
     });
