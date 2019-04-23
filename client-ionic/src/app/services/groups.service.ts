@@ -20,7 +20,7 @@ export class GroupsService extends ApiService {
 
     return this.http.get<any>(this.API_GROUP_URL, {headers: this.getHeaders() })
       .pipe(
-        catchError(this.handleError<any>('getGroup'))
+        catchError(this.handleError<any>('getGroup', {group: []}))
       );
   }
 

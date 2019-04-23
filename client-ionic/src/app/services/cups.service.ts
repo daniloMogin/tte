@@ -19,7 +19,7 @@ export class CupsService extends ApiService {
 
     return this.http.get<any>(this.API_CUP_URL, { headers: this.getHeaders() })
     .pipe(
-      catchError(this.handleError<any>('getCup'))
+      catchError(this.handleError<any>('getCup', {cup:[]}))
     );
   }
 

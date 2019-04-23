@@ -19,7 +19,7 @@ export class GamesService extends ApiService {
 
     return this.http.get<any>(this.API_GAMES_URL, { headers: this.getHeaders() })
     .pipe(
-      catchError(this.handleError<any>('getGame'))
+      catchError(this.handleError<any>('getGame', {game: []}))
     );
   }
 
