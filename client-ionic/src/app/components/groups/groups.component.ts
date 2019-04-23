@@ -46,6 +46,7 @@ export class GroupsComponent implements OnInit {
 
     return await modal.present();
   }
+  
   async delete(event: Event) {
     event.preventDefault();
     event.stopPropagation();

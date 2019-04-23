@@ -123,7 +123,7 @@ export default class GameController {
             if (token) {
                 try {
                     let teamsObjectArr: fromInterfaces.IUser[] = [];
-                    const teamsArr: string[] = req.body.teams.split(',');
+                    const teamsArr: string[] = req.body.teams/*.split(',');
                     let teamsIdArr: number[] = [];
                     for (let i: number = 0; i < teamsArr.length; i++) {
                         const findUserByUsername: any = await userDB.findUserByUsername(
@@ -134,13 +134,13 @@ export default class GameController {
                             teamsIdArr.push(findUserByUsername._id);
                         }
                         teamsObjectArr.push(findUserByUsername);
-                    }
+                    }*/
                     const user: any = await func.decodeToken(token);
                     const game: any = {
                         name: req.body.name,
                         description: req.body.description,
                         active: req.body.active,
-                        teams: teamsIdArr,
+                        teams: teamsArr,
                         createdBy: user._id,
                         modifiedBy: user._id,
                         createdAt: Date.now()

@@ -17,14 +17,18 @@
             <ion-label position='floating'>Description</ion-label>
             <ion-textarea [(ngModel)]='cup.description' clearInput></ion-textarea>
           </ion-item>
-          <ion-item>
+         <!--  <ion-item>
             <ion-label position='floating'>Groups</ion-label>
             <ion-input [(ngModel)]='cup.groups' clearInput></ion-input>
-          </ion-item>
-          <ion-item>
+          </ion-item> -->
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <ion-item>
             <ion-label position='floating'>Active</ion-label>
-            <ion-checkbox [(ngModel)]="cup.active"></ion-checkbox>
-          </ion-item>
+          <ion-checkbox [(ngModel)]="cup.active"></ion-checkbox>
+        </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>

@@ -168,7 +168,7 @@ class UserController {
                         msg: 'User with that username already exists'
                     });
                 } else {
-                    const roleArr: string[] = req.body.role.split(',');
+                    const roleArr: string[] = req.body.role/*.split(',');
                     let roleIdArr: number[] = [];
                     for (let i: number = 0; i < roleArr.length; i++) {
                         const findRoleByName: any = await role_db.findRoleByName(
@@ -176,7 +176,7 @@ class UserController {
                             res
                         );
                         roleIdArr.push(findRoleByName._id);
-                    }
+                    }*/
                     const name: string = req.body.name;
                     const lastname: string = req.body.lastname;
                     const username: string = req.body.username;
@@ -194,7 +194,7 @@ class UserController {
                         active,
                         DoB,
                         additionalInfo,
-                        roleIdArr
+                        roleArr
                     };
 
                     const validate_register = await func.validateRegister(

@@ -38,3 +38,30 @@ Taj objekat grupe unutar kupa sadrzi kao niz, a ovo izgleda ocekuje string (post
 Mozda bi trebalo drugacije da saljemo, ili da server drugacije obradjuje.
 
 */
+
+
+
+
+/* TODO: kada updatejuemo cup PUT-ujuci na rutu /cup/:id izmenjen vec dobijeni objekt (sa GET /cup/:id rute) izbaci gresku:
+
+HttpErrorResponse {headers: HttpHeaders, status: 500, statusText: "Internal Server Error", url: "http://localhost:3000/API/cup/5cbef6caf2040522fcc8ec7f", ok: false, …}
+error:
+msg:
+kind: "ObjectId"
+message: "Cast to ObjectId failed for value "" at path "winner""
+name: "CastError"
+path: "winner"
+stringValue: """"
+value: ""
+__proto__: Object
+success: false
+__proto__: Object
+headers: HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, lazyInit: ƒ}
+message: "Http failure response for http://localhost:3000/API/cup/5cbef6caf2040522fcc8ec7f: 500 Internal Server Error"
+name: "HttpErrorResponse"
+ok: false
+status: 500
+statusText: "Internal Server Error"
+url: "http://localhost:3000/API/cup/5cbef6caf2040522fcc8ec7f"
+
+Greske nema kada rucno dodamo winner/second/third objekat u cup objekat

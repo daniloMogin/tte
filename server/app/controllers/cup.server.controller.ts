@@ -117,7 +117,7 @@ export default class CupController {
     async (req: Request, res: Response) => {
         const token: string = func.getToken(req.headers);
         if (token) {
-            const groupArr: string[] = req.body.groups.split(',');
+            const groupArr: string[] = req.body.groups/*.split(',');
             let groupIdArr: number[] = [];
             for (let i: number = 0; i < groupArr.length; i++) {
                 const findGroupByName: any = await groupDB.findGroupByName(
@@ -126,7 +126,7 @@ export default class CupController {
                 if (!_.isNil(findGroupByName)) {
                     groupIdArr.push(findGroupByName._id);
                 }
-            }
+            }*/
             const user: any = await func.decodeToken(token);
             const cup: any = {
                 name: req.body.name,
@@ -136,7 +136,7 @@ export default class CupController {
                 createdAt: Date.now(),
                 modifiedBy: user._id,
                 updatedAt: Date.now(),
-                groups: groupIdArr
+                groups: groupArr
             };
             try {
                 const createCup: any = await cupDB.createCup(cup);
@@ -166,7 +166,7 @@ export default class CupController {
         const token: string = func.getToken(req.headers);
         if (token) {
             const user: any = await func.decodeToken(token);
-            const groupArr: string[] = req.body.groups.split(',');
+            const groupArr: string[] = req.body.groups/*.split(',');
             let groupIdArr: number[] = [];
             for (let i: number = 0; i < groupArr.length; i++) {
                 const findGroupByName: any = await groupDB.findGroupByName(
@@ -175,7 +175,7 @@ export default class CupController {
                 if (!_.isNil(findGroupByName)) {
                     groupIdArr.push(findGroupByName._id);
                 }
-            }
+            }*/
             let win: any = '';
             let sec: any = '';
             let thr: any = '';
@@ -206,12 +206,13 @@ export default class CupController {
                 active: req.body.active,
                 modifiedBy: user._id,
                 updatedAt: Date.now(),
-                groups: groupIdArr,
+                groups: groupArr,
                 winner: win,
                 second: sec,
                 third: thr
             };
             try {
+                console.log("UPDATING CUP IN DB!!!!!!")
                 const updateCup: any = await cupDB.updateCup(cup, req);
                 if (_.isNil(updateCup.message)) {
                     res.status(200).json({
