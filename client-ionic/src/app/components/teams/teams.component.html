@@ -27,7 +27,7 @@
     <td>{{user.DoB}}</td>
     <td *ngIf='user.winRatio'>{{user.winRatio | number: '1.2-2'}}</td>
     <td *ngIf='!user.winRatio'>-</td>
-    <td text-center><ion-button color="primary" (click)="openEditModal(user)">Edit</ion-button> <ion-button color="danger" (click)='delete($event)'>Delete</ion-button></td>
+    <td text-center><ion-button color="primary" (click)="openEditModal(user)">Edit</ion-button></td>
   </tr>
 </table>
 </ion-content>

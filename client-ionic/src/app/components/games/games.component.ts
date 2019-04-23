@@ -30,7 +30,7 @@ export class GamesComponent implements OnInit {
 
     return await modal.present();
   }
-  async delete(event: Event) {
+  async delete(event: Event, game) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -44,7 +44,12 @@ export class GamesComponent implements OnInit {
           text: 'Yes',
           role: 'yes',
           handler: () => {
-            console.log('Yes');
+            this.gamesService.deleteGame(game._id).subscribe(response => {
+              console.log(response);
+              if (response.success) {
+                this.games = this.games.filter(elem =>  elem !== game );
+              }
+            });
           }
         }, {
           text: 'No',

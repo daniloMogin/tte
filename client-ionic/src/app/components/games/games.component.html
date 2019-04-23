@@ -21,7 +21,7 @@
       <td>{{ game.score }}</td>
       <td text-center>
         <ion-button color="primary" (click)='openModal(game)'>Edit</ion-button>
-        <ion-button color="danger" (click)='delete($event)'>Delete</ion-button>
+        <ion-button color="danger" (click)='delete($event, game)'>Delete</ion-button>
       </td>
     </tr>
   </table>
