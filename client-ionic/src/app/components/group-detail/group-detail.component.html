@@ -34,6 +34,9 @@
               </tr>
             </thead>
             <tbody>
+              <tr *ngIf='group.teams.length === 0'>
+                <td colspan='3'>There are no teams</td>
+              </tr>
               <tr *ngFor='let team of group.teams; let i = index'>
                 <td>{{ team.winRatio ? i + 1 : '-'}}</td>
                 <td>
@@ -42,9 +45,6 @@
                   </a>
                 </td>
                 <td>{{ team.winRatio ? team.winRatio : '-' }}</td>
-              </tr>
-              <tr *ngIf='group.teams'>
-                <td colspan='3'>There are no teams</td>
               </tr>
             </tbody>
           </table>
@@ -71,7 +71,7 @@
                 </td>
                 <td></td>
               </tr>
-              <tr *ngIf='group.score'>
+              <tr *ngIf='group.score.length === 0'>
                 <td colspan='3'>There are no scores</td>
               </tr>
             </tbody>

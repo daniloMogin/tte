@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { GroupsService } from 'src/app/services';
+import { GroupsService, UsersService } from 'src/app/services';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,20 +13,29 @@ export class AddModalGroupsComponent implements OnInit {
   group = {
     name: '',
     description: '',
-    teams: '',
+    teams: [],
     active: true
   };
 
-  constructor(public modalCtrl: ModalController, private groupsService: GroupsService, private router: Router) { }
+  constructor(public modalCtrl: ModalController, private groupsService: GroupsService, private teamsService: UsersService, 
+    private router: Router) { }
 
-  ngOnInit() {}
+  teams: any[] = [];
+
+  ngOnInit() {
+    this.teamsService.getUsers().subscribe(response => {
+      this.teams = response;
+    })
+  }
 
   closeModal() {
     this.modalCtrl.dismiss();
   }
 
   addGroup() {
-    console.log("Adding cup");
+    console.log("Adding group");
+    console.log(this.group);
+
     this.groupsService.createGroup(this.group).subscribe(response => {
       if (response.success) {
         this.modalCtrl.dismiss(response.group);

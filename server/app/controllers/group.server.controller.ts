@@ -128,7 +128,7 @@ export default class GroupController {
                     req.body.name
                 );
                 if (_.isNil(findGroupByName)) {
-                    const teamsArr: string[] = req.body.teams.split(',');
+                    const teamsArr: string[] = req.body.teams//.split(',');
                     let teamsIdArr: number[] = [];
                     for (let i: number = 0; i < teamsArr.length; i++) {
                         const findUserByUsername: any = await userDB.findUserByUsername(

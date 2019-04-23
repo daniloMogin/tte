@@ -16,6 +16,12 @@
             <ion-label position='floating'>Description</ion-label>
             <ion-textarea [(ngModel)]='group.description' clearInput></ion-textarea>
           </ion-item>
+          <ion-item>
+            <ion-label position='floating'>Teams</ion-label>
+            <ion-select [(ngModel)]='group.teams' multiple="true" cancelText="CANCEL" okText="OK">
+              <ion-select-option *ngFor='let team of teams' value='{{team.username}}'>{{ team.name + ' ' + team.lastname }}</ion-select-option>
+            </ion-select>
+          </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
