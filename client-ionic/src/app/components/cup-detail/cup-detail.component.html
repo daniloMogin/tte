@@ -67,7 +67,7 @@
                 </td>
                 <td>{{ (team.winRatio ? team.winRatio : 0) | number: '1.2-2' }}</td>
               </tr>
-              <tr *ngIf='group.teams'>
+              <tr *ngIf='group.teams.length === 0'>
                   <td colspan='3'>There are no teams</td>
                 </tr>
               <tr>
