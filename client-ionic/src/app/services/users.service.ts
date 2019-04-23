@@ -19,7 +19,7 @@ private API_CUP_URL = this.API_ROOT + 'users/';
   getUsers(): Observable<any> {
     return this.http.get<any>(this.API_CUP_URL, {headers: this.getHeaders()})
     .pipe(
-      catchError(this.handleError<any>('getUsers'))
+      catchError(this.handleError<any>('getUsers', {team: []}))
     );
   }
 
