@@ -23,7 +23,12 @@ export class EditModalTeamsComponent implements OnInit {
   }
 
   saveData() {
-    this.userService.updateUser(this.user._id, this.user).subscribe(response => { console.log(response); });
+    console.log('Updating user');
+    console.log(this.user);
+    
+    
+    this.userService.updateUser(this.user._id, this.user).subscribe(response => { console.log('Response recieved');
+     console.log(response); });
   }
 
 }
