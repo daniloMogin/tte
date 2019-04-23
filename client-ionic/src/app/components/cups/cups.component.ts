@@ -11,7 +11,7 @@ import { AddModalCupsComponent } from '../modal/add-modal-cups/add-modal-cups.co
 })
 export class CupsComponent implements OnInit {
 
-  cups: [];
+  cups: any[];
 
   constructor(private cupsService: api.CupsService,  private modalCtrl : ModalController, private alertController: AlertController) { }
 
@@ -39,6 +39,26 @@ export class CupsComponent implements OnInit {
     return await modal.present();
 
   }
+
+  async openAddModal() {
+    const modal = await this.modalCtrl.create({
+      component: AddModalCupsComponent,
+      componentProps: {
+        cups: this.cups
+      }
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+        if (data.data) {
+          let cup = data.data;
+          this.cups.push(cup);
+        }
+    });
+
+    return await modal.present();
+  }
+
   async delete(event: Event) {
     event.preventDefault();
     event.stopPropagation();
@@ -67,15 +87,6 @@ export class CupsComponent implements OnInit {
     });
 
     await alert.present();
-  }
-
-
-  async openAddModal() {
-    const modal = await this.modalCtrl.create({
-      component: AddModalCupsComponent
-    });
-
-    return await modal.present();
   }
 
 }

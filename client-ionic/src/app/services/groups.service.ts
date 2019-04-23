@@ -40,7 +40,7 @@ export class GroupsService extends ApiService {
   }
 
   updateGroup(id: string, group: any): Observable<any> {
-    group.teams = group.teams.join(',');
+    //group.teams = group.teams.join(',');
     return this.http.put<any>(this.API_GROUP_URL + id, group, {headers: this.getHeaders() })
       .pipe(
         catchError(this.handleError<any>('updateGroup'))
