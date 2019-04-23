@@ -46,13 +46,18 @@
                     <a routerLink='/groups/{{group._id}}'>{{ group.name }}</a>
                 </th>
               </tr>
-            </thead>
-            <tbody>
               <tr>
                 <td colspan='3'>
                     {{ group.description }}
                 </td>
               </tr>
+              <tr>
+                <th>Position</th>
+                <th>Name</th>
+                <th>Win ratio</th>
+              </tr>
+            </thead>
+            <tbody>
               <tr *ngFor='let team of group.teams; let i = index'>
                 <td>{{ i + 1 }}</td>
                 <td>
@@ -62,10 +67,16 @@
                 </td>
                 <td>{{ (team.winRatio ? team.winRatio : 0) | number: '1.2-2' }}</td>
               </tr>
+              <tr *ngIf='group.teams'>
+                  <td colspan='3'>There are no teams</td>
+                </tr>
               <tr>
-                <ion-select placeholder="Select team to add">
-                  <ion-select-option *ngFor='let team of teams' value="team._id">{{ team.name + ' ' + team.lastname }}</ion-select-option>
-                </ion-select>
+                <td colspan='3'>
+                  <ion-select placeholder="Select team to add">
+                    <ion-select-option *ngFor='let team of teams' value="team._id">{{ team.name + ' ' + team.lastname }}
+                    </ion-select-option>
+                  </ion-select>
+                </td>
               </tr>
             </tbody>
           </table>

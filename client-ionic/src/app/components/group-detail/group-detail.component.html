@@ -43,6 +43,9 @@
                 </td>
                 <td>{{ team.winRatio ? team.winRatio : '-' }}</td>
               </tr>
+              <tr *ngIf='group.teams'>
+                <td colspan='3'>There are no teams</td>
+              </tr>
             </tbody>
           </table>
         </ion-col>
@@ -67,6 +70,9 @@
                   </a>
                 </td>
                 <td></td>
+              </tr>
+              <tr *ngIf='group.score'>
+                <td colspan='3'>There are no scores</td>
               </tr>
             </tbody>
           </table>
