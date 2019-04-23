@@ -11,7 +11,7 @@ import { AddModalGroupsComponent } from '../modal/add-modal-groups/add-modal-gro
 })
 export class GroupsComponent implements OnInit {
 
-  groups: [];
+  groups: any[];
 
   constructor(private groupsService: api.GroupsService, private modalCtrl: ModalController, private alertController: AlertController) { }
 
@@ -47,7 +47,7 @@ export class GroupsComponent implements OnInit {
     return await modal.present();
   }
   
-  async delete(event: Event) {
+  async delete(event: Event, group: any) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -61,7 +61,12 @@ export class GroupsComponent implements OnInit {
             text: 'Yes',
             role: 'yes',
            handler: () => {
-              console.log('Yes');
+            this.groupsService.deleteGroup(group._id).subscribe(response => {
+              console.log(response);
+              if (response.success) {
+                this.groups = this.groups.filter(elem => elem !== group );
+              }
+            });
             }
           }, {
             text: 'No',

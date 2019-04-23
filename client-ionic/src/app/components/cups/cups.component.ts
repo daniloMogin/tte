@@ -59,7 +59,7 @@ export class CupsComponent implements OnInit {
     return await modal.present();
   }
 
-  async delete(event: Event) {
+  async delete(event: Event, cup: any) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -72,8 +72,13 @@ export class CupsComponent implements OnInit {
           {
             text: 'Yes',
             role: 'yes',
-           handler: () => {
-              console.log('Yes');
+            handler: () => {
+              this.cupsService.deleteCup(cup._id).subscribe(response => {
+                console.log(response);
+                if (response.success) {
+                  this.cups = this.cups.filter(elem =>  elem !== cup );
+                }
+              });
             }
           }, {
             text: 'No',
