@@ -4,6 +4,17 @@ ion-card {
   min-width: 100%;
 }
 
+ion-card-content {
+  height: 100%;
+}
+
+ion-card-title, ion-card-subtitle {
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .add-button-container {
   cursor: pointer;
   width: 100%;
@@ -15,3 +26,22 @@ ion-card {
   color: #3880ff;
 }
 
+.delete-button-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 2.5em;
+  padding: 10px;
+  color: red;
+  font-weight: bold; 
+}
+
+.edit-button-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 2.5em;
+  padding: 10px;
+  color: #3880ff;
+  font-weight: bold; 
+}
