@@ -16,22 +16,22 @@ export class AppComponent {
     {
       title: 'Cups',
       url: '/cups',
-      icon: 'home'
+      icon: 'podium'
     },
     {
       title: 'Groups',
       url: '/groups',
-      icon: 'list'
+      icon: 'grid'
     },
     {
       title: 'Teams',
       url: '/teams',
-      icon: 'list'
+      icon: 'people'
     },
     {
       title: 'Games',
       url: '/games',
-      icon: 'list'
+      icon: 'tennisball'
     }
   ];
 

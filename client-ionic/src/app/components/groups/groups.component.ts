@@ -12,6 +12,7 @@ import { AddModalGroupsComponent } from '../modal/add-modal-groups/add-modal-gro
 export class GroupsComponent implements OnInit {
 
   groups: any[];
+  showBar: boolean = true;
 
   constructor(private groupsService: api.GroupsService, private modalCtrl: ModalController, private alertController: AlertController) { }
 
@@ -23,6 +24,7 @@ export class GroupsComponent implements OnInit {
       console.log(response);
       
       this.groups = response.group;
+      this.showBar = false;
       console.log(this.groups);
     });
   }

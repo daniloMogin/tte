@@ -12,6 +12,7 @@ import { AddModalCupsComponent } from '../modal/add-modal-cups/add-modal-cups.co
 export class CupsComponent implements OnInit {
 
   cups: any[];
+  showBar: boolean = true;
 
   constructor(private cupsService: api.CupsService,  private modalCtrl : ModalController, private alertController: AlertController) { }
 
@@ -23,6 +24,7 @@ export class CupsComponent implements OnInit {
     this.cupsService.getCups().subscribe(response => {
       console.log(response);
       this.cups = response.cup;
+      this.showBar = false;
     });
   }
 

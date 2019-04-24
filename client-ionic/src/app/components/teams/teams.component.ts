@@ -11,7 +11,7 @@ import { AddModalTeamsComponent } from '../modal/add-modal-teams/add-modal-teams
 })
 export class TeamsComponent implements OnInit {
 users = [];
-
+showBar: boolean = true;
   constructor(private userService: api.UsersService, private modalCtrl : ModalController, private alertController: AlertController) { }
 
   ngOnInit() {
@@ -19,7 +19,9 @@ users = [];
 
   ionViewWillEnter() {
     this.userService.getUsers().subscribe(response => {
+      this.showBar = false;
       this.users = response;
+      
       console.log(this.users);
     });
   }

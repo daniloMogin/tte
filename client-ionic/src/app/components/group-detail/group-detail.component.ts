@@ -12,6 +12,7 @@ export class GroupDetailComponent implements OnInit {
 
   private group: any = {};
   private loaded = false;
+  showBar: boolean = true;
 
   private teams: any[];
   private addTeamsSelect: any;
@@ -25,6 +26,7 @@ export class GroupDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.groupsService.getGroupById(id).subscribe( response => {
       this.group = response.group;
+      this.showBar = false;
 
       /* retrieving lost teams
       let teams = [];
