@@ -1,0 +1,17 @@
+.delete-button-container {
+    cursor: pointer;
+    font-size: 2.5em;
+    color: red;
+    font-weight: bold; 
+  }
+
+  .add-button-container {
+    cursor: pointer;
+    font-size: 3.5em;
+    margin-top: 0.2em;
+    /*color: var(--ion-color-primary);/*#3880ff;*/
+  }
+
+  .add-button-container:hover, .delete-button-container:hover {
+    transform: scale(1.25);
+  }

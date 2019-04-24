@@ -16,20 +16,17 @@
       <ion-col *ngFor='let group of groups' size-xs='12' size-sm='6' size-md='4'>
         <a routerLink='/groups/{{group._id}}'>
           <ion-card text-center>
-            <ion-card-header>
-                <ion-icon class="edit color" (click)='openEditModal($event, group)' name="create"></ion-icon>
-                <ion-icon class="delete" color='danger' (click)='delete($event, group)' name="close"></ion-icon>
-                
-
+            <ion-icon name='create' class="edit-button-container" (click)='openEditModal($event, group)'></ion-icon>
+            <ion-icon name='close' class="delete-button-container" (click)='delete($event, group)'></ion-icon>
+            <ion-card-content  class="ion-align-items-center ion-justify-content-center">
               <ion-card-title>{{ group.name }}</ion-card-title>
+              <div>
+                <ion-icon class='cardLogo' name='grid'></ion-icon>
+              </div>
               <ion-card-subtitle>{{ group.description }}</ion-card-subtitle>
-            </ion-card-header>
-          
-            <ion-card-content>
               <img>
-              <!-- <ion-button (click)='openEditModal($event, group)'>EDIT</ion-button> -->
-              <!-- <ion-button color='danger' (click)='delete($event, group)'>DELETE</ion-button> -->
-              
+              <!-- <ion-button (click)='openEditModal($event, group)'>EDIT</ion-button>
+              <ion-button color='danger' (click)='delete($event, group)'>DELETE</ion-button> -->
             </ion-card-content>
           </ion-card>
         </a>
