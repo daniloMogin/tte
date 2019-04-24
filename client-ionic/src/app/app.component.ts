@@ -16,7 +16,7 @@ export class AppComponent {
     {
       title: 'Cups',
       url: '/cups',
-      icon: 'podium'
+      icon: 'trophy'
     },
     {
       title: 'Groups',

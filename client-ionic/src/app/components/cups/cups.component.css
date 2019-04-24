@@ -4,6 +4,10 @@ ion-card {
   min-width: 100%;
 }
 
+ion-card:hover {
+  color: blue;
+}
+
 ion-card-content {
   height: 100%;
   display: flex;
@@ -53,6 +57,18 @@ ion-card-subtitle {
   font-weight: bold; 
 }
 
+.edit-button-container:hover, .delete-button-container:hover {
+  transform: scale(1.25);
+}
+
+.add-button-container:hover {
+  font-size: 6em;
+}
+
 ion-icon {
   z-index: 5000;
+}
+
+.cardLogo {
+  font-size: 5em;
 }
