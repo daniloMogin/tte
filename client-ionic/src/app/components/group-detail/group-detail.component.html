@@ -34,9 +34,6 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngIf='group.teams.length === 0'>
-                <td colspan='3'>There are no teams</td>
-              </tr>
               <tr *ngFor='let team of group.teams; let i = index'>
                 <td>{{ team.winRatio ? i + 1 : '-'}}</td>
                 <td>
@@ -45,6 +42,18 @@
                   </a>
                 </td>
                 <td>{{ team.winRatio ? team.winRatio : '-' }}</td>
+              </tr>
+              <tr *ngIf='group.teams.length === 0'>
+                <td colspan='3'>There are no teams</td>
+              </tr>
+              <tr>
+                <td colspan='3'>
+                  <ion-select placeholder="Select team to add" multiple="true" cancelText="Cancel" okText="OK" 
+                  [(ngModel)]='addTeamsSelect' (ionChange)='changeTeams(group)' selectedText='Add or remove teams'>
+                    <ion-select-option *ngFor='let team of teams; let i = index' value="{{i}}">{{ team.name + ' ' + team.lastname }}
+                    </ion-select-option>
+                  </ion-select>
+                </td>
               </tr>
             </tbody>
           </table>

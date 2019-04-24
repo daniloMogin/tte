@@ -37,7 +37,7 @@
 
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor='let group of cup.groups' size-xs='12' size-lg='6'>
+        <ion-col *ngFor='let group of cup.groups; let groupIndex = index' size-xs='12' size-lg='6'>
           
           <table class='table table-bordered table-striped'>
             <thead>
@@ -72,8 +72,9 @@
                 </tr>
               <tr>
                 <td colspan='3'>
-                  <ion-select placeholder="Select team to add">
-                    <ion-select-option *ngFor='let team of teams' value="team._id">{{ team.name + ' ' + team.lastname }}
+                  <ion-select placeholder="Select team to add" multiple="true" cancelText="Cancel" okText="OK" 
+                  [(ngModel)]='addTeamsSelect[groupIndex]' (ionChange)='changeTeams(group, groupIndex)'  selectedText='Add or remove teams'>
+                    <ion-select-option *ngFor='let team of teams; let i = index' value="{{i}}">{{ team.name + ' ' + team.lastname }}
                     </ion-select-option>
                   </ion-select>
                 </td>

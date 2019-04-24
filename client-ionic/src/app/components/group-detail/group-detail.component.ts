@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as api from '../../services';
 import { ActivatedRoute } from '@angular/router';
+import { UsersService } from '../../services';
 
 @Component({
   selector: 'app-group-detail',
@@ -12,7 +13,10 @@ export class GroupDetailComponent implements OnInit {
   private group: any = {};
   private loaded = false;
 
-  constructor(private groupsService: api.GroupsService, private route: ActivatedRoute) { }
+  private teams: any[];
+  private addTeamsSelect: any;
+
+  constructor(private groupsService: api.GroupsService, private teamsService: UsersService, private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
@@ -39,6 +43,39 @@ export class GroupDetailComponent implements OnInit {
       console.log(this.group);
       this.loaded = true;
     });
+
+    this.teamsService.getUsers().subscribe(response => {
+      this.teams = response;
+      console.log(this.teams);
+    });
+
   }
+
+  changeTeams(group) {
+    const newTeams = [];
+    if (this.addTeamsSelect) {
+      this.addTeamsSelect.forEach(i => {
+        newTeams.push(this.teams[i]);
+      });
+      group.teams = newTeams;
+      //console.log(this.addTeamsSelect)
+    }
+  }
+
+  addTeams(group) {
+    console.log("ADDING TEAMS");
+    
+    if (this.addTeamsSelect) {
+      this.addTeamsSelect.forEach(i => {
+        group.teams.push(this.teams[i]);
+      });
+    }
+    console.log(this.addTeamsSelect);
+    
+    this.addTeamsSelect = null;
+    console.log(this.addTeamsSelect);
+    
+  }
+
 
 }

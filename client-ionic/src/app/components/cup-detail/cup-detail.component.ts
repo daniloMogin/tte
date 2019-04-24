@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CupsService, UsersService } from '../../services';
 import { ModalController } from '@ionic/angular';
 import { AddModalGroupsComponent } from '../modal/add-modal-groups/add-modal-groups.component';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-cup-detail',
@@ -15,6 +16,7 @@ export class CupDetailComponent implements OnInit {
   private loaded = false;
 
   private teams: any[] = [];
+  private addTeamsSelect: any[] = [];
 
   constructor(private route: ActivatedRoute, private cupsService: CupsService, private teamsService: UsersService, private modalCtrl: ModalController, ) { }
 
@@ -26,6 +28,9 @@ export class CupDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.cupsService.getCupById(id).subscribe(response => {
       this.cup = response.cup;
+      this.cup.groups.forEach(group => {
+        this.addTeamsSelect.push([]);
+      });
       console.log(this.cup);
       this.loaded = true;
     });
@@ -56,6 +61,25 @@ export class CupDetailComponent implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  addTeams(group) {
+    let teamsToAdd = [];
+    if (this.addTeamsSelect) {
+      this.addTeamsSelect.forEach(i => {
+        group.teams.push(this.teams[i]);
+      });
+      //this.teams = 
+      this.addTeamsSelect = null;
+    }
+  }
+
+  changeTeams(group, groupIndex) {
+    const newTeams = [];
+    this.addTeamsSelect[groupIndex].forEach(i => {
+      newTeams.push(this.teams[i]);
+    });
+    group.teams = newTeams;
   }
 
 }
