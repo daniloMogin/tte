@@ -15,3 +15,23 @@ ion-card {
   color: #3880ff;
 }
 
+.delete {
+  position: absolute;
+  font-size: 2.5em;
+  right: 0;
+  top: 0;
+  padding: 10px;
+  
+  
+}
+
+.edit {
+  position: absolute;
+  font-size: 2.5em;
+  left: 0;
+  top: 0;
+  padding: 10px;
+}
+.color {
+  color: #109633;
+}

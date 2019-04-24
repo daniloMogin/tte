@@ -24,11 +24,12 @@
     <th></th>
   </tr>
   <tr *ngFor="let user of users">
-    <td><a routerLink='/teams/{{user._id}}'>{{user.name + ' ' + user.lastname}}</a></td>
+    <td><ion-icon name="people" class="position"></ion-icon><a routerLink='/teams/{{user._id}}' class="text">{{user.name + ' ' + user.lastname}}</a></td>
     <td>{{user.DoB}}</td>
     <td *ngIf='user.winRatio'>{{user.winRatio | number: '1.2-2'}}</td>
     <td *ngIf='!user.winRatio'>-</td>
-    <td text-center><ion-button color="primary" (click)="openEditModal(user)">Edit</ion-button></td>
+    <!-- <td text-center><ion-button color="primary" (click)="openEditModal(user)">Edit</ion-button></td> -->
+    <ion-icon class="edit color" (click)='openEditModal(user)' name="create"></ion-icon>
   </tr>
 </table>
 </ion-content>

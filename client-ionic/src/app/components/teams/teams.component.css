@@ -4,3 +4,29 @@
     line-height: 1.1;
     color: #3880ff;
 }
+
+.color {
+    color: #109633;
+}
+
+.edit {
+    cursor: pointer;
+    font-size: 2.5em;
+  
+    padding: 10px;
+  }
+  .edit:hover {
+    transform: scale(1.25);
+  }
+
+
+  .position {
+      position: absolute;
+      left: 1%;
+      font-size: 2em;
+      color: #BC2A2B;
+  }
+
+  .text {
+      color: black;
+  }

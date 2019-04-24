@@ -30,7 +30,7 @@
         </tr>
         <tr *ngFor='let game of users.games; let i=index'>
             <td>
-              <a routerLink='/games/{{game._id}}'>{{game.score}}</a>
+              <a routerLink='/games/{{game._id}}' class="text">{{game.score}}</a>
             </td>
         </tr>
       </table>

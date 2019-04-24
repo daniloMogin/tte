@@ -18,11 +18,13 @@
       <th></th>
     </tr>
     <tr *ngFor='let game of games'>
-      <td><a routerLink='/games/{{game._id}}'>{{ game.name }}</a></td>
+      <td><ion-icon name="tennisball" class="position"></ion-icon><a routerLink='/games/{{game._id}}' class="text">{{ game.name }}</a></td>
       <td>{{ game.score }}</td>
       <td text-center>
-        <ion-button color="primary" (click)='openModal(game)'>Edit</ion-button>
-        <ion-button color="danger" (click)='delete($event, game)'>Delete</ion-button>
+        <!-- <ion-button color="primary" (click)='openModal(game)'>Edit</ion-button>
+        <ion-button color="danger" (click)='delete($event, game)'>Delete</ion-button> -->
+        <ion-icon class="edit color" (click)='openModal($event, game)' name="create"></ion-icon>
+        <ion-icon class="delete" color='danger' (click)='delete($event, game)' name="close"></ion-icon>
       </td>
     </tr>
   </table>
