@@ -10,6 +10,7 @@ import { GamesService } from '../../services';
 export class GameDetailComponent implements OnInit {
 
   private game: any[] = [];
+  showBar: boolean = true;
 
   constructor(private route: ActivatedRoute, private gamesService: GamesService) { }
 
@@ -20,6 +21,7 @@ export class GameDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.gamesService.getGameById(id).subscribe(response => {
       this.game = response.game;
+      this.showBar = false;
       console.log(this.game);
     });
   }

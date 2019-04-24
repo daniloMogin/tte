@@ -12,6 +12,7 @@ import { EditModalGamesComponent } from '../modal/edit-modal-games/edit-modal-ga
 export class GamesComponent implements OnInit {
 
   games: any[] = [];
+  showBar: boolean = true;
 
   constructor(private gamesService: GamesService, private modalCtrl: ModalController, private alertController: AlertController) { }
 
@@ -19,7 +20,10 @@ export class GamesComponent implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.gamesService.getGames().subscribe(response => this.games = response.game);
+    this.gamesService.getGames().subscribe(response => {
+      this.games = response.game;
+      this.showBar = false;
+    });
   }
 
   async openModal(game) {
@@ -47,7 +51,7 @@ export class GamesComponent implements OnInit {
             this.gamesService.deleteGame(game._id).subscribe(response => {
               console.log(response);
               if (response.success) {
-                this.games = this.games.filter(elem =>  elem !== game );
+                this.games = this.games.filter(elem => elem !== game);
               }
             });
           }

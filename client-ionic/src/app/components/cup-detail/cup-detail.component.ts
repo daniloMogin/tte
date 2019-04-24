@@ -13,6 +13,7 @@ export class CupDetailComponent implements OnInit {
 
   private cup: any = {};
   private loaded = false;
+  showBar: boolean = true;
 
   private teams: any[] = [];
 
@@ -32,6 +33,7 @@ export class CupDetailComponent implements OnInit {
 
     this.teamsService.getUsers().subscribe(response => {
       this.teams = response;
+      this.showBar = false;
       console.log(this.teams);
     });
   }
