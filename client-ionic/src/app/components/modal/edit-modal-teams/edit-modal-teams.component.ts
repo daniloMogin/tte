@@ -9,7 +9,9 @@ import { UsersService } from '../../../services';
 })
 export class EditModalTeamsComponent implements OnInit {
 
-  user: any;
+  user: any = {
+    active: true
+  }
 
   constructor(public modalCtrl: ModalController, private navParams: NavParams, private userService: UsersService) { }
 
