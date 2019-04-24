@@ -79,7 +79,7 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: '',
+    path: '**',
     redirectTo: '/cups',
     pathMatch: 'full'
   }

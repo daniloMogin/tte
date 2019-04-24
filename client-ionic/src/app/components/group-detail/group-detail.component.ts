@@ -15,7 +15,7 @@ export class GroupDetailComponent implements OnInit {
   showBar: boolean = true;
 
   private teams: any[];
-  private addTeamsSelect: any;
+  private addTeamsSelect: any[] = [];
 
   constructor(private groupsService: api.GroupsService, private teamsService: UsersService, private route: ActivatedRoute) { }
 
@@ -44,6 +44,11 @@ export class GroupDetailComponent implements OnInit {
 
       console.log(this.group);
       this.loaded = true;
+
+      console.log(this.group.teams);
+      this.group.teams.forEach(team => {
+        this.addTeamsSelect.push(team._id);
+      });
     });
 
     this.teamsService.getUsers().subscribe(response => {
@@ -55,28 +60,27 @@ export class GroupDetailComponent implements OnInit {
 
   changeTeams(group) {
     const newTeams = [];
-    if (this.addTeamsSelect) {
-      this.addTeamsSelect.forEach(i => {
-        newTeams.push(this.teams[i]);
-      });
-      group.teams = newTeams;
-      //console.log(this.addTeamsSelect)
-    }
+    this.addTeamsSelect.forEach(id => {
+      const newTeam = this.teams.find(team => {
+        return team._id === id;
+      })
+      newTeams.push(newTeam);
+    });
+    group.teams = newTeams;
+    this.groupsService.updateGroup(group._id, group).subscribe(response => {
+      if (response.success) {
+      }
+    });
   }
 
   addTeams(group) {
-    console.log("ADDING TEAMS");
-    
     if (this.addTeamsSelect) {
       this.addTeamsSelect.forEach(i => {
         group.teams.push(this.teams[i]);
       });
     }
-    console.log(this.addTeamsSelect);
-    
     this.addTeamsSelect = null;
-    console.log(this.addTeamsSelect);
-    
+
   }
 
 
