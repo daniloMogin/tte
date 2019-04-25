@@ -9,10 +9,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  
-  myForm: FormGroup;
 
-  registerUserData = {}
+  myForm: FormGroup;
+  errorMsg;
+ 
   constructor(private _auth: AuthService,
     private _router: Router, private fb: FormBuilder) { }
 
@@ -24,7 +24,9 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       DoB: ['', Validators.required],
-      role: ['', Validators.required]
+      role: ['player', Validators.required],
+      active: [true],
+      additionalInfo: []
 
 
 
@@ -33,24 +35,25 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    if(this.myForm.valid){
-      alert(`Form is valid!!!`);
-    } else {
-      alert('User form is not valid!!')
-    }
-  
-    console.log('this.myForm');
-    console.log(this.myForm);
     
-    // this._auth.registerUser(this.registerUserData)
-    //   .subscribe(
-    //     res => {
-    //       console.log(res);
+    if (this.myForm.valid) {
+      alert(`Form is valid!!!`);
+      
+      console.log('this.myForm');
+      console.log(this.myForm);
 
-    //     },
-    //     err => console.log(err)
-    //   )
+      this._auth.registerUser(this.myForm.value)
+        .subscribe(
+          res => {
+            console.log(res);
+
+          },
+          err => 
+          //this.errorMsg = err.error.msg.error.messagge
+          console.log(err.msg.error.message)
+          
+        )
+    }
+
   }
-
-
 }
