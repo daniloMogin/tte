@@ -11,60 +11,89 @@
 
 
 <ion-content padding>
-  <form  #registerForm="ngForm">
+  <form [formGroup]='myForm'>
     <ion-row>
       <ion-col>
         <ion-list inset>
 
           <ion-item>
             <ion-label position='floating'>Name</ion-label>
-            <ion-input [(ngModel)]="registerUserData.name" type="text" placeholder="Name" name="name" required></ion-input>
+            <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="(myForm.controls.name.dirty || myForm.controls.name.touched) && myForm.controls.name.invalid && 
+          myForm.controls.name.errors.required">
+            <p>Name is required!</p>
           </ion-item>
 
           <ion-item>
             <ion-label position='floating'>Last Name</ion-label>
-            <ion-input [(ngModel)]="registerUserData.lastname" type="text" placeholder="Last Name" name="lastname" required></ion-input>
+            <ion-input type="text" placeholder="Last Name" formControlName="lastname"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="(myForm.controls.lastname.dirty || myForm.controls.lastname.touched) && myForm.controls.lastname.invalid && 
+          myForm.controls.lastname.errors.required">
+            <p>Last name is required!</p>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Username</ion-label>
-            <ion-input [(ngModel)]="registerUserData.username" type="text" placeholder="Username" name="username" required></ion-input>
+            <ion-input type="text" placeholder="Username" formControlName="username"></ion-input>
           </ion-item>
-
+          <ion-item *ngIf="(myForm.controls.username.dirty || myForm.controls.username.touched) && myForm.controls.username.invalid && 
+          myForm.controls.username.errors.required && submitted">
+            <p>Username is required!</p>
+          </ion-item>
           <ion-item>
             <ion-label position='floating'>Password</ion-label>
-            <ion-input [(ngModel)]="registerUserData.password" type="password" placeholder="Password" name="password" required></ion-input>
+            <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="(myForm.controls.password.dirty || myForm.controls.password.touched) && myForm.controls.password.invalid && 
+          myForm.controls.password.errors.required">
+            <p>Password is required!</p>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>E-mail</ion-label>
-            <ion-input [(ngModel)]="registerUserData.email" type="email" placeholder="Email" name="email" required></ion-input>
+            <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="(myForm.controls.email.dirty || myForm.controls.email.touched) && myForm.controls.email.invalid && 
+          myForm.controls.email.errors.required">
+            <p>Email is required!</p>
+          </ion-item>
+          <ion-item *ngIf="(myForm.controls.email.dirty || myForm.controls.email.touched) && myForm.controls.email.invalid && 
+          myForm.controls.email.errors.email">
+            <p>Email format is not valid!</p>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Active</ion-label>
-              <ion-checkbox [(ngModel)]="registerUserData.active" name='active'></ion-checkbox>
-            
-
+            <ion-checkbox formControlName='active'></ion-checkbox>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Date of birth</ion-label>
-            <ion-datetime [(ngModel)]="registerUserData.DoB" name='DoB' display-format="MMM DD, YYYY" placeholder='Choose date'></ion-datetime>
+            <ion-datetime formControlName='DoB' display-format="MMM DD, YYYY" placeholder='Choose date'></ion-datetime>
+          </ion-item>
+          <ion-item *ngIf="(myForm.controls.DoB.dirty || myForm.controls.DoB.touched) && myForm.controls.DoB.invalid && 
+          myForm.controls.DoB.errors.required">
+            <p>Date is required!</p>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Additional Info</ion-label>
-            <ion-textarea [(ngModel)]="registerUserData.additionalInfo" name='additionalInfo' placeholder='Additional Info...' rows="6" cols="20" clearInput></ion-textarea>
+            <ion-textarea placeholder='Additional Info...' rows="6" cols="20" clearInput formControlName='additionalInfo'></ion-textarea>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Role</ion-label>
-            <ion-select [(ngModel)]="registerUserData.role" name='role' placeholder="Select One">
+            <ion-select formControlName='role' placeholder="Select One">
               <ion-select-option value="player">Player</ion-select-option>
 
             </ion-select>
+          </ion-item>
+          <ion-item *ngIf="(myForm.controls.role.dirty || myForm.controls.role.touched) && myForm.controls.role.invalid && 
+          myForm.controls.role.errors.required">
+            <p>Role is required!</p>
           </ion-item>
 
         </ion-list>
       </ion-col>
     </ion-row>
-          <ion-button color="primary" (click)='register()'>Register</ion-button>
-    
+    <ion-button color="primary" (click)='register()' [disabled]="!myForm.valid">Register</ion-button>
+
 
   </form>
 </ion-content>
