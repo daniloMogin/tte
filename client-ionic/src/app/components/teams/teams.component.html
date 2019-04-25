@@ -5,31 +5,34 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      List of teams
+      <div text-center>List of Teams</div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content text-center>
-<table class="table table-striped">
-  <tr>
-    <td colspan=4>
-      <div class='add-button-container' (click)='openAddModal()'>+</div>
-    </td>
-  </tr>
-  <tr>
-    <th>Name</th>
-    <th>Date of Birth</th>
-    <th>Win Ratio</th>
-    <th></th>
-  </tr>
-  <tr *ngFor="let user of users">
-    <td><ion-icon name="people" class="position"></ion-icon><a routerLink='/teams/{{user._id}}' class="text">{{user.name + ' ' + user.lastname}}</a></td>
-    <td>{{user.DoB}}</td>
-    <td *ngIf='user.winRatio'>{{user.winRatio | number: '1.2-2'}}</td>
-    <td *ngIf='!user.winRatio'>-</td>
-    <!-- <td text-center><ion-button color="primary" (click)="openEditModal(user)">Edit</ion-button></td> -->
-    <ion-icon class="edit color" (click)='openEditModal(user)' name="create"></ion-icon>
-  </tr>
-</table>
+<ion-content *ngIf='loaded' text-center>
+  <table class="table table-bordered table-striped">
+    <tr>
+      <td colspan=6>
+        <div class='add-button-container' (click)='openAddModal()'>+</div>
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Date of Birth</th>
+      <th>Win Ratio</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td class='td-min'><ion-icon name="people" class="position row-logo"></ion-icon></td>
+      <td><a routerLink='/teams/{{user._id}}' class="text">{{user.name + ' ' + user.lastname}}</a></td>
+      <td>{{user.DoB}}</td>
+      <td *ngIf='user.winRatio'>{{user.winRatio | number: '1.2-2'}}</td>
+      <td *ngIf='!user.winRatio'>-</td>
+      <td text-center class='td-min'>
+        <ion-icon class="edit color" (click)='openEditModal(user)' name="create"></ion-icon>
+      </td>
+    </tr>
+  </table>
 </ion-content>

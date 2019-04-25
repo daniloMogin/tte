@@ -21,16 +21,21 @@ export class EditModalTeamsComponent implements OnInit {
   }
 
   closeModal() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(false);
   }
 
   saveData() {
     console.log('Updating user');
     console.log(this.user);
-    
-    
-    this.userService.updateUser(this.user._id, this.user).subscribe(response => { console.log('Response recieved');
-     console.log(response); });
+
+    this.userService.updateUser(this.user._id, this.user).subscribe(response => { 
+     console.log('Response recieved');
+     console.log(response);
+     if (response.success) {
+      this.modalCtrl.dismiss(this.user);
+      /*this.router.navigate(['/groups/'+response.group._id]);*/
+    }
+    });
   }
 
 }

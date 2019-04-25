@@ -18,9 +18,12 @@ export class EditModalGroupsComponent implements OnInit {
   }
 
   closeModal() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(false);
   }
   saveData() {
-    this.groupService.updateGroup(this.group._id, this.group).subscribe(response => { console.log(response); });
+    this.groupService.updateGroup(this.group._id, this.group).subscribe(response => { 
+      console.log(response);
+      this.modalCtrl.dismiss(response.group);
+    });
   }
 }

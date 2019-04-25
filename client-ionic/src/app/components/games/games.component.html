@@ -5,22 +5,29 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      List of games
+      <div text-center>List of Games</div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content text-center>
-  <table class="table table-striped">
+<ion-content *ngIf='loaded' text-center>
+  <table class="table table-bordered table-striped">
     <tr>
+        <td colspan=6>
+          <div class='add-button-container' (click)='openAddModal()'>+</div>
+        </td>
+      </tr>
+    <tr>
+      <th></th>
       <th>Game name </th>
       <th>Score</th>
       <th></th>
     </tr>
     <tr *ngFor='let game of games'>
-      <td><ion-icon name="tennisball" class="position"></ion-icon><a routerLink='/games/{{game._id}}' class="text">{{ game.name }}</a></td>
+      <td class='td-min row-logo'><ion-icon name="tennisball" class="position row-logo"></ion-icon></td>
+      <td><a routerLink='/games/{{game._id}}' class="text">{{ game.name }}</a></td>
       <td>{{ game.score }}</td>
-      <td text-center>
+      <td text-center class='td-min'>
         <!-- <ion-button color="primary" (click)='openModal(game)'>Edit</ion-button>
         <ion-button color="danger" (click)='delete($event, game)'>Delete</ion-button> -->
         <ion-icon class="edit color" (click)='openModal($event, game)' name="create"></ion-icon>

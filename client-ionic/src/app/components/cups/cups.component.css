@@ -22,9 +22,9 @@ ion-card-title, ion-card-subtitle {
   padding: 10px 20px;
 }
 
-ion-card-subtitle {
+/*ion-card-subtitle {
   border-top: 2px solid gray;
-}
+}*/
 
 .add-button-container {
   cursor: pointer;
@@ -66,7 +66,7 @@ ion-card-subtitle {
 }
 
 ion-icon {
-  z-index: 5000;
+  z-index: 5;
 }
 
 .cardLogo {

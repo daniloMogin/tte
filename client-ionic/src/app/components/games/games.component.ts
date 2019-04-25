@@ -13,6 +13,7 @@ export class GamesComponent implements OnInit {
 
   games: any[] = [];
   showBar: boolean = true;
+  loaded: boolean = false;
 
   constructor(private gamesService: GamesService, private modalCtrl: ModalController, private alertController: AlertController) { }
 
@@ -23,6 +24,7 @@ export class GamesComponent implements OnInit {
     this.gamesService.getGames().subscribe(response => {
       this.games = response.game;
       this.showBar = false;
+      this.loaded = true;
     });
   }
 

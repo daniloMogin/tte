@@ -11,7 +11,7 @@ export class RegisterComponent implements OnInit {
 
   registerUserData = {}
   constructor(private _auth: AuthService,
-    private _router: Router) { }
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         res => {
           console.log(res);
+          this.router.navigate(['/login']);
 
         },
         err => console.log(err)

@@ -13,6 +13,7 @@ export class GroupsComponent implements OnInit {
 
   groups: any[];
   showBar: boolean = true;
+  loaded: boolean = false;
 
   constructor(private groupsService: api.GroupsService, private modalCtrl: ModalController, private alertController: AlertController) { }
 
@@ -25,6 +26,7 @@ export class GroupsComponent implements OnInit {
       
       this.groups = response.group;
       this.showBar = false;
+      this.loaded = true;
       console.log(this.groups);
     });
   }
@@ -38,12 +40,31 @@ export class GroupsComponent implements OnInit {
       componentProps: group
     });
 
+    modal.onDidDismiss()
+      .then((data) => {
+        console.log(data);
+        if (data.data) {
+          console.log(group)
+          console.log(data.data);
+          
+          this.groups[this.groups.indexOf(group)] = data.data;
+        }
+    });
+
     return await modal.present();
   }
 
   async openAddModal() {
     const modal = await this.modalCtrl.create({
       component: AddModalGroupsComponent
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+        if (data.data) {
+          const group = data.data;
+          this.groups.push(group);
+        }
     });
 
     return await modal.present();

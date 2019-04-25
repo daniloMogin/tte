@@ -13,6 +13,7 @@ export class CupsComponent implements OnInit {
 
   cups: any[];
   showBar: boolean = true;
+  loaded: boolean = false;
 
   constructor(private cupsService: api.CupsService,  private modalCtrl : ModalController, private alertController: AlertController) { }
 
@@ -25,6 +26,7 @@ export class CupsComponent implements OnInit {
       console.log(response);
       this.cups = response.cup;
       this.showBar = false;
+      this.loaded = true;
     });
   }
 

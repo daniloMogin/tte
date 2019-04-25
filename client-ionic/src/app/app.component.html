@@ -19,8 +19,9 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
+        
       </ion-content>
-      <ion-img src="../assets/img/tt.png"></ion-img>
+      <ion-img class='large-image' src="../assets/img/tt.png"></ion-img>
       <ion-footer class="bar-stable">
         <div *ngIf='!authService.isLoggedIn()'>
           <ion-item nav-clear menu-close routerLink='/login'>

@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar text-center>
     <ion-title>Add new group</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name='close' class="close-button-container" (click)='closeModal()'></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -26,8 +29,7 @@
     </ion-row>
     <ion-row>
       <ion-col text-center>
-        <ion-button (click)='addGroup()'>ADD</ion-button>
-        <ion-button (click)='closeModal()'>Close Modal</ion-button>
+        <ion-icon name='checkmark' class="add-button-container" color='primary' (click)='addGroup()'></ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -25,8 +25,8 @@
       color: #109633;
   }
   .position {
-    position: absolute;
-    left: 1%;
+    /*position: absolute;
+    left: 1%;*/
     font-size: 2em;
     color: #BC2A2B;
 }
@@ -34,4 +34,20 @@
 .text {
     color: black;
 
+}
+
+.add-button-container {
+  cursor: pointer;
+  font-size: 2.5em;
+  line-height: 1.1;
+  color: #3880ff;
+}
+
+tr:hover .row-logo {
+  transform: scale(1.1);
+}
+
+td {
+  padding: 6px;
+  font-size: 1.1em;
 }

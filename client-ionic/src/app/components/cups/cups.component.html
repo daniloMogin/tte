@@ -1,4 +1,4 @@
-<ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
+
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -9,8 +9,9 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-progress-bar type="indeterminate" *ngIf='!loaded'></ion-progress-bar>
 
-<ion-content>
+<ion-content *ngIf='loaded'>
   <ion-grid>
     <ion-row align-items-stretch>
       <ion-col *ngFor='let cup of cups' size-xs='12' size-sm='6' size-md='4'>

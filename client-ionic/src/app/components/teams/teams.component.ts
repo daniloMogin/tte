@@ -10,8 +10,11 @@ import { AddModalTeamsComponent } from '../modal/add-modal-teams/add-modal-teams
   styleUrls: ['./teams.component.css']
 })
 export class TeamsComponent implements OnInit {
-users = [];
-showBar: boolean = true;
+
+  users = [];
+  showBar: boolean = true;
+  loaded: boolean = false;
+
   constructor(private userService: api.UsersService, private modalCtrl : ModalController, private alertController: AlertController) { }
 
   ngOnInit() {
@@ -20,6 +23,7 @@ showBar: boolean = true;
   ionViewWillEnter() {
     this.userService.getUsers().subscribe(response => {
       this.showBar = false;
+      this.loaded = true;
       this.users = response;
       
       console.log(this.users);
@@ -30,6 +34,13 @@ showBar: boolean = true;
     const modal = await this.modalCtrl.create({
       component: EditModalTeamsComponent,
       componentProps: user
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+        if (data.data) {
+          this.users[this.users.indexOf(user)] = data.data;
+        }
     });
 
     return await modal.present();

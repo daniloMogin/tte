@@ -29,7 +29,7 @@ export class AddModalGroupsComponent implements OnInit {
   }
 
   closeModal() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(false);
   }
 
   addGroup() {

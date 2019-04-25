@@ -21,8 +21,8 @@
 
 
   .position {
-      position: absolute;
-      left: 1%;
+      /*position: absolute;
+      left: 1%;*/
       font-size: 2em;
       color: #BC2A2B;
   }
@@ -30,3 +30,7 @@
   .text {
       color: black;
   }
+
+  tr:hover .row-logo {
+      transform: scale(1.2);
+  } 

@@ -1,0 +1,14 @@
+/*ion-menu ion-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*
+ion-menu ion-content {
+    flex-shrink: 0 !important;
+}*/
+/*
+.large-image {
+    flex-grow: 1;
+}*/
