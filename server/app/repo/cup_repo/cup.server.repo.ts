@@ -144,7 +144,19 @@ export default class CupDBCalls {
                 };
                 CupModel.findByIdAndUpdate(req.params.id, result)
                     .then(data => {
-                        resolve(data);
+                        CupModel.findById(data._id)
+                            .populate(
+                                'createdBy modifiedBy winner second third',
+                                '-password -__v'
+                            )
+                            .populate({
+                                path: 'groups',
+                                populate: { path: 'teams score createdBy modifiedBy' }
+                            })
+                            .then(data => {
+                                resolve(data);
+                            })
+                        // resolve(data);
                     })
                     .catch(error => {
                         resolve(error);

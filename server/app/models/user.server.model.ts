@@ -54,13 +54,13 @@ export const UserSchema: mongoose.Schema = new mongoose.Schema({
         type: String,
         required: false
     },
-    games: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Game',
-            required: false
-        }
-    ],
+    // games: [
+    //     {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: 'Game',
+    //         required: false
+    //     }
+    // ],
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

@@ -12,7 +12,7 @@ export interface IUser extends mongoose.Document {
     additionalInfo: string;
     role: fromInterface.IRole[];
     winRatio: string;
-    games: fromInterface.IGame[];
+    // games: fromInterface.IGame[];
     createdAt: Date;
     updatedAt: Date;
     createdBy: fromInterface.IUser;

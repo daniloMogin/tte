@@ -55,12 +55,30 @@ export default class GameDBCalls {
         });
     }
 
+    public findAllGameByName(name) {
+        return new Promise(resolve => {
+            try {
+                GameModel.find({ name })
+                    .populate('createdBy modifiedBy', '-password -__v')
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        resolve(error);
+                    });
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    }
+
     public createGame(game: fromInterfaces.IGame) {
         return new Promise(resolve => {
             try {
                 const result: fromInterfaces.IGame = new GameModel({
                     name: game.name,
                     description: game.description,
+                    score: game.score,
                     active: game.active,
                     teams: game.teams,
                     createdBy: game.createdBy,

@@ -6,7 +6,13 @@ export interface IGame extends mongoose.Document {
     description: string;
     teams: fromInterfaces.IUser[];
     teamsObject?: fromInterfaces.IUser[];
-    score: string;
+    score: [
+        {
+            teamId: string;
+            teamName: string;
+            teamPoints: string;
+        }
+    ];
     winner: fromInterfaces.IUser;
     active: boolean;
     createdAt: Date;

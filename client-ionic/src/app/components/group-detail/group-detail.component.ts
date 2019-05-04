@@ -59,7 +59,8 @@ export class GroupDetailComponent implements OnInit {
   }
 
   changeTeams(group) {
-    const newTeams = [];
+      console.log(`changeTeams... `);
+      const newTeams = [];
     this.addTeamsSelect.forEach(id => {
       const newTeam = this.teams.find(team => {
         return team._id === id;
@@ -68,6 +69,9 @@ export class GroupDetailComponent implements OnInit {
     });
     group.teams = newTeams;
     this.groupsService.updateGroup(group._id, group).subscribe(response => {
+      console.log(`response`);
+      console.log(response);
+      group.score = response.group.score;
       if (response.success) {
       }
     });

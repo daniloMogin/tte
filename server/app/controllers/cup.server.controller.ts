@@ -54,8 +54,6 @@ export default class CupController {
                 const cup: fromInterfaces.ICup | any = await cupDB.findCupById(
                     req
                 );
-                console.log(`findCup`);
-                console.log(cup);
                 if (cup !== null) {
                     res.status(200).json({
                         success: true,
@@ -165,6 +163,8 @@ export default class CupController {
     async (req: Request, res: Response) => {
         const token: string = func.getToken(req.headers);
         if (token) {
+            // console.log(` -=-=-=-=-=-=- req.body -=-=-=-=-=-=- `);
+            // console.log(req.body);
             const user: any = await func.decodeToken(token);
             const groupArr: string[] = req.body.groups/*.split(',');
             let groupIdArr: number[] = [];
@@ -176,9 +176,9 @@ export default class CupController {
                     groupIdArr.push(findGroupByName._id);
                 }
             }*/
-            let win: any = '';
-            let sec: any = '';
-            let thr: any = '';
+            let win: any = null;
+            let sec: any = null;
+            let thr: any = null;
             if (req.body.winner !== '' && !_.isNil(req.body.winner)) {
                 const findUserByUsername: any = await userDB.findUserByUsername(
                     req.body.winner.trim(),
@@ -211,9 +211,13 @@ export default class CupController {
                 second: sec,
                 third: thr
             };
+            // console.log(`-*-*-*-*-*-*- cup-*-*-*-*-*-*- `);
+            // console.log(cup);
             try {
-                console.log("UPDATING CUP IN DB!!!!!!")
+                // console.log("UPDATING CUP IN DB!!!!!!")
                 const updateCup: any = await cupDB.updateCup(cup, req);
+                // console.log(` -*-*-*-*-*-*- updateCup -*-*-*-*-*-*- `);
+                // console.log(JSON.stringify(updateCup));
                 if (_.isNil(updateCup.message)) {
                     res.status(200).json({
                         success: true,

@@ -144,12 +144,12 @@ export default class UserDBCalls {
     public updateUser = (user, req: Request, res: Response) => {
         return new Promise(resolve => {
             try {
-                const passHash: string = bcrypt.hashSync(user.password);
+                // const passHash: string = bcrypt.hashSync(user.password);
                 const result = {
                     name: user.name,
                     lastname: user.lastname,
                     username: user.username,
-                    password: passHash,
+                    password: user.password,
                     email: user.email,
                     active: user.active,
                     DoB: user.DoB,
@@ -247,7 +247,9 @@ export default class UserDBCalls {
                     req_password,
                     user_pass,
                     (err: Error, isMatch: string | number) => {
+                        console.log('isMatch');
                         console.log(isMatch);
+                        console.log('err');
                         console.log(err);
                         if (isMatch && !err) {
                             const token = jwt.encode(

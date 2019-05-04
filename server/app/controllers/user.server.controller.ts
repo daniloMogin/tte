@@ -278,7 +278,8 @@ class UserController {
                     additionalInfo,
                     role: roleArr
                 };
-
+                console.log(`user`);
+                console.log(user);
                 try {
                     const findUserById = await user_db.findUserById(req, res);
                     if (findUserById != null) {
@@ -302,21 +303,28 @@ class UserController {
 
     public async authenticate(req: Request, res: Response) {
         try {
+            console.log('LAJHSDJKHASJKDHASKHD');
             const validate_login = await func.validateLogin(
                 req.body.username,
                 req.body.password
             );
+            console.log(`validate_login`);
+            console.log(validate_login);
             if (_.isNil(validate_login.error)) {
                 const authenticate_user_email = await user_db.findUserByUsername(
                     validate_login.username,
                     res
                 );
+                // console.log(`authenticate_user_email`);
+                // console.log(authenticate_user_email);
                 if (!_.isNil(authenticate_user_email)) {
                     const authenticate_user_password = await user_db.authenticateUserPassword(
                         authenticate_user_email,
                         req.body.password,
                         res
                     );
+                    console.log(`authenticate_user_password`);
+                    console.log(authenticate_user_password);
                     res.status(201).json({
                         success: true,
                         msg: authenticate_user_password

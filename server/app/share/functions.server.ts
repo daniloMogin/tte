@@ -43,22 +43,22 @@ export default class Functions {
         return decode;
     };
 
-    public createGameIdArray = (
-        input: fromInterfaces.IUser,
-        createGame: fromInterfaces.IGame
-    ): number[] => {
-        const gameIds: number[] = [createGame._id];
-        if (!_.isNil(input.games)) {
-            for (const game of input.games) {
-                if (!_.isNil(game._id)) {
-                    if (createGame._id !== game._id) {
-                        gameIds.push(game._id);
-                    }
-                }
-            }
-        }
-        return gameIds;
-    };
+    // public createGameIdArray = (
+    //     input: fromInterfaces.IUser,
+    //     createGame: fromInterfaces.IGame
+    // ): number[] => {
+    //     const gameIds: number[] = [createGame._id];
+    //     if (!_.isNil(input.games)) {
+    //         for (const game of input.games) {
+    //             if (!_.isNil(game._id)) {
+    //                 if (createGame._id !== game._id) {
+    //                     gameIds.push(game._id);
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return gameIds;
+    // };
 
     /**
      * Function for authenticating password

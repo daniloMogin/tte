@@ -109,7 +109,15 @@ export default class GroupDBCalls {
                     new: true
                 })
                     .then(data => {
-                        resolve(data);
+                        GroupModel.findById(data._id)
+                            .populate(
+                                'teams score createdBy modifiedBy',
+                                '-password -__v'
+                            )
+                            .then(data => {
+                                resolve(data);
+                            })
+                        // resolve(data);
                     })
                     .catch(error => {
                         resolve(error);

@@ -136,6 +136,21 @@ export default class GameController {
                         teamsObjectArr.push(findUserByUsername);
                     }*/
                     const user: any = await func.decodeToken(token);
+                    console.log(`teamsArr`);
+                    console.log(teamsArr);
+                    
+                    const score = [
+                        {
+                            teamId: '',
+                            teamName: '',
+                            teamPoints: '0',
+                        },
+                        {
+                            teamId: '',
+                            teamName: '',
+                            teamPoints: '0',
+                        }
+                    ]
                     const game: any = {
                         name: req.body.name,
                         description: req.body.description,
@@ -145,29 +160,21 @@ export default class GameController {
                         modifiedBy: user._id,
                         createdAt: Date.now()
                     };
-                    const createGame: any = await gameDB.createGame(game);
-                    const updateUser = [];
-                    for (const i of teamsObjectArr) {
-                        updateUser.push(
-                            userDB.updateUserGame(
-                                i,
-                                func.createGameIdArray(i, createGame),
-                                user._id,
-                                res
-                            )
-                        );
-                    }
-                    if (_.isNil(createGame.errors)) {
-                        res.status(200).json({
-                            success: true,
-                            game: createGame
-                        });
-                    } else {
-                        res.status(500).json({
-                            success: false,
-                            msg: createGame
-                        });
-                    }
+                    console.log(`ZOVITE ME KADA BUDETE OVO INPLEMENTIRALI`);
+                    // console.log(`game`);
+                    // console.log(game);
+                    // const createGame: any = await gameDB.createGame(game);
+                    // if (_.isNil(createGame.errors)) {
+                    //     res.status(200).json({
+                    //         success: true,
+                    //         game: createGame
+                    //     });
+                    // } else {
+                    //     res.status(500).json({
+                    //         success: false,
+                    //         msg: createGame
+                    //     });
+                    // }
                 } catch (err) {
                     console.error(
                         'Unable to connect to db and fetch all games. Error is ',
@@ -186,10 +193,10 @@ export default class GameController {
             const token: string = func.getToken(req.headers);
             // console.log(`req.body`);
             // console.log(req.body);
-            console.log(`req.body.teams`);
-            console.log(req.body.teams);
-            console.log(req.body.teams.length);
-            
+            // console.log(`req.body.teams`);
+            // console.log(req.body.teams);
+            // console.log(req.body.teams.length);
+
             if (token) {
                 const user: any = await func.decodeToken(token);
                 let game: fromInterfaces.IGame | any;
@@ -202,29 +209,29 @@ export default class GameController {
                         // console.log(`teamsArr`);
                         // console.log(teamsArr);
                         for (let i: number = 0; i < req.body.teams.length; i++) {
-                            console.log(`req.body.teams[i].username`);
-                            console.log(req.body.teams[i].username);
-                            
+                            // console.log(`req.body.teams[i].username`);
+                            // console.log(req.body.teams[i].username);
+
                             const findUserByUsername: any = await userDB.findUserByUsername(
                                 req.body.teams[i].username.trim(),
                                 res
                             );
-                            console.log(`findUserByUsername`);
-                            console.log(findUserByUsername);
+                            // console.log(`findUserByUsername`);
+                            // console.log(findUserByUsername);
                             teamsArr.push(req.body.teams[i].username)
                             if (!_.isNil(findUserByUsername)) {
                                 teamsIdArr.push(findUserByUsername._id);
                             }
                             teamsObjectArr.push(findUserByUsername);
                         }
-                        console.log(`teamsArr`);
-                        console.log(teamsArr);
+                        // console.log(`teamsArr`);
+                        // console.log(teamsArr);
                         // const winnerId: any = await userDB.findUserByUsername(
                         //     req.body.winner,
                         //     res
                         // );
-                        console.log(`req.body.name`);
-                        console.log(req.body.name);
+                        // console.log(`req.body.name`);
+                        // console.log(req.body.name);
                         const winnerId = '5b3bae1a43bb661294677e5c';
                         game = {
                             name: req.body.name,
@@ -243,43 +250,44 @@ export default class GameController {
                         });
                     }
                     try {
-                        console.log(`game`);
-                        console.log(game);
-                        
-                        const updateGame: any = await gameDB.updateGame(game, req);
-                        let userWithWinRatio: any = [];
-                        let updateUser = [];
-                        // console.log(`updateGame`);
-                        // console.log(updateGame);
-                        for (let i: number = 0; i < teamsArr.length; i++) {
-                            userWithWinRatio = await this.calculateWinRatio(
-                                teamsArr[i].trim(),
-                                req,
-                                res
-                            );
-                            console.log(`userWithWinRatio`);
-                            console.log(userWithWinRatio);
-                            updateUser.push(
-                                await userDB.updateUserWinRatio(
-                                    userWithWinRatio,
-                                    user._id,
-                                    res
-                                )
-                            );
-                            console.log(`updateUser`);
-                            console.log(updateUser);
-                        }
-                        if (_.isNil(updateGame.message)) {
-                            res.status(200).json({
-                                success: true,
-                                game: updateGame
-                            });
-                        } else {
-                            res.status(500).json({
-                                success: false,
-                                msg: updateGame.message
-                            });
-                        }
+                        console.log(`ZOVITE ME KADA BUDETE OVO INPLEMENTIRALI`);
+                        // console.log(`game`);
+                        // console.log(game);
+
+                        // const updateGame: any = await gameDB.updateGame(game, req);
+                        // let userWithWinRatio: any = [];
+                        // let updateUser = [];
+                        // // console.log(`updateGame`);
+                        // // console.log(updateGame);
+                        // for (let i: number = 0; i < teamsArr.length; i++) {
+                        //     userWithWinRatio = await this.calculateWinRatio(
+                        //         teamsArr[i].trim(),
+                        //         req,
+                        //         res
+                        //     );
+                        //     console.log(`userWithWinRatio`);
+                        //     console.log(userWithWinRatio);
+                        //     updateUser.push(
+                        //         await userDB.updateUserWinRatio(
+                        //             userWithWinRatio,
+                        //             user._id,
+                        //             res
+                        //         )
+                        //     );
+                        //     console.log(`updateUser`);
+                        //     console.log(updateUser);
+                        // }
+                        // if (_.isNil(updateGame.message)) {
+                        //     res.status(200).json({
+                        //         success: true,
+                        //         game: updateGame
+                        //     });
+                        // } else {
+                        //     res.status(500).json({
+                        //         success: false,
+                        //         msg: updateGame.message
+                        //     });
+                        // }
                     } catch (err) {
                         res.status(500).json({
                             success: false,
