@@ -20,10 +20,12 @@
             <ion-label position='floating'>Description</ion-label>
             <ion-textarea [(ngModel)]='cup.description' clearInput></ion-textarea>
           </ion-item>
-         <!--  <ion-item>
+          <ion-item>
             <ion-label position='floating'>Groups</ion-label>
-            <ion-input [(ngModel)]='cup.groups' clearInput></ion-input>
-          </ion-item> -->
+            <ion-select [(ngModel)]='cup.groups' multiple="true" cancelText="CANCEL" okText="OK">
+              <ion-select-option *ngFor='let group of groups' value='{{group._id}}'>{{ group.name }}</ion-select-option>
+            </ion-select>
+          </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>

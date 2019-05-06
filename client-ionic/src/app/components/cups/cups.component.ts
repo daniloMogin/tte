@@ -40,6 +40,14 @@ export class CupsComponent implements OnInit {
       componentProps: cup
     });
 
+    modal.onDidDismiss()
+      .then((data) => {
+        if (data.data) {
+          this.cups[this.cups.indexOf(cup)] = data.data;
+        }
+    });
+
+
     return await modal.present();
 
   }
