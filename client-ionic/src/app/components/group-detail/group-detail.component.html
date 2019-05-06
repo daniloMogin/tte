@@ -70,6 +70,7 @@
                 <th>Team 1</th>
                 <th>SCORE</th>
                 <th>Team 2</th>
+                <th>Edit Score</th>
               </tr>
             </thead>
             <tbody>
@@ -81,6 +82,7 @@
                   </a>
                 </td>
                 <td>{{ game.score[1].teamName | json }}</td>
+                 <td><ion-icon class="edit color" (click)='openModal(game)' name="create"></ion-icon></td>
               </tr>
               <tr *ngIf='group.score.length === 0'>
                 <td colspan='3'>There are no scores</td>

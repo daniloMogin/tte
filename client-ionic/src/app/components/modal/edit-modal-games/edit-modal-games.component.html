@@ -16,18 +16,31 @@
             <ion-input [(ngModel)]='game.name' clearInput></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position='floating'>Game Score</ion-label>
-            <ion-input [(ngModel)]='game.score' clearInput></ion-input>
+            <ion-label position='floating'>Team One Name</ion-label>
+            <ion-input [(ngModel)]='game.score[0].teamName' clearInput></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position='floating'>Game Description</ion-label>
+              <ion-label position='floating'>Team One Score</ion-label>
+                <ion-input [(ngModel)]='game.score[0].teamPoints' clearInput></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position='floating'>Team Two Name</ion-label>
+                <ion-input [(ngModel)]='game.score[1].teamName' clearInput></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-label position='floating'>Team Two Score</ion-label>
+                  <ion-input [(ngModel)]='game.score[1].teamPoints' clearInput></ion-input>
+                </ion-item>
+          
+          <ion-item>
+             <ion-label position='floating'>Game Description</ion-label>
             <ion-textarea rows="4" cols="20" [(ngModel)]='game.description' clearInput></ion-textarea>
           </ion-item>
           </ion-col>
     </ion-row>
     <ion-row>
       <ion-col text-center>
-        <ion-icon name='checkmark' class="add-button-container" color='primary' (click)='addCup()'></ion-icon>
+        <ion-icon name='checkmark' class="add-button-container" color='primary' (click)='saveData()'></ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>
