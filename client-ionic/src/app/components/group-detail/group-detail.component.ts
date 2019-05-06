@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as api from '../../services';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../services';
+import { EditModalGamesComponent } from '../modal/edit-modal-games/edit-modal-games.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-group-detail',
@@ -17,7 +19,7 @@ export class GroupDetailComponent implements OnInit {
   private teams: any[];
   private addTeamsSelect: any[] = [];
 
-  constructor(private groupsService: api.GroupsService, private teamsService: UsersService, private route: ActivatedRoute) { }
+  constructor(private groupsService: api.GroupsService, private teamsService: UsersService, private route: ActivatedRoute, private modalCtrl: ModalController) { }
 
   ngOnInit() {
   }
@@ -85,6 +87,15 @@ export class GroupDetailComponent implements OnInit {
     }
     this.addTeamsSelect = null;
 
+  }
+
+  async openModal(game) {
+    const modal = await this.modalCtrl.create({
+      component: EditModalGamesComponent,
+      componentProps: game
+    });
+
+    return await modal.present();
   }
 
 

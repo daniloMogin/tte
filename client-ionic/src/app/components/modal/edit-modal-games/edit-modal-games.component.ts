@@ -9,19 +9,27 @@ import { GamesService } from '../../../services/games.service';
 })
 export class EditModalGamesComponent implements OnInit {
 
-  game: any;
+  game: any = {}
 
   constructor(public modalCtrl: ModalController, private navParams: NavParams, private gameService: GamesService) { }
 
   ngOnInit() {
     this.game = this.navParams.data;
-    console.log(this.game);
+    console.log(this.navParams.data);
   }
 
   closeModal() {
     this.modalCtrl.dismiss();
   }
   saveData() {
-    this.gameService.updateGame(this.game._id, this.game).subscribe(response => { console.log(response); });
-  }
+    console.log(this.game);
+    this.gameService.updateGame(this.game._id, this.game).subscribe(response => { console.log('Response recieved');
+    console.log(response);
+    if (response.success) {
+     this.modalCtrl.dismiss(this.game);
+    
+   }
+   });
+ }
+
 }
