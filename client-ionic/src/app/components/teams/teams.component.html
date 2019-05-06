@@ -8,6 +8,10 @@
       <div text-center>List of Teams</div>
     </ion-title>
   </ion-toolbar>
+  <ion-item>
+  <ion-label>Search:</ion-label>
+  <ion-input [(ngModel)]='search'></ion-input>
+</ion-item>
 </ion-header>
 
 <ion-content *ngIf='loaded' text-center>
@@ -24,7 +28,7 @@
       <th>Win Ratio</th>
       <th></th>
     </tr>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of users | filter:search">
       <td class='td-min'><ion-icon name="people" class="position row-logo"></ion-icon></td>
       <td><a routerLink='/teams/{{user._id}}' class="text">{{user.name + ' ' + user.lastname}}</a></td>
       <td>{{user.DoB}}</td>
