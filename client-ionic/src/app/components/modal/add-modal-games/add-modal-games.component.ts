@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GamesService, UsersService } from 'src/app/services';
 
 @Component({
   selector: 'app-add-modal-games',
@@ -7,8 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddModalGamesComponent implements OnInit {
 
-  constructor() { }
+  name: string;
+  description: string;
+  team1: string;
+  team2: string;
 
-  ngOnInit() {}
+  teams: any[];
+
+  constructor(private gamesService: GamesService, private usersService: UsersService) { }
+
+  ngOnInit() {
+    this.usersService.getUsers().subscribe(response => {
+      this.teams = response;
+    });
+  }
 
 }

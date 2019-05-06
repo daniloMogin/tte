@@ -3,6 +3,7 @@ import { GamesService } from '../../services';
 import { EditModalTeamsComponent } from '../modal/edit-modal-teams/edit-modal-teams.component';
 import { ModalController, AlertController } from '@ionic/angular';
 import { EditModalGamesComponent } from '../modal/edit-modal-games/edit-modal-games.component';
+import { AddModalGamesComponent } from '../modal/add-modal-games/add-modal-games.component';
 
 @Component({
   selector: 'app-games',
@@ -29,7 +30,7 @@ export class GamesComponent implements OnInit {
     });
   }
 
-  async openModal(game) {
+  async openEditModal(game) {
     const modal = await this.modalCtrl.create({
       component: EditModalGamesComponent,
       componentProps: game
@@ -37,6 +38,15 @@ export class GamesComponent implements OnInit {
 
     return await modal.present();
   }
+
+  async openAddModal() {
+    const modal = await this.modalCtrl.create({
+      component: AddModalGamesComponent
+    });
+
+    return await modal.present();
+  }
+
   async delete(event: Event, game) {
     event.preventDefault();
     event.stopPropagation();
