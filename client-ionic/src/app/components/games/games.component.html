@@ -25,8 +25,8 @@
     </tr>
     <tr *ngFor='let game of games'>
       <td class='td-min row-logo'><ion-icon name="tennisball" class="position row-logo"></ion-icon></td>
-      <td><a routerLink='/games/{{game._id}}' class="text">{{ game.name }}</a></td>
-      <td>{{ game.score }}</td>
+      <td><a routerLink='/games/{{game._id}}' class="text">{{ game.score[0].teamName }} - {{ game.score[1].teamName }}</a></td>
+      <td>{{ game.score[0].teamPoints }} - {{ game.score[1].teamPoints }}</td>
       <td text-center class='td-min'>
         <!-- <ion-button color="primary" (click)='openModal(game)'>Edit</ion-button>
         <ion-button color="danger" (click)='delete($event, game)'>Delete</ion-button> -->

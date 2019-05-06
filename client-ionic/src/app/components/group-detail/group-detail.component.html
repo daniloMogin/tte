@@ -74,13 +74,13 @@
             </thead>
             <tbody>
               <tr *ngFor='let game of group.score; let i = index'>
-                <td></td>
+                <td>{{ game.score[0].teamName | json }}</td>
                 <td>
                   <a routerLink='/games/{{game._id}}'>
-                    {{ game.score | json}}
+                    {{game.score[0].teamPoints}} - {{game.score[1].teamPoints}}
                   </a>
                 </td>
-                <td></td>
+                <td>{{ game.score[1].teamName | json }}</td>
               </tr>
               <tr *ngIf='group.score.length === 0'>
                 <td colspan='3'>There are no scores</td>

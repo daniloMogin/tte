@@ -42,10 +42,10 @@ export class GroupDetailComponent implements OnInit {
       console.log(teams);
       */
 
-      console.log(this.group);
+      console.log(this.group.teams);
       this.loaded = true;
 
-      console.log(this.group.teams);
+      console.log(this.group.score);
       this.group.teams.forEach(team => {
         this.addTeamsSelect.push(team._id);
       });
@@ -69,8 +69,8 @@ export class GroupDetailComponent implements OnInit {
     });
     group.teams = newTeams;
     this.groupsService.updateGroup(group._id, group).subscribe(response => {
-      console.log(`response`);
-      console.log(response);
+      // console.log(`response`);
+      // console.log(response);
       group.score = response.group.score;
       if (response.success) {
       }

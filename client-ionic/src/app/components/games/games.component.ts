@@ -25,6 +25,7 @@ export class GamesComponent implements OnInit {
       this.games = response.game;
       this.showBar = false;
       this.loaded = true;
+      console.log(this.games)
     });
   }
 
