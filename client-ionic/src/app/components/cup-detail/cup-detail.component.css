@@ -16,3 +16,23 @@ table {
 thead {
     font-size: 1.2em;
 }
+
+.table thead th {
+    vertical-align: middle;
+    position: relative;
+    line-height: 1.8em;
+}
+
+.remove-button-container {
+    /*float: right;*/
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 1.8em;
+    color: red;
+    font-weight: bold; 
+}
+
+.remove-button-container:hover {
+    transform: scale(1.25);
+}

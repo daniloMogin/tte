@@ -17,15 +17,15 @@ export class AddModalGroupsComponent implements OnInit {
     active: true
   };
 
+  teams: any[] = [];
+
   constructor(public modalCtrl: ModalController, private groupsService: GroupsService, private teamsService: UsersService, 
     private router: Router) { }
-
-  teams: any[] = [];
 
   ngOnInit() {
     this.teamsService.getUsers().subscribe(response => {
       this.teams = response;
-    })
+    });
   }
 
   closeModal() {

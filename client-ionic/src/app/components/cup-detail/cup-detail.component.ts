@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CupsService, UsersService, GroupsService } from '../../services';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { AddModalGroupsComponent } from '../modal/add-modal-groups/add-modal-groups.component';
 
 @Component({
@@ -18,8 +18,14 @@ export class CupDetailComponent implements OnInit {
   private teams: any[] = [];
   private addTeamsSelect: any[] = [];
 
-  constructor(private route: ActivatedRoute, private cupsService: CupsService, private teamsService: UsersService, 
-    private groupsService: GroupsService, private modalCtrl: ModalController, ) { }
+  constructor(
+      private route: ActivatedRoute,
+      private cupsService: CupsService,
+      private teamsService: UsersService,
+      private groupsService: GroupsService,
+      private modalCtrl: ModalController,
+      private alertController: AlertController
+  ) { }
 
   ngOnInit() {
   }
@@ -94,6 +100,41 @@ export class CupDetailComponent implements OnInit {
       if (response.success) {
       }
     });
+  }
+
+  async removeGroup(groupToRemove) {
+    const alert = await this.alertController.create({
+      
+      header: 'Alert',
+      subHeader: 'Remove group from cup?',
+      message: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Yes',
+          role: 'yes',
+          handler: () => {
+            const filteredGroups = this.cup.groups.filter(group => group !== groupToRemove);
+            const updatedCup = {...this.cup, groups: filteredGroups};
+            console.log(updatedCup);
+            this.cupsService.updateCup(this.cup._id, updatedCup).subscribe(response => {
+              console.log(response);
+              if (response.success) {
+                this.cup = response.cup;
+              }
+            });
+          }
+        }, {
+          text: 'No',
+          role: 'no',
+          handler: () => {
+            console.log('No');
+          }
+        }
+      ]
+    
+  });
+
+  await alert.present();
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController} from '@ionic/angular';
-import { CupsService } from '../../../services';
+import { CupsService, GroupsService } from '../../../services';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,9 +17,15 @@ export class AddModalCupsComponent implements OnInit {
     active: true
   };
 
-  constructor(public modalCtrl: ModalController, private cupsService: CupsService, private router: Router) { }
+  groups: any[] = [];
+
+  constructor(public modalCtrl: ModalController, private cupsService: CupsService,
+    private groupsService: GroupsService, private router: Router) { }
 
   ngOnInit() {
+    this.groupsService.getGroup().subscribe(response => {
+      this.groups = response.group;
+    });
   }
 
   closeModal() {

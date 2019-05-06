@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
-import { CupsService } from '../../../services';
+import { CupsService, GroupsService } from '../../../services';
 
 @Component({
   selector: 'app-edit-modal-cups',
@@ -11,11 +11,28 @@ export class EditModalCupsComponent implements OnInit {
 
   cup: any;
 
-  constructor(public modalCtrl: ModalController, private navParams: NavParams, private cupsService: CupsService) { }
+  private groups: any[];
+  private addGroupsSelect: any[] = [];
+
+  constructor(public modalCtrl: ModalController, private navParams: NavParams,
+    private cupsService: CupsService, private groupsService: GroupsService) { }
 
   ngOnInit() {
     this.cup = this.navParams.data;
     console.log(this.cup);
+
+    this.cup.groups.forEach(group => {
+      this.addGroupsSelect.push(group._id);
+    });
+
+    console.log('addGroupSelect:');
+    console.log(this.addGroupsSelect);
+
+    this.groupsService.getGroup().subscribe(response => {
+      this.groups = response.group;
+      console.log(this.groups);
+    });
+
   }
 
   closeModal() {
@@ -25,8 +42,11 @@ export class EditModalCupsComponent implements OnInit {
   saveData() {
     console.log("UPDATING CUP");
     console.log(this.cup);
+    this.cup.groups = this.addGroupsSelect;
     this.cupsService.updateCup(this.cup._id, this.cup).subscribe(response => { console.log("RESPONSE RECEIVED");
-      console.log(response); });
+      console.log(response);
+      this.modalCtrl.dismiss(response.cup);
+    });
   }
 
 }
