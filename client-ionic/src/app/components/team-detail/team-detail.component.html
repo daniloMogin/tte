@@ -28,7 +28,7 @@
         <tr>
           <th>Games</th>
         </tr>
-        <tr *ngFor='let game of users.role; let i=index'>
+        <tr *ngFor='let game of users.games; let i=index'>
             <td>
               <a routerLink='/games/{{game._id}}' class="text">{{game.name}}</a>
             </td>

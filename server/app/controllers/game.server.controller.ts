@@ -205,10 +205,10 @@ export default class GameController {
                 let teamsArr: string[];
                 if (req.body.teams.length > 0) {
                     try {
-                        // teamsArr = req.body.teams.split(',');
+                        teamsIdArr = req.body.teams;//.split(',');
                         // console.log(`teamsArr`);
                         // console.log(teamsArr);
-                        for (let i: number = 0; i < req.body.teams.length; i++) {
+                        /*for (let i: number = 0; i < req.body.teams.length; i++) {
                             // console.log(`req.body.teams[i].username`);
                             // console.log(req.body.teams[i].username);
 
@@ -223,7 +223,7 @@ export default class GameController {
                                 teamsIdArr.push(findUserByUsername._id);
                             }
                             teamsObjectArr.push(findUserByUsername);
-                        }
+                        }*/
                         // console.log(`teamsArr`);
                         // console.log(teamsArr);
                         // const winnerId: any = await userDB.findUserByUsername(

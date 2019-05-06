@@ -45,6 +45,7 @@
               <tr>
                 <th colspan='3'>
                     <a routerLink='/groups/{{group._id}}'>{{ group.name }}</a>
+                    <ion-icon name='close' class="remove-button-container" (click)='removeGroup(group)'></ion-icon>
                 </th>
               </tr>
               <tr>
