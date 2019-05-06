@@ -10,7 +10,7 @@ import { ApiService } from './api-service';
 export class GamesService extends ApiService {
 
   private API_GAMES_URL = this.API_ROOT + 'game/';
-
+  
   constructor(private http: HttpClient) {
     super();
   }

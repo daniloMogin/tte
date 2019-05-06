@@ -8,6 +8,14 @@
       <div text-center>List of Games</div>
     </ion-title>
   </ion-toolbar>
+  <!-- <ion-item>
+      <ion-label>Search:</ion-label>
+      <ion-input [(ngModel)]='search.name'></ion-input>
+    </ion-item> -->
+    <ion-searchbar
+    [(ngModel)]="searchTerm"
+    (ionChange)="filterItems()"
+  ></ion-searchbar>
 </ion-header>
 
 <ion-content *ngIf='loaded' text-center>
@@ -23,15 +31,15 @@
       <th>Score</th>
       <th></th>
     </tr>
-    <tr *ngFor='let game of games'>
+    <tr *ngFor='let game of games | filter:search'>
       <td class='td-min row-logo'><ion-icon name="tennisball" class="position row-logo"></ion-icon></td>
-      <td><a routerLink='/games/{{game._id}}' class="text">{{ game.score[0].teamName }} - {{ game.score[1].teamName }}</a></td>
+      <td><a routerLink='/games/{{game._id}}' class="text">{{ game.name }}</a></td>
       <td>{{ game.score[0].teamPoints }} - {{ game.score[1].teamPoints }}</td>
       <td text-center class='td-min'>
         <!-- <ion-button color="primary" (click)='openModal(game)'>Edit</ion-button>
         <ion-button color="danger" (click)='delete($event, game)'>Delete</ion-button> -->
         <ion-icon class="edit color" (click)='openModal(game)' name="create"></ion-icon>
-        <ion-icon class="delete" color='danger' (click)='delete($event, game)' name="close"></ion-icon>
+        <!-- <ion-icon class="delete" color='danger' (click)='delete($event, game)' name="close"></ion-icon> -->
       </td>
     </tr>
   </table>
