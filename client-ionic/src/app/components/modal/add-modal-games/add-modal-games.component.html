@@ -7,7 +7,7 @@
     </ion-toolbar>
   </ion-header>
   
-  <ion-content padding>
+  <div class="inner-content" padding>
     <ion-grid>
       <ion-row>
         <ion-col text-center>
@@ -21,33 +21,25 @@
             </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row padding>
         <ion-col size-xs="12" size-sm="5">
-          <ion-item>
-            <!-- <ion-label position='floating' text-center>Team 1</ion-label>
-            <ion-input [(ngModel)]='group.name' clearInput text-center></ion-input> -->
-            <ion-select [(ngModel)]='team1' cancelText="CANCEL" okText="OK">
+            <ion-select [(ngModel)]='team1' cancelText="CANCEL" okText="OK"  placeholder='Team 1'>
               <ion-select-option *ngFor='let team of teams' value='{{team._id}}'>{{ team.name }} {{ team.lastname }}</ion-select-option>
             </ion-select>
-          </ion-item>
         </ion-col>
-        <ion-col size-xs="12" size-sm="2" class="versus" align-self-end>
+        <ion-col size-xs="12" size-sm="2" class="versus" align-self-center>
           VS
         </ion-col>
         <ion-col size-xs="12" size-sm="5">
-          <ion-item>
-            <!-- <ion-label position='floating' text-center>Team 2</ion-label>
-            <ion-input [(ngModel)]='group.name' clearInput text-center></ion-input> -->
-            <ion-select [(ngModel)]='team2' cancelText="CANCEL" okText="OK">
-                <ion-select-option *ngFor='let team of teams' value='{{team._id}}'>{{ team.name }} {{ team.lastname }}</ion-select-option>
-              </ion-select>
-          </ion-item>
+            <ion-select [(ngModel)]='team2' cancelText="CANCEL" okText="OK" placeholder='Team 2'>
+              <ion-select-option *ngFor='let team of teams' value='{{team._id}}'>{{ team.name }} {{ team.lastname }}</ion-select-option>
+            </ion-select>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col text-center>
-          <ion-icon name='checkmark' class="add-button-container" color='primary' (click)='addGroup()'></ion-icon>
+          <ion-icon name='checkmark' class="add-button-container" color='primary' (click)='addGame()'></ion-icon>
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-content>
+  </div>

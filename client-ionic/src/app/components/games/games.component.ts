@@ -28,7 +28,7 @@ export class GamesComponent implements OnInit {
       this.showBar = false;
       this.loaded = true;
       console.log(this.games)
-      this.filteredData = this.games
+      this.filteredData = this.games;
     });
   }
 
@@ -41,7 +41,8 @@ export class GamesComponent implements OnInit {
   async openEditModal(game) {
     const modal = await this.modalCtrl.create({
       component: EditModalGamesComponent,
-      componentProps: game
+      componentProps: game,
+      cssClass: 'auto-height'
     });
 
     return await modal.present();
@@ -49,7 +50,8 @@ export class GamesComponent implements OnInit {
 
   async openAddModal() {
     const modal = await this.modalCtrl.create({
-      component: AddModalGamesComponent
+      component: AddModalGamesComponent,
+      cssClass: 'auto-height'
     });
 
     return await modal.present();

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GamesService, UsersService } from 'src/app/services';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-modal-games',
@@ -15,11 +16,28 @@ export class AddModalGamesComponent implements OnInit {
 
   teams: any[];
 
-  constructor(private gamesService: GamesService, private usersService: UsersService) { }
+  constructor(public modalCtrl: ModalController, private gamesService: GamesService, private usersService: UsersService) { }
 
   ngOnInit() {
     this.usersService.getUsers().subscribe(response => {
       this.teams = response;
+    });
+  }
+
+  closeModal() {
+    this.modalCtrl.dismiss(false);
+  }
+
+  addGame() {
+    const game = {
+      name: this.name,
+      description: this.description,
+      active: true,
+      teams: [this.team1, this.team2]
+    };
+    this.gamesService.createGame(game).subscribe(response => {
+      console.log(response);
+      
     });
   }
 

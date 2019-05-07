@@ -37,7 +37,8 @@ export class GroupsComponent implements OnInit {
 
     const modal = await this.modalCtrl.create({
       component: EditModalGroupsComponent,
-      componentProps: group
+      componentProps: group,
+      cssClass: 'auto-height'
     });
 
     modal.onDidDismiss()
@@ -56,7 +57,8 @@ export class GroupsComponent implements OnInit {
 
   async openAddModal() {
     const modal = await this.modalCtrl.create({
-      component: AddModalGroupsComponent
+      component: AddModalGroupsComponent,
+      cssClass: 'auto-height'
     });
 
     modal.onDidDismiss()

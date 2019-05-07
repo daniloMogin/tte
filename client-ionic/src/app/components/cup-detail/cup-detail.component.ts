@@ -57,7 +57,8 @@ export class CupDetailComponent implements OnInit {
 
   async openAddGroupModal() {
     const modal = await this.modalCtrl.create({
-      component: AddModalGroupsComponent
+      component: AddModalGroupsComponent,
+      cssClass: 'auto-height'
     });
 
     modal.onDidDismiss()

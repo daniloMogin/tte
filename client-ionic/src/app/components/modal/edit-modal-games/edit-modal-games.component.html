@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<div class="inner-content" padding>
   <ion-grid>
     <ion-row>
       <ion-col text-center>
@@ -15,6 +15,7 @@
           <ion-label position='floating'>Game Name</ion-label>
             <ion-input [(ngModel)]='game.name' clearInput></ion-input>
           </ion-item>
+          <!--
           <ion-item>
             <ion-label position='floating'>Team One Name</ion-label>
             <ion-input [(ngModel)]='game.score[0].teamName' clearInput></ion-input>
@@ -30,18 +31,35 @@
               <ion-item>
                   <ion-label position='floating'>Team Two Score</ion-label>
                   <ion-input [(ngModel)]='game.score[1].teamPoints' clearInput></ion-input>
-                </ion-item>
+                </ion-item>-->
           
           <ion-item>
-             <ion-label position='floating'>Game Description</ion-label>
+            <ion-label position='floating'>Game Description</ion-label>
             <ion-textarea rows="4" cols="20" [(ngModel)]='game.description' clearInput></ion-textarea>
           </ion-item>
-          </ion-col>
+      </ion-col>
     </ion-row>
+    <ion-row padding class="score-container" text-center>
+        <ion-col size-xs="5">
+          <ion-item>
+            <ion-label position='floating'>{{ game.score[0].teamName }}</ion-label>
+            <ion-input type="number" [(ngModel)]='game.score[0].teamPoints' text-center></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size-xs="2" class="versus" align-self-end>
+          :
+        </ion-col>
+        <ion-col size-xs="5">
+            <ion-item>
+              <ion-label position='floating'>{{ game.score[1].teamName }}</ion-label>
+              <ion-input type="number" [(ngModel)]='game.score[1].teamPoints' text-center></ion-input>
+            </ion-item>
+        </ion-col>
+      </ion-row>
     <ion-row>
       <ion-col text-center>
         <ion-icon name='checkmark' class="add-button-container" color='primary' (click)='saveData()'></ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>
-</ion-content>
+</div>
