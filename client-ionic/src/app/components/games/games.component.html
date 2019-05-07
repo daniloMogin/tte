@@ -1,4 +1,4 @@
-<ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
+
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -14,10 +14,10 @@
     </ion-item> -->
     <ion-searchbar
     [(ngModel)]="searchTerm"
-    (ionChange)="filterItems()"
+    (ionChange)="setFilteredLocation()"
   ></ion-searchbar>
 </ion-header>
-
+<ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
 <ion-content *ngIf='loaded' text-center>
   <table class="table table-bordered table-striped">
     <tr>
@@ -31,7 +31,7 @@
       <th>Score</th>
       <th></th>
     </tr>
-    <tr *ngFor='let game of games | filter:search'>
+    <tr *ngFor='let game of filteredData'>
       <td class='td-min row-logo'><ion-icon name="tennisball" class="position row-logo"></ion-icon></td>
       <td><a routerLink='/games/{{game._id}}' class="text">{{ game.name }}</a></td>
       <td>{{ game.score[0].teamPoints }} - {{ game.score[1].teamPoints }}</td>

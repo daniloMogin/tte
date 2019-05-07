@@ -10,10 +10,11 @@ import { EditModalGamesComponent } from '../modal/edit-modal-games/edit-modal-ga
   styleUrls: ['./games.component.css']
 })
 export class GamesComponent implements OnInit {
-
+  searchTerm: string = '';
   games: any[] = [];
   showBar: boolean = true;
   loaded: boolean = false;
+  filteredData: any[] = [];
 
   constructor(private gamesService: GamesService, private modalCtrl: ModalController, private alertController: AlertController) { }
 
@@ -26,6 +27,15 @@ export class GamesComponent implements OnInit {
       this.showBar = false;
       this.loaded = true;
       console.log(this.games)
+    });
+
+    this.filteredData = this.games
+
+  }
+
+  setFilteredLocation() {
+    this.filteredData = this.games.filter((game) => {
+      return game.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
     });
   }
 
