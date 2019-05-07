@@ -12,5 +12,9 @@ table {
     transform: scale(1.25);
   }
   .color {
-    color: #109633;
+    color: #10519c;
+}
+
+.text {
+  color: black;
 }

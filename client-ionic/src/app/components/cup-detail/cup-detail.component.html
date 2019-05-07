@@ -22,7 +22,7 @@
 
     <br>
     
-    <table class='table table-bordered table-fit'>
+    <!-- <table class='table table-bordered table-fit'>
       <tr *ngIf='cup.winner'>
         <td>WINNER</td><td><a routerLink='/teams/{{cup.winner._id}}'>{{ cup.winner.name + ' ' + cup.winner.lastname }}</a></td>
       </tr>
@@ -32,7 +32,7 @@
       <tr *ngIf='cup.third'>
         <td>THIRD PLACE</td><td><a routerLink='/teams/{{cup.third._id}}'>{{ cup.third.name + ' ' + cup.third.lastname }}</a></td>
       </tr>
-    </table>
+    </table> -->
 
     <ion-button (click)='openEditModal()'>ADD GROUP TO CUP</ion-button>
 
@@ -63,7 +63,7 @@
               <tr *ngFor='let team of group.teams; let i = index'>
                 <td>{{ i + 1 }}</td>
                 <td>
-                  <a routerLink='/teams/{{team._id}}'>
+                  <a routerLink='/teams/{{team._id}}'  class="text">
                   {{ team.name + ' ' + team.lastname }}
                   </a>
                 </td>
