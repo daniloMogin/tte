@@ -23,7 +23,7 @@
       </ion-row>
       <ion-row padding>
         <ion-col size-xs="12" size-sm="5">
-            <ion-select [(ngModel)]='team1' cancelText="CANCEL" okText="OK"  placeholder='Team 1'>
+            <ion-select [(ngModel)]='team1' cancelText="CANCEL" okText="OK"  placeholder='Team 1'  (ionChange)="constructGameName()">
               <ion-select-option *ngFor='let team of teams' value='{{team._id}}'>{{ team.name }} {{ team.lastname }}</ion-select-option>
             </ion-select>
         </ion-col>
@@ -31,7 +31,7 @@
           VS
         </ion-col>
         <ion-col size-xs="12" size-sm="5">
-            <ion-select [(ngModel)]='team2' cancelText="CANCEL" okText="OK" placeholder='Team 2'>
+            <ion-select [(ngModel)]='team2' cancelText="CANCEL" okText="OK" placeholder='Team 2' (ionChange)="constructGameName()">
               <ion-select-option *ngFor='let team of teams' value='{{team._id}}'>{{ team.name }} {{ team.lastname }}</ion-select-option>
             </ion-select>
         </ion-col>
