@@ -38,7 +38,7 @@
               <tr *ngFor='let team of group.teams; let i = index'>
                 <td>{{ team.winRatio ? i + 1 : '-'}}</td>
                 <td>
-                  <a routerLink='/teams/{{team._id}}'>
+                  <a routerLink='/teams/{{team._id}}'  class="text">
                   {{ team.name + ' ' + team.lastname }}
                   </a>
                 </td>
@@ -77,7 +77,7 @@
               <tr *ngFor='let game of group.score; let i = index'>
                 <td>{{ game.score[0].teamName | json }}</td>
                 <td>
-                  <a routerLink='/games/{{game._id}}'>
+                  <a routerLink='/games/{{game._id}}'  class="text">
                     {{game.score[0].teamPoints}} - {{game.score[1].teamPoints}}
                   </a>
                 </td>

@@ -36,3 +36,7 @@ thead {
 .remove-button-container:hover {
     transform: scale(1.25);
 }
+.text {
+    color: black;
+  }
+  

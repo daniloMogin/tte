@@ -5,7 +5,7 @@ ion-card {
 }
 
 ion-card:hover {
-  color: blue;
+  color: #10519c;
 }
 
 ion-card-content {
@@ -53,7 +53,7 @@ ion-card-title, ion-card-subtitle {
   left: 0;
   font-size: 2.5em;
   padding: 10px;
-  color: #3880ff;
+  color: #10519c;
   font-weight: bold; 
 }
 
