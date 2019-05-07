@@ -23,12 +23,12 @@ export class EditModalGamesComponent implements OnInit {
   }
   saveData() {
     console.log(this.game);
-    this.gameService.updateGame(this.game._id, this.game).subscribe(response => { console.log('Response recieved');
-    console.log(response);
-    if (response.success) {
-     this.modalCtrl.dismiss(this.game);
-    
-   }
+    this.gameService.updateGame(this.game._id, this.game).subscribe(response => {
+      console.log('Response recieved');
+      console.log(response);
+      if (response.success) {
+        this.modalCtrl.dismiss(this.game);
+      }
    });
  }
 

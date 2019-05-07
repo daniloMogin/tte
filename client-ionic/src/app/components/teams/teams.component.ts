@@ -42,7 +42,8 @@ export class TeamsComponent implements OnInit {
   async openEditModal(user) {
     const modal = await this.modalCtrl.create({
       component: EditModalTeamsComponent,
-      componentProps: user
+      componentProps: user,
+      cssClass: 'auto-height'
     });
 
     modal.onDidDismiss()
@@ -57,7 +58,8 @@ export class TeamsComponent implements OnInit {
 
   async openAddModal() {
     const modal = await this.modalCtrl.create({
-      component: AddModalTeamsComponent
+      component: AddModalTeamsComponent,
+      cssClass: 'auto-height'
     });
 
     return await modal.present();

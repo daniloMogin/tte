@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CupsService, UsersService, GroupsService } from '../../services';
 import { ModalController, AlertController } from '@ionic/angular';
-import { AddModalGroupsComponent } from '../modal/add-modal-groups/add-modal-groups.component';
+import { EditModalCupsComponent } from '../modal/edit-modal-cups/edit-modal-cups.component';
 
 @Component({
   selector: 'app-cup-detail',
@@ -55,26 +55,23 @@ export class CupDetailComponent implements OnInit {
     });
   }
 
-  async openAddGroupModal() {
+  async openEditModal() {
+
     const modal = await this.modalCtrl.create({
-      component: AddModalGroupsComponent
+      component: EditModalCupsComponent,
+      componentProps: this.cup,
+      cssClass: 'auto-height'
     });
 
     modal.onDidDismiss()
       .then((data) => {
         if (data.data) {
-          const group = data.data;
-          this.cup.groups.push(group);
-          this.cup.winner = '';
-          this.cup.second = '';
-          this.cup.third = '';
-          this.cupsService.updateCup(this.cup._id, this.cup).subscribe(response => {
-            console.log(response);
-          });
+          this.cup = data.data;
         }
     });
 
     return await modal.present();
+
   }
 
   addTeams(group) {

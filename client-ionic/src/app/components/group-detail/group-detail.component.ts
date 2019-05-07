@@ -92,7 +92,8 @@ export class GroupDetailComponent implements OnInit {
   async openModal(game) {
     const modal = await this.modalCtrl.create({
       component: EditModalGamesComponent,
-      componentProps: game
+      componentProps: game,
+      cssClass: 'auto-height'
     });
 
     return await modal.present();
