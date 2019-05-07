@@ -26,7 +26,6 @@
     "@ionic/angular": "^4.1.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
-    "ng2-search-filter": "^0.4.7",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.29"
   },
