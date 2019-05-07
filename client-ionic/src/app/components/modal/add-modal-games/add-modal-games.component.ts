@@ -48,4 +48,16 @@ export class AddModalGamesComponent implements OnInit {
     });
   }
 
+  constructGameName() {
+    console.log('check name');
+    
+    if (this.team1 && this.team2 && !this.name) {
+      console.log('construct name');
+      
+      const team1Obj = this.teams.find(team => team._id === this.team1);
+      const team2Obj = this.teams.find(team => team._id === this.team2);
+      this.name = team1Obj.name + ' ' + team1Obj.lastname + ' VS ' + team2Obj.name + ' ' + team2Obj.lastname;
+    }
+  }
+
 }
