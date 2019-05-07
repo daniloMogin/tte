@@ -123,9 +123,9 @@ export default class GameController {
             if (token) {
                 try {
                     let teamsObjectArr: fromInterfaces.IUser[] = [];
-                    const teamsArr: string[] = req.body.teams/*.split(',');
-                    let teamsIdArr: number[] = [];
-                    for (let i: number = 0; i < teamsArr.length; i++) {
+                    const teamsArr: any[] = req.body.teams/*.split(',');
+                    let teamsIdArr: number[] = [teamsArr[0]._id, teamsArr[1]._id];
+                    /*for (let i: number = 0; i < teamsArr.length; i++) {
                         const findUserByUsername: any = await userDB.findUserByUsername(
                             teamsArr[i].trim(),
                             res
@@ -141,13 +141,13 @@ export default class GameController {
                     
                     const score = [
                         {
-                            teamId: '',
-                            teamName: '',
+                            teamId: teamsArr[0]._id,
+                            teamName: teamsArr[0].username,
                             teamPoints: '0',
                         },
                         {
-                            teamId: '',
-                            teamName: '',
+                            teamId: teamsArr[1]._id,
+                            teamName: teamsArr[1].username,
                             teamPoints: '0',
                         }
                     ]
@@ -156,25 +156,26 @@ export default class GameController {
                         description: req.body.description,
                         active: req.body.active,
                         teams: teamsArr,
+                        score: score,
                         createdBy: user._id,
                         modifiedBy: user._id,
                         createdAt: Date.now()
                     };
                     console.log(`ZOVITE ME KADA BUDETE OVO INPLEMENTIRALI`);
-                    // console.log(`game`);
-                    // console.log(game);
-                    // const createGame: any = await gameDB.createGame(game);
-                    // if (_.isNil(createGame.errors)) {
-                    //     res.status(200).json({
-                    //         success: true,
-                    //         game: createGame
-                    //     });
-                    // } else {
-                    //     res.status(500).json({
-                    //         success: false,
-                    //         msg: createGame
-                    //     });
-                    // }
+                    console.log(`game`);
+                    console.log(game);
+                    const createGame: any = await gameDB.createGame(game);
+                    if (_.isNil(createGame.errors)) {
+                        res.status(200).json({
+                            success: true,
+                            game: createGame
+                        });
+                    } else {
+                        res.status(500).json({
+                            success: false,
+                            msg: createGame
+                        });
+                    }
                 } catch (err) {
                     console.error(
                         'Unable to connect to db and fetch all games. Error is ',

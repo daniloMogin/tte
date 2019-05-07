@@ -45,6 +45,13 @@ export class GamesComponent implements OnInit {
       cssClass: 'auto-height'
     });
 
+    modal.onDidDismiss()
+      .then((data) => {
+        if (data.data) {
+          this.games[this.games.indexOf(game)] = data.data;
+        }
+    });
+
     return await modal.present();
   }
 
@@ -52,6 +59,14 @@ export class GamesComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: AddModalGamesComponent,
       cssClass: 'auto-height'
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+        if (data.data) {
+          this.games.push(data.data);
+          this.filteredData.push(data.data);
+        }
     });
 
     return await modal.present();

@@ -20,6 +20,8 @@ export class AddModalGamesComponent implements OnInit {
 
   ngOnInit() {
     this.usersService.getUsers().subscribe(response => {
+      console.log(response);
+      
       this.teams = response;
     });
   }
@@ -29,15 +31,20 @@ export class AddModalGamesComponent implements OnInit {
   }
 
   addGame() {
+
     const game = {
       name: this.name,
       description: this.description,
       active: true,
-      teams: [this.team1, this.team2]
+      teams: [
+        this.teams.find(team => team._id === this.team1),
+        this.teams.find(team => team._id === this.team2)
+      ]
     };
+
     this.gamesService.createGame(game).subscribe(response => {
       console.log(response);
-      
+      this.modalCtrl.dismiss(response.game);
     });
   }
 
