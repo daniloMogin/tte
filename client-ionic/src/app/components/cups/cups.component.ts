@@ -67,7 +67,7 @@ export class CupsComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: AddModalCupsComponent,
       componentProps: {
-        cups: this.cups,
+        cups: {...this.cups},
         cssClass: 'auto-height'
       }
     });

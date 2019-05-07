@@ -93,6 +93,10 @@ ion-modal.auto-height {
   }
 }
 
-.toast-container {
-  --background: #10519c;
+.loginToast { 
+  
+  .toast-message {
+    background: blue;
+  }
+
 }

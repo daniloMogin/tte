@@ -25,7 +25,8 @@ export class AuthGuard implements CanActivate  {
       message: 'Please log in',
       duration: 2000000,
       position: 'bottom',
-      cssClass: 'loginToast'
+      cssClass: 'loginToast',
+      color: 'primary'
     });
     toast.present();
   }
