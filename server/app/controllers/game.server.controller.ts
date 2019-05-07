@@ -138,7 +138,7 @@ export default class GameController {
                     const user: any = await func.decodeToken(token);
                     console.log(`teamsArr`);
                     console.log(teamsArr);
-                    
+
                     const score = [
                         {
                             teamId: teamsArr[0]._id,
@@ -203,10 +203,10 @@ export default class GameController {
                 let game: fromInterfaces.IGame | any;
                 let teamsObjectArr: fromInterfaces.IUser[] = [];
                 let teamsIdArr: number[] = [];
-                let teamsArr: string[];
+                let teamsArr: any[];
                 if (req.body.teams.length > 0) {
                     try {
-                        teamsIdArr = req.body.teams;//.split(',');
+                        teamsArr = req.body.teams;//.split(',');
                         // console.log(`teamsArr`);
                         // console.log(teamsArr);
                         /*for (let i: number = 0; i < req.body.teams.length; i++) {
@@ -233,15 +233,25 @@ export default class GameController {
                         // );
                         // console.log(`req.body.name`);
                         // console.log(req.body.name);
-                        const winnerId = '5b3bae1a43bb661294677e5c';
+                        const score = [
+                            {
+                                teamId: teamsArr[0]._id,
+                                teamName: teamsArr[0].username,
+                                teamPoints: '0',
+                            },
+                            {
+                                teamId: teamsArr[1]._id,
+                                teamName: teamsArr[1].username,
+                                teamPoints: '0',
+                            }
+                        ]
                         game = {
                             name: req.body.name,
                             description: req.body.description,
                             active: req.body.active,
                             modifiedBy: user._id,
-                            teams: teamsIdArr,
+                            teams: teamsArr,
                             score: req.body.score,
-                            winner: winnerId,
                             updatedAt: Date.now()
                         };
                     } catch (error) {
@@ -251,11 +261,11 @@ export default class GameController {
                         });
                     }
                     try {
-                        console.log(`ZOVITE ME KADA BUDETE OVO INPLEMENTIRALI`);
+                        // console.log(`ZOVITE ME KADA BUDETE OVO INPLEMENTIRALI`);
                         // console.log(`game`);
                         // console.log(game);
 
-                        // const updateGame: any = await gameDB.updateGame(game, req);
+                        const updateGame: any = await gameDB.updateGame(game, req);
                         // let userWithWinRatio: any = [];
                         // let updateUser = [];
                         // // console.log(`updateGame`);
@@ -278,17 +288,17 @@ export default class GameController {
                         //     console.log(`updateUser`);
                         //     console.log(updateUser);
                         // }
-                        // if (_.isNil(updateGame.message)) {
-                        //     res.status(200).json({
-                        //         success: true,
-                        //         game: updateGame
-                        //     });
-                        // } else {
-                        //     res.status(500).json({
-                        //         success: false,
-                        //         msg: updateGame.message
-                        //     });
-                        // }
+                        if (_.isNil(updateGame.message)) {
+                            res.status(200).json({
+                                success: true,
+                                game: updateGame
+                            });
+                        } else {
+                            res.status(500).json({
+                                success: false,
+                                msg: updateGame.message
+                            });
+                        }
                     } catch (err) {
                         res.status(500).json({
                             success: false,
