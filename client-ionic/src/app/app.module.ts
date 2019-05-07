@@ -13,8 +13,6 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
 import { CupsComponent } from './components/cups/cups.component';
 import { CupDetailComponent } from './components/cup-detail/cup-detail.component';
 import { GroupsComponent } from './components/groups/groups.component';
@@ -73,8 +71,7 @@ import { AddModalTeamsComponent } from './components/modal/add-modal-teams/add-m
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
-    Ng2SearchPipeModule
+    ReactiveFormsModule
   ],
   providers: [
     StatusBar,
