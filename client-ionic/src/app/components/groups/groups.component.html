@@ -8,12 +8,13 @@
       <div text-center>List of Groups</div>
     </ion-title>
   </ion-toolbar>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredLocation()"></ion-searchbar>
 </ion-header>
 
 <ion-content *ngIf='loaded'>
   <ion-grid>
     <ion-row>
-      <ion-col *ngFor='let group of groups' size-xs='12' size-sm='6' size-md='4'>
+      <ion-col *ngFor='let group of filteredData' size-xs='12' size-sm='6' size-md='4'>
         <a routerLink='/groups/{{group._id}}'>
           <ion-card text-center>
             <ion-icon name='create' class="edit-button-container" (click)='openEditModal($event, group)'></ion-icon>

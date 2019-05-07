@@ -22,7 +22,7 @@
           </ion-item>
           <ion-item *ngIf="(myForm.controls.name.dirty || myForm.controls.name.touched) && myForm.controls.name.invalid && 
           myForm.controls.name.errors.required">
-            <p>Name is required!</p>
+            <p class="requiredField">Name is required!</p>
           </ion-item>
 
           <ion-item>
@@ -31,15 +31,15 @@
           </ion-item>
           <ion-item *ngIf="(myForm.controls.lastname.dirty || myForm.controls.lastname.touched) && myForm.controls.lastname.invalid && 
           myForm.controls.lastname.errors.required">
-            <p>Last name is required!</p>
+            <p class="requiredField">Last name is required!</p>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Username</ion-label>
             <ion-input type="text" placeholder="Username" formControlName="username"></ion-input>
           </ion-item>
           <ion-item *ngIf="(myForm.controls.username.dirty || myForm.controls.username.touched) && myForm.controls.username.invalid && 
-          myForm.controls.username.errors.required && submitted">
-            <p>Username is required!</p>
+          myForm.controls.username.errors.required">
+            <p class="requiredField">Username is required!</p>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Password</ion-label>
@@ -47,7 +47,7 @@
           </ion-item>
           <ion-item *ngIf="(myForm.controls.password.dirty || myForm.controls.password.touched) && myForm.controls.password.invalid && 
           myForm.controls.password.errors.required">
-            <p>Password is required!</p>
+            <p class="requiredField">Password is required!</p>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>E-mail</ion-label>
@@ -55,11 +55,11 @@
           </ion-item>
           <ion-item *ngIf="(myForm.controls.email.dirty || myForm.controls.email.touched) && myForm.controls.email.invalid && 
           myForm.controls.email.errors.required">
-            <p>Email is required!</p>
+            <p class="requiredField">Email is required!</p>
           </ion-item>
           <ion-item *ngIf="(myForm.controls.email.dirty || myForm.controls.email.touched) && myForm.controls.email.invalid && 
           myForm.controls.email.errors.email">
-            <p>Email format is not valid!</p>
+            <p class="requiredField">Email format is not valid!</p>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Active</ion-label>
@@ -71,7 +71,7 @@
           </ion-item>
           <ion-item *ngIf="(myForm.controls.DoB.dirty || myForm.controls.DoB.touched) && myForm.controls.DoB.invalid && 
           myForm.controls.DoB.errors.required">
-            <p>Date is required!</p>
+            <p class="requiredField">Date is required!</p>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Additional Info</ion-label>

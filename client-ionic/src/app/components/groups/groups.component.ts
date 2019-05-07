@@ -10,10 +10,11 @@ import { AddModalGroupsComponent } from '../modal/add-modal-groups/add-modal-gro
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
-
+  searchTerm: string = '';
   groups: any[];
   showBar: boolean = true;
   loaded: boolean = false;
+  filteredData: any[] = [];
 
   constructor(private groupsService: api.GroupsService, private modalCtrl: ModalController, private alertController: AlertController) { }
 
@@ -27,7 +28,14 @@ export class GroupsComponent implements OnInit {
       this.groups = response.group;
       this.showBar = false;
       this.loaded = true;
+      this.filteredData = this. groups;
       console.log(this.groups);
+    });
+  }
+
+  setFilteredLocation() {
+    this.filteredData = this.groups.filter((group) => {
+      return group.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
     });
   }
 

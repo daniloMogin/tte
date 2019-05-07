@@ -10,10 +10,12 @@ import { AddModalCupsComponent } from '../modal/add-modal-cups/add-modal-cups.co
   styleUrls: ['./cups.component.css']
 })
 export class CupsComponent implements OnInit {
-
+  searchTerm: string = '';
   cups: any[];
   showBar: boolean = true;
   loaded: boolean = false;
+  filteredData: any[] = [];
+
 
   constructor(private cupsService: api.CupsService,  private modalCtrl : ModalController, private alertController: AlertController) { }
 
@@ -27,6 +29,14 @@ export class CupsComponent implements OnInit {
       this.cups = response.cup;
       this.showBar = false;
       this.loaded = true;
+
+      this.filteredData = this.cups
+    });
+  }
+
+  setFilteredLocation() {
+    this.filteredData = this.cups.filter((cup) => {
+      return cup.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
     });
   }
 
