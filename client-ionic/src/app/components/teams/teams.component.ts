@@ -10,12 +10,13 @@ import { AddModalTeamsComponent } from '../modal/add-modal-teams/add-modal-teams
   styleUrls: ['./teams.component.css']
 })
 export class TeamsComponent implements OnInit {
-
+  searchTerm: string = '';
   users = [];
   showBar: boolean = true;
   loaded: boolean = false;
+  filteredData: any[] = [];
 
-  constructor(private userService: api.UsersService, private modalCtrl : ModalController, private alertController: AlertController) { }
+  constructor(private userService: api.UsersService, private modalCtrl: ModalController, private alertController: AlertController) { }
 
   ngOnInit() {
   }
@@ -25,8 +26,16 @@ export class TeamsComponent implements OnInit {
       this.showBar = false;
       this.loaded = true;
       this.users = response;
-      
+
       console.log(this.users);
+      this.filteredData = this.users;
+    });
+  }
+
+  setFilteredLocation() {
+    this.filteredData = this.users.filter((user) => {
+      const fullName = user.name + ' ' + user.lastname
+      return fullName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
     });
   }
 
@@ -41,7 +50,7 @@ export class TeamsComponent implements OnInit {
         if (data.data) {
           this.users[this.users.indexOf(user)] = data.data;
         }
-    });
+      });
 
     return await modal.present();
   }
@@ -60,24 +69,24 @@ export class TeamsComponent implements OnInit {
 
     const alert = await this.alertController.create({
 
-        header: 'Alert',
-        subHeader: 'Delete team?',
-        message: 'Are you sure?',
-        buttons: [
-          {
-            text: 'Yes',
-            role: 'yes',
-           handler: () => {
-              console.log('Yes');
-            }
-          }, {
-            text: 'No',
-            role: 'no',
-            handler: () => {
-              console.log('No');
-            }
+      header: 'Alert',
+      subHeader: 'Delete team?',
+      message: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Yes',
+          role: 'yes',
+          handler: () => {
+            console.log('Yes');
           }
-        ]
+        }, {
+          text: 'No',
+          role: 'no',
+          handler: () => {
+            console.log('No');
+          }
+        }
+      ]
 
     });
 

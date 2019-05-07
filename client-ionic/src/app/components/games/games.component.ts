@@ -28,10 +28,8 @@ export class GamesComponent implements OnInit {
       this.showBar = false;
       this.loaded = true;
       console.log(this.games)
+      this.filteredData = this.games
     });
-
-    this.filteredData = this.games
-
   }
 
   setFilteredLocation() {
