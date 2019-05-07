@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate  {
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Please log in',
-      duration: 2000000,
+      duration: 2000,
       position: 'bottom',
       cssClass: 'loginToast',
       color: 'primary'
