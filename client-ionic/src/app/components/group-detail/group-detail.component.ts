@@ -5,6 +5,8 @@ import { UsersService } from '../../services';
 import { EditModalGamesComponent } from '../modal/edit-modal-games/edit-modal-games.component';
 import { ModalController } from '@ionic/angular';
 
+import * as _ from 'lodash';
+
 @Component({
   selector: 'app-group-detail',
   templateUrl: './group-detail.component.html',
@@ -92,7 +94,7 @@ export class GroupDetailComponent implements OnInit {
   async openModal(game) {
     const modal = await this.modalCtrl.create({
       component: EditModalGamesComponent,
-      componentProps: game,
+      componentProps: _.cloneDeep(game),
       cssClass: 'auto-height'
     });
 

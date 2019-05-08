@@ -77,3 +77,7 @@ ion-icon {
 ion-card:hover {
   color: #10519c;
 }
+
+a {
+  text-decoration: none;
+}

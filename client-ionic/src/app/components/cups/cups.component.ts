@@ -11,7 +11,7 @@ import { AddModalCupsComponent } from '../modal/add-modal-cups/add-modal-cups.co
 })
 export class CupsComponent implements OnInit {
   searchTerm: string = '';
-  cups: any[];
+  cups: any[] = [];
   showBar: boolean = true;
   loaded: boolean = false;
   filteredData: any[] = [];
@@ -25,12 +25,18 @@ export class CupsComponent implements OnInit {
   ionViewWillEnter() {
     console.log('Geting cups');
     this.cupsService.getCups().subscribe(response => {
+      
       console.log(response);
-      this.cups = response.cup;
+      if (response) {
+        this.cups = response.cup;
+        this.filteredData = this.cups;
+      } else {
+        alert("ERROR!");
+      }
+
       this.showBar = false;
       this.loaded = true;
-
-      this.filteredData = this.cups
+      
     });
   }
 
@@ -67,7 +73,7 @@ export class CupsComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: AddModalCupsComponent,
       componentProps: {
-        cups: this.cups,
+        cups: {...this.cups},
         cssClass: 'auto-height'
       }
     });
