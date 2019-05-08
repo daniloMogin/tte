@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api-service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { handleError, getHeaders, API_ROOT } from './shared';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService extends ApiService {
+export class AuthService {
 
-  private API_AUTH_URL = this.API_ROOT + 'auth/';
+  private API_AUTH_URL = API_ROOT + 'auth/';
 
   constructor(private http: HttpClient, private router: Router) {
-    super();
   }
 
-  
   /*setToken(token: string): void {
     this.authToken = token;
     console.log('Set token: ' + this.authToken);
@@ -30,14 +28,14 @@ export class AuthService extends ApiService {
   registerUser(user: object): Observable<any> {
     return this.http.post<any>(this.API_AUTH_URL + 'register', user)
     .pipe(
-      catchError(this.handleError<any>('registerUser'))
+      catchError(handleError<any>('registerUser'))
     )
   }
 
   loginUser(username: string, password: string): Observable<any> {
     return this.http.post<any>(this.API_AUTH_URL + 'login', {username: username, password: password})
     .pipe(
-      catchError(this.handleError<any>('loginUser'))
+      catchError(handleError<any>('loginUser'))
     );
   }
 

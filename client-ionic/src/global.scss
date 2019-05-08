@@ -14,7 +14,7 @@
     display: flex !important;
     }
 
-ion-toast.loginToast {
+ion-toast.notificationToast {
     --width: 300px;
     text-align: center;
 }
@@ -93,7 +93,7 @@ ion-modal.auto-height {
   }
 }
 
-.loginToast { 
+.notificationToast { 
   
   .toast-message {
     background: blue;

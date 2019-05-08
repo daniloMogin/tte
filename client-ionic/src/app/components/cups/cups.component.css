@@ -72,3 +72,7 @@ ion-icon {
 .cardLogo {
   font-size: 5em;
 }
+
+a {
+  text-decoration: none;
+}

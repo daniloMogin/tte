@@ -2,50 +2,48 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
-import { ApiService } from './api-service';
+import { handleError, getHeaders, API_ROOT } from './shared';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService extends ApiService {
-  
-private API_CUP_URL = this.API_ROOT + 'users/';
+export class UsersService {
+
+private API_CUP_URL = API_ROOT + 'users/';
 
   constructor(private http: HttpClient) {
-    super()
    }
 
   getUsers(): Observable<any> {
-    return this.http.get<any>(this.API_CUP_URL, {headers: this.getHeaders()})
+    return this.http.get<any>(this.API_CUP_URL, {headers: getHeaders()})
     .pipe(
-      catchError(this.handleError<any>('getUsers', {team: []}))
+      catchError(handleError<any>('getUsers', {team: []}))
     );
   }
 
   createUsers(user: object): Observable<any> {
-    return this.http.post<any>(this.API_CUP_URL, user, {headers: this.getHeaders() })
+    return this.http.post<any>(this.API_CUP_URL, user, {headers: getHeaders() })
     .pipe(
-      catchError(this.handleError<any>('createUsers'))
+      catchError(handleError<any>('createUsers'))
     );
 
   }
   getUserById(id: string): Observable<any> {
-    return this.http.get<any>(this.API_CUP_URL + id, {headers: this.getHeaders() })
+    return this.http.get<any>(this.API_CUP_URL + id, {headers: getHeaders() })
     .pipe(
-      catchError(this.handleError<any>('getUserById'))
+      catchError(handleError<any>('getUserById'))
     );
   }
   getUserByRole(role: string): Observable<any> {
-    return this.http.get<any>(this.API_CUP_URL + 'byRole/' + role, {headers: this.getHeaders() })
+    return this.http.get<any>(this.API_CUP_URL + 'byRole/' + role, {headers: getHeaders() })
     .pipe(
-      catchError(this.handleError<any>('getUserByRole'))
+      catchError(handleError<any>('getUserByRole'))
     );
   }
   updateUser(id: string, user: object): Observable<any> {
-    return this.http.put<any>(this.API_CUP_URL + id , user, {headers: this.getHeaders() })
+    return this.http.put<any>(this.API_CUP_URL + id , user, {headers: getHeaders() })
     .pipe(
-      catchError(this.handleError<any>('updateUser'))
+      catchError(handleError<any>('updateUser'))
     );
   }
 }
