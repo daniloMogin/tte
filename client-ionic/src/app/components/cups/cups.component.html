@@ -18,14 +18,14 @@
       <ion-col *ngFor='let cup of filteredData' size-xs='12' size-sm='6' size-md='4'>
         <a routerLink='/cups/{{cup._id}}'>
           <ion-card text-center>
-            <ion-icon name='create' class="edit-button-container" (click)='openEditModal($event, cup)'></ion-icon>
+            <ion-icon name='create' class="edit-button-container text-color" (click)='openEditModal($event, cup)'></ion-icon>
             <ion-icon name='close' class="delete-button-container" (click)='delete($event, cup)'></ion-icon>
             <ion-card-content class="ion-align-items-center ion-justify-content-center">
-              <ion-card-title>{{ cup.name }}</ion-card-title>
+              <ion-card-title class="text-color">{{ cup.name }}</ion-card-title>
               <div>
                   <ion-icon class='cardLogo' name="trophy"></ion-icon>
               </div>
-              <ion-card-subtitle>{{ cup.description }}</ion-card-subtitle>
+              <ion-card-subtitle class="text-color">{{ cup.description }}</ion-card-subtitle>
               <img>
               <!-- <ion-button (click)="openEditModal($event, cup)">EDIT</ion-button> -->
               <!-- <ion-button color='danger' (click)='delete($event, cup)'>DELETE</ion-button> -->
@@ -35,7 +35,7 @@
       </ion-col>
       <ion-col size-xs='12' size-sm='6' size-md='4'>
         <ion-card class='ion-align-items-center ion-align-self-stretch' text-center>
-          <div class='add-button-container' (click)='openAddModal()'>
+          <div class='add-button-container text-color' (click)='openAddModal()'>
             +
           </div>
         </ion-card>

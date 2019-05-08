@@ -17,14 +17,14 @@
       <ion-col *ngFor='let group of filteredData' size-xs='12' size-sm='6' size-md='4'>
         <a routerLink='/groups/{{group._id}}'>
           <ion-card text-center>
-            <ion-icon name='create' class="edit-button-container" (click)='openEditModal($event, group)'></ion-icon>
+            <ion-icon name='create' class="edit-button-container text-color" (click)='openEditModal($event, group)'></ion-icon>
             <ion-icon name='close' class="delete-button-container" (click)='delete($event, group)'></ion-icon>
             <ion-card-content  class="ion-align-items-center ion-justify-content-center">
-              <ion-card-title>{{ group.name }}</ion-card-title>
+              <ion-card-title class="text-color">{{ group.name }}</ion-card-title>
               <div>
-                <ion-icon class='cardLogo' name='grid'></ion-icon>
+                <ion-icon class='cardLogo text-color' name='grid'></ion-icon>
               </div>
-              <ion-card-subtitle>{{ group.description }}</ion-card-subtitle>
+              <ion-card-subtitle class="text-color">{{ group.description }}</ion-card-subtitle>
               <img>
               <!-- <ion-button (click)='openEditModal($event, group)'>EDIT</ion-button>
               <ion-button color='danger' (click)='delete($event, group)'>DELETE</ion-button> -->
@@ -34,7 +34,7 @@
       </ion-col>
       <ion-col size-xs='12' size-sm='6' size-md='4'>
         <ion-card class='ion-align-items-center ion-align-self-stretch' text-center>
-          <div class='add-button-container' (click)='openAddModal()'>+</div>
+          <div class='add-button-container text-color' (click)='openAddModal()'>+</div>
         </ion-card>
       </ion-col>
     </ion-row>

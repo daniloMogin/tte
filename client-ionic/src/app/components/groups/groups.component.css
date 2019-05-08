@@ -2,7 +2,20 @@ ion-card {
   min-height: 10em;
   height: 100%;
   min-width: 100%;
+  color: #10519c;
+  -webkit-transition: ease-out 0.4s;
+  -moz-transition: ease-out 0.4s;
+  transition: ease-out 0.4s;
 }
+
+ion-card:hover {
+ color: white;
+  background-color: #10519c;
+}
+ion-card:hover .text-color {
+  color: white;
+}
+
 
 ion-card-content {
   height: 100%;
