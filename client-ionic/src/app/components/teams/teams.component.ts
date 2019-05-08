@@ -26,6 +26,9 @@ export class TeamsComponent implements OnInit {
       this.showBar = false;
       this.loaded = true;
       this.users = response;
+      this.users.forEach(user => {
+        user.fullName = user.name + ' ' + user.lastname;
+      });
 
       console.log(this.users);
       this.filteredData = this.users;
@@ -34,8 +37,7 @@ export class TeamsComponent implements OnInit {
 
   setFilteredLocation() {
     this.filteredData = this.users.filter((user) => {
-      const fullName = user.name + ' ' + user.lastname
-      return fullName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      return user.fullName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
     });
   }
 
@@ -49,7 +51,10 @@ export class TeamsComponent implements OnInit {
     modal.onDidDismiss()
       .then((data) => {
         if (data.data) {
-          this.users[this.users.indexOf(user)] = data.data;
+          const updatedUser = data.data;
+          updatedUser.fullName = updatedUser.name + ' ' + updatedUser.lastname;
+          this.users[this.users.indexOf(user)] = updatedUser;
+          this.setFilteredLocation();
         }
       });
 

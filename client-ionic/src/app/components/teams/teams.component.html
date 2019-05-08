@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content *ngIf='loaded' text-center>
-  <table class="table table-bordered table-striped">
+  <table class="table table-bordered table-striped" [mfData]="filteredData" #mf="mfDataTable">
     <tr>
       <td colspan=6>
         <div class='add-button-container' (click)='openAddModal()'>+</div>
@@ -20,12 +20,18 @@
     </tr>
     <tr>
       <th></th>
-      <th>Name</th>
-      <th>Date of Birth</th>
+      <th>
+        <mfDefaultSorter by="fullName">Name</mfDefaultSorter>
+      </th>
+      <th>
+        <mfDefaultSorter by="DoB">Date of Birth</mfDefaultSorter>
+      </th>
+      <!-- <th>Name</th> -->
+      <!-- <th>Date of Birth</th> -->
       <th>Win Ratio</th>
       <th></th>
     </tr>
-    <tr *ngFor="let user of filteredData">
+    <tr *ngFor="let user of mf.data">
       <td class='td-min'>
         <ion-icon name="people" class="position row-logo"></ion-icon>
       </td>

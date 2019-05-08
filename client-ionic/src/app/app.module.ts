@@ -9,6 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { FormsModule } from '@angular/forms';
+import {DataTableModule} from '@pascalhonegger/ng-datatable';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -71,7 +72,8 @@ import { AddModalTeamsComponent } from './components/modal/add-modal-teams/add-m
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataTableModule
   ],
   providers: [
     StatusBar,
