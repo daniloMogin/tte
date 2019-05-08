@@ -2,48 +2,48 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { handleError, getHeaders, API_ROOT } from './shared';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-private API_CUP_URL = API_ROOT + 'users/';
+  constructor(private http: HttpClient, private shared: SharedService) {
+  }
 
-  constructor(private http: HttpClient) {
-   }
+  private API_USER_URL = this.shared.API_ROOT + 'users/';
 
   getUsers(): Observable<any> {
-    return this.http.get<any>(this.API_CUP_URL, {headers: getHeaders()})
+    return this.http.get<any>(this.API_USER_URL, {headers: this.shared.getHeaders()})
     .pipe(
-      catchError(handleError<any>('getUsers', {team: []}))
+      catchError(this.shared.handleError<any>('getUsers', {team: []}))
     );
   }
 
   createUsers(user: object): Observable<any> {
-    return this.http.post<any>(this.API_CUP_URL, user, {headers: getHeaders() })
+    return this.http.post<any>(this.API_USER_URL, user, {headers: this.shared.getHeaders() })
     .pipe(
-      catchError(handleError<any>('createUsers'))
+      catchError(this.shared.handleError<any>('createUsers'))
     );
 
   }
   getUserById(id: string): Observable<any> {
-    return this.http.get<any>(this.API_CUP_URL + id, {headers: getHeaders() })
+    return this.http.get<any>(this.API_USER_URL + id, {headers: this.shared.getHeaders() })
     .pipe(
-      catchError(handleError<any>('getUserById'))
+      catchError(this.shared.handleError<any>('getUserById'))
     );
   }
   getUserByRole(role: string): Observable<any> {
-    return this.http.get<any>(this.API_CUP_URL + 'byRole/' + role, {headers: getHeaders() })
+    return this.http.get<any>(this.API_USER_URL + 'byRole/' + role, {headers: this.shared.getHeaders() })
     .pipe(
-      catchError(handleError<any>('getUserByRole'))
+      catchError(this.shared.handleError<any>('getUserByRole'))
     );
   }
   updateUser(id: string, user: object): Observable<any> {
-    return this.http.put<any>(this.API_CUP_URL + id , user, {headers: getHeaders() })
+    return this.http.put<any>(this.API_USER_URL + id , user, {headers: this.shared.getHeaders() })
     .pipe(
-      catchError(handleError<any>('updateUser'))
+      catchError(this.shared.handleError<any>('updateUser'))
     );
   }
 }

@@ -2,52 +2,52 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { handleError, getHeaders, API_ROOT } from './shared';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CupsService {
 
-  private API_CUP_URL = API_ROOT + 'cup/';
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private shared: SharedService) {
   }
+
+  private API_CUP_URL = this.shared.API_ROOT + 'cup/';
 
   getCups(): Observable<any> {
 
-    return this.http.get<any>(this.API_CUP_URL, { headers: getHeaders() })
+    return this.http.get<any>(this.API_CUP_URL, { headers: this.shared.getHeaders() })
     .pipe(
-      catchError(handleError<any>('getCup'/*, {cup:[]}*/))
+      catchError(this.shared.handleError<any>('getCup'/*, {cup:[]}*/))
     );
   }
 
   createCup(cup: object): Observable<any> {
-    return this.http.post<any>(this.API_CUP_URL, cup, { headers: getHeaders() })
+    return this.http.post<any>(this.API_CUP_URL, cup, { headers: this.shared.getHeaders() })
     .pipe(
-      catchError(handleError<any>('createCup'))
+      catchError(this.shared.handleError<any>('createCup'))
     );
 
   }
 
   getCupById(id: string): Observable<any> {
-    return this.http.get<any>(this.API_CUP_URL + id, { headers: getHeaders() })
+    return this.http.get<any>(this.API_CUP_URL + id, { headers: this.shared.getHeaders() })
     .pipe(
-      catchError(handleError<any>('getCupById'))
+      catchError(this.shared.handleError<any>('getCupById'))
     );
   }
 
   updateCup(id: string, cup: object): Observable<any> {
-    return this.http.put<any>(this.API_CUP_URL + id , cup, { headers: getHeaders() })
+    return this.http.put<any>(this.API_CUP_URL + id , cup, { headers: this.shared.getHeaders() })
     .pipe(
-      catchError(handleError<any>('updateCup'))
+      catchError(this.shared.handleError<any>('updateCup'))
     );
   }
 
   deleteCup(id: string): Observable<any> {
-    return this.http.delete<any>(this.API_CUP_URL + id, { headers: getHeaders() })
+    return this.http.delete<any>(this.API_CUP_URL + id, { headers: this.shared.getHeaders() })
     .pipe(
-      catchError(handleError<any>('deleteCup'))
+      catchError(this.shared.handleError<any>('deleteCup'))
     );
   }
 

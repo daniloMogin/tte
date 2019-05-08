@@ -1,4 +1,4 @@
-import { handleError, getHeaders, API_ROOT } from './shared';
+import { handleError, getHeaders, this.shared.API_ROOT } from './shared';
 
 describe('ApiService', () => {
   it('should create an instance', () => {

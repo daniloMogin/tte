@@ -35,24 +35,21 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    
+
     if (this.myForm.valid) {
-      alert(`Form is valid!!!`);
-      
+
       console.log('this.myForm');
       console.log(this.myForm);
 
       this._auth.registerUser(this.myForm.value)
         .subscribe(
           res => {
-            console.log(res);
-            this.router.navigate(['/login']);
-          },
-          err => 
-          //this.errorMsg = err.error.msg.error.messagge
-          console.log(err.msg.error.message)
-          
-        )
+            if (res && res.success) {
+              console.log(res);
+              this.router.navigate(['/login']);
+            }
+          }
+        );
     }
 
   }

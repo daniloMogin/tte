@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { handleError, getHeaders, API_ROOT } from './shared';
+import { SharedService } from './shared.service';
 
 
 @Injectable({
@@ -11,9 +11,9 @@ import { handleError, getHeaders, API_ROOT } from './shared';
 })
 export class AuthService {
 
-  private API_AUTH_URL = API_ROOT + 'auth/';
+  private API_AUTH_URL = this.shared.API_ROOT + 'auth/';
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private shared: SharedService) {
   }
 
   /*setToken(token: string): void {
@@ -28,14 +28,14 @@ export class AuthService {
   registerUser(user: object): Observable<any> {
     return this.http.post<any>(this.API_AUTH_URL + 'register', user)
     .pipe(
-      catchError(handleError<any>('registerUser'))
+      catchError(this.shared.handleError<any>('registerUser'))
     )
   }
 
   loginUser(username: string, password: string): Observable<any> {
     return this.http.post<any>(this.API_AUTH_URL + 'login', {username: username, password: password})
     .pipe(
-      catchError(handleError<any>('loginUser'))
+      catchError(this.shared.handleError<any>('loginUser'))
     );
   }
 
