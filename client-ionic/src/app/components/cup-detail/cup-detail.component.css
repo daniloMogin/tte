@@ -47,21 +47,31 @@ thead .group-name {
     color: black;
   }
   
-  ion-select {
+  ion-select/*, .editButton*/ {
       background-color: #10519c;
       color: white;
   }
+
+  /*.editButton {
+      margin: 0!important;
+      padding: 10px!important;
+      cursor: pointer;
+  }*/
 
   td {
     transition: ease-out 0.2s;
   }
   
-  tr:hover td {
+  .table-cups tr:hover td {
     background-color: #10519c;
     color: white;
     text-decoration: none;
   }
-  tr:hover a {
+  .table-cups tr:hover a {
     color: white;
     text-decoration: none;
+  }
+
+  .cup-side-header {
+      width: 15em;
   }
