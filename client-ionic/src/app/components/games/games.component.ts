@@ -25,6 +25,9 @@ export class GamesComponent implements OnInit {
   ionViewWillEnter() {
     this.gamesService.getGames().subscribe(response => {
       this.games = response.game;
+      this.games.forEach(game => {
+        game.scoreString = game.score[0].teamPoints + ' - ' + game.score[1].teamPoints;
+      });
       this.showBar = false;
       this.loaded = true;
       console.log(this.games)
@@ -49,6 +52,7 @@ export class GamesComponent implements OnInit {
       .then((data) => {
         if (data.data) {
           this.games[this.games.indexOf(game)] = data.data;
+          this.setFilteredLocation();
         }
     });
 
@@ -64,8 +68,10 @@ export class GamesComponent implements OnInit {
     modal.onDidDismiss()
       .then((data) => {
         if (data.data) {
-          this.games.push(data.data);
-          this.filteredData.push(data.data);
+          const newGame = data.data;
+          newGame.scoreString = '0 - 0';
+          this.games.push(newGame);
+          this.filteredData.push(newGame);
         }
     });
 

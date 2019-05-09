@@ -51,9 +51,7 @@ export class TeamsComponent implements OnInit {
     modal.onDidDismiss()
       .then((data) => {
         if (data.data) {
-          const updatedUser = data.data;
-          updatedUser.fullName = updatedUser.name + ' ' + updatedUser.lastname;
-          this.users[this.users.indexOf(user)] = updatedUser;
+          this.users[this.users.indexOf(user)] = data.data;
           this.setFilteredLocation();
         }
       });

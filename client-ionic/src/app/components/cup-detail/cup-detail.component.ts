@@ -37,12 +37,15 @@ export class CupDetailComponent implements OnInit {
       this.cup = response.cup;
       this.cup.groups.forEach(group => {
         const groupTeamsIds = [];
+        let i = 0;
         group.teams.forEach(team => {
+          team.position = ++i;
+          team.fullName = team.name + ' ' + team.lastname;
           groupTeamsIds.push(team._id);
         });
         this.addTeamsSelect.push(groupTeamsIds);
         console.log(this.addTeamsSelect);
-        
+
       });
       console.log(this.cup);
       this.loaded = true;
@@ -91,6 +94,11 @@ export class CupDetailComponent implements OnInit {
         return team._id === id;
       });
       newTeams.push(newTeam);
+    });
+    let i = 0;
+    newTeams.forEach(team => {
+      team.position = ++i;
+      team.fullName = team.name + ' ' + team.lastname;
     });
     group.teams = newTeams;
     this.groupsService.updateGroup(group._id, group).subscribe(response => {
