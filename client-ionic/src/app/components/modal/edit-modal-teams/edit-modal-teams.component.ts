@@ -28,6 +28,8 @@ export class EditModalTeamsComponent implements OnInit {
     console.log('Updating user');
     console.log(this.user);
 
+    this.user.fullName = this.user.name + ' ' + this.user.lastname;
+
     this.userService.updateUser(this.user._id, this.user).subscribe(response => { 
      console.log('Response recieved');
      console.log(response);

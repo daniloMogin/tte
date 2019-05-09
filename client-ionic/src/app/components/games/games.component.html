@@ -11,7 +11,7 @@
 </ion-header>
 <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
 <ion-content *ngIf='loaded' text-center>
-  <table class="table table-bordered table-striped">
+  <table class="table table-bordered table-striped" [mfData]="filteredData" #mf="mfDataTable">
     <tr>
       <td colspan=6>
         <div class='add-button-container' (click)='openAddModal()'>+</div>
@@ -19,16 +19,20 @@
     </tr>
     <tr>
       <th></th>
-      <th>Game name </th>
-      <th>Score</th>
+      <th class="header-sort">
+          <mfDefaultSorter by="name">Game name</mfDefaultSorter>
+      </th>
+      <th class="header-sort">
+          <mfDefaultSorter by="scoreString">Score</mfDefaultSorter>
+      </th>
       <th></th>
     </tr>
-    <tr *ngFor='let game of filteredData'>
+    <tr *ngFor='let game of mf.data'>
       <td class='td-min row-logo'>
         <ion-icon name="tennisball" class="position row-logo"></ion-icon>
       </td>
       <td><a routerLink='/games/{{game._id}}' class="text">{{ game.name }}</a></td>
-      <td>{{ game.score[0].teamPoints }} - {{ game.score[1].teamPoints }}</td>
+      <td>{{ game.scoreString }}</td>
       <td text-center class='td-min'>
         <!-- <ion-button color="primary" (click)='openModal(game)'>Edit</ion-button>
         <ion-button color="danger" (click)='delete($event, game)'>Delete</ion-button> -->

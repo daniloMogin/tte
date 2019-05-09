@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content *ngIf='loaded' text-center>
-  <table class="table table-bordered table-striped" [mfData]="filteredData" #mf="mfDataTable">
+  <table class="table table-bordered table-striped" [mfData]="filteredData" mfSortBy="fullName" mfSortOrder="asc" #mf="mfDataTable">
     <tr>
       <td colspan=6>
         <div class='add-button-container' (click)='openAddModal()'>+</div>
@@ -20,22 +20,24 @@
     </tr>
     <tr>
       <th></th>
-      <th>
+      <th class="header-sort">
         <mfDefaultSorter by="fullName">Name</mfDefaultSorter>
       </th>
-      <th>
+      <th class="header-sort">
         <mfDefaultSorter by="DoB">Date of Birth</mfDefaultSorter>
       </th>
       <!-- <th>Name</th> -->
       <!-- <th>Date of Birth</th> -->
-      <th>Win Ratio</th>
+      <th class="header-sort">
+        <mfDefaultSorter by="winRatio">Win Ratio</mfDefaultSorter>
+      </th>
       <th></th>
     </tr>
     <tr *ngFor="let user of mf.data">
       <td class='td-min'>
         <ion-icon name="people" class="position row-logo"></ion-icon>
       </td>
-      <td><a routerLink='/teams/{{user._id}}' class="text">{{user.name + ' ' + user.lastname}}</a></td>
+      <td><a routerLink='/teams/{{user._id}}' class="text">{{ user.fullName }}</a></td>
       <td>{{user.DoB}}</td>
       <td *ngIf='user.winRatio'>{{user.winRatio | number: '1.2-2'}}</td>
       <td *ngIf='!user.winRatio'>-</td>

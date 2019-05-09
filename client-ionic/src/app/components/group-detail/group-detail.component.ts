@@ -51,12 +51,22 @@ export class GroupDetailComponent implements OnInit {
 
       console.log(this.group.score);
       this.group.teams.forEach(team => {
+        team.fullName = team.name + ' ' + team.lastname;
         this.addTeamsSelect.push(team._id);
       });
+
+      this.group.score.forEach(game => {
+        game.sortTeam1 = game.score[0].teamName;
+        game.sortTeam2 = game.score[1].teamName;
+        game.scoreString = game.score[0].teamPoints + ' - ' + game.score[1].teamPoints;
+      })
     });
 
     this.teamsService.getUsers().subscribe(response => {
       this.teams = response;
+      this.teams.forEach(team => {
+        team.fullName = team.name + ' ' + team.lastname;
+      })
       console.log(this.teams);
     });
 

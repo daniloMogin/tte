@@ -100,3 +100,24 @@ ion-modal.auto-height {
   }
 
 }
+
+.glyphicon-triangle-top::before {
+  content: ' \25b2';
+}
+
+.glyphicon-triangle-bottom::before {
+  content: ' \25BC';
+}
+
+.header-sort {
+  padding: 0!important;
+}
+
+mfdefaultsorter a {
+  padding: 12px;
+}
+
+mfdefaultsorter, mfdefaultsorter a {
+  display: block;
+  width: 100%;
+}

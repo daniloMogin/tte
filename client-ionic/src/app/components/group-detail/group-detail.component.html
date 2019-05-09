@@ -26,20 +26,26 @@
       <ion-row>
         
         <ion-col size-sm='12' size-md='6'>
-          <table class='table table-bordered table-striped'>
+          <table class='table table-bordered table-striped' [mfData]="group.teams" mfSortBy="position" mfSortOrder="asc" #mf1="mfDataTable">
             <thead>
               <tr>
-                <th>Position</th>
-                <th>Name</th>
-                <th>Win ratio</th>
+                <th class="header-sort">
+                    <mfDefaultSorter by="position">Position</mfDefaultSorter>
+                </th>
+                <th class="header-sort">
+                    <mfDefaultSorter by="fullName">Name</mfDefaultSorter>
+                </th>
+                <th class="header-sort">
+                    <mfDefaultSorter by="winRatio">Win ratio</mfDefaultSorter>
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor='let team of group.teams; let i = index'>
-                <td>{{ team.winRatio ? i + 1 : '-'}}</td>
+              <tr *ngFor='let team of mf1.data'>
+                <td>{{ team.winRatio ? position : '-'}}</td>
                 <td>
                   <a routerLink='/teams/{{team._id}}'  class="text">
-                  {{ team.name + ' ' + team.lastname }}
+                  {{ team.fullName }}
                   </a>
                 </td>
                 <td>{{ team.winRatio ? team.winRatio : '-' }}</td>
@@ -64,24 +70,30 @@
         <br>
 
         <ion-col size-sm='12' size-md='6'>
-          <table class='table table-bordered table-striped'>
+          <table class='table table-bordered table-striped' [mfData]="group.score" #mf2="mfDataTable">
             <thead>
               <tr>
-                <th>Team 1</th>
-                <th>SCORE</th>
-                <th>Team 2</th>
+                <th class="header-sort">
+                    <mfDefaultSorter by="sortTeam1">Team 1</mfDefaultSorter>
+                </th>
+                <th class="header-sort">
+                    <mfDefaultSorter by="sortTeam2">SCORE</mfDefaultSorter>
+                </th>
+                <th class="header-sort">
+                    <mfDefaultSorter by="score[1].teamName">Team 2</mfDefaultSorter>
+                </th>
                 <th>Edit Score</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor='let game of group.score; let i = index'>
-                <td>{{ game.score[0].teamName | json }}</td>
+              <tr *ngFor='let game of mf2.data; let i = index'>
+                <td>{{ game.score[0].teamName }}</td>
                 <td>
                   <a routerLink='/games/{{game._id}}'  class="text">
-                    {{game.score[0].teamPoints}} - {{game.score[1].teamPoints}}
+                    {{ game.scoreString }}
                   </a>
                 </td>
-                <td>{{ game.score[1].teamName | json }}</td>
+                <td>{{ game.score[1].teamName }}</td>
                  <td><ion-icon class="edit color" (click)='openModal(game)' name="create"></ion-icon></td>
               </tr>
               <tr *ngIf='group.score.length === 0'>

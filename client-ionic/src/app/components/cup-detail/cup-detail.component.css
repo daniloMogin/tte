@@ -13,7 +13,7 @@ table {
     margin: 0 auto;
 }
 
-thead {
+thead .group-name {
     font-size: 1.2em;
 }
 

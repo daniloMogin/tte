@@ -40,34 +40,40 @@
       <ion-row>
         <ion-col *ngFor='let group of cup.groups; let groupIndex = index' size-xs='12' size-lg='6'>
           
-          <table class='table table-bordered table-striped'>
+          <table class='table table-bordered table-striped' [mfData]="group.teams" mfSortBy="position" mfSortOrder="asc" #mf="mfDataTable">
             <thead>
-              <tr>
+              <tr class='group-name'>
                 <th colspan='3'>
                     <a routerLink='/groups/{{group._id}}'>{{ group.name }}</a>
                     <ion-icon name='close' class="remove-button-container" (click)='removeGroup(group)'></ion-icon>
                 </th>
               </tr>
-              <tr>
+              <tr *ngIf='group.description'>
                 <td colspan='3'>
                     {{ group.description }}
                 </td>
               </tr>
               <tr>
-                <th>Position</th>
-                <th>Name</th>
-                <th>Win ratio</th>
+                <th class="header-sort">
+                    <mfDefaultSorter by="position">Position</mfDefaultSorter>
+                </th>
+                <th class="header-sort">
+                    <mfDefaultSorter by="fullName">Name</mfDefaultSorter>
+                </th>
+                <th class="header-sort">
+                    <mfDefaultSorter by="winRatio">Win ratio</mfDefaultSorter>
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor='let team of group.teams; let i = index'>
-                <td>{{ i + 1 }}</td>
+              <tr *ngFor='let team of mf.data'>
+                <td>{{  team.winRatio ? position : '-' }}</td>
                 <td>
                   <a routerLink='/teams/{{team._id}}'  class="text">
-                  {{ team.name + ' ' + team.lastname }}
+                  {{ team.fullName }}
                   </a>
                 </td>
-                <td>{{ (team.winRatio ? team.winRatio : 0) | number: '1.2-2' }}</td>
+                <td>{{ team.winRatio ? team.winRatio : '-' }}</td>
               </tr>
               <tr *ngIf='group.teams.length === 0'>
                   <td colspan='3'>There are no teams</td>
