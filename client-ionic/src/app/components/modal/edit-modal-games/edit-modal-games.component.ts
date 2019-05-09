@@ -23,7 +23,7 @@ export class EditModalGamesComponent implements OnInit {
   }
   saveData() {
     console.log(this.game);
-    this.game.scoreString = this.game.score[0].teamPoints + ' ' + this.game.score[1].teamPoints;
+    this.game.scoreString = this.game.score[0].teamPoints + ' - ' + this.game.score[1].teamPoints;
     this.gameService.updateGame(this.game._id, this.game).subscribe(response => {
       console.log('Response recieved');
       console.log(response);

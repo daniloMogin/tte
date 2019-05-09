@@ -67,7 +67,7 @@
             </thead>
             <tbody>
               <tr *ngFor='let team of mf.data'>
-                <td>{{  team.winRatio ? position : '-' }}</td>
+                <td>{{ team.winRatio ? team.position : '-' }}</td>
                 <td>
                   <a routerLink='/teams/{{team._id}}'  class="text">
                   {{ team.fullName }}

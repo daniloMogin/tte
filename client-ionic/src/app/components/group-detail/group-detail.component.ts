@@ -50,7 +50,9 @@ export class GroupDetailComponent implements OnInit {
       this.loaded = true;
 
       console.log(this.group.score);
+      let i = 0;
       this.group.teams.forEach(team => {
+        team.position = ++i;
         team.fullName = team.name + ' ' + team.lastname;
         this.addTeamsSelect.push(team._id);
       });
@@ -73,12 +75,15 @@ export class GroupDetailComponent implements OnInit {
   }
 
   changeTeams(group) {
-      console.log(`changeTeams... `);
-      const newTeams = [];
+
+    console.log(`changeTeams... `);
+    const newTeams = [];
+    let i = 0;
     this.addTeamsSelect.forEach(id => {
       const newTeam = this.teams.find(team => {
         return team._id === id;
       })
+      newTeam.position = ++i;
       newTeams.push(newTeam);
     });
     group.teams = newTeams;
@@ -89,6 +94,7 @@ export class GroupDetailComponent implements OnInit {
       if (response.success) {
       }
     });
+
   }
 
   addTeams(group) {
@@ -106,6 +112,13 @@ export class GroupDetailComponent implements OnInit {
       component: EditModalGamesComponent,
       componentProps: _.cloneDeep(game),
       cssClass: 'auto-height'
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+        if (data.data) {
+          this.group.score[this.group.score.indexOf(game)] = data.data;
+        }
     });
 
     return await modal.present();
