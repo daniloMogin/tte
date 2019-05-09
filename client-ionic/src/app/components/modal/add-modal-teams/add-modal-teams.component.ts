@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UsersService } from '../../../services';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-add-modal-teams',
@@ -11,18 +13,48 @@ export class AddModalTeamsComponent implements OnInit {
 
   team: any;
 
-  constructor(public modalCtrl: ModalController, private userService: UsersService) { }
+  constructor(public modalCtrl: ModalController, private userService: UsersService, private fb: FormBuilder,private _auth: AuthService) { }
 
-  ngOnInit() {}
+  myForm: FormGroup;
+  errorMsg;
+
+  ngOnInit() {
+    this.myForm = this.fb.group({
+      name: ['', Validators.required],
+      lastname: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      DoB: ['', Validators.required],
+      role: ['player', Validators.required],
+      active: [true],
+      additionalInfo: []
+
+    })
+
+  }
+
+  addTeam() {
+
+    if (this.myForm.valid) {
+
+      console.log('this.myForm');
+      console.log(this.myForm);
+
+      this._auth.registerUser(this.myForm.value)
+        .subscribe(
+          res => {
+            if (res && res.success) {
+              this.modalCtrl.dismiss(res.user);
+            }
+          }
+        );
+    }
+
+  }
 
   closeModal() {
     this.modalCtrl.dismiss();
-  }
-
-  addCup() {
-    console.log("Adding cup");
-    return;
-    this.userService.createUsers(this.team).subscribe(response => console.log(response));
   }
 
 }

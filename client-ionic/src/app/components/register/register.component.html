@@ -92,7 +92,11 @@
         </ion-list>
       </ion-col>
     </ion-row>
-    <ion-button color="primary" (click)='register()' [disabled]="!myForm.valid">Register</ion-button>
+    <ion-row>
+        <ion-col text-center>
+          <ion-button color="primary" (click)='register()' [disabled]="!myForm.valid">Register</ion-button>
+        </ion-col>
+    </ion-row>
 
 
   </form>

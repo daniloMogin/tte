@@ -3,6 +3,7 @@ import { ModalController, AlertController } from '@ionic/angular';
 import * as api from '../../services';
 import { EditModalTeamsComponent } from '../modal/edit-modal-teams/edit-modal-teams.component';
 import { AddModalTeamsComponent } from '../modal/add-modal-teams/add-modal-teams.component';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-teams',
@@ -63,6 +64,16 @@ export class TeamsComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: AddModalTeamsComponent,
       cssClass: 'auto-height'
+    });
+
+    modal.onDidDismiss()
+    .then((data) => {
+      if (data.data) {
+        const newUser = data.data;
+        newUser.fullName = newUser.name + ' ' + newUser.lastname;
+        this.users.push(newUser);
+        this.setFilteredLocation();
+      }
     });
 
     return await modal.present();
