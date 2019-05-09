@@ -14,7 +14,7 @@
   <table class="table table-bordered table-striped">
     <tr>
       <td colspan=6>
-        <div class='add-button-container' (click)='openAddModal()'>+</div>
+        <div class='add-button-container hover-color' (click)='openAddModal()'>+</div>
       </td>
     </tr>
     <tr>
@@ -24,15 +24,15 @@
       <th></th>
     </tr>
     <tr *ngFor='let game of filteredData'>
-      <td class='td-min row-logo'>
+      <td class='td-min'>
         <ion-icon name="tennisball" class="position row-logo"></ion-icon>
       </td>
-      <td><a routerLink='/games/{{game._id}}' class="text">{{ game.name }}</a></td>
-      <td>{{ game.score[0].teamPoints }} - {{ game.score[1].teamPoints }}</td>
+      <td><a routerLink='/games/{{game._id}}' class="text hover-color">{{ game.name }}</a></td>
+      <td class="hover-color">{{ game.score[0].teamPoints }} - {{ game.score[1].teamPoints }}</td>
       <td text-center class='td-min'>
         <!-- <ion-button color="primary" (click)='openModal(game)'>Edit</ion-button>
         <ion-button color="danger" (click)='delete($event, game)'>Delete</ion-button> -->
-        <ion-icon class="edit color" (click)='openEditModal(game)' name="create"></ion-icon>
+        <ion-icon class="edit color hover-color" (click)='openEditModal(game)' name="create"></ion-icon>
         <!-- <ion-icon class="delete" color='danger' (click)='delete($event, game)' name="close"></ion-icon> -->
       </td>
     </tr>

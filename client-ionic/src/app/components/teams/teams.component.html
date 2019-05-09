@@ -15,7 +15,7 @@
   <table class="table table-bordered table-striped" [mfData]="filteredData" #mf="mfDataTable">
     <tr>
       <td colspan=6>
-        <div class='add-button-container' (click)='openAddModal()'>+</div>
+        <div class='add-button-container hover-color' (click)='openAddModal()'>+</div>
       </td>
     </tr>
     <tr>
@@ -35,12 +35,12 @@
       <td class='td-min'>
         <ion-icon name="people" class="position row-logo"></ion-icon>
       </td>
-      <td><a routerLink='/teams/{{user._id}}' class="text">{{user.name + ' ' + user.lastname}}</a></td>
-      <td>{{user.DoB}}</td>
-      <td *ngIf='user.winRatio'>{{user.winRatio | number: '1.2-2'}}</td>
-      <td *ngIf='!user.winRatio'>-</td>
+      <td><a routerLink='/teams/{{user._id}}' class="text hover-color">{{user.name + ' ' + user.lastname}}</a></td>
+      <td class="hover-color">{{user.DoB | date: 'MM/dd/yyyy'}}</td>
+      <td *ngIf='user.winRatio' class="hover-color">{{user.winRatio | number: '1.2-2'}}</td>
+      <td *ngIf='!user.winRatio' class="hover-color">-</td>
       <td text-center class='td-min'>
-        <ion-icon class="edit color" (click)='openEditModal(user)' name="create"></ion-icon>
+        <ion-icon class="edit color hover-color" (click)='openEditModal(user)' name="create"></ion-icon>
       </td>
     </tr>
   </table>

@@ -33,4 +33,21 @@
 
   tr:hover .row-logo {
       transform: scale(1.2);
-  } 
+  }
+  
+  td {
+    transition: ease-out 0.2s;
+  }
+
+  tr:hover td {
+      background-color: #10519c;
+  }
+
+  tr:hover .hover-color {
+      color: white;
+      text-decoration: none;
+  }
+  th {
+      background-color: #10519c;
+      color: white;
+  }

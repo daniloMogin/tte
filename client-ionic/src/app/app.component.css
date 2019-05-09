@@ -25,5 +25,20 @@ ion-list {
 */
 ion-list ion-icon {
     color: #10519c;
+    transition: ease-out 0.35s;
+}
+
+.hover:hover ion-icon {
+    transform: scale(1.8);
+}
+
+.active-link {
+    --ion-background-color: #10519c;
+    --ion-text-color:white;
+    font-size: 1.2em;
+}
+.active-link ion-icon{
+    color:white;
+    transform: scale(1.5);
 }
 

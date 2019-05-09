@@ -21,6 +21,13 @@ thead {
     vertical-align: middle;
     position: relative;
     line-height: 1.8em;
+    color: white;
+    background-color: #10519c;
+}
+
+.table thead th a {
+    text-decoration: none;
+    color: white;
 }
 
 .remove-button-container {
@@ -40,3 +47,21 @@ thead {
     color: black;
   }
   
+  ion-select {
+      background-color: #10519c;
+      color: white;
+  }
+
+  td {
+    transition: ease-out 0.2s;
+  }
+  
+  tr:hover td {
+    background-color: #10519c;
+    color: white;
+    text-decoration: none;
+  }
+  tr:hover a {
+    color: white;
+    text-decoration: none;
+  }
