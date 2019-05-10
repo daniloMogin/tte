@@ -14,13 +14,33 @@
 
   <div *ngIf='loaded'>
 
-    <h1>{{ cup.name }}</h1>
+    <div padding>
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <!-- <th class="cup-side-header">
+                Name:
+              </th> -->
+              <th colspan="2">
+                {{ cup.name }}
+              </th>
+            </tr>
+          </thead>
+          <tbody *ngIf="cup.description">
+            <tr>
+              <td class="cup-side-header">Description:</td>
+              <td>{{ cup.description }}</td>
+            </tr>
+            <!-- <tr>
+              <td colspan="2">
+                <div class="editButton" (click)='openEditModal()'>EDIT CUP DETAILS</div>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+    </div>
 
-    <br>
-
-    <div>{{ cup.description }}</div>
-
-    <br>
+    
     
     <!-- <table class='table table-bordered table-fit'>
       <tr *ngIf='cup.winner'>
@@ -34,13 +54,13 @@
       </tr>
     </table> -->
 
-    <ion-button (click)='openEditModal()'>ADD GROUP TO CUP</ion-button>
+    
 
     <ion-grid>
       <ion-row>
         <ion-col *ngFor='let group of cup.groups; let groupIndex = index' size-xs='12' size-lg='6'>
           
-          <table class='table table-bordered table-striped' [mfData]="group.teams" mfSortBy="position" mfSortOrder="asc" #mf="mfDataTable">
+          <table class='table table-bordered table-striped table-cups' [mfData]="group.teams" mfSortBy="position" mfSortOrder="asc" #mf="mfDataTable">
             <thead>
               <tr class='group-name'>
                 <th colspan='3'>
