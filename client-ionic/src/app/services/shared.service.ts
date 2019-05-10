@@ -8,7 +8,7 @@ import { NotificationService } from './notification.service';
   })
   export class SharedService {
 
-    public API_ROOT = 'http://localhost:3000/API/';
+    public API_ROOT = 'http://172.16.10.54:3000/API/';
 
     constructor(private notificationService: NotificationService) {}
 

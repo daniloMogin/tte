@@ -15,11 +15,11 @@
       <ion-col text-center style='max-width: 30em;'>
         <ion-item>
           <ion-label position='floating'>Username</ion-label>
-            <ion-input placeholder='Please enter your username' [(ngModel)]='user.username' clearInput></ion-input>
+            <ion-input (keydown.enter)='login()' placeholder='Please enter your username' [(ngModel)]='user.username' clearInput></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Password</ion-label>
-            <ion-input type='password' placeholder='Please enter your password' [(ngModel)]='user.password' clearInput></ion-input>
+            <ion-input (keydown.enter)='login()' type='password' placeholder='Please enter your password' [(ngModel)]='user.password' clearInput></ion-input>
           </ion-item>
       </ion-col>
     </ion-row>
