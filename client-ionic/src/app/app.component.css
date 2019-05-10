@@ -44,4 +44,8 @@ ion-list ion-icon {
 .active-link ion-icon{
     color:white;
 }
-
+@media only screen and (max-height: 550px) {
+    ion-img {
+        display: none;
+    }
+  }
