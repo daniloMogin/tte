@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import * as api from '../../services';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../services';
-import { EditModalGamesComponent } from '../modal/edit-modal-games/edit-modal-games.component';
-import { ModalController } from '@ionic/angular';
+import { EditModalGroupsComponent } from '../modal/edit-modal-groups/edit-modal-groups.component';
+import { ModalController, AlertController } from '@ionic/angular';
 
 import * as _ from 'lodash';
+import { EditModalGamesComponent } from '../modal/edit-modal-games/edit-modal-games.component';
 
 @Component({
   selector: 'app-group-detail',
@@ -21,7 +22,14 @@ export class GroupDetailComponent implements OnInit {
   private teams: any[];
   private addTeamsSelect: any[] = [];
 
-  constructor(private groupsService: api.GroupsService, private teamsService: UsersService, private route: ActivatedRoute, private modalCtrl: ModalController) { }
+  constructor(
+    private groupsService: api.GroupsService,
+    private teamsService: UsersService,
+    private route: ActivatedRoute,
+    private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -90,27 +98,48 @@ export class GroupDetailComponent implements OnInit {
     this.groupsService.updateGroup(group._id, group).subscribe(response => {
       // console.log(`response`);
       // console.log(response);
-      group.score = response.group.score;
       if (response.success) {
+        group.score = response.group.score;
       }
     });
 
   }
 
-  addTeams(group) {
-    if (this.addTeamsSelect) {
-      this.addTeamsSelect.forEach(i => {
-        group.teams.push(this.teams[i]);
-      });
-    }
-    this.addTeamsSelect = null;
+  async openGroupEditModal() {
+    const modal = await this.modalCtrl.create({
+      component: EditModalGroupsComponent,
+      componentProps: this.group,
+      cssClass: 'auto-height'
+    });
 
+    modal.onDidDismiss()
+      .then((data) => {
+        if (data.data) {
+
+          this.group = data.data;
+
+          let i = 0;
+          this.group.teams.forEach(team => {
+            team.position = ++i;
+            team.fullName = team.name + ' ' + team.lastname;
+            this.addTeamsSelect.push(team._id);
+          });
+
+          this.group.score.forEach(game => {
+            game.sortTeam1 = game.score[0].teamName;
+            game.sortTeam2 = game.score[1].teamName;
+            game.scoreString = game.score[0].teamPoints + ' - ' + game.score[1].teamPoints;
+          });
+        }
+    });
+
+    return await modal.present();
   }
 
-  async openModal(game) {
+  async openGameEditModal(game) {
     const modal = await this.modalCtrl.create({
       component: EditModalGamesComponent,
-      componentProps: _.cloneDeep(game),
+      componentProps: game,
       cssClass: 'auto-height'
     });
 
@@ -122,6 +151,39 @@ export class GroupDetailComponent implements OnInit {
     });
 
     return await modal.present();
+
+  }
+
+  async deleteGroup() {
+    const alert = await this.alertCtrl.create({
+
+      header: 'Alert',
+      subHeader: 'Delete group?',
+      message: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Yes',
+          role: 'yes',
+         handler: () => {
+          this.groupsService.deleteGroup(this.group._id).subscribe(response => {
+            console.log(response);
+            if (response.success) {
+              this.router.navigate(['/groups']);
+            }
+          });
+          }
+        }, {
+          text: 'No',
+          role: 'no',
+          handler: () => {
+            console.log('No');
+          }
+        }
+      ]
+
+    });
+
+    await alert.present();
   }
 
 

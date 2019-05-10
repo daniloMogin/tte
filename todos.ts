@@ -65,3 +65,8 @@ statusText: "Internal Server Error"
 url: "http://localhost:3000/API/cup/5cbef6caf2040522fcc8ec7f"
 
 Greske nema kada rucno dodamo winner/second/third objekat u cup objekat
+
+
+
+
+/* On group details, editing group after editing game, resets game */

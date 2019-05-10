@@ -40,7 +40,18 @@ thead .group-name {
     font-weight: bold; 
 }
 
-.remove-button-container:hover {
+.edit-button-container {
+    /*float: right;*/
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 1.8em;
+    color: white;
+    font-weight: bold;
+    padding: 0; 
+}
+
+.remove-button-container:hover, .edit-button-container:hover {
     transform: scale(1.25);
 }
 .text {
@@ -73,5 +84,9 @@ thead .group-name {
   }
 
   .cup-side-header {
-      width: 15em;
+      width: 15%;
+  }
+
+  .cupName {
+    font-size: 1.2em;
   }

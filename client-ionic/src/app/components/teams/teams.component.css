@@ -51,3 +51,8 @@
       background-color: #10519c;
       color: white;
   }
+
+  ion-icon {
+    padding: 0!important;
+    vertical-align: bottom!important;
+  }

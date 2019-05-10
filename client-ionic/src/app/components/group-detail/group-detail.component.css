@@ -21,6 +21,9 @@ table {
 .table thead th {
   color: white;
   background-color: #10519c;
+  vertical-align: middle;
+  position: relative;
+  line-height: 1.8em;
 }
 
 ion-select {
@@ -39,4 +42,34 @@ tr:hover td {
 tr:hover a, tr:hover .edit {
   color: white;
   text-decoration: none;
+}
+
+.gameScoreTable ion-icon {
+  padding: 0!important;
+  vertical-align: middle!important;
+}
+
+.remove-button-container {
+  /*float: right;*/
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 1.8em;
+  color: red;
+  font-weight: bold; 
+}
+
+.edit-button-container {
+  /*float: right;*/
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 1.8em;
+  color: white;
+  font-weight: bold;
+  padding: 0; 
+}
+
+.remove-button-container:hover, .edit-button-container:hover {
+  transform: scale(1.25);
 }
