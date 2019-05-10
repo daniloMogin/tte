@@ -48,8 +48,8 @@ tr:hover .row-logo {
 }
 
 td {
-  padding: 6px;
-  font-size: 1.1em;
+  /*padding: 6px;*/
+  /*font-size: 1.1em;*/
   transition: ease-out 0.2s;
 }
 
@@ -64,4 +64,9 @@ tr:hover .hover-color {
 th {
     background-color: #10519c;
     color: white;
+}
+
+ion-icon {
+  padding: 0!important;
+  vertical-align: middle!important;
 }

@@ -1,7 +1,7 @@
 ion-card {
   min-height: 10em;
   height: 100%;
-  min-width: 100%;
+  /*min-width: 100%;*/
   color: #10519c;
   -webkit-transition: ease-out 0.4s;
   -moz-transition: ease-out 0.4s;

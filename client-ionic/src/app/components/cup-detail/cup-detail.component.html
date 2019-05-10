@@ -21,7 +21,9 @@
               <!-- <th class="cup-side-header">
                 Name:
               </th> -->
-              <th colspan="2">
+              <th colspan="2" class="cupName">
+                <ion-icon name='create' class="edit-button-container text-color" (click)='openCupEditModal()'></ion-icon>
+                <ion-icon name='close' class="remove-button-container" (click)='deleteCup()'></ion-icon>
                 {{ cup.name }}
               </th>
             </tr>

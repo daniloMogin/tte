@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CupsService, UsersService, GroupsService } from '../../services';
 import { ModalController, AlertController } from '@ionic/angular';
 import { EditModalCupsComponent } from '../modal/edit-modal-cups/edit-modal-cups.component';
@@ -24,7 +24,8 @@ export class CupDetailComponent implements OnInit {
       private teamsService: UsersService,
       private groupsService: GroupsService,
       private modalCtrl: ModalController,
-      private alertController: AlertController
+      private alertController: AlertController,
+      private router: Router
   ) { }
 
   ngOnInit() {
@@ -58,7 +59,7 @@ export class CupDetailComponent implements OnInit {
     });
   }
 
-  async openEditModal() {
+  async openCupEditModal() {
 
     const modal = await this.modalCtrl.create({
       component: EditModalCupsComponent,
@@ -77,14 +78,35 @@ export class CupDetailComponent implements OnInit {
 
   }
 
-  addTeams(group) {
-    let teamsToAdd = [];
-    if (this.addTeamsSelect) {
-      this.addTeamsSelect.forEach(i => {
-        group.teams.push(this.teams[i]);
-      });
-      this.addTeamsSelect = null;
-    }
+  async deleteCup() {
+    const alert = await this.alertController.create({
+      
+        header: 'Alert',
+        subHeader: 'Delete cup?',
+        message: 'Are you sure?',
+        buttons: [
+          {
+            text: 'Yes',
+            role: 'yes',
+            handler: () => {
+              this.cupsService.deleteCup(this.cup._id).subscribe(response => {
+                console.log(response);
+                if (response.success) {
+                  this.router.navigate(['/cups']);
+                }
+              });
+            }
+          }, {
+            text: 'No',
+            role: 'no',
+            handler: () => {
+              console.log('No');
+            }
+          }
+        ]
+    });
+
+    await alert.present();
   }
 
   changeTeams(group, groupIndex) {

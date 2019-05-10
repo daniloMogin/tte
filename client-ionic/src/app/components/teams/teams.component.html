@@ -11,7 +11,7 @@
   <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredLocation()"></ion-searchbar>
 </ion-header>
 
-<ion-content *ngIf='loaded' text-center>
+<ion-content *ngIf='loaded' text-center scrollX="true">
   <table class="table table-bordered table-striped" [mfData]="filteredData" mfSortBy="fullName" mfSortOrder="asc" #mf="mfDataTable">
     <tr>
       <td colspan=6>
@@ -35,7 +35,7 @@
     </tr>
     <tr *ngFor="let user of mf.data">
       <td class='td-min'>
-        <ion-icon name="people" class="position row-logo"></ion-icon>
+        <ion-icon name="people" class="position row-logo" item-center></ion-icon>
       </td>
       <td><a routerLink='/teams/{{user._id}}' class="text hover-color">{{user.fullName}}</a></td>
       <td class="hover-color">{{user.DoB | date: 'MM/dd/yyyy'}}</td>

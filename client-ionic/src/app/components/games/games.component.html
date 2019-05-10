@@ -10,7 +10,7 @@
   <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredLocation()"></ion-searchbar>
 </ion-header>
 <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
-<ion-content *ngIf='loaded' text-center>
+<ion-content *ngIf='loaded' text-center scrollX="true">
   <table class="table table-bordered table-striped" [mfData]="filteredData" #mf="mfDataTable">
     <tr>
       <td colspan=6>
@@ -29,7 +29,7 @@
     </tr>
     <tr *ngFor='let game of mf.data'>
       <td class='td-min'>
-        <ion-icon name="tennisball" class="position row-logo"></ion-icon>
+        <ion-icon name="tennisball" class="position row-logo" item-center></ion-icon>
       </td>
       <td><a routerLink='/games/{{game._id}}' class="text hover-color">{{ game.name }}</a></td>
       <td class="hover-color">{{ game.scoreString }}</td>
