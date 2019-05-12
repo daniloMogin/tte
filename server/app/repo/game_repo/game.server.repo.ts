@@ -72,6 +72,40 @@ export default class GameDBCalls {
         });
     }
 
+    public findAllGameForUser(userId) {
+        return new Promise(resolve => {
+            try {
+                GameModel.find({ "score.teamId": userId })
+                    .populate('score team createdBy modifiedBy', '-password -__v')
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        resolve(error);
+                    });
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    }
+
+    public findAllWinGameForUser(userId) {
+        return new Promise(resolve => {
+            try {
+                GameModel.find({ winner: userId })
+                    .populate('score team createdBy modifiedBy', '-password -__v')
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        resolve(error);
+                    });
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    }
+
     public createGame(game: fromInterfaces.IGame) {
         return new Promise(resolve => {
             try {
