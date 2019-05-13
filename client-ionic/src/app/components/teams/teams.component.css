@@ -29,6 +29,7 @@
 
   .text {
       color: black;
+      font-weight: bold;
   }
 
   tr:hover .row-logo {
@@ -55,4 +56,10 @@
   ion-icon {
     padding: 0!important;
     vertical-align: bottom!important;
+  }
+
+  .full-width {
+      display: block;
+      width: 100%;
+      height: 100%;
   }

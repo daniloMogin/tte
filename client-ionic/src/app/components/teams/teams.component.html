@@ -37,7 +37,7 @@
       <td class='td-min'>
         <ion-icon name="people" class="position row-logo" item-center></ion-icon>
       </td>
-      <td><a routerLink='/teams/{{user._id}}' class="text hover-color">{{user.fullName}}</a></td>
+      <td><a routerLink='/teams/{{user._id}}' class="text hover-color full-width">{{user.fullName}}</a></td>
       <td class="hover-color">{{user.DoB | date: 'MM/dd/yyyy'}}</td>
       <td *ngIf='user.winRatio' class="hover-color">{{user.winRatio | number: '1.2-2'}}</td>
       <td *ngIf='!user.winRatio' class="hover-color">-</td>
