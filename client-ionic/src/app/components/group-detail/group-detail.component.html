@@ -21,7 +21,7 @@
               <!-- <th class="cup-side-header">
                 Name:
               </th> -->
-              <th colspan="2" class="groupName">
+              <th colspan="2" class="info-name">
                 <ion-icon name='create' class="edit-button-container text-color" (click)='openGroupEditModal()'></ion-icon>
                 <ion-icon name='close' class="remove-button-container" (click)='deleteGroup()'></ion-icon>
                 {{ group.name }}
@@ -30,7 +30,7 @@
           </thead>
           <tbody *ngIf="group.description">
             <tr>
-              <td class="group-side-header">Description:</td>
+              <td class="info-side-header">Description:</td>
               <td>{{ group.description }}</td>
             </tr>
             <!-- <tr>

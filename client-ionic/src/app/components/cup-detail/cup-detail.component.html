@@ -21,7 +21,7 @@
               <!-- <th class="cup-side-header">
                 Name:
               </th> -->
-              <th colspan="2" class="cupName">
+              <th colspan="2" class="info-name">
                 <ion-icon name='create' class="edit-button-container text-color" (click)='openCupEditModal()'></ion-icon>
                 <ion-icon name='close' class="remove-button-container" (click)='deleteCup()'></ion-icon>
                 {{ cup.name }}
@@ -30,7 +30,7 @@
           </thead>
           <tbody *ngIf="cup.description">
             <tr>
-              <td class="cup-side-header">Description:</td>
+              <td class="info-side-header">Description:</td>
               <td>{{ cup.description }}</td>
             </tr>
             <!-- <tr>
