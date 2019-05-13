@@ -85,22 +85,22 @@ export class GroupDetailComponent implements OnInit {
   changeTeams(group) {
 
     console.log(`changeTeams... `);
-    const newTeams = [];
-    let i = 0;
-    this.addTeamsSelect.forEach(id => {
-      const newTeam = this.teams.find(team => {
-        return team._id === id;
-      })
-      newTeam.position = ++i;
-      newTeams.push(newTeam);
-    });
-    group.teams = newTeams;
     this.showBar = true;
     this.groupsService.updateGroup(group._id, group).subscribe(response => {
       // console.log(`response`);
       // console.log(response);
       this.showBar = false;
       if (response.success) {
+        const newTeams = [];
+        let i = 0;
+        this.addTeamsSelect.forEach(id => {
+          const newTeam = this.teams.find(team => {
+            return team._id === id;
+          })
+          newTeam.position = ++i;
+          newTeams.push(newTeam);
+        });
+        group.teams = newTeams;
         group.score = response.group.score;
       }
     });
