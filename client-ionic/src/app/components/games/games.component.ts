@@ -92,8 +92,10 @@ export class GamesComponent implements OnInit {
           text: 'Yes',
           role: 'yes',
           handler: () => {
+            this.showBar = true;
             this.gamesService.deleteGame(game._id).subscribe(response => {
               console.log(response);
+              this.showBar = false;
               if (response.success) {
                 this.games = this.games.filter(elem => elem !== game);
               }

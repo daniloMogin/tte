@@ -95,9 +95,11 @@ export class GroupDetailComponent implements OnInit {
       newTeams.push(newTeam);
     });
     group.teams = newTeams;
+    this.showBar = true;
     this.groupsService.updateGroup(group._id, group).subscribe(response => {
       // console.log(`response`);
       // console.log(response);
+      this.showBar = false;
       if (response.success) {
         group.score = response.group.score;
       }
@@ -165,9 +167,11 @@ export class GroupDetailComponent implements OnInit {
           text: 'Yes',
           role: 'yes',
          handler: () => {
+          this.showBar = true;
           this.groupsService.deleteGroup(this.group._id).subscribe(response => {
             console.log(response);
             if (response.success) {
+              this.showBar = false;
               this.router.navigate(['/groups']);
             }
           });

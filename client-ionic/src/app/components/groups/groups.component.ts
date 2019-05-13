@@ -94,8 +94,10 @@ export class GroupsComponent implements OnInit {
             text: 'Yes',
             role: 'yes',
            handler: () => {
+            this.showBar = true;
             this.groupsService.deleteGroup(group._id).subscribe(response => {
               console.log(response);
+              this.showBar = false;
               if (response.success) {
                 this.groups = this.groups.filter(elem => elem !== group );
               }

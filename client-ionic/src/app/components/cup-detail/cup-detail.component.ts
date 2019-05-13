@@ -89,9 +89,11 @@ export class CupDetailComponent implements OnInit {
             text: 'Yes',
             role: 'yes',
             handler: () => {
+              this.showBar = true;
               this.cupsService.deleteCup(this.cup._id).subscribe(response => {
                 console.log(response);
                 if (response.success) {
+                  this.showBar = false;
                   this.router.navigate(['/cups']);
                 }
               });
@@ -123,7 +125,9 @@ export class CupDetailComponent implements OnInit {
       team.fullName = team.name + ' ' + team.lastname;
     });
     group.teams = newTeams;
+    this.showBar = true;
     this.groupsService.updateGroup(group._id, group).subscribe(response => {
+      this.showBar = false;
       if (response.success) {
       }
     });
@@ -143,8 +147,10 @@ export class CupDetailComponent implements OnInit {
             const filteredGroups = this.cup.groups.filter(group => group !== groupToRemove);
             const updatedCup = {...this.cup, groups: filteredGroups};
             console.log(updatedCup);
+            this.showBar = true;
             this.cupsService.updateCup(this.cup._id, updatedCup).subscribe(response => {
               console.log(response);
+              this.showBar = false;
               if (response.success) {
                 this.cup = response.cup;
               }
