@@ -19,6 +19,8 @@ export class AddModalGroupsComponent implements OnInit {
 
   teams: any[] = [];
 
+  working = false;
+
   constructor(public modalCtrl: ModalController, private groupsService: GroupsService, private teamsService: UsersService, 
     private router: Router) { }
 
@@ -36,7 +38,10 @@ export class AddModalGroupsComponent implements OnInit {
     console.log("Adding group");
     console.log(this.group);
 
+    this.working = true;
+
     this.groupsService.createGroup(this.group).subscribe(response => {
+      this.working = false;
       if (response.success) {
         this.modalCtrl.dismiss(response.group);
         /*this.router.navigate(['/groups/'+response.group._id]);*/

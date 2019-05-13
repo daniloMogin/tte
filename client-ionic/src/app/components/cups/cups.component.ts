@@ -107,6 +107,7 @@ export class CupsComponent implements OnInit {
                 console.log(response);
                 if (response.success) {
                   this.cups = this.cups.filter(elem =>  elem !== cup );
+                  this.setFilteredLocation();
                 }
               });
             }

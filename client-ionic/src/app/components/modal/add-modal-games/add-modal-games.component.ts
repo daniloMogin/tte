@@ -16,6 +16,8 @@ export class AddModalGamesComponent implements OnInit {
 
   teams: any[];
 
+  working = false;
+
   constructor(public modalCtrl: ModalController, private gamesService: GamesService, private usersService: UsersService) { }
 
   ngOnInit() {
@@ -42,8 +44,11 @@ export class AddModalGamesComponent implements OnInit {
       ]
     };
 
+    this.working = true;
+
     this.gamesService.createGame(game).subscribe(response => {
       console.log(response);
+      this.working = false;
       this.modalCtrl.dismiss(response.game);
     });
   }

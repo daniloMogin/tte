@@ -39,10 +39,10 @@ export class AddModalCupsComponent implements OnInit {
     console.log(this.cup);
     this.working = true;
     this.cupsService.createCup(this.cup).subscribe(response => {
+      this.working = false;
       if (response.success) {
-        this.working = false;
         this.modalCtrl.dismiss(false);
-        this.router.navigate(['/cups/'+response.cup._id]);
+        this.router.navigate(['/cups/' + response.cup._id]);
       }
     });
   }

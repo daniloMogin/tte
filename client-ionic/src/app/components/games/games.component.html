@@ -8,9 +8,11 @@
     </ion-title>
   </ion-toolbar>
   <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredLocation()"></ion-searchbar>
+  
 </ion-header>
-<ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
+
 <ion-content *ngIf='loaded' text-center scrollX="true">
+    <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
   <table class="table table-bordered table-striped" [mfData]="filteredData" #mf="mfDataTable">
     <tr>
       <td colspan=6>

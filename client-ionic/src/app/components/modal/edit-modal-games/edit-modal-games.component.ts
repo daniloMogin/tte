@@ -9,7 +9,9 @@ import { GamesService } from '../../../services/games.service';
 })
 export class EditModalGamesComponent implements OnInit {
 
-  game: any = {}
+  game: any = {};
+
+  working = false;
 
   constructor(public modalCtrl: ModalController, private navParams: NavParams, private gameService: GamesService) { }
 
@@ -24,9 +26,11 @@ export class EditModalGamesComponent implements OnInit {
   saveData() {
     console.log(this.game);
     this.game.scoreString = this.game.score[0].teamPoints + ' - ' + this.game.score[1].teamPoints;
+    this.working = true;
     this.gameService.updateGame(this.game._id, this.game).subscribe(response => {
       console.log('Response recieved');
       console.log(response);
+      this.working = false;
       if (response.success) {
         this.modalCtrl.dismiss(this.game);
       }
