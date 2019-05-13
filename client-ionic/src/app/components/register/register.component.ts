@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
+  showBar: boolean = false;
   myForm: FormGroup;
   errorMsg;
  
@@ -35,7 +36,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-
+    this.showBar = true;
     if (this.myForm.valid) {
 
       console.log('this.myForm');

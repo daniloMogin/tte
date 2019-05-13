@@ -19,7 +19,7 @@
       </td>
     </tr>
     <tr>
-      <th></th>
+      <th class="display-none"></th>
       <th class="header-sort">
         <mfDefaultSorter by="name">Game name</mfDefaultSorter>
       </th>
@@ -29,10 +29,10 @@
       <th></th>
     </tr>
     <tr *ngFor='let game of mf.data'>
-      <td class='td-min'>
+      <td class='td-min display-none'>
         <ion-icon name="tennisball" class="position row-logo" item-center></ion-icon>
       </td>
-      <td><a routerLink='/games/{{game._id}}' class="text hover-color">{{ game.name }}</a></td>
+      <td><a routerLink='/games/{{game._id}}' class="text hover-color full-width">{{ game.name }}</a></td>
       <td class="hover-color">{{ game.scoreString }}</td>
       <td text-center class='td-min'>
         <!-- <ion-button color="primary" (click)='openModal(game)'>Edit</ion-button>

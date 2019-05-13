@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { SharedService } from './shared.service';
+import { NotificationService } from './notification.service';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class AuthService {
 
   private API_AUTH_URL = this.shared.API_ROOT + 'auth/';
 
-  constructor(private http: HttpClient, private router: Router, private shared: SharedService) {
+  constructor(private http: HttpClient, private router: Router, private shared: SharedService, private notificationService: NotificationService) {
   }
 
   /*setToken(token: string): void {
@@ -42,6 +43,7 @@ export class AuthService {
   logoutUser() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+    this.notificationService.showToast({message: `Goodbye!`});
   }
 
   isLoggedIn() {
