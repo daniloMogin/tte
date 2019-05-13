@@ -80,6 +80,8 @@ export class CupsComponent implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
+        console.log(data);
+        
         if (data.data) {
           const cup = data.data;
           this.cups.push(cup);
