@@ -1,4 +1,3 @@
-<ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -9,6 +8,7 @@
     </ion-title>
   </ion-toolbar>
   <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredLocation()"></ion-searchbar>
+  <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
 </ion-header>
 
 <ion-content *ngIf='loaded'>

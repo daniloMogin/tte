@@ -14,6 +14,8 @@ export class EditModalCupsComponent implements OnInit {
   private groups: any[];
   private addGroupsSelect: any[] = [];
 
+  working = false;
+
   constructor(public modalCtrl: ModalController, private navParams: NavParams,
     private cupsService: CupsService, private groupsService: GroupsService) { }
 
@@ -43,9 +45,13 @@ export class EditModalCupsComponent implements OnInit {
     console.log("UPDATING CUP");
     console.log(this.cup);
     this.cup.groups = this.addGroupsSelect;
+    this.working = true;
     this.cupsService.updateCup(this.cup._id, this.cup).subscribe(response => { console.log("RESPONSE RECEIVED");
       console.log(response);
-      this.modalCtrl.dismiss(response.cup);
+      this.working = false;
+      if (response && response.success) {
+        this.modalCtrl.dismiss(response.cup);
+      }
     });
   }
 

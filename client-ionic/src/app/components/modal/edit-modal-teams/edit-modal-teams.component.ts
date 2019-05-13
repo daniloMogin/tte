@@ -11,7 +11,9 @@ export class EditModalTeamsComponent implements OnInit {
 
   user: any = {
     active: true
-  }
+  };
+
+  working = false;
 
   constructor(public modalCtrl: ModalController, private navParams: NavParams, private userService: UsersService) { }
 
@@ -30,10 +32,13 @@ export class EditModalTeamsComponent implements OnInit {
 
     this.user.fullName = this.user.name + ' ' + this.user.lastname;
 
+    this.working = true;
+
     this.userService.updateUser(this.user._id, this.user).subscribe(response => { 
      console.log('Response recieved');
      console.log(response);
-     if (response.success) {
+     this.working = false;
+     if (response && response.success) {
       this.modalCtrl.dismiss(this.user);
       /*this.router.navigate(['/groups/'+response.group._id]);*/
     }

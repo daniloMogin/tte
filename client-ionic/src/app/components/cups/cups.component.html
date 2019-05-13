@@ -9,8 +9,8 @@
     </ion-title>
   </ion-toolbar>
   <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredLocation()"></ion-searchbar>
+  <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
 </ion-header>
-<ion-progress-bar type="indeterminate" *ngIf='!loaded'></ion-progress-bar>
 
 <ion-content *ngIf='loaded'>
   <ion-grid>

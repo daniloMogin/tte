@@ -10,6 +10,8 @@ import { GroupsService } from '../../../services/groups.service';
 export class EditModalGroupsComponent implements OnInit {
   group: any;
 
+  working = false;
+
   constructor(public modalCtrl: ModalController, private navParams: NavParams, private groupService: GroupsService) { }
 
   ngOnInit() {
@@ -21,9 +23,13 @@ export class EditModalGroupsComponent implements OnInit {
     this.modalCtrl.dismiss(false);
   }
   saveData() {
+    this.working = true;
     this.groupService.updateGroup(this.group._id, this.group).subscribe(response => { 
       console.log(response);
-      this.modalCtrl.dismiss(response.group);
+      this.working = false;
+      if (response && response.success) {
+        this.modalCtrl.dismiss(response.group);
+      }
     });
   }
 }

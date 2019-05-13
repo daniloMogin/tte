@@ -18,6 +18,8 @@ export class AddModalTeamsComponent implements OnInit {
   myForm: FormGroup;
   errorMsg;
 
+  working = false;
+
   ngOnInit() {
     this.myForm = this.fb.group({
       name: ['', Validators.required],
@@ -41,11 +43,14 @@ export class AddModalTeamsComponent implements OnInit {
       console.log('this.myForm');
       console.log(this.myForm);
 
+      this.working = true;
+
       this._auth.registerUser(this.myForm.value)
         .subscribe(
-          res => {
-            if (res && res.success) {
-              this.modalCtrl.dismiss(res.user);
+          response => {
+            this.working = false;
+            if (response && response.success) {
+              this.modalCtrl.dismiss(response.user);
             }
           }
         );

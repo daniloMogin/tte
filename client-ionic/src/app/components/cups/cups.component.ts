@@ -80,6 +80,8 @@ export class CupsComponent implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
+        console.log(data);
+        
         if (data.data) {
           const cup = data.data;
           this.cups.push(cup);
@@ -103,10 +105,13 @@ export class CupsComponent implements OnInit {
             text: 'Yes',
             role: 'yes',
             handler: () => {
+              this.showBar = true;
               this.cupsService.deleteCup(cup._id).subscribe(response => {
                 console.log(response);
+                this.showBar = false;
                 if (response.success) {
                   this.cups = this.cups.filter(elem =>  elem !== cup );
+                  this.setFilteredLocation();
                 }
               });
             }

@@ -36,18 +36,7 @@ export class CupDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.cupsService.getCupById(id).subscribe(response => {
       this.cup = response.cup;
-      this.cup.groups.forEach(group => {
-        const groupTeamsIds = [];
-        let i = 0;
-        group.teams.forEach(team => {
-          team.position = ++i;
-          team.fullName = team.name + ' ' + team.lastname;
-          groupTeamsIds.push(team._id);
-        });
-        this.addTeamsSelect.push(groupTeamsIds);
-        console.log(this.addTeamsSelect);
-
-      });
+      this.processCup();
       console.log(this.cup);
       this.loaded = true;
     });
@@ -56,6 +45,21 @@ export class CupDetailComponent implements OnInit {
       this.teams = response;
       this.showBar = false;
       console.log(this.teams);
+    });
+  }
+
+  processCup() {
+    this.cup.groups.forEach(group => {
+      const groupTeamsIds = [];
+      let i = 0;
+      group.teams.forEach(team => {
+        team.position = ++i;
+        team.fullName = team.name + ' ' + team.lastname;
+        groupTeamsIds.push(team._id);
+      });
+      this.addTeamsSelect.push(groupTeamsIds);
+      console.log(this.addTeamsSelect);
+
     });
   }
 
@@ -71,6 +75,7 @@ export class CupDetailComponent implements OnInit {
       .then((data) => {
         if (data.data) {
           this.cup = data.data;
+          this.processCup();
         }
     });
 
@@ -89,9 +94,11 @@ export class CupDetailComponent implements OnInit {
             text: 'Yes',
             role: 'yes',
             handler: () => {
+              this.showBar = true;
               this.cupsService.deleteCup(this.cup._id).subscribe(response => {
                 console.log(response);
                 if (response.success) {
+                  this.showBar = false;
                   this.router.navigate(['/cups']);
                 }
               });
@@ -123,7 +130,9 @@ export class CupDetailComponent implements OnInit {
       team.fullName = team.name + ' ' + team.lastname;
     });
     group.teams = newTeams;
+    this.showBar = true;
     this.groupsService.updateGroup(group._id, group).subscribe(response => {
+      this.showBar = false;
       if (response.success) {
       }
     });
@@ -143,8 +152,10 @@ export class CupDetailComponent implements OnInit {
             const filteredGroups = this.cup.groups.filter(group => group !== groupToRemove);
             const updatedCup = {...this.cup, groups: filteredGroups};
             console.log(updatedCup);
+            this.showBar = true;
             this.cupsService.updateCup(this.cup._id, updatedCup).subscribe(response => {
               console.log(response);
+              this.showBar = false;
               if (response.success) {
                 this.cup = response.cup;
               }
