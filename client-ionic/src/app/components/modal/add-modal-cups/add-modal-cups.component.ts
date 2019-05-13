@@ -19,6 +19,8 @@ export class AddModalCupsComponent implements OnInit {
 
   groups: any[] = [];
 
+  working = false;
+
   constructor(public modalCtrl: ModalController, private cupsService: CupsService,
     private groupsService: GroupsService, private router: Router) { }
 
@@ -35,8 +37,10 @@ export class AddModalCupsComponent implements OnInit {
   addCup() {
     console.log("Adding cup");
     console.log(this.cup);
+    this.working = true;
     this.cupsService.createCup(this.cup).subscribe(response => {
       if (response.success) {
+        this.working = false;
         this.modalCtrl.dismiss(false);
         this.router.navigate(['/cups/'+response.cup._id]);
       }
