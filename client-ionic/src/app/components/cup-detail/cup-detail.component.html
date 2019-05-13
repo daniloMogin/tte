@@ -1,4 +1,3 @@
-<ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -8,6 +7,7 @@
       Details of Cup: {{ cup.name }}
     </ion-title>
   </ion-toolbar>
+  <ion-progress-bar type="indeterminate" *ngIf='!loaded'></ion-progress-bar>
 </ion-header>
 
 <ion-content text-center>
