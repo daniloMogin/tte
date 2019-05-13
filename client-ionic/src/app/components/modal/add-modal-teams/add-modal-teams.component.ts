@@ -47,10 +47,10 @@ export class AddModalTeamsComponent implements OnInit {
 
       this._auth.registerUser(this.myForm.value)
         .subscribe(
-          res => {
+          response => {
             this.working = false;
-            if (res && res.success) {
-              this.modalCtrl.dismiss(res.user);
+            if (response && response.success) {
+              this.modalCtrl.dismiss(response.user);
             }
           }
         );

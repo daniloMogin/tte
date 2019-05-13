@@ -42,7 +42,7 @@ export class AddModalGroupsComponent implements OnInit {
 
     this.groupsService.createGroup(this.group).subscribe(response => {
       this.working = false;
-      if (response.success) {
+      if (response && response.success) {
         this.modalCtrl.dismiss(response.group);
         /*this.router.navigate(['/groups/'+response.group._id]);*/
       }

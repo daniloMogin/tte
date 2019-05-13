@@ -27,7 +27,9 @@ export class EditModalGroupsComponent implements OnInit {
     this.groupService.updateGroup(this.group._id, this.group).subscribe(response => { 
       console.log(response);
       this.working = false;
-      this.modalCtrl.dismiss(response.group);
+      if (response && response.success) {
+        this.modalCtrl.dismiss(response.group);
+      }
     });
   }
 }

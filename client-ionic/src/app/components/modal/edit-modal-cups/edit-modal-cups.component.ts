@@ -49,7 +49,9 @@ export class EditModalCupsComponent implements OnInit {
     this.cupsService.updateCup(this.cup._id, this.cup).subscribe(response => { console.log("RESPONSE RECEIVED");
       console.log(response);
       this.working = false;
-      this.modalCtrl.dismiss(response.cup);
+      if (response && response.success) {
+        this.modalCtrl.dismiss(response.cup);
+      }
     });
   }
 

@@ -38,7 +38,7 @@ export class EditModalTeamsComponent implements OnInit {
      console.log('Response recieved');
      console.log(response);
      this.working = false;
-     if (response.success) {
+     if (response && response.success) {
       this.modalCtrl.dismiss(this.user);
       /*this.router.navigate(['/groups/'+response.group._id]);*/
     }
