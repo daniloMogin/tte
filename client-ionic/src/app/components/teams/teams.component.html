@@ -19,7 +19,7 @@
       </td>
     </tr>
     <tr>
-      <th></th>
+      <th class="display-none"></th>
       <th class="header-sort">
         <mfDefaultSorter by="fullName">Name</mfDefaultSorter>
       </th>
@@ -34,7 +34,7 @@
       <th></th>
     </tr>
     <tr *ngFor="let user of mf.data">
-      <td class='td-min'>
+      <td class='td-min display-none'>
         <ion-icon name="people" class="position row-logo" item-center></ion-icon>
       </td>
       <td><a routerLink='/teams/{{user._id}}' class="text hover-color full-width">{{user.fullName}}</a></td>
