@@ -29,6 +29,7 @@
     "bootstrap": "^4.3.1",
     "cordova-android": "8.0.0",
     "core-js": "^2.5.4",
+    "ionic-selectable": "^4.4.0",
     "lodash": "^4.17.11",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.29"
