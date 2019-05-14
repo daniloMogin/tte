@@ -17,6 +17,7 @@ table {
 
 .text {
   color: black;
+  font-weight: bold;
 }
 .table thead th {
   color: white;
@@ -37,11 +38,11 @@ td {
   transition: ease-out 0.2s;
 }
 
-tr:hover td {
+tr:not(.info-description):hover td {
   background-color: #10519c;
   color: white;
 }
-tr:hover a, tr:hover .edit {
+tr:not(.info-description):hover a, tr:not(.info-description):hover .edit {
   color: white;
   text-decoration: none;
 }

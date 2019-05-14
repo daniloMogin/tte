@@ -5,7 +5,9 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title text-center>
-      Details of Group: {{ group.name }} 
+      Details of Group: 
+      <span *ngIf="loaded">{{ group.name }}</span>
+      <span *ngIf="!loaded">Loading...</span>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -29,7 +31,7 @@
             </tr>
           </thead>
           <tbody *ngIf="group.description">
-            <tr>
+            <tr class='info-description'>
               <td class="info-side-header">Description:</td>
               <td>{{ group.description }}</td>
             </tr>

@@ -4,12 +4,15 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title text-center>
-      Details of Team: {{user.name + ' ' + user.lastname}}
+      Details of Team: 
+      <span *ngIf="loaded">{{user.name + ' ' + user.lastname}}</span>
+      <span *ngIf="!loaded">Loading...</span>
     </ion-title>
   </ion-toolbar>
   <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
 </ion-header>
-<ion-content>
+
+<ion-content *ngIf='loaded'>
 
 <div padding>
   <table class="table table-bordered">

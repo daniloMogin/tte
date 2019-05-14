@@ -56,6 +56,7 @@ thead .group-name {
 }
 .text {
     color: black;
+    font-weight: bold;
   }
   
   ion-select/*, .editButton*/ {
@@ -73,12 +74,12 @@ thead .group-name {
     transition: ease-out 0.2s;
   }
   
-  .table-cups tr:hover td {
+  .table-cups tr:not(.info-description):hover td {
     background-color: #10519c;
     color: white;
     text-decoration: none;
   }
-  .table-cups tr:hover a {
+  .table-cups tr:not(.info-description):hover a {
     color: white;
     text-decoration: none;
   }

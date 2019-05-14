@@ -12,6 +12,7 @@ import { ModalController } from '@ionic/angular';
 export class TeamDetailComponent implements OnInit {
   user: any = [];
   showBar: boolean = true;
+  loaded = false;
   constructor(private usersService: api.UsersService, private route: ActivatedRoute, private modalCtrl: ModalController) { }
 
   ngOnInit() {
@@ -22,6 +23,7 @@ export class TeamDetailComponent implements OnInit {
     this.usersService.getUserById(id).subscribe( response => {
       this.user = response.user;
       this.showBar = false;
+      this.loaded = true;
       console.log(this.user)
     });
   }
