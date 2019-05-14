@@ -17,6 +17,7 @@ table {
 
 .text {
   color: black;
+  font-weight: bold;
 }
 .table thead th {
   color: white;

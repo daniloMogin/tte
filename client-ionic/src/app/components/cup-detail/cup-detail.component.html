@@ -4,7 +4,9 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title text-center>
-      Details of Cup: {{ cup.name }}
+      Details of Cup: 
+      <span *ngIf="loaded">{{ cup.name }}</span>
+      <span *ngIf="!loaded">Loading...</span>
     </ion-title>
   </ion-toolbar>
   <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
