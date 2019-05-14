@@ -9,7 +9,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { FormsModule } from '@angular/forms';
-import {DataTableModule} from '@pascalhonegger/ng-datatable';
+import { DataTableModule } from '@pascalhonegger/ng-datatable';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -73,7 +74,8 @@ import { AddModalTeamsComponent } from './components/modal/add-modal-teams/add-m
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    DataTableModule
+    DataTableModule,
+    IonicSelectableModule
   ],
   providers: [
     StatusBar,
