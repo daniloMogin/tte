@@ -25,6 +25,9 @@ export class AddModalGamesComponent implements OnInit {
       console.log(response);
       
       this.teams = response;
+      this.teams.forEach(team => {
+        team.fullName = team.name + ' ' + team.lastname;
+      })
     });
   }
 

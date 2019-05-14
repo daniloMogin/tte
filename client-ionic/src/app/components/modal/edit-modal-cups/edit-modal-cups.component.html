@@ -23,11 +23,12 @@
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Groups</ion-label>
-            <ion-select multiple="true" cancelText="Cancel" okText="OK" [(ngModel)]='addGroupsSelect'>
+            <!-- <ion-select multiple="true" cancelText="Cancel" okText="OK" [(ngModel)]='addGroupsSelect'>
               <ion-select-option *ngFor='let group of groups; let i = index' value="{{group._id}}">
                 {{ group.name }}
               </ion-select-option>
-            </ion-select>
+            </ion-select> -->
+            <app-extended-select title='Select groups' [(model)]='cup.groups' [items]='groups' textField='name' valueField='_id' [multiple]='true'></app-extended-select>
           </ion-item>
         </ion-col>
       </ion-row>
