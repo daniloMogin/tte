@@ -11,7 +11,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class GameDetailComponent implements OnInit {
 
-  private game: any[] = [];
+  private game: any = [];
   showBar: boolean = true;
   loaded = false;
 
