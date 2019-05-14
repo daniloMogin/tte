@@ -15,7 +15,7 @@
   <div *ngIf='loaded'>
 
     <div padding>
-      <table class="table table-bordered">
+      <table class="table table-bordered info-table">
           <thead>
             <tr>
               <!-- <th class="cup-side-header">
@@ -94,16 +94,16 @@
           <table class='table table-bordered table-striped gameScoreTable' [mfData]="group.score" #mf2="mfDataTable">
             <thead>
               <tr>
-                <th class="header-sort">
+                <th class="header-sort sticky-top">
                     <mfDefaultSorter by="sortTeam1">Team 1</mfDefaultSorter>
                 </th>
-                <th class="header-sort">
+                <th class="header-sort sticky-top">
                     <mfDefaultSorter by="scoreString">SCORE</mfDefaultSorter>
                 </th>
-                <th class="header-sort">
+                <th class="header-sort sticky-top">
                     <mfDefaultSorter by="sortTeam2">Team 2</mfDefaultSorter>
                 </th>
-                <th class="td-min"></th>
+                <th class="td-min sticky-top"></th>
               </tr>
             </thead>
             <tbody>

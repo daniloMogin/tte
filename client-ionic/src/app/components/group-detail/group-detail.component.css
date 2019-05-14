@@ -22,8 +22,10 @@ table {
   color: white;
   background-color: #10519c;
   vertical-align: middle;
-  position: relative;
   line-height: 1.8em;
+}
+.info-table thead th {
+  position: relative;
 }
 
 ion-select {

@@ -19,19 +19,19 @@
       </td>
     </tr>
     <tr>
-      <th class="display-none"></th>
-      <th class="header-sort">
+      <th class="display-none" class="sticky-top"></th>
+      <th class="header-sort sticky-top">
         <mfDefaultSorter by="fullName">Name</mfDefaultSorter>
       </th>
-      <th class="header-sort">
+      <th class="header-sort sticky-top">
         <mfDefaultSorter by="DoB">Date of Birth</mfDefaultSorter>
       </th>
       <!-- <th>Name</th> -->
       <!-- <th>Date of Birth</th> -->
-      <th class="header-sort">
+      <th class="header-sort sticky-top">
         <mfDefaultSorter by="winRatio">Win Ratio</mfDefaultSorter>
       </th>
-      <th></th>
+      <th class="sticky-top"></th>
     </tr>
     <tr *ngFor="let user of mf.data">
       <td class='td-min display-none'>
