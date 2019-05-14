@@ -29,7 +29,7 @@
             </tr>
           </thead>
           <tbody *ngIf="cup.description">
-            <tr>
+            <tr class='info-description'>
               <td class="info-side-header">Description:</td>
               <td>{{ cup.description }}</td>
             </tr>
@@ -70,7 +70,7 @@
                     <ion-icon name='close' class="remove-button-container" (click)='removeGroup(group)'></ion-icon>
                 </th>
               </tr>
-              <tr *ngIf='group.description'>
+              <tr *ngIf='group.description' class='info-description'>
                 <td colspan='3'>
                     {{ group.description }}
                 </td>
