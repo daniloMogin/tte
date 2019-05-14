@@ -19,6 +19,8 @@ export class AddModalCupsComponent implements OnInit {
 
   groups: any[] = [];
 
+  loaded = false;
+
   working = false;
 
   constructor(public modalCtrl: ModalController, private cupsService: CupsService,
@@ -27,6 +29,10 @@ export class AddModalCupsComponent implements OnInit {
   ngOnInit() {
     this.groupsService.getGroup().subscribe(response => {
       this.groups = response.group;
+      console.log(this.groups);
+      console.log(this.cup);
+      
+      this.loaded = true;
     });
   }
 

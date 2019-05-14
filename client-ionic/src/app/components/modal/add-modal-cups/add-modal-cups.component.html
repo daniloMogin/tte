@@ -20,11 +20,14 @@
             <ion-label position='floating'>Description</ion-label>
             <ion-textarea [(ngModel)]='cup.description' clearInput></ion-textarea>
           </ion-item>
-          <ion-item>
+          <ion-item *ngIf='loaded' >
             <ion-label position='floating'>Groups</ion-label>
-            <ion-select [(ngModel)]='cup.groups' multiple="true" cancelText="CANCEL" okText="OK">
+            <!-- <ion-select [(ngModel)]='cup.groups' multiple="true" cancelText="CANCEL" okText="OK">
               <ion-select-option *ngFor='let group of groups' value='{{group._id}}'>{{ group.name }}</ion-select-option>
-            </ion-select>
+            </ion-select> -->
+            
+            <app-extended-select title='Select groups' [(model)]='cup.groups' [items]='groups' textField='name' valueField='_id' [multiple]='true'></app-extended-select>
+
           </ion-item>
       </ion-col>
     </ion-row>
@@ -38,7 +41,6 @@
     </ion-row>
     <ion-row>
       <ion-col text-center>
-        <!-- <ion-button (click)='addCup()'>ADD</ion-button> -->
         <ion-icon name='checkmark' class="add-button-container" color='primary' (click)='addCup()'></ion-icon>
       </ion-col>
     </ion-row>

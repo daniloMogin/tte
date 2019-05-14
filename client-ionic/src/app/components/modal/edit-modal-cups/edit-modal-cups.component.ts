@@ -12,7 +12,7 @@ export class EditModalCupsComponent implements OnInit {
   cup: any;
 
   private groups: any[];
-  private addGroupsSelect: any[] = [];
+  //private addGroupsSelect: any[] = [];
 
   working = false;
 
@@ -23,12 +23,11 @@ export class EditModalCupsComponent implements OnInit {
     this.cup = this.navParams.data;
     console.log(this.cup);
 
-    this.cup.groups.forEach(group => {
+    /*this.cup.groups.forEach(group => {
       this.addGroupsSelect.push(group._id);
     });
-
     console.log('addGroupSelect:');
-    console.log(this.addGroupsSelect);
+    console.log(this.addGroupsSelect);*/
 
     this.groupsService.getGroup().subscribe(response => {
       this.groups = response.group;
@@ -42,11 +41,12 @@ export class EditModalCupsComponent implements OnInit {
   }
 
   saveData() {
-    console.log("UPDATING CUP");
+    console.log('UPDATING CUP');
     console.log(this.cup);
-    this.cup.groups = this.addGroupsSelect;
+    //return;
+    //this.cup.groups = this.addGroupsSelect;
     this.working = true;
-    this.cupsService.updateCup(this.cup._id, this.cup).subscribe(response => { console.log("RESPONSE RECEIVED");
+    this.cupsService.updateCup(this.cup._id, this.cup).subscribe(response => { console.log('RESPONSE RECEIVED');
       console.log(response);
       this.working = false;
       if (response && response.success) {
