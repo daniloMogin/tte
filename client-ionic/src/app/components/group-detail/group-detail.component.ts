@@ -15,8 +15,8 @@ import { EditModalGamesComponent } from '../modal/edit-modal-games/edit-modal-ga
 })
 export class GroupDetailComponent implements OnInit {
 
-  private group: any = {};
-  private loaded = false;
+  group: any = {};
+  loaded = false;
   showBar: boolean = true;
 
   private teams: any[];

@@ -11,8 +11,8 @@ export class EditModalCupsComponent implements OnInit {
 
   cup: any;
 
-  private groups: any[];
-  private addGroupsSelect: any[] = [];
+  groups: any[];
+  addGroupsSelect: any[] = [];
 
   working = false;
 
