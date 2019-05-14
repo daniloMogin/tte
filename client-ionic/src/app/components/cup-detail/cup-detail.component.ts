@@ -11,8 +11,8 @@ import { EditModalCupsComponent } from '../modal/edit-modal-cups/edit-modal-cups
 })
 export class CupDetailComponent implements OnInit {
 
-  private cup: any = {};
-  private loaded = false;
+  cup: any = {};
+  loaded = false;
   showBar: boolean = true;
 
   private teams: any[] = [];

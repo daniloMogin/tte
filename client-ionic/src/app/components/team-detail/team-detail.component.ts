@@ -10,7 +10,7 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./team-detail.component.css']
 })
 export class TeamDetailComponent implements OnInit {
-  user = [];
+  user: any = [];
   showBar: boolean = true;
   loaded = false;
   constructor(private usersService: api.UsersService, private route: ActivatedRoute, private modalCtrl: ModalController) { }
