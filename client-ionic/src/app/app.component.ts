@@ -5,33 +5,40 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
 export class AppComponent {
   public appPages = [
     {
       title: 'Cups',
       url: '/cups',
-      icon: 'trophy'
+      icon: 'trophy',
+      img: './assets/img/cup.png'
     },
     {
       title: 'Groups',
       url: '/groups',
-      icon: 'grid'
+      icon: 'grid',
+      img: './assets/img/cup.png'
     },
     {
       title: 'Teams',
       url: '/teams',
-      icon: 'people'
+      icon: 'people',
+      img: './assets/img/teams.png'
     },
     {
       title: 'Games',
       url: '/games',
-      icon: 'tennisball'
+      icon: 'tennisball',
+      img: './assets/img/games.png'
     }
   ];
 
@@ -39,10 +46,19 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public authService: AuthService
-  ) {
+    public authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) 
+  
+    
+  {
     this.initializeApp();
+
+    console.log(this.router.url);
   }
+
+
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -50,4 +66,10 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  routeImage(routeId) {
+    return this.router.url.startsWith(routeId); 
+  }
+  
+  
 }
