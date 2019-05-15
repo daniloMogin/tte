@@ -26,7 +26,8 @@
         <ion-col size-xs="12" size-sm="5">
           <ion-item>
             <app-extended-select 
-            class='versus' title='Select team' [(model)]='team1' [items]='teams' textField='fullName' valueField='_id' [multiple]='false' placeholder='Team 1'>
+            class='versus' title='Select team' [(model)]='team1' [items]='teams1' (selected)='filterTeams($event, teams2)'
+            textField='fullName' valueField='_id' [multiple]='false' placeholder='Team 1'>
             </app-extended-select>
           </ion-item>
             <!-- <ion-select [(ngModel)]='team1' cancelText="CANCEL" okText="OK"  placeholder='Team 1'  (ionChange)="constructGameName()">
@@ -39,7 +40,8 @@
         <ion-col size-xs="12" size-sm="5">
             <ion-item>
                 <app-extended-select 
-                class='versus' title='Select team' [(model)]='team2' [items]='teams' textField='fullName' valueField='_id' [multiple]='false' placeholder='Team 2'>
+                class='versus' title='Select team' [(model)]='team2' [items]='teams2' (selected)='filterTeams($event, teams1)'
+                textField='fullName' valueField='_id' [multiple]='false' placeholder='Team 2'>
                 </app-extended-select>
             </ion-item>
             <!-- <ion-select [(ngModel)]='team2' cancelText="CANCEL" okText="OK" placeholder='Team 2' (ionChange)="constructGameName()">

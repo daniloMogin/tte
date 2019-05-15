@@ -15,6 +15,8 @@ export class AddModalGamesComponent implements OnInit {
   team2: string;
 
   teams: any[];
+  teams1: any[];
+  teams2: any[];
 
   working = false;
 
@@ -23,11 +25,13 @@ export class AddModalGamesComponent implements OnInit {
   ngOnInit() {
     this.usersService.getUsers().subscribe(response => {
       console.log(response);
-      
+
       this.teams = response;
       this.teams.forEach(team => {
         team.fullName = team.name + ' ' + team.lastname;
-      })
+      });
+      this.teams1 = this.teams.slice();
+      this.teams2 = this.teams.slice();
     });
   }
 
@@ -64,6 +68,12 @@ export class AddModalGamesComponent implements OnInit {
       const team2Obj = this.teams.find(team => team._id === this.team2);
       this.name = team1Obj.name + ' ' + team1Obj.lastname + ' VS ' + team2Obj.name + ' ' + team2Obj.lastname;
     }
+  }
+
+  filterTeams(event, teams) {
+    teams.length = 0;
+    [].push.apply(teams, this.teams);
+    teams.splice(teams.indexOf(event.value), 1);
   }
 
 }
