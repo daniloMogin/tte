@@ -78,12 +78,15 @@
               </tr>
               <tr>
                 <td colspan='3'>
-                  <ion-select placeholder="Select team to add" multiple="true" cancelText="Cancel" okText="OK" 
+                  <!-- <ion-select placeholder="Select team to add" multiple="true" cancelText="Cancel" okText="OK" 
                   [(ngModel)]='addTeamsSelect' (ionChange)='changeTeams(group)' selectedText='Add or remove teams'>
                     <ion-select-option *ngFor='let team of teams; let i = index' value="{{team._id}}">
                       {{ team.name + ' ' + team.lastname }}
                     </ion-select-option>
-                  </ion-select>
+                  </ion-select> -->
+                  <app-extended-select title='Select teams' [(model)]='addTeamsSelect' [items]='teams'
+                  textField='fullName' valueField='_id' [multiple]='true' placeholder='Select teams to add/remove' 
+                  selectedDisplay='Select teams to add/remove'></app-extended-select>
                 </td>
               </tr>
             </tbody>

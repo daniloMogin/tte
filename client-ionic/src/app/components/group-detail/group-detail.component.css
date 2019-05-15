@@ -34,11 +34,6 @@ table {
   position: relative;
 }
 
-ion-select {
-  color: white;
-  background-color: #10519c;
-}
-
 td {
   transition: ease-out 0.2s;
 }

@@ -35,6 +35,7 @@ export class GroupDetailComponent implements OnInit {
   }
 
   ionViewWillEnter() {
+
     const id = this.route.snapshot.paramMap.get('id');
     this.groupsService.getGroupById(id).subscribe( response => {
       this.group = response.group;
@@ -69,7 +70,8 @@ export class GroupDetailComponent implements OnInit {
         game.sortTeam1 = game.score[0].teamName;
         game.sortTeam2 = game.score[1].teamName;
         game.scoreString = game.score[0].teamPoints + ' - ' + game.score[1].teamPoints;
-      })
+      });
+
     });
 
     this.teamsService.getUsers().subscribe(response => {
@@ -80,6 +82,12 @@ export class GroupDetailComponent implements OnInit {
       console.log(this.teams);
     });
 
+  }
+
+  ngAfterViewChecked() {
+    const selectableButton = <HTMLElement>document.querySelector('ionic-selectable div.ionic-selectable-inner');
+    selectableButton.style.backgroundColor =  'rgb(16,81,156)';
+    selectableButton.style.color = 'white';
   }
 
   changeTeams(group) {
