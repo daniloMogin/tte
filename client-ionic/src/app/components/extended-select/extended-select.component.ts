@@ -17,6 +17,7 @@ export class ExtendedSelectComponent implements OnInit {
   @Input() multiple: boolean;
   @Input() placeholder: string;
   @Input() title: string;
+  @Input() formatField = 'name';
 
   @Output() selected = new EventEmitter<any>();
 
@@ -35,7 +36,7 @@ export class ExtendedSelectComponent implements OnInit {
 
   formatSelectedValues(values) {
     if (this.multiple) {
-      return values.map(value => value.name).join(', ');
+      return values.map(value => value[this.formatField]).join(', ');
     } else {
       return values.fullName;
     }

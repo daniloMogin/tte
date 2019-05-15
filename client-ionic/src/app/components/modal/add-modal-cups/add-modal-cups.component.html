@@ -26,7 +26,8 @@
               <ion-select-option *ngFor='let group of groups' value='{{group._id}}'>{{ group.name }}</ion-select-option>
             </ion-select> -->
             
-            <app-extended-select title='Select groups' [(model)]='cup.groups' [items]='groups' textField='name' valueField='_id' [multiple]='true'></app-extended-select>
+            <app-extended-select title='Select groups' [(model)]='cup.groups' [items]='groups' 
+            textField='name' valueField='_id' [multiple]='true'></app-extended-select>
 
           </ion-item>
       </ion-col>
