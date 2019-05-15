@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalController, AlertController, IonContent } from '@ionic/angular';
 import * as api from '../../services';
 import { EditModalTeamsComponent } from '../modal/edit-modal-teams/edit-modal-teams.component';
 import { AddModalTeamsComponent } from '../modal/add-modal-teams/add-modal-teams.component';
@@ -16,6 +16,8 @@ export class TeamsComponent implements OnInit {
   showBar: boolean = true;
   loaded: boolean = false;
   filteredData: any[] = [];
+
+  @ViewChild(IonContent) content: IonContent;
 
   constructor(private userService: api.UsersService, private modalCtrl: ModalController, private alertController: AlertController) { }
 
@@ -34,6 +36,9 @@ export class TeamsComponent implements OnInit {
       console.log(this.users);
       this.filteredData = this.users;
     });
+  }
+  ScrollToTop(){
+    this.content.scrollToTop(1500);
   }
 
   setFilteredLocation() {

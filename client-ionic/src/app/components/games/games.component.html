@@ -11,7 +11,7 @@
   <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
 </ion-header>
 
-<ion-content *ngIf='loaded' text-center scrollX="true">
+<ion-content *ngIf='loaded' text-center scrollX="true" >
   <table class="table table-bordered table-striped" [mfData]="filteredData" #mf="mfDataTable">
     <tr>
       <td colspan=6>
@@ -19,7 +19,8 @@
       </td>
     </tr>
     <tr>
-      <th class="display-none" class="sticky-top"></th>
+      <th class="display-none" class="sticky-top"><ion-button (click)="ScrollToTop()"><ion-icon class="rotate" name="fastForward"></ion-icon> 
+      </ion-button></th>
       <th class="header-sort" class="sticky-top">
         <mfDefaultSorter by="name">Game name</mfDefaultSorter>
       </th>

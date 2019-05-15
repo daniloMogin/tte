@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { GamesService } from '../../services';
 import { EditModalTeamsComponent } from '../modal/edit-modal-teams/edit-modal-teams.component';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, IonContent } from '@ionic/angular';
 import { EditModalGamesComponent } from '../modal/edit-modal-games/edit-modal-games.component';
 import { AddModalGamesComponent } from '../modal/add-modal-games/add-modal-games.component';
 
@@ -17,7 +17,10 @@ export class GamesComponent implements OnInit {
   loaded: boolean = false;
   filteredData: any[] = [];
 
+  @ViewChild(IonContent) content: IonContent;
+
   constructor(private gamesService: GamesService, private modalCtrl: ModalController, private alertController: AlertController) { }
+
 
   ngOnInit() {
   }
@@ -34,6 +37,20 @@ export class GamesComponent implements OnInit {
       this.filteredData = this.games;
     });
   }
+  ScrollToTop(){
+    this.content.scrollToTop(1500);
+  }
+  // logScrollStart(){
+  //   console.log("logScrollStart : When Scroll Starts");
+  // }
+ 
+  // logScrolling(){
+  //   console.log("logScrolling : When Scrolling");
+  // }
+ 
+  // logScrollEnd(){
+  //   console.log("logScrollEnd : When Scroll Ends");
+  // }
 
   setFilteredLocation() {
     this.filteredData = this.games.filter((game) => {
