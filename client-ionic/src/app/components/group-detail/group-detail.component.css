@@ -1,6 +1,11 @@
 table {
     margin: 0 auto;
 }
+.full-width {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 
 .edit {
     cursor: pointer;

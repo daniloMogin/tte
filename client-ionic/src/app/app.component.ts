@@ -26,7 +26,7 @@ export class AppComponent {
       title: 'Groups',
       url: '/groups',
       icon: 'grid',
-      img: './assets/img/cup.png'
+      img: './assets/img/group.png'
     },
     {
       title: 'Teams',

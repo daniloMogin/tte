@@ -98,7 +98,9 @@
       </ion-row>
       <ion-row>
         <ion-col text-center>
-          <ion-button color="primary" (click)='addTeam()' [disabled]="!myForm.valid">Add</ion-button>
+          <ion-button [disabled]="!myForm.valid" (click)='addTeam()' fill='clear' class="add-button-container">
+          <ion-icon color="primary" name='checkmark'>Add</ion-icon>
+        </ion-button>
         </ion-col>
       </ion-row> 
   

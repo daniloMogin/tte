@@ -67,7 +67,7 @@
               <tr *ngFor='let team of mf1.data'>
                 <td>{{ team.winRatio ? team.position : '-' }}</td>
                 <td>
-                  <a routerLink='/teams/{{team._id}}'  class="text">
+                  <a routerLink='/teams/{{team._id}}'  class="text full-width">
                   {{ team.fullName }}
                   </a>
                 </td>
@@ -112,7 +112,7 @@
               <tr *ngFor='let game of mf2.data; let i = index'>
                 <td>{{ game.score[0].teamName }}</td>
                 <td>
-                  <a routerLink='/games/{{game._id}}'  class="text">
+                  <a routerLink='/games/{{game._id}}'  class="text full-width">
                     {{ game.scoreString }}
                   </a>
                 </td>

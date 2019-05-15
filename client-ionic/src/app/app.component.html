@@ -11,7 +11,7 @@
       <ion-content>
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item routerLink="{{p.url}}" routerLinkActive="active-link" #rla="routerLinkActive" class="hover">
+            <ion-item routerLink="{{p.url}}" routerLinkActive="active-link" class="hover">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
                 {{p.title}}
@@ -21,13 +21,14 @@
         </ion-list>
       </ion-content>
       <!-- <ion-img class='large-image' src="../assets/img/tt.png"></ion-img> -->
-      <!-- <ion-img class='large-image' src='{{appPages[0].img}}'></ion-img> -->
       <ion-img class='large-image' *ngIf='routeImage("/cups")' src='{{appPages[0].img}}'></ion-img>
       <ion-img class='large-image' *ngIf='routeImage("/groups")' src='{{appPages[1].img}}'></ion-img>
       <ion-img class='large-image' *ngIf='routeImage("/teams")' src='{{appPages[2].img}}'></ion-img>
       <ion-img class='large-image' *ngIf='routeImage("/games")' src='{{appPages[3].img}}'></ion-img>
       <ion-footer class="bar-stable">
+          <ion-menu-toggle auto-hide="false">
         <div *ngIf='!authService.isLoggedIn()'>
+          
           <ion-item nav-clear menu-close routerLink='/login'>
             <ion-icon slot='start' name="log-in"></ion-icon>
             <ion-label>Login</ion-label>
@@ -42,6 +43,7 @@
           <ion-icon slot='start' name="log-out"></ion-icon>
           <ion-label>Logout</ion-label>
         </ion-item>
+      </ion-menu-toggle>
       </ion-footer>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>

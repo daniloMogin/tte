@@ -73,6 +73,11 @@ thead .group-name {
   td {
     transition: ease-out 0.2s;
   }
+  .full-width {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
   
   .table-cups tr:not(.info-description):hover td {
     background-color: #10519c;
