@@ -26,7 +26,11 @@ export class AddModalGroupsComponent implements OnInit {
 
   ngOnInit() {
     this.teamsService.getUsers().subscribe(response => {
-      this.teams = response;
+      const teams = response;
+      teams.forEach(team => {
+        team.fullName = team.name + ' ' + team.lastname;
+      });
+      this.teams = teams;
     });
   }
 
@@ -39,6 +43,8 @@ export class AddModalGroupsComponent implements OnInit {
     console.log(this.group);
 
     this.working = true;
+
+    this.group.teams = this.group.teams.map(team => team.username);
 
     this.groupsService.createGroup(this.group).subscribe(response => {
       this.working = false;
