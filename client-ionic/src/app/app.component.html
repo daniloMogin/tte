@@ -25,6 +25,8 @@
       <ion-img class='large-image' *ngIf='routeImage("/groups")' src='{{appPages[1].img}}'></ion-img>
       <ion-img class='large-image' *ngIf='routeImage("/teams")' src='{{appPages[2].img}}'></ion-img>
       <ion-img class='large-image' *ngIf='routeImage("/games")' src='{{appPages[3].img}}'></ion-img>
+      <ion-img class='large-image' *ngIf='routeImage("/login")' src='../assets/img/tt.png'></ion-img>
+      <ion-img class='large-image' *ngIf='routeImage("/register")' src='../assets/img/tt.png'></ion-img>
       <ion-footer class="bar-stable">
           <ion-menu-toggle auto-hide="false">
         <div *ngIf='!authService.isLoggedIn()'>

@@ -27,14 +27,14 @@ export class LoginComponent implements OnInit {
   login() {
     this.showBar = true;
     this.authService.loginUser(this.user.username, this.user.password).subscribe(response => {
+      this.showBar = false;
       if (response.success) {
         localStorage.setItem('token', response.msg.token.replace('JWT ', ''));
         this.router.navigate(["/cups"]);
-        this.showBar = false;
         this.notificationService.showToast({message: `Welcome ${this.user.username}!`});
       }
+      
     });
   }
-
-
+  
 }

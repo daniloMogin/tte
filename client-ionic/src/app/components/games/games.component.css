@@ -80,6 +80,9 @@ ion-icon {
 .sticky-top {
   padding: 0;
 }
+.rotate {
+  transform: rotate(-90deg);
+}
 @media only screen and (max-width: 450px) {
   .display-none {
     display: none;
