@@ -96,7 +96,7 @@ ion-modal.auto-height {
 .notificationToast { 
   
   .toast-message {
-    background: blue;
+    background:#10519c;;
   }
 
 }
@@ -132,4 +132,17 @@ font-size: 1.2em;
 
 app-extended-select {
   width: 100%;
+}
+
+ion-alert, .alert-head {
+  text-align: center!important;
+}
+
+.alert-button-group {
+  justify-content: center!important;
+}
+
+ion-alert .alert-title {
+  color: red!important;
+  font-weight: bold;
 }

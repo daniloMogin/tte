@@ -14,13 +14,13 @@
       <ion-col text-center>
         <ion-item>
           <ion-label position='floating'>Name</ion-label>
-            <ion-input [(ngModel)]='cup.name' clearInput></ion-input>
+            <ion-input [(ngModel)]='cup.name' clearInput required #cupName='ngModel'></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Description</ion-label>
             <ion-textarea [(ngModel)]='cup.description' clearInput></ion-textarea>
           </ion-item>
-          <ion-item *ngIf='loaded' >
+          <ion-item>
             <ion-label position='floating'>Groups</ion-label>
             <!-- <ion-select [(ngModel)]='cup.groups' multiple="true" cancelText="CANCEL" okText="OK">
               <ion-select-option *ngFor='let group of groups' value='{{group._id}}'>{{ group.name }}</ion-select-option>
@@ -41,7 +41,9 @@
     </ion-row>
     <ion-row>
       <ion-col text-center>
-        <ion-icon name='checkmark' class="add-button-container" color='primary' (click)='addCup()'></ion-icon>
+        <ion-button fill="clear" [disabled]='!cupName.valid' (click)='addCup()'>
+            <ion-icon name='checkmark'  class="add-button-container" color='primary'></ion-icon>
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

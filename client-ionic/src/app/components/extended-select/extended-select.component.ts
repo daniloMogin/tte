@@ -18,8 +18,9 @@ export class ExtendedSelectComponent implements OnInit {
   @Input() placeholder: string;
   @Input() title: string;
 
-  private model2: any = '';
-  private items2: any[] = [];
+  @Output() selected = new EventEmitter<any>();
+
+  private currentValue: any;
 
   @ViewChild('selectableComponent') selectableComponent: IonicSelectableComponent;
 
@@ -30,22 +31,25 @@ export class ExtendedSelectComponent implements OnInit {
     console.log(this.items);
     console.log(this.valueField);
     console.log(this.textField);
-    
-    
-    
   }
 
   formatSelectedValues(values) {
-    return values.map(value => value.name).join(', ');
+    if (this.multiple) {
+      return values.map(value => value.name).join(', ');
+    } else {
+      return values.fullName;
+    }
   }
 
   confirmSelect() {
     this.selectableComponent.confirm();
     this.selectableComponent.close();
+    this.selected.emit({value: this.currentValue});
   }
 
   valueChange(event) {
     this.modelChange.emit(event.value);
+    this.currentValue = event.value;
   }
 
 }

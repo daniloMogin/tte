@@ -159,8 +159,8 @@ export class GroupDetailComponent implements OnInit {
   async deleteGroup() {
     const alert = await this.alertCtrl.create({
 
-      header: 'Alert',
-      subHeader: 'Delete group?',
+      header: 'Delete group',
+      // subHeader: 'Delete group?',
       message: 'Are you sure?',
       buttons: [
         {

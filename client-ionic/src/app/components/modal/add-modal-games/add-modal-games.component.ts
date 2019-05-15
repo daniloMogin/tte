@@ -11,10 +11,12 @@ export class AddModalGamesComponent implements OnInit {
 
   name: string;
   description: string;
-  team1: string;
-  team2: string;
+  team1: any;
+  team2: any;
 
   teams: any[];
+  teams1: any[];
+  teams2: any[];
 
   working = false;
 
@@ -23,11 +25,13 @@ export class AddModalGamesComponent implements OnInit {
   ngOnInit() {
     this.usersService.getUsers().subscribe(response => {
       console.log(response);
-      
+
       this.teams = response;
       this.teams.forEach(team => {
         team.fullName = team.name + ' ' + team.lastname;
-      })
+      });
+      this.teams1 = this.teams.slice();
+      this.teams2 = this.teams.slice();
     });
   }
 
@@ -42,8 +46,8 @@ export class AddModalGamesComponent implements OnInit {
       description: this.description,
       active: true,
       teams: [
-        this.teams.find(team => team._id === this.team1),
-        this.teams.find(team => team._id === this.team2)
+        this.team1,
+        this.team2
       ]
     };
 
@@ -58,12 +62,23 @@ export class AddModalGamesComponent implements OnInit {
     });
   }
 
+  onSelect(event, teams) {
+    this.filterTeams(event, teams);
+    this.constructGameName();
+  }
+
   constructGameName() {
     if (this.team1 && this.team2 && !this.name) {
-      const team1Obj = this.teams.find(team => team._id === this.team1);
-      const team2Obj = this.teams.find(team => team._id === this.team2);
-      this.name = team1Obj.name + ' ' + team1Obj.lastname + ' VS ' + team2Obj.name + ' ' + team2Obj.lastname;
+      /*const team1Obj = this.teams.find(team => team._id === this.team1);
+      const team2Obj = this.teams.find(team => team._id === this.team2);*/
+      this.name = this.team1.fullName + ' VS ' + this.team2.fullName;
     }
+  }
+
+  filterTeams(event, teams) {
+    teams.length = 0;
+    [].push.apply(teams, this.teams);
+    teams.splice(teams.indexOf(event.value), 1);
   }
 
 }

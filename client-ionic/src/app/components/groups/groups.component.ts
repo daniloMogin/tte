@@ -86,8 +86,8 @@ export class GroupsComponent implements OnInit {
 
     const alert = await this.alertController.create({
 
-        header: 'Alert',
-        subHeader: 'Delete group?',
+        header: 'Delete group?',
+        // subHeader: 'Delete group?',
         message: 'Are you sure?',
         buttons: [
           {
