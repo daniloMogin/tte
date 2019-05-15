@@ -14,7 +14,7 @@
       <ion-col text-center>
         <ion-item>
           <ion-label position='floating'>Name</ion-label>
-            <ion-input [(ngModel)]='group.name' clearInput></ion-input>
+            <ion-input [(ngModel)]='group.name' clearInput required #groupName='ngModel'></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position='floating'>Description</ion-label>
@@ -30,7 +30,9 @@
     </ion-row>
     <ion-row>
       <ion-col text-center>
-        <ion-icon name='checkmark' class="add-button-container" color='primary' (click)='addGroup()'></ion-icon>
+        <ion-button fill="clear" [disabled]='!groupName.valid' (click)='addGroup()'>
+            <ion-icon name='checkmark'  class="add-button-container" color='primary'></ion-icon>
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

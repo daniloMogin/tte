@@ -97,8 +97,8 @@ export class CupsComponent implements OnInit {
 
     const alert = await this.alertController.create({
       
-        header: 'Alert',
-        subHeader: 'Delete cup?',
+        header: 'Delete cup?',
+        // subHeader: 'Delete cup?',
         message: 'Are you sure?',
         buttons: [
           {

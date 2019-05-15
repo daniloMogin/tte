@@ -85,8 +85,8 @@ export class TeamsComponent implements OnInit {
 
     const alert = await this.alertController.create({
 
-      header: 'Alert',
-      subHeader: 'Delete team?',
+      header: 'Delete team',
+      // subHeader: 'Delete team?',
       message: 'Are you sure?',
       buttons: [
         {

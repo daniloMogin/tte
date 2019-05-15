@@ -14,19 +14,19 @@
       <ion-col text-center>
         <ion-item>
           <ion-label position='floating'>Name</ion-label>
-          <ion-input [(ngModel)]='user.name' clearInput></ion-input>
+          <ion-input [(ngModel)]='user.name' clearInput required #nameInput='ngModel'></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position='floating'>Last name</ion-label>
-          <ion-input [(ngModel)]='user.lastname' clearInput></ion-input>
+          <ion-input [(ngModel)]='user.lastname' clearInput  required #lastNameInput='ngModel'></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position='floating'>Date of birth</ion-label>
-          <ion-datetime display-picker="MM/DD/YYYY" display-format="MM/DD/YYYY" [(ngModel)]='user.DoB'></ion-datetime>
+          <ion-datetime display-picker="MM/DD/YYYY" display-format="MM/DD/YYYY" [(ngModel)]='user.DoB' required #DoBInput='ngModel'></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label position='floating'>Email</ion-label>
-          <ion-input [(ngModel)]='user.email' clearInput></ion-input>
+          <ion-input [(ngModel)]='user.email' type='email' email clearInput required #emailInput='ngModel'></ion-input>
         </ion-item>
         <!-- <ion-item>
           <ion-label position='floating'>Active</ion-label>
@@ -36,7 +36,9 @@
     </ion-row>
     <ion-row>
       <ion-col text-center>
-        <ion-icon name='checkmark' class="add-button-container" color='primary' (click)='saveData()'></ion-icon>
+        <ion-button fill="clear" [disabled]='!nameInput.valid || !lastNameInput.valid || !DoBInput.valid || !emailInput.valid' (click)='saveData()'>
+            <ion-icon name='checkmark'  class="add-button-container" color='primary'></ion-icon>
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

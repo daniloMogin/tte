@@ -68,10 +68,13 @@ export class GamesComponent implements OnInit {
     modal.onDidDismiss()
       .then((data) => {
         if (data.data) {
+          console.log("Received game:");
+          console.log(data.data);
+          
           const newGame = data.data;
           newGame.scoreString = '0 - 0';
           this.games.push(newGame);
-          this.filteredData.push(newGame);
+          this.setFilteredLocation();
         }
     });
 
@@ -84,8 +87,8 @@ export class GamesComponent implements OnInit {
 
     const alert = await this.alertController.create({
 
-      header: 'Alert',
-      subHeader: 'Delete game?',
+      header: 'Delete game?',
+      // subHeader: 'Delete game?',
       message: 'Are you sure?',
       buttons: [
         {
