@@ -28,14 +28,13 @@ import { NotificationService } from './notification.service';
             console.log(error);
             console.log(error.error);
             console.log(error.error.msg);
-
-            if (error.error && error.error.msg) {
+            if (error.error && error.error.msg && error.error.msg.errmsg) {
+                errorMessage = errorMessage + ' - ' + error.error.msg.errmsg;
+            } else if (error.error && error.error.msg) {
                 console.log(error.error.msg);
-
                 errorMessage = errorMessage + ' - ' + error.error.msg;
                 console.log(errorMessage);
-
-            }
+            } 
 
             console.log('Show toast');
 

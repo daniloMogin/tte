@@ -90,6 +90,7 @@ export class CupsComponent implements OnInit {
         if (data.data) {
           const cup = data.data;
           this.cups.push(cup);
+          this.setFilteredLocation();
         }
     });
 

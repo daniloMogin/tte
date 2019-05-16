@@ -28,7 +28,7 @@ export class GroupsComponent implements OnInit {
       this.groups = response.group;
       this.showBar = false;
       this.loaded = true;
-      this.filteredData = this. groups;
+      this.filteredData = this.groups;
       console.log(this.groups);
     });
   }
@@ -105,6 +105,7 @@ export class GroupsComponent implements OnInit {
               this.showBar = false;
               if (response.success) {
                 this.groups = this.groups.filter(elem => elem !== group );
+                this.setFilteredLocation();
               }
             });
             }
