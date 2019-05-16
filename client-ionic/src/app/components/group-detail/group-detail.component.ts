@@ -140,11 +140,12 @@ export class GroupDetailComponent implements OnInit {
 
           this.group = data.data;
 
+          this.addTeamsSelect = [];
           let i = 0;
           this.group.teams.forEach(team => {
             team.position = ++i;
             team.fullName = team.name + ' ' + team.lastname;
-            this.addTeamsSelect.push(team._id);
+            this.addTeamsSelect.push(team);
           });
 
           this.group.score.forEach(game => {
