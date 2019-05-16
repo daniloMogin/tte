@@ -49,7 +49,7 @@
       <ion-row>
         
         <ion-col size-sm='12' size-md='6'>
-          <table class='table table-bordered table-striped' [mfData]="group.teams" mfSortBy="position" mfSortOrder="asc" #mf1="mfDataTable">
+          <table class='table table-bordered table-striped groupTeamTable' [mfData]="group.teams" mfSortBy="position" mfSortOrder="asc" #mf1="mfDataTable">
             <thead>
               <tr>
                 <th class="header-sort">
@@ -86,7 +86,8 @@
                   </ion-select> -->
                   <app-extended-select title='Select teams' [(model)]='addTeamsSelect' [items]='teams'
                   textField='fullName' valueField='_id' [multiple]='true' placeholder='Select teams to add/remove' 
-                  selectedDisplay='Select teams to add/remove'></app-extended-select>
+                  selectedDisplay='Select teams to add/remove' backgroundColor='rgb(16,81,156)' textColor='white'
+                  (modelChange)='changeTeams(group)'></app-extended-select>
                 </td>
               </tr>
             </tbody>

@@ -19,6 +19,8 @@ export class ExtendedSelectComponent implements OnInit {
   @Input() title: string;
   @Input() formatField = 'name';
   @Input() selectedDisplay = '';
+  @Input() textColor = '';
+  @Input() backgroundColor = '';
 
   @Output() selected = new EventEmitter<any>();
 
@@ -29,10 +31,26 @@ export class ExtendedSelectComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('Select model:');
+    
     console.log(this.model);
+    console.log('Select items:');
+    
     console.log(this.items);
     console.log(this.valueField);
     console.log(this.textField);
+  }
+
+  ngAfterViewChecked() {
+    const selectableButton: NodeListOf<HTMLElement> = document.querySelectorAll('ionic-selectable div.ionic-selectable-inner');
+    selectableButton.forEach(button => {
+      if (this.backgroundColor) {
+        button.style.backgroundColor =  this.backgroundColor;
+      }
+      if (this.textColor) {
+        button.style.color = this.textColor;
+      }
+    });
   }
 
   formatSelectedValues(values) {

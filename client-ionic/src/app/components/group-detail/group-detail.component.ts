@@ -63,7 +63,7 @@ export class GroupDetailComponent implements OnInit {
       this.group.teams.forEach(team => {
         team.position = ++i;
         team.fullName = team.name + ' ' + team.lastname;
-        this.addTeamsSelect.push(team._id);
+        this.addTeamsSelect.push(team);
       });
 
       this.group.score.forEach(game => {
@@ -84,22 +84,18 @@ export class GroupDetailComponent implements OnInit {
 
   }
 
-  ngAfterViewChecked() {
-    const selectableButton = <HTMLElement>document.querySelector('ionic-selectable div.ionic-selectable-inner');
-    selectableButton.style.backgroundColor =  'rgb(16,81,156)';
-    selectableButton.style.color = 'white';
-  }
-
   changeTeams(group) {
 
     console.log(`changeTeams... `);
     this.showBar = true;
-    this.groupsService.updateGroup(group._id, group).subscribe(response => {
+    const updatedGroup = {...this.group};
+    updatedGroup.teams = this.addTeamsSelect;
+    this.groupsService.updateGroup(group._id, updatedGroup).subscribe(response => {
       // console.log(`response`);
       // console.log(response);
       this.showBar = false;
       if (response.success) {
-        const newTeams = [];
+        /*const newTeams = [];
         let i = 0;
         this.addTeamsSelect.forEach(id => {
           const newTeam = this.teams.find(team => {
@@ -107,9 +103,25 @@ export class GroupDetailComponent implements OnInit {
           })
           newTeam.position = ++i;
           newTeams.push(newTeam);
+        });*/
+        const teams = response.group.teams;
+        const score = response.group.score;;
+        let i = 0;
+        teams.forEach(team => {
+          team.position = ++i;
+          team.fullName = team.name + ' ' + team.lastname;
         });
-        group.teams = newTeams;
-        group.score = response.group.score;
+        score.forEach(game => {
+          game.sortTeam1 = game.score[0].teamName;
+          game.sortTeam2 = game.score[1].teamName;
+          game.scoreString = game.score[0].teamPoints + ' - ' + game.score[1].teamPoints;
+        });
+        this.group.teams = teams;
+        this.addTeamsSelect = [];
+        this.group.teams.forEach(team => {
+          this.addTeamsSelect.push(team);
+        });
+        this.group.score = score;
       }
     });
 

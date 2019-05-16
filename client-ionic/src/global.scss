@@ -146,3 +146,12 @@ ion-alert .alert-title {
   color: red!important;
   font-weight: bold;
 }
+
+table.groupTeamTable {
+  margin-bottom: 20px!important;
+}
+
+.groupTeamTable tbody tr:last-of-type {
+  color: white!important;
+  /*background-color: rgba(0,0,0,.05)!important;*/
+}

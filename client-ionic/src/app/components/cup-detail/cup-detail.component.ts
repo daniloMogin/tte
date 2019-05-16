@@ -43,6 +43,9 @@ export class CupDetailComponent implements OnInit {
 
     this.teamsService.getUsers().subscribe(response => {
       this.teams = response;
+      this.teams.forEach(team => {
+        team.fullName = team.name + ' ' + team.lastname;
+      })
       this.showBar = false;
       console.log(this.teams);
     });
@@ -50,14 +53,16 @@ export class CupDetailComponent implements OnInit {
 
   processCup() {
     this.cup.groups.forEach(group => {
-      const groupTeamsIds = [];
+      const groupTeams = [];
       let i = 0;
       group.teams.forEach(team => {
         team.position = ++i;
         team.fullName = team.name + ' ' + team.lastname;
-        groupTeamsIds.push(team._id);
+        groupTeams.push(team);
       });
-      this.addTeamsSelect.push(groupTeamsIds);
+      this.addTeamsSelect.push(groupTeams);
+      console.log('AddTeamsSelect');
+      
       console.log(this.addTeamsSelect);
 
     });
@@ -117,7 +122,7 @@ export class CupDetailComponent implements OnInit {
   }
 
   changeTeams(group, groupIndex) {
-    const newTeams = [];
+    /*const newTeams = [];
     this.addTeamsSelect[groupIndex].forEach(id => {
       const newTeam = this.teams.find(team => {
         return team._id === id;
@@ -128,19 +133,27 @@ export class CupDetailComponent implements OnInit {
     newTeams.forEach(team => {
       team.position = ++i;
       team.fullName = team.name + ' ' + team.lastname;
-    });
-    group.teams = newTeams;
+    });*/
+    const updatedGroup = {...group};
+    updatedGroup.teams = this.addTeamsSelect[groupIndex];
     this.showBar = true;
-    this.groupsService.updateGroup(group._id, group).subscribe(response => {
+    this.groupsService.updateGroup(group._id, updatedGroup).subscribe(response => {
       this.showBar = false;
       if (response.success) {
+        const teams = response.group.teams;
+        let i = 0;
+        teams.forEach(team => {
+          team.position = ++i;
+          team.fullName = team.name + ' ' + team.lastname;
+        });
+        group.teams = teams;
       }
     });
   }
 
   async removeGroup(groupToRemove) {
     const alert = await this.alertController.create({
-      
+
       header: 'Alert',
       subHeader: 'Remove group from cup?',
       message: 'Are you sure?',

@@ -76,3 +76,8 @@ tr:not(.info-description):hover a, tr:not(.info-description):hover .edit {
 .remove-button-container:hover, .edit-button-container:hover {
   transform: scale(1.25);
 }
+
+.groupTeamTable tbody tr:last-of-type {
+  color: white!important;
+  /*background-color: rgba(0,0,0,.05)!important;*/
+}
