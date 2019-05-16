@@ -22,6 +22,7 @@ export class TeamDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.usersService.getUserById(id).subscribe( response => {
       this.user = response.user;
+      this.user.fullName = this.user.name + ' ' + this.user.lastname;
       this.showBar = false;
       this.loaded = true;
       console.log(this.user)

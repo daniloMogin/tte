@@ -52,6 +52,11 @@ export class GamesComponent implements OnInit {
   //   console.log("logScrollEnd : When Scroll Ends");
   // }
 
+  onSearchChange(event) {
+    this.searchTerm = event.value;
+    this.setFilteredLocation();
+  }
+
   setFilteredLocation() {
     this.filteredData = this.games.filter((game) => {
       return game.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;

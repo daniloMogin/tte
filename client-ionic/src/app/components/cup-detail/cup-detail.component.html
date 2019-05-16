@@ -1,16 +1,10 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title text-center>
-      Details of Cup: 
-      <span *ngIf="loaded">{{ cup.name }}</span>
-      <span *ngIf="!loaded">Loading...</span>
-    </ion-title>
-  </ion-toolbar>
-  <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
-</ion-header>
+<app-page-header
+  rootTitle = 'Cups'
+  rootLink = '/cups'
+  [secondLevelTitle] = 'cup.name'
+  [showBar] = 'showBar'
+  [loaded] = 'loaded'
+></app-page-header>
 
 <ion-content text-center>
 

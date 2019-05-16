@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -9,7 +9,16 @@
   </ion-toolbar>
   <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredLocation()"></ion-searchbar>
   <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
-</ion-header>
+</ion-header> -->
+
+<app-page-header
+  rootTitle = 'Teams'
+  rootLink = '/teams'
+  [showBar] = 'showBar'
+  [loaded] = 'loaded'
+  [searchTerm] = 'searchTerm'
+  (searchTermChange)='onSearchChange($event)'
+></app-page-header>
 
 <ion-content *ngIf='loaded' text-center scrollX="true">
   <table class="table table-bordered table-striped" [mfData]="filteredData" mfSortBy="fullName" mfSortOrder="asc" #mf="mfDataTable">

@@ -37,8 +37,14 @@ export class TeamsComponent implements OnInit {
       this.filteredData = this.users;
     });
   }
+
   ScrollToTop(){
     this.content.scrollToTop(1500);
+  }
+
+  onSearchChange(event) {
+    this.searchTerm = event.value;
+    this.setFilteredLocation();
   }
 
   setFilteredLocation() {

@@ -171,3 +171,31 @@ th.header-sort span:last-of-type {
 ion-icon.table-sort-inactive {
   vertical-align: middle!important;
 }
+
+.title-level-separator, .title-level-up {
+  vertical-align: middle;
+}
+
+.title-level-separator {
+  margin: 0 0.4em;
+}
+
+.title-level-up {
+  position: relative;
+  bottom: 0.05em;
+}
+
+.page-title a {
+  color: white;
+  /*text-decoration: underline;*/
+}
+
+.page-title a:hover {
+  transform: scale(1.2);
+  color: white;
+  text-decoration: none;
+}
+
+.page-title a:hover .title-level-up {
+  transform: scale(1.2);
+}

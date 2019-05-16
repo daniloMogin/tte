@@ -34,6 +34,7 @@ import { AddModalGroupsComponent } from './components/modal/add-modal-groups/add
 import { AddModalGamesComponent } from './components/modal/add-modal-games/add-modal-games.component';
 import { AddModalTeamsComponent } from './components/modal/add-modal-teams/add-modal-teams.component';
 import { ExtendedSelectComponent } from './components/extended-select/extended-select.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ExtendedSelectComponent } from './components/extended-select/extended-s
     AddModalGroupsComponent,
     AddModalGamesComponent,
     AddModalTeamsComponent,
-    ExtendedSelectComponent
+    ExtendedSelectComponent,
+    PageHeaderComponent
   ],
 
   entryComponents: [
@@ -68,7 +70,8 @@ import { ExtendedSelectComponent } from './components/extended-select/extended-s
     AddModalGroupsComponent,
     AddModalGamesComponent,
     AddModalTeamsComponent,
-    ExtendedSelectComponent
+    ExtendedSelectComponent,
+    PageHeaderComponent
   ],
   imports: [
     BrowserModule,

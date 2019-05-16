@@ -1,16 +1,10 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title text-center>
-      Details of Team: 
-      <span *ngIf="loaded">{{user.name + ' ' + user.lastname}}</span>
-      <span *ngIf="!loaded">Loading...</span>
-    </ion-title>
-  </ion-toolbar>
-  <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
-</ion-header>
+<app-page-header
+  rootTitle = 'Teams'
+  rootLink = '/teams'
+  [secondLevelTitle] = 'user.fullName'
+  [showBar] = 'showBar'
+  [loaded] = 'loaded'
+></app-page-header>
 
 <ion-content *ngIf='loaded'>
 
@@ -78,4 +72,5 @@
     </ion-col>
   </ion-row>
 </ion-grid>
+
 </ion-content>

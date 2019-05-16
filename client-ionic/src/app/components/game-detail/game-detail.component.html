@@ -1,16 +1,11 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title text-center>
-      Details of Game: 
-      <span *ngIf="loaded">{{ game.name }}</span>
-      <span *ngIf="!loaded">Loading...</span>
-    </ion-title>
-  </ion-toolbar>
-  <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
-</ion-header>
+<app-page-header
+  rootTitle = 'Games'
+  rootLink = '/games'
+  [secondLevelTitle] = 'game.name'
+  [showBar] = 'showBar'
+  [loaded] = 'loaded'
+></app-page-header>
+
 <ion-content *ngIf='loaded'>
 
     <div padding class="padding">

@@ -33,6 +33,11 @@ export class GroupsComponent implements OnInit {
     });
   }
 
+  onSearchChange(event) {
+    this.searchTerm = event.value;
+    this.setFilteredLocation();
+  }
+
   setFilteredLocation() {
     this.filteredData = this.groups.filter((group) => {
       return group.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
