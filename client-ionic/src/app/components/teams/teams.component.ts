@@ -40,6 +40,9 @@ export class TeamsComponent implements OnInit {
   ScrollToTop(){
     this.content.scrollToTop(1500);
   }
+  ScrollToBottom(){
+    this.content.scrollToBottom(1500);
+  }
 
   setFilteredLocation() {
     this.filteredData = this.users.filter((user) => {

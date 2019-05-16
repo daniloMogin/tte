@@ -40,6 +40,9 @@ export class GamesComponent implements OnInit {
   ScrollToTop(){
     this.content.scrollToTop(1500);
   }
+  ScrollToBottom(){
+    this.content.scrollToBottom(1500);
+  }
   // logScrollStart(){
   //   console.log("logScrollStart : When Scroll Starts");
   // }
