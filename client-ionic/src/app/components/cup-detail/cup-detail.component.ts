@@ -154,8 +154,8 @@ export class CupDetailComponent implements OnInit {
   async removeGroup(groupToRemove) {
     const alert = await this.alertController.create({
 
-      header: 'Alert',
-      subHeader: 'Remove group from cup?',
+      header: 'Remove group from cup?',
+      // subHeader: 'Remove group from cup?',
       message: 'Are you sure?',
       buttons: [
         {
@@ -171,6 +171,7 @@ export class CupDetailComponent implements OnInit {
               this.showBar = false;
               if (response.success) {
                 this.cup = response.cup;
+                this.processCup();
               }
             });
           }

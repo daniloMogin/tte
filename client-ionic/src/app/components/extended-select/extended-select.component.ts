@@ -42,7 +42,8 @@ export class ExtendedSelectComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    const selectableButton: NodeListOf<HTMLElement> = document.querySelectorAll('ionic-selectable div.ionic-selectable-inner');
+    const selectableButton: NodeListOf<HTMLElement> = document.
+    querySelectorAll('table ionic-selectable div.ionic-selectable-inner');
     selectableButton.forEach(button => {
       if (this.backgroundColor) {
         button.style.backgroundColor =  this.backgroundColor;
