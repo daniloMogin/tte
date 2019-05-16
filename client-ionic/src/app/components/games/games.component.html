@@ -28,7 +28,7 @@
       </td>
     </tr>
     <tr>
-      <th class="display-none" class="sticky-top"><ion-button (click)="ScrollToTop()"><ion-icon class="rotate" name="fastForward"></ion-icon> 
+      <th class="sticky-top"><ion-button (click)="ScrollToTop()"><ion-icon name="arrow-up"></ion-icon> 
       </ion-button></th>
       <th class="header-sort sticky-top">
         <mfDefaultSorter by="name">
@@ -46,10 +46,11 @@
           </span>
         </mfDefaultSorter>
       </th>
-      <th class="sticky-top"></th>
+      <th class="sticky-top"><ion-button (click)="ScrollToBottom()"><ion-icon name="arrow-down"></ion-icon> 
+      </ion-button></th>
     </tr>
     <tr *ngFor='let game of mf.data'>
-      <td class='td-min display-none'>
+      <td class='td-min'>
         <ion-icon name="tennisball" class="position row-logo" item-center></ion-icon>
       </td>
       <td><a routerLink='/games/{{game._id}}' class="text hover-color full-width">{{ game.name }}</a></td>

@@ -28,7 +28,7 @@
       </td>
     </tr>
     <tr>
-      <th class="sticky-top display-none padding-zero"><ion-button (click)="ScrollToTop()"><ion-icon class="rotate" name="fastForward"></ion-icon> 
+      <th class="sticky-top padding-zero"><ion-button (click)="ScrollToTop()"><ion-icon name="arrow-up"></ion-icon> 
       </ion-button></th>
       <th class="header-sort sticky-top">
         <mfDefaultSorter by="fullName">
@@ -56,10 +56,11 @@
           </span>
         </mfDefaultSorter>
       </th>
-      <th class="sticky-top"></th>
+      <th class="sticky-top padding-zero"><ion-button (click)="ScrollToBottom()"><ion-icon name="arrow-down"></ion-icon> 
+      </ion-button></th>
     </tr>
     <tr *ngFor="let user of mf.data">
-      <td class='td-min display-none'>
+      <td class='td-min'>
         <ion-icon name="people" class="position row-logo" item-center></ion-icon>
       </td>
       <td><a routerLink='/teams/{{user._id}}' class="text hover-color full-width">{{user.fullName}}</a></td>
