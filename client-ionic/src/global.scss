@@ -155,3 +155,19 @@ table.groupTeamTable {
   color: white!important;
   /*background-color: rgba(0,0,0,.05)!important;*/
 }
+
+th.header-sort span {
+  display: none;
+}
+
+th.header-sort span:last-of-type {
+  display: inline;
+}
+
+.rotate {
+  transform: rotate(-90deg);
+}
+
+ion-icon.table-sort-inactive {
+  vertical-align: middle!important;
+}

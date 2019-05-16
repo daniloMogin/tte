@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content *ngIf='loaded' text-center scrollX="true" >
-  <table class="table table-bordered table-striped" [mfData]="filteredData" #mf="mfDataTable">
+  <table class="table table-bordered table-striped" [mfData]="filteredData" #mf="mfDataTable" (mfSortByChange)='sortChanged($event)'>
     <tr>
       <td colspan=6>
         <div class='add-button-container hover-color' (click)='openAddModal()'>+</div>
@@ -21,11 +21,21 @@
     <tr>
       <th class="display-none" class="sticky-top"><ion-button (click)="ScrollToTop()"><ion-icon class="rotate" name="fastForward"></ion-icon> 
       </ion-button></th>
-      <th class="header-sort" class="sticky-top">
-        <mfDefaultSorter by="name">Game name</mfDefaultSorter>
+      <th class="header-sort sticky-top">
+        <mfDefaultSorter by="name">
+          Game name
+          <span>
+            <ion-icon name="code" class='table-sort-inactive rotate'></ion-icon>
+          </span>
+        </mfDefaultSorter>
       </th>
       <th class="header-sort sticky-top">
-        <mfDefaultSorter by="scoreString">Score</mfDefaultSorter>
+        <mfDefaultSorter by="scoreString">
+          Score
+          <span>
+            <ion-icon name="code" class='table-sort-inactive rotate'></ion-icon>
+          </span>
+        </mfDefaultSorter>
       </th>
       <th class="sticky-top"></th>
     </tr>
