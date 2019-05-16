@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -9,10 +9,19 @@
   </ion-toolbar>
   <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredLocation()"></ion-searchbar>
   <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
-</ion-header>
+</ion-header> -->
+
+<app-page-header
+  rootTitle = 'Games'
+  rootLink = '/games'
+  [showBar] = 'showBar'
+  [loaded] = 'loaded'
+  [searchTerm] = 'searchTerm'
+  (searchTermChange)='onSearchChange($event)'
+></app-page-header>
 
 <ion-content *ngIf='loaded' text-center scrollX="true" >
-  <table class="table table-bordered table-striped" [mfData]="filteredData" #mf="mfDataTable">
+  <table class="table table-bordered table-striped" [mfData]="filteredData" #mf="mfDataTable" (mfSortByChange)='sortChanged($event)'>
     <tr>
       <td colspan=6>
         <div class='add-button-container hover-color' (click)='openAddModal()'>+</div>
@@ -22,10 +31,20 @@
       <th class="sticky-top"><ion-button (click)="ScrollToTop()"><ion-icon name="arrow-up"></ion-icon> 
       </ion-button></th>
       <th class="header-sort sticky-top">
-        <mfDefaultSorter by="name">Game name</mfDefaultSorter>
+        <mfDefaultSorter by="name">
+          Game name
+          <span>
+            <ion-icon name="code" class='table-sort-inactive rotate'></ion-icon>
+          </span>
+        </mfDefaultSorter>
       </th>
       <th class="header-sort sticky-top">
-        <mfDefaultSorter by="scoreString">Score</mfDefaultSorter>
+        <mfDefaultSorter by="scoreString">
+          Score
+          <span>
+            <ion-icon name="code" class='table-sort-inactive rotate'></ion-icon>
+          </span>
+        </mfDefaultSorter>
       </th>
       <th class="sticky-top"><ion-button (click)="ScrollToBottom()"><ion-icon name="arrow-down"></ion-icon> 
       </ion-button></th>

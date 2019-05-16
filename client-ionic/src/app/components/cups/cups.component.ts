@@ -40,6 +40,11 @@ export class CupsComponent implements OnInit {
     });
   }
 
+  onSearchChange(event) {
+    this.searchTerm = event.value;
+    this.setFilteredLocation();
+  }
+
   setFilteredLocation() {
     this.filteredData = this.cups.filter((cup) => {
       return cup.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;

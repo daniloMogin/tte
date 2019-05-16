@@ -58,6 +58,10 @@
     vertical-align: bottom!important;
   }
 
+  ion-icon.table-sort-inactive {
+    vertical-align: middle!important;
+  }
+
   .full-width {
       display: block;
       width: 100%;

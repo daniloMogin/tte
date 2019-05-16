@@ -1,16 +1,25 @@
 
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      <div text-center>List of Cups</div>
+      <div text-center>Cups</div>
     </ion-title>
   </ion-toolbar>
   <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredLocation()"></ion-searchbar>
   <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
-</ion-header>
+</ion-header> -->
+
+<app-page-header
+  rootTitle = 'Cups'
+  rootLink = '/cups'
+  [showBar] = 'showBar'
+  [loaded] = 'loaded'
+  [searchTerm] = 'searchTerm'
+  (searchTermChange)='onSearchChange($event)'
+></app-page-header>
 
 <ion-content *ngIf='loaded'>
   <ion-grid>

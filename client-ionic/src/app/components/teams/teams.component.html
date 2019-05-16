@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -9,7 +9,16 @@
   </ion-toolbar>
   <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredLocation()"></ion-searchbar>
   <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
-</ion-header>
+</ion-header> -->
+
+<app-page-header
+  rootTitle = 'Teams'
+  rootLink = '/teams'
+  [showBar] = 'showBar'
+  [loaded] = 'loaded'
+  [searchTerm] = 'searchTerm'
+  (searchTermChange)='onSearchChange($event)'
+></app-page-header>
 
 <ion-content *ngIf='loaded' text-center scrollX="true">
   <table class="table table-bordered table-striped" [mfData]="filteredData" mfSortBy="fullName" mfSortOrder="asc" #mf="mfDataTable">
@@ -22,15 +31,30 @@
       <th class="sticky-top padding-zero"><ion-button (click)="ScrollToTop()"><ion-icon name="arrow-up"></ion-icon> 
       </ion-button></th>
       <th class="header-sort sticky-top">
-        <mfDefaultSorter by="fullName">Name</mfDefaultSorter>
+        <mfDefaultSorter by="fullName">
+          Name
+          <span>
+            <ion-icon name="code" class='table-sort-inactive rotate'></ion-icon>
+          </span>
+        </mfDefaultSorter>
       </th>
       <th class="header-sort sticky-top">
-        <mfDefaultSorter by="DoB">Date of Birth</mfDefaultSorter>
+        <mfDefaultSorter by="DoB">
+          Date of Birth
+          <span>
+            <ion-icon name="code" class='table-sort-inactive rotate'></ion-icon>
+          </span>
+        </mfDefaultSorter>
       </th>
       <!-- <th>Name</th> -->
       <!-- <th>Date of Birth</th> -->
       <th class="header-sort sticky-top">
-        <mfDefaultSorter by="winRatio">Win Ratio</mfDefaultSorter>
+        <mfDefaultSorter by="winRatio">
+          Win Ratio
+          <span>
+            <ion-icon name="code" class='table-sort-inactive rotate'></ion-icon>
+          </span>
+        </mfDefaultSorter>
       </th>
       <th class="sticky-top padding-zero"><ion-button (click)="ScrollToBottom()"><ion-icon name="arrow-down"></ion-icon> 
       </ion-button></th>
