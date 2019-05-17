@@ -68,6 +68,7 @@ export class GroupsComponent implements OnInit {
           console.log(data.data);
 
           this.groups[this.groups.indexOf(group)] = data.data;
+          this.setFilteredLocation();
         }
       });
 

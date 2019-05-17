@@ -71,6 +71,7 @@ export class CupsComponent implements OnInit {
       .then((data) => {
         if (data.data) {
           this.cups[this.cups.indexOf(cup)] = data.data;
+          this.setFilteredLocation();
         }
       });
 

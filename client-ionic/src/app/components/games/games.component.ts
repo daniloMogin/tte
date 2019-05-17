@@ -132,6 +132,7 @@ export class GamesComponent implements OnInit {
               this.showBar = false;
               if (response.success) {
                 this.games = this.games.filter(elem => elem !== game);
+                this.setFilteredLocation();
               }
             });
           }
