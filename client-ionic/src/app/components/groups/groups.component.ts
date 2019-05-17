@@ -80,6 +80,7 @@ export class GroupsComponent implements OnInit {
         if (data.data) {
           const group = data.data;
           this.groups.push(group);
+          this.setFilteredLocation();
         }
     });
 

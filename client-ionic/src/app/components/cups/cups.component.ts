@@ -31,9 +31,9 @@ export class CupsComponent implements OnInit {
       if (response) {
         this.cups = response.cup;
         this.filteredData = this.cups;
-      } else {
+      }/* else {
         alert("ERROR!");
-      }
+      }*/
 
       this.showBar = false;
       this.loaded = true;
