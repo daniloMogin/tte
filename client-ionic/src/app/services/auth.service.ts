@@ -14,8 +14,12 @@ export class AuthService {
 
   private API_AUTH_URL = this.shared.API_ROOT + 'auth/';
 
-  constructor(private http: HttpClient, private router: Router, private shared: SharedService, private notificationService: NotificationService) {
-  }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private shared: SharedService,
+    private notificationService: NotificationService
+  ) { }
 
   /*setToken(token: string): void {
     this.authToken = token;
@@ -28,23 +32,23 @@ export class AuthService {
 
   registerUser(user: object): Observable<any> {
     return this.http.post<any>(this.API_AUTH_URL + 'register', user)
-    .pipe(
-      catchError(this.shared.handleError<any>('registerUser'))
-    )
+      .pipe(
+        catchError(this.shared.handleError<any>('registerUser'))
+      )
   }
 
   loginUser(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.API_AUTH_URL + 'login', {username: username, password: password})
-    .pipe(
-      catchError(this.shared.handleError<any>('loginUser'))
-    );
+    return this.http.post<any>(this.API_AUTH_URL + 'login', { username: username, password: password })
+      .pipe(
+        catchError(this.shared.handleError<any>('loginUser'))
+      );
   }
 
   logoutUser() {
     localStorage.removeItem('admin');
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
-    this.notificationService.showToast({message: `Goodbye!`});
+    this.notificationService.showToast({ message: `Goodbye!` });
 
   }
 

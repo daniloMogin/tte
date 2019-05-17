@@ -13,7 +13,12 @@ export class AddModalTeamsComponent implements OnInit {
 
   team: any;
 
-  constructor(public modalCtrl: ModalController, private userService: UsersService, private fb: FormBuilder,private _auth: AuthService) { }
+  constructor(
+    public modalCtrl: ModalController,
+    private userService: UsersService,
+    private fb: FormBuilder,
+    private _auth: AuthService
+  ) { }
 
   myForm: FormGroup;
   errorMsg;

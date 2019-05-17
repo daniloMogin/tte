@@ -21,8 +21,11 @@ export class AddModalGroupsComponent implements OnInit {
 
   working = false;
 
-  constructor(public modalCtrl: ModalController, private groupsService: GroupsService, private teamsService: UsersService, 
-    private router: Router) { }
+  constructor(public modalCtrl: ModalController,
+    private groupsService: GroupsService,
+    private teamsService: UsersService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.teamsService.getUsers().subscribe(response => {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -13,9 +14,14 @@ export class RegisterComponent implements OnInit {
   showBar: boolean = false;
   myForm: FormGroup;
   errorMsg;
- 
-  constructor(private _auth: AuthService,
-    private router: Router, private fb: FormBuilder) { }
+
+  constructor(
+    private _auth: AuthService,
+    private router: Router,
+    private fb: FormBuilder,
+    private notificationService: NotificationService
+  ) 
+  { }
 
   ngOnInit() {
     this.myForm = this.fb.group({
@@ -48,6 +54,7 @@ export class RegisterComponent implements OnInit {
             this.showBar = false;
             if (res && res.success) {
               console.log(res);
+              this.notificationService.showToast({message: `Registration successful!`})
               this.router.navigate(['/login']);
             }
           }

@@ -39,7 +39,7 @@ export class GroupDetailComponent implements OnInit {
   ionViewWillEnter() {
 
     const id = this.route.snapshot.paramMap.get('id');
-    this.groupsService.getGroupById(id).subscribe( response => {
+    this.groupsService.getGroupById(id).subscribe(response => {
       this.group = response.group;
       this.showBar = false;
 
@@ -90,7 +90,7 @@ export class GroupDetailComponent implements OnInit {
 
     console.log(`changeTeams... `);
     this.showBar = true;
-    const updatedGroup = {...this.group};
+    const updatedGroup = { ...this.group };
     updatedGroup.teams = this.addTeamsSelect;
     this.groupsService.updateGroup(group._id, updatedGroup).subscribe(response => {
       // console.log(`response`);
@@ -156,7 +156,7 @@ export class GroupDetailComponent implements OnInit {
             game.scoreString = game.score[0].teamPoints + ' - ' + game.score[1].teamPoints;
           });
         }
-    });
+      });
 
     return await modal.present();
   }
@@ -173,7 +173,7 @@ export class GroupDetailComponent implements OnInit {
         if (data.data) {
           this.group.score[this.group.score.indexOf(game)] = data.data;
         }
-    });
+      });
 
     return await modal.present();
 
@@ -189,15 +189,15 @@ export class GroupDetailComponent implements OnInit {
         {
           text: 'Yes',
           role: 'yes',
-         handler: () => {
-          this.showBar = true;
-          this.groupsService.deleteGroup(this.group._id).subscribe(response => {
-            console.log(response);
-            if (response.success) {
-              this.showBar = false;
-              this.router.navigate(['/groups']);
-            }
-          });
+          handler: () => {
+            this.showBar = true;
+            this.groupsService.deleteGroup(this.group._id).subscribe(response => {
+              console.log(response);
+              if (response.success) {
+                this.showBar = false;
+                this.router.navigate(['/groups']);
+              }
+            });
           }
         }, {
           text: 'No',

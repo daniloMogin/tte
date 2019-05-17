@@ -20,7 +20,11 @@ export class AddModalGamesComponent implements OnInit {
 
   working = false;
 
-  constructor(public modalCtrl: ModalController, private gamesService: GamesService, private usersService: UsersService) { }
+  constructor(
+    public modalCtrl: ModalController,
+    private gamesService: GamesService,
+    private usersService: UsersService
+  ) { }
 
   ngOnInit() {
     this.usersService.getUsers().subscribe(response => {

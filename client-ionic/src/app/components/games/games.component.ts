@@ -20,7 +20,12 @@ export class GamesComponent implements OnInit {
 
   @ViewChild(IonContent) content: IonContent;
 
-  constructor(private gamesService: GamesService, private modalCtrl: ModalController, private alertController: AlertController, private authService: AuthService) { }
+  constructor(
+    private gamesService: GamesService,
+    private modalCtrl: ModalController,
+    private alertController: AlertController,
+    private authService: AuthService
+  ) { }
 
 
   ngOnInit() {
@@ -38,20 +43,20 @@ export class GamesComponent implements OnInit {
       this.filteredData = this.games;
     });
   }
-  ScrollToTop(){
+  ScrollToTop() {
     this.content.scrollToTop(1500);
   }
-  ScrollToBottom(){
+  ScrollToBottom() {
     this.content.scrollToBottom(1500);
   }
   // logScrollStart(){
   //   console.log("logScrollStart : When Scroll Starts");
   // }
- 
+
   // logScrolling(){
   //   console.log("logScrolling : When Scrolling");
   // }
- 
+
   // logScrollEnd(){
   //   console.log("logScrollEnd : When Scroll Ends");
   // }
@@ -80,7 +85,7 @@ export class GamesComponent implements OnInit {
           this.games[this.games.indexOf(game)] = data.data;
           this.setFilteredLocation();
         }
-    });
+      });
 
     return await modal.present();
   }
@@ -96,13 +101,13 @@ export class GamesComponent implements OnInit {
         if (data.data) {
           console.log("Received game:");
           console.log(data.data);
-          
+
           const newGame = data.data;
           newGame.scoreString = '0 - 0';
           this.games.push(newGame);
           this.setFilteredLocation();
         }
-    });
+      });
 
     return await modal.present();
   }

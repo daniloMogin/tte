@@ -14,14 +14,20 @@ export class TeamDetailComponent implements OnInit {
   user: any = [];
   showBar: boolean = true;
   loaded = false;
-  constructor(private usersService: api.UsersService, private route: ActivatedRoute, private modalCtrl: ModalController, private authService: AuthService) { }
+
+  constructor(
+    private usersService: api.UsersService,
+    private route: ActivatedRoute,
+    private modalCtrl: ModalController,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.usersService.getUserById(id).subscribe( response => {
+    this.usersService.getUserById(id).subscribe(response => {
       this.user = response.user;
       this.user.fullName = this.user.name + ' ' + this.user.lastname;
       this.showBar = false;

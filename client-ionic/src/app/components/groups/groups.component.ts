@@ -17,7 +17,12 @@ export class GroupsComponent implements OnInit {
   loaded: boolean = false;
   filteredData: any[] = [];
 
-  constructor(private groupsService: api.GroupsService, private modalCtrl: ModalController, private alertController: AlertController, private authService: AuthService) { }
+  constructor(
+    private groupsService: api.GroupsService,
+    private modalCtrl: ModalController,
+    private alertController: AlertController,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
@@ -25,7 +30,7 @@ export class GroupsComponent implements OnInit {
   ionViewWillEnter() {
     this.groupsService.getGroup().subscribe(response => {
       console.log(response);
-      
+
       this.groups = response.group;
       this.showBar = false;
       this.loaded = true;
@@ -61,10 +66,10 @@ export class GroupsComponent implements OnInit {
         if (data.data) {
           console.log(group)
           console.log(data.data);
-          
+
           this.groups[this.groups.indexOf(group)] = data.data;
         }
-    });
+      });
 
     return await modal.present();
   }
@@ -82,43 +87,43 @@ export class GroupsComponent implements OnInit {
           this.groups.push(group);
           this.setFilteredLocation();
         }
-    });
+      });
 
     return await modal.present();
   }
-  
+
   async delete(event: Event, group: any) {
     event.preventDefault();
     event.stopPropagation();
 
     const alert = await this.alertController.create({
 
-        header: 'Delete group?',
-        // subHeader: 'Delete group?',
-        message: 'Are you sure?',
-        buttons: [
-          {
-            text: 'Yes',
-            role: 'yes',
-           handler: () => {
+      header: 'Delete group?',
+      // subHeader: 'Delete group?',
+      message: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Yes',
+          role: 'yes',
+          handler: () => {
             this.showBar = true;
             this.groupsService.deleteGroup(group._id).subscribe(response => {
               console.log(response);
               this.showBar = false;
               if (response.success) {
-                this.groups = this.groups.filter(elem => elem !== group );
+                this.groups = this.groups.filter(elem => elem !== group);
                 this.setFilteredLocation();
               }
             });
-            }
-          }, {
-            text: 'No',
-            role: 'no',
-            handler: () => {
-              console.log('No');
-            }
           }
-        ]
+        }, {
+          text: 'No',
+          role: 'no',
+          handler: () => {
+            console.log('No');
+          }
+        }
+      ]
 
     });
 

@@ -16,8 +16,12 @@ export class EditModalCupsComponent implements OnInit {
 
   working = false;
 
-  constructor(public modalCtrl: ModalController, private navParams: NavParams,
-    private cupsService: CupsService, private groupsService: GroupsService) { }
+  constructor(
+    public modalCtrl: ModalController,
+    private navParams: NavParams,
+    private cupsService: CupsService,
+    private groupsService: GroupsService
+  ) { }
 
   ngOnInit() {
     this.cup = this.navParams.data;
@@ -46,7 +50,8 @@ export class EditModalCupsComponent implements OnInit {
     //return;
     //this.cup.groups = this.addGroupsSelect;
     this.working = true;
-    this.cupsService.updateCup(this.cup._id, this.cup).subscribe(response => { console.log('RESPONSE RECEIVED');
+    this.cupsService.updateCup(this.cup._id, this.cup).subscribe(response => {
+      console.log('RESPONSE RECEIVED');
       console.log(response);
       this.working = false;
       if (response && response.success) {

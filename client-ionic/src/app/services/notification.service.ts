@@ -6,7 +6,9 @@ import { ToastController } from '@ionic/angular';
 })
 export class NotificationService {
 
-  constructor(private toastController: ToastController) { }
+  constructor(
+    private toastController: ToastController
+  ) { }
 
   async showToast(options = {}) {
     console.log('showToast');
@@ -21,7 +23,7 @@ export class NotificationService {
     console.log(defaultOptions);
 
     const toast = await this.toastController.create(
-      {...defaultOptions, ...options}
+      { ...defaultOptions, ...options }
     );
     console.log('Toast created');
 

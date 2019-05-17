@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController} from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { CupsService, GroupsService } from '../../../services';
 import { Router } from '@angular/router';
 
@@ -23,15 +23,19 @@ export class AddModalCupsComponent implements OnInit {
 
   working = false;
 
-  constructor(public modalCtrl: ModalController, private cupsService: CupsService,
-    private groupsService: GroupsService, private router: Router) { }
+  constructor(
+    public modalCtrl: ModalController,
+    private cupsService: CupsService,
+    private groupsService: GroupsService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.groupsService.getGroup().subscribe(response => {
       this.groups = response.group;
       console.log(this.groups);
       console.log(this.cup);
-      
+
       this.loaded = true;
     });
   }

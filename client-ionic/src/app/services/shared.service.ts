@@ -5,14 +5,16 @@ import { NotificationService } from './notification.service';
 
 @Injectable({
     providedIn: 'root'
-  })
-  export class SharedService {
+})
+export class SharedService {
 
     public API_ROOT = 'http://tte-server.herokuapp.com/API/';
     //public API_ROOT = 'http://localhost:3000/API/';
     //public API_ROOT = 'http://172.16.10.54:3000/API/';
 
-    constructor(private notificationService: NotificationService) {}
+    constructor(
+        private notificationService: NotificationService
+    ) { }
 
     handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
@@ -44,7 +46,7 @@ import { NotificationService } from './notification.service';
                 console.log(error.error.msg);
                 errorMessage = errorMessage + ' - ' + error.error.msg;
                 console.log(errorMessage);
-            } 
+            }
 
             console.log('Show toast');
 
@@ -67,4 +69,4 @@ import { NotificationService } from './notification.service';
         }
     }
 
-  }
+}
