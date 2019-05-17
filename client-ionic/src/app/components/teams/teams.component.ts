@@ -4,6 +4,7 @@ import * as api from '../../services';
 import { EditModalTeamsComponent } from '../modal/edit-modal-teams/edit-modal-teams.component';
 import { AddModalTeamsComponent } from '../modal/add-modal-teams/add-modal-teams.component';
 import { RegisterComponent } from '../register/register.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-teams',
@@ -19,7 +20,7 @@ export class TeamsComponent implements OnInit {
 
   @ViewChild(IonContent) content: IonContent;
 
-  constructor(private userService: api.UsersService, private modalCtrl: ModalController, private alertController: AlertController) { }
+  constructor(private userService: api.UsersService, private modalCtrl: ModalController, private alertController: AlertController, private authService: AuthService) { }
 
   ngOnInit() {
   }

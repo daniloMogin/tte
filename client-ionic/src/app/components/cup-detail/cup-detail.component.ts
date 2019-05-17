@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CupsService, UsersService, GroupsService } from '../../services';
 import { ModalController, AlertController } from '@ionic/angular';
 import { EditModalCupsComponent } from '../modal/edit-modal-cups/edit-modal-cups.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-cup-detail',
@@ -25,7 +26,8 @@ export class CupDetailComponent implements OnInit {
       private groupsService: GroupsService,
       private modalCtrl: ModalController,
       private alertController: AlertController,
-      private router: Router
+      private router: Router,
+      private authService: AuthService
   ) { }
 
   ngOnInit() {

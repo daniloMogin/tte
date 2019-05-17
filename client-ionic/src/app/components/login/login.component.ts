@@ -27,8 +27,17 @@ export class LoginComponent implements OnInit {
   login() {
     this.showBar = true;
     this.authService.loginUser(this.user.username, this.user.password).subscribe(response => {
-      this.showBar = false;
+
+    
+    this.showBar = false;
       if (response.success) {
+        let role = response.msg.role;
+        localStorage.setItem('admin', '');
+        role.forEach(r => {
+          if (r.name === 'admin') {
+            localStorage.setItem('admin', 'true')
+          }
+        });
         localStorage.setItem('token', response.msg.token.replace('JWT ', ''));
         this.router.navigate(["/cups"]);
         this.notificationService.showToast({message: `Welcome ${this.user.username}!`});

@@ -4,6 +4,7 @@ import { EditModalTeamsComponent } from '../modal/edit-modal-teams/edit-modal-te
 import { ModalController, AlertController, IonContent } from '@ionic/angular';
 import { EditModalGamesComponent } from '../modal/edit-modal-games/edit-modal-games.component';
 import { AddModalGamesComponent } from '../modal/add-modal-games/add-modal-games.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-games',
@@ -19,7 +20,7 @@ export class GamesComponent implements OnInit {
 
   @ViewChild(IonContent) content: IonContent;
 
-  constructor(private gamesService: GamesService, private modalCtrl: ModalController, private alertController: AlertController) { }
+  constructor(private gamesService: GamesService, private modalCtrl: ModalController, private alertController: AlertController, private authService: AuthService) { }
 
 
   ngOnInit() {

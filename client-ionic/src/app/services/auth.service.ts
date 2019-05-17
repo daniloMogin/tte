@@ -41,13 +41,20 @@ export class AuthService {
   }
 
   logoutUser() {
+    localStorage.removeItem('admin');
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
     this.notificationService.showToast({message: `Goodbye!`});
+
   }
 
   isLoggedIn() {
     return localStorage.getItem('token');
+  }
+
+  isAdmin() {
+    return localStorage.getItem('admin');
+
   }
 
 }

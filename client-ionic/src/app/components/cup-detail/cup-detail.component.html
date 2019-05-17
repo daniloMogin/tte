@@ -18,8 +18,8 @@
                 Name:
               </th> -->
               <th colspan="2" class="info-name">
-                <ion-icon name='create' class="edit-button-container text-color" (click)='openCupEditModal()'></ion-icon>
-                <ion-icon name='close' class="remove-button-container" (click)='deleteCup()'></ion-icon>
+                <ion-icon *ngIf='authService.isAdmin()' name='create' class="edit-button-container text-color" (click)='openCupEditModal()'></ion-icon>
+                <ion-icon *ngIf='authService.isAdmin()' name='close' class="remove-button-container" (click)='deleteCup()'></ion-icon>
                 {{ cup.name }}
               </th>
             </tr>
@@ -63,7 +63,7 @@
               <tr class='group-name'>
                 <th colspan='3'>
                     <a routerLink='/groups/{{group._id}}'>{{ group.name }}</a>
-                    <ion-icon name='close' class="remove-button-container" (click)='removeGroup(group)'></ion-icon>
+                    <ion-icon *ngIf='authService.isAdmin()' name='close' class="remove-button-container" (click)='removeGroup(group)'></ion-icon>
                 </th>
               </tr>
               <tr *ngIf='group.description' class='info-description'>
@@ -112,7 +112,7 @@
                   <td colspan='3'>There are no teams</td>
                 </tr>
               <tr>
-                <td colspan='3'>
+                <td colspan='3' *ngIf='authService.isAdmin()'>
                   <!-- <ion-select placeholder="Select team to add" multiple="true" cancelText="Cancel" okText="OK" 
                   [(ngModel)]='addTeamsSelect[groupIndex]' (ionChange)='changeTeams(group, groupIndex)'  selectedText='Add or remove teams'>
                     <ion-select-option *ngFor='let team of teams; let i = index' value="{{team._id}}">{{ team.name + ' ' + team.lastname }}

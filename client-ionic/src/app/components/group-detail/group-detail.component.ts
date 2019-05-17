@@ -7,6 +7,7 @@ import { ModalController, AlertController } from '@ionic/angular';
 
 import * as _ from 'lodash';
 import { EditModalGamesComponent } from '../modal/edit-modal-games/edit-modal-games.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-group-detail',
@@ -28,7 +29,8 @@ export class GroupDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {

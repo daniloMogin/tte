@@ -22,7 +22,7 @@
 
 <ion-content *ngIf='loaded' text-center scrollX="true" >
   <table class="table table-bordered table-striped" [mfData]="filteredData" #mf="mfDataTable" (mfSortByChange)='sortChanged($event)'>
-    <tr>
+    <tr *ngIf='authService.isAdmin()'>
       <td colspan=6>
         <div class='add-button-container hover-color' (click)='openAddModal()'>+</div>
       </td>
@@ -58,7 +58,7 @@
       <td text-center class='td-min'>
         <!-- <ion-button color="primary" (click)='openModal(game)'>Edit</ion-button>
         <ion-button color="danger" (click)='delete($event, game)'>Delete</ion-button> -->
-        <ion-icon class="edit color hover-color" (click)='openEditModal(game)' name="create"></ion-icon>
+        <ion-icon *ngIf='authService.isAdmin()' class="edit color hover-color" (click)='openEditModal(game)' name="create"></ion-icon>
         <!-- <ion-icon class="delete" color='danger' (click)='delete($event, game)' name="close"></ion-icon> -->
       </td>
     </tr>
