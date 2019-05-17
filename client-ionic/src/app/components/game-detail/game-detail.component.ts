@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GamesService } from '../../services';
 import { EditModalGamesComponent } from '../modal/edit-modal-games/edit-modal-games.component';
 import { ModalController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-game-detail',
@@ -15,7 +16,7 @@ export class GameDetailComponent implements OnInit {
   showBar: boolean = true;
   loaded = false;
 
-  constructor(private route: ActivatedRoute, private gamesService: GamesService, private modalCtrl: ModalController) { }
+  constructor(private route: ActivatedRoute, private gamesService: GamesService, private modalCtrl: ModalController, private authService: AuthService) { }
 
   ngOnInit() {
   }

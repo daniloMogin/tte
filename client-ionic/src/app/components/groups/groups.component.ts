@@ -3,6 +3,7 @@ import * as api from '../../services';
 import { ModalController, AlertController } from '@ionic/angular';
 import { EditModalGroupsComponent } from '../modal/edit-modal-groups/edit-modal-groups.component';
 import { AddModalGroupsComponent } from '../modal/add-modal-groups/add-modal-groups.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-groups',
@@ -16,7 +17,7 @@ export class GroupsComponent implements OnInit {
   loaded: boolean = false;
   filteredData: any[] = [];
 
-  constructor(private groupsService: api.GroupsService, private modalCtrl: ModalController, private alertController: AlertController) { }
+  constructor(private groupsService: api.GroupsService, private modalCtrl: ModalController, private alertController: AlertController, private authService: AuthService) { }
 
   ngOnInit() {
   }

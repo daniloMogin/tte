@@ -27,8 +27,8 @@
       <ion-col *ngFor='let cup of filteredData' size-xs='12' size-sm='6' size-md='4'>
         <a routerLink='/cups/{{cup._id}}'>
           <ion-card text-center>
-            <ion-icon name='create' class="edit-button-container text-color" (click)='openEditModal($event, cup)'></ion-icon>
-            <ion-icon name='close' class="delete-button-container" (click)='delete($event, cup)'></ion-icon>
+            <ion-icon *ngIf='authService.isAdmin()' name='create' class="edit-button-container text-color" (click)='openEditModal($event, cup)'></ion-icon>
+            <ion-icon *ngIf='authService.isAdmin()' name='close' class="delete-button-container" (click)='delete($event, cup)'></ion-icon>
             <ion-card-content class="ion-align-items-center ion-justify-content-center">
               <ion-card-title class="text-color">{{ cup.name }}</ion-card-title>
               <div>
@@ -42,7 +42,7 @@
           </ion-card>
         </a>
       </ion-col>
-      <ion-col size-xs='12' size-sm='6' size-md='4'>
+      <ion-col *ngIf='authService.isAdmin()' size-xs='12' size-sm='6' size-md='4'>
         <ion-card class='ion-align-items-center ion-align-self-stretch' text-center>
           <div class='add-button-container text-color' (click)='openAddModal()'>
             +

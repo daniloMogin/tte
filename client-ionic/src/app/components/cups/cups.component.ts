@@ -3,6 +3,7 @@ import { ModalController, AlertController } from '@ionic/angular';
 import * as api from '../../services';
 import { EditModalCupsComponent } from '../modal/edit-modal-cups/edit-modal-cups.component';
 import { AddModalCupsComponent } from '../modal/add-modal-cups/add-modal-cups.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-cups',
@@ -17,7 +18,7 @@ export class CupsComponent implements OnInit {
   filteredData: any[] = [];
 
 
-  constructor(private cupsService: api.CupsService,  private modalCtrl : ModalController, private alertController: AlertController) { }
+  constructor(private cupsService: api.CupsService,  private modalCtrl : ModalController, private alertController: AlertController, private authService: AuthService) { }
 
   ngOnInit() {
   }

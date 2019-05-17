@@ -22,7 +22,7 @@
 
 <ion-content *ngIf='loaded' text-center scrollX="true">
   <table class="table table-bordered table-striped" [mfData]="filteredData" mfSortBy="fullName" mfSortOrder="asc" #mf="mfDataTable">
-    <tr>
+    <tr *ngIf='authService.isAdmin()'>
       <td colspan=6>
         <div class='add-button-container hover-color' (click)='openAddModal()'>+</div>
       </td>
@@ -68,7 +68,7 @@
       <td *ngIf='user.winRatio' class="hover-color">{{user.winRatio | number: '1.2-2'}}</td>
       <td *ngIf='!user.winRatio' class="hover-color">-</td>
       <td text-center class='td-min'>
-        <ion-icon class="edit color hover-color" (click)='openEditModal(user)' name="create"></ion-icon>
+        <ion-icon *ngIf='authService.isAdmin()' class="edit color hover-color" (click)='openEditModal(user)' name="create"></ion-icon>
       </td>
     </tr>
   </table>

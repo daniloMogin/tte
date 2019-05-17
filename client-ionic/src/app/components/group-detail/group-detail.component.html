@@ -17,8 +17,8 @@
                 Name:
               </th> -->
               <th colspan="2" class="info-name">
-                <ion-icon name='create' class="edit-button-container text-color" (click)='openGroupEditModal()'></ion-icon>
-                <ion-icon name='close' class="remove-button-container" (click)='deleteGroup()'></ion-icon>
+                <ion-icon *ngIf='authService.isAdmin()' name='create' class="edit-button-container text-color" (click)='openGroupEditModal()'></ion-icon>
+                <ion-icon *ngIf='authService.isAdmin()' name='close' class="remove-button-container" (click)='deleteGroup()'></ion-icon>
                 {{ group.name }}
               </th>
             </tr>
@@ -85,7 +85,7 @@
                 <td colspan='3'>There are no teams</td>
               </tr>
               <tr>
-                <td colspan='3'>
+                <td colspan='3' *ngIf='authService.isAdmin()'>
                   <!-- <ion-select placeholder="Select team to add" multiple="true" cancelText="Cancel" okText="OK" 
                   [(ngModel)]='addTeamsSelect' (ionChange)='changeTeams(group)' selectedText='Add or remove teams'>
                     <ion-select-option *ngFor='let team of teams; let i = index' value="{{team._id}}">
@@ -132,7 +132,7 @@
                       </span>
                     </mfDefaultSorter>
                 </th>
-                <th class="td-min sticky-top"></th>
+                <th *ngIf='authService.isAdmin()' class="td-min sticky-top"></th>
               </tr>
             </thead>
             <tbody>
@@ -144,7 +144,7 @@
                   </a>
                 </td>
                 <td>{{ game.score[1].teamName }}</td>
-                <td class='td-min'>
+                <td class='td-min' *ngIf='authService.isAdmin()'>
                   <ion-icon class="edit color" (click)='openGameEditModal(game)' name="create" item-center></ion-icon>
                 </td>
               </tr>

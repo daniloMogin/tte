@@ -3,6 +3,7 @@ import * as api from '../../services';
 import { ActivatedRoute } from '@angular/router';
 import { EditModalTeamsComponent } from '../modal/edit-modal-teams/edit-modal-teams.component';
 import { ModalController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-team-detail',
@@ -13,7 +14,7 @@ export class TeamDetailComponent implements OnInit {
   user: any = [];
   showBar: boolean = true;
   loaded = false;
-  constructor(private usersService: api.UsersService, private route: ActivatedRoute, private modalCtrl: ModalController) { }
+  constructor(private usersService: api.UsersService, private route: ActivatedRoute, private modalCtrl: ModalController, private authService: AuthService) { }
 
   ngOnInit() {
   }
