@@ -9,10 +9,20 @@ import { SharedService } from './shared.service';
 })
 export class RolesService {
 
+  roles: any;
+
   private API_ROLES_URL = this.shared.API_ROOT + 'roles/';
 
   constructor(private http: HttpClient, private shared: SharedService) {
    }
+
+  retrieveRoles() {
+    return this.roles;
+  }
+
+  setRoles(roles) {
+    this.roles = roles;
+  }
 
   getRole(): Observable<any> {
 

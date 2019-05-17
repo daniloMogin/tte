@@ -26,6 +26,8 @@ export class TeamDetailComponent implements OnInit {
       this.user.fullName = this.user.name + ' ' + this.user.lastname;
       this.showBar = false;
       this.loaded = true;
+      console.log('USER:');
+      
       console.log(this.user)
     });
   }

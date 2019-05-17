@@ -33,7 +33,8 @@ export class TeamsComponent implements OnInit {
       this.users.forEach(user => {
         user.fullName = user.name + ' ' + user.lastname;
       });
-
+      console.log('USERS:');
+      
       console.log(this.users);
       this.filteredData = this.users;
     });
