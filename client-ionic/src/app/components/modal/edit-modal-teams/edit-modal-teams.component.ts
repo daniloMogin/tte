@@ -27,7 +27,7 @@ export class EditModalTeamsComponent implements OnInit {
     public modalCtrl: ModalController,
     private navParams: NavParams,
     private userService: UsersService,
-    private authService: AuthService,
+    public authService: AuthService,
     private notificationService: NotificationService,
     private roleService: RolesService
   ) { }
