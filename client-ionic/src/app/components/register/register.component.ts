@@ -51,6 +51,7 @@ export class RegisterComponent implements OnInit {
       this._auth.registerUser(this.myForm.value)
         .subscribe(
           res => {
+            this.showBar = false;
             if (res && res.success) {
               console.log(res);
               this.notificationService.showToast({message: `Registration successful!`})
