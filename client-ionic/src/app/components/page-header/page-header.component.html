@@ -13,6 +13,6 @@
       <span *ngIf="!loaded">Loading...</span>
     </ion-title>
   </ion-toolbar>
-  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="onSearchChange()"></ion-searchbar>
+  <ion-searchbar *ngIf='showSearch' [(ngModel)]="searchTerm" (ionChange)="onSearchChange()"></ion-searchbar>
   <ion-progress-bar type="indeterminate" *ngIf='showBar'></ion-progress-bar>
 </ion-header>

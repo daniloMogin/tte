@@ -30,9 +30,19 @@ export class SharedService {
             console.log(error);
             console.log(error.error);
             console.log(error.error.msg);
-            if (error.error && error.error.msg && error.error.msg.errmsg) {
+            if (error.msg) {
+                errorMessage = errorMessage + ' - ' + error.msg; 
+            } else if (error.error && error.error.msg && error.error.msg.errmsg) {
+                console.log('1');
+                
                 errorMessage = errorMessage + ' - ' + error.error.msg.errmsg;
+            } else if (error.error && error.error.msg && error.error.msg.error && error.error.msg.error.message) {
+                console.log('2');
+                
+                errorMessage = errorMessage + ' - ' + error.error.msg.error.message;
             } else if (error.error && error.error.msg) {
+                console.log('3');
+                
                 console.log(error.error.msg);
                 errorMessage = errorMessage + ' - ' + error.error.msg;
                 console.log(errorMessage);
@@ -40,7 +50,7 @@ export class SharedService {
 
             console.log('Show toast');
 
-            this.notificationService.showToast({ message: errorMessage });
+            this.notificationService.showToast({message: errorMessage, duration: 4000});
 
             console.log('Error handling done');
 

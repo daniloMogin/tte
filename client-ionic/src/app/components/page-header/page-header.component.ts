@@ -13,6 +13,7 @@ export class PageHeaderComponent implements OnInit {
   @Input() secondLevelTitle = '';
   @Input() loaded = false;
 
+  @Input() showSearch = false;
   @Input() searchTerm = '';
   @Output() searchTermChange = new EventEmitter<any>();
 
