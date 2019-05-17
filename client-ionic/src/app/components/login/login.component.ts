@@ -27,11 +27,10 @@ export class LoginComponent implements OnInit {
   login() {
     this.showBar = true;
     this.authService.loginUser(this.user.username, this.user.password).subscribe(response => {
-
-    
-    this.showBar = false;
+      this.showBar = false;
+      console.log(response);
       if (response.success) {
-        let role = response.msg.role;
+        const role = response.msg.role;
         localStorage.setItem('admin', '');
         role.forEach(r => {
           if (r.name === 'admin') {
@@ -39,11 +38,11 @@ export class LoginComponent implements OnInit {
           }
         });
         localStorage.setItem('token', response.msg.token.replace('JWT ', ''));
-        this.router.navigate(["/cups"]);
+        localStorage.setItem('userID', response.msg._id);
+        localStorage.setItem('username', this.user.username);
+        this.router.navigate(['/cups']);
         this.notificationService.showToast({message: `Welcome ${this.user.username}!`});
       }
-      
     });
   }
-  
 }

@@ -54,7 +54,14 @@ export class AuthService {
 
   isAdmin() {
     return localStorage.getItem('admin');
+  }
 
+  getCurrentUserID() {
+    return localStorage.getItem('userID');
+  }
+
+  getCurrentUsername() {
+    return localStorage.getItem('username');
   }
 
 }

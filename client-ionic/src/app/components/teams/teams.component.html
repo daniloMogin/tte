@@ -68,7 +68,7 @@
       <td *ngIf='user.winRatio' class="hover-color">{{user.winRatio | number: '1.2-2'}}</td>
       <td *ngIf='!user.winRatio' class="hover-color">-</td>
       <td text-center class='td-min'>
-        <ion-icon *ngIf='authService.isAdmin()' class="edit color hover-color" (click)='openEditModal(user)' name="create"></ion-icon>
+        <ion-icon *ngIf='authService.isAdmin() || (authService.getCurrentUserID() === user._id)' class="edit color hover-color" (click)='openEditModal(user)' name="create"></ion-icon>
       </td>
     </tr>
   </table>
