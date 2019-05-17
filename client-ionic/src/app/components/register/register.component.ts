@@ -13,9 +13,13 @@ export class RegisterComponent implements OnInit {
   showBar: boolean = false;
   myForm: FormGroup;
   errorMsg;
- 
-  constructor(private _auth: AuthService,
-    private router: Router, private fb: FormBuilder) { }
+
+  constructor(
+    private _auth: AuthService,
+    private router: Router,
+    private fb: FormBuilder
+  ) 
+  { }
 
   ngOnInit() {
     this.myForm = this.fb.group({

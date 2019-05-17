@@ -7,18 +7,22 @@ import { NotificationService } from './services/notification.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate  {
-  constructor(private authService: AuthService, private notificationService: NotificationService, private router: Router) {}
+export class AuthGuard implements CanActivate {
+  constructor(
+    private authService: AuthService,
+    private notificationService: NotificationService,
+    private router: Router
+  ) { }
 
   canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
       return true;
     } else {
-      this.notificationService.showToast({message: 'Please log in'});
+      this.notificationService.showToast({ message: 'Please log in' });
       this.router.navigate(['/login']);
       return false;
     }
   }
 
-  
+
 }

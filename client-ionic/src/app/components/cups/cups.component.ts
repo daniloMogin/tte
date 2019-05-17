@@ -18,7 +18,11 @@ export class CupsComponent implements OnInit {
   filteredData: any[] = [];
 
 
-  constructor(private cupsService: api.CupsService,  private modalCtrl : ModalController, private alertController: AlertController, private authService: AuthService) { }
+  constructor(
+    private cupsService: api.CupsService,
+    private modalCtrl: ModalController,
+    private alertController: AlertController,
+    private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -26,7 +30,7 @@ export class CupsComponent implements OnInit {
   ionViewWillEnter() {
     console.log('Geting cups');
     this.cupsService.getCups().subscribe(response => {
-      
+
       console.log(response);
       if (response) {
         this.cups = response.cup;
@@ -37,7 +41,7 @@ export class CupsComponent implements OnInit {
 
       this.showBar = false;
       this.loaded = true;
-      
+
     });
   }
 
@@ -68,7 +72,7 @@ export class CupsComponent implements OnInit {
         if (data.data) {
           this.cups[this.cups.indexOf(cup)] = data.data;
         }
-    });
+      });
 
 
     return await modal.present();
@@ -79,7 +83,7 @@ export class CupsComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: AddModalCupsComponent,
       componentProps: {
-        cups: {...this.cups}
+        cups: { ...this.cups }
       },
       cssClass: 'auto-height'
     });
@@ -87,13 +91,13 @@ export class CupsComponent implements OnInit {
     modal.onDidDismiss()
       .then((data) => {
         console.log(data);
-        
+
         if (data.data) {
           const cup = data.data;
           this.cups.push(cup);
           this.setFilteredLocation();
         }
-    });
+      });
 
     return await modal.present();
   }
@@ -103,34 +107,34 @@ export class CupsComponent implements OnInit {
     event.stopPropagation();
 
     const alert = await this.alertController.create({
-      
-        header: 'Delete cup?',
-        // subHeader: 'Delete cup?',
-        message: 'Are you sure?',
-        buttons: [
-          {
-            text: 'Yes',
-            role: 'yes',
-            handler: () => {
-              this.showBar = true;
-              this.cupsService.deleteCup(cup._id).subscribe(response => {
-                console.log(response);
-                this.showBar = false;
-                if (response.success) {
-                  this.cups = this.cups.filter(elem =>  elem !== cup );
-                  this.setFilteredLocation();
-                }
-              });
-            }
-          }, {
-            text: 'No',
-            role: 'no',
-            handler: () => {
-              console.log('No');
-            }
+
+      header: 'Delete cup?',
+      // subHeader: 'Delete cup?',
+      message: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Yes',
+          role: 'yes',
+          handler: () => {
+            this.showBar = true;
+            this.cupsService.deleteCup(cup._id).subscribe(response => {
+              console.log(response);
+              this.showBar = false;
+              if (response.success) {
+                this.cups = this.cups.filter(elem => elem !== cup);
+                this.setFilteredLocation();
+              }
+            });
           }
-        ]
-      
+        }, {
+          text: 'No',
+          role: 'no',
+          handler: () => {
+            console.log('No');
+          }
+        }
+      ]
+
     });
 
     await alert.present();

@@ -11,37 +11,39 @@ export class RolesService {
 
   private API_ROLES_URL = this.shared.API_ROOT + 'roles/';
 
-  constructor(private http: HttpClient, private shared: SharedService) {
-   }
+  constructor(
+    private http: HttpClient,
+    private shared: SharedService
+  ) { }
 
   getRole(): Observable<any> {
 
     return this.http.get<any>(this.API_ROLES_URL, { headers: this.shared.getHeaders() })
-    .pipe(
-      catchError(this.shared.handleError<any>('getRole'))
-    );
+      .pipe(
+        catchError(this.shared.handleError<any>('getRole'))
+      );
   }
 
   createRole(role: object): Observable<any> {
     return this.http.post<any>(this.API_ROLES_URL, role, { headers: this.shared.getHeaders() })
-    .pipe(
-      catchError(this.shared.handleError<any>('createRole'))
-    );
+      .pipe(
+        catchError(this.shared.handleError<any>('createRole'))
+      );
 
   }
 
   getRoleById(id: string): Observable<any> {
     return this.http.get<any>(this.API_ROLES_URL + id, { headers: this.shared.getHeaders() })
-    .pipe(
-      catchError(this.shared.handleError<any>('getRoleById'))
-    );
+      .pipe(
+        catchError(this.shared.handleError<any>('getRoleById'))
+      );
   }
 
   updateRole(id: string, role: object): Observable<any> {
-    return this.http.put<any>(this.API_ROLES_URL + id , role, { headers: this.shared.getHeaders() })
-    .pipe(
-      catchError(this.shared.handleError<any>('updateRole'))
-    );
+    return this.http.put<any>(this.API_ROLES_URL + id, role, { headers: this.shared.getHeaders() })
+      .pipe(
+        catchError(this.shared.handleError<any>('updateRole'))
+      );
   }
 
 }

@@ -13,7 +13,11 @@ export class EditModalGamesComponent implements OnInit {
 
   working = false;
 
-  constructor(public modalCtrl: ModalController, private navParams: NavParams, private gameService: GamesService) { }
+  constructor(
+    public modalCtrl: ModalController,
+    private navParams: NavParams,
+    private gameService: GamesService
+  ) { }
 
   ngOnInit() {
     this.game = this.navParams.data;
@@ -34,7 +38,7 @@ export class EditModalGamesComponent implements OnInit {
       if (response && response.success) {
         this.modalCtrl.dismiss(this.game);
       }
-   });
- }
+    });
+  }
 
 }

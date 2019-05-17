@@ -20,7 +20,12 @@ export class TeamsComponent implements OnInit {
 
   @ViewChild(IonContent) content: IonContent;
 
-  constructor(private userService: api.UsersService, private modalCtrl: ModalController, private alertController: AlertController, private authService: AuthService) { }
+  constructor(
+    private userService: api.UsersService,
+    private modalCtrl: ModalController,
+    private alertController: AlertController,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
@@ -39,10 +44,10 @@ export class TeamsComponent implements OnInit {
     });
   }
 
-  ScrollToTop(){
+  ScrollToTop() {
     this.content.scrollToTop(1500);
   }
-  ScrollToBottom(){
+  ScrollToBottom() {
     this.content.scrollToBottom(1500);
   }
 
@@ -82,14 +87,14 @@ export class TeamsComponent implements OnInit {
     });
 
     modal.onDidDismiss()
-    .then((data) => {
-      if (data.data) {
-        const newUser = data.data;
-        newUser.fullName = newUser.name + ' ' + newUser.lastname;
-        this.users.push(newUser);
-        this.setFilteredLocation();
-      }
-    });
+      .then((data) => {
+        if (data.data) {
+          const newUser = data.data;
+          newUser.fullName = newUser.name + ' ' + newUser.lastname;
+          this.users.push(newUser);
+          this.setFilteredLocation();
+        }
+      });
 
     return await modal.present();
   }

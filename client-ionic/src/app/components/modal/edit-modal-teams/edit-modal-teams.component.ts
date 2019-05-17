@@ -15,7 +15,11 @@ export class EditModalTeamsComponent implements OnInit {
 
   working = false;
 
-  constructor(public modalCtrl: ModalController, private navParams: NavParams, private userService: UsersService) { }
+  constructor(
+    public modalCtrl: ModalController,
+    private navParams: NavParams,
+    private userService: UsersService
+  ) { }
 
   ngOnInit() {
     this.user = this.navParams.data;
@@ -34,14 +38,14 @@ export class EditModalTeamsComponent implements OnInit {
 
     this.working = true;
 
-    this.userService.updateUser(this.user._id, this.user).subscribe(response => { 
-     console.log('Response recieved');
-     console.log(response);
-     this.working = false;
-     if (response && response.success) {
-      this.modalCtrl.dismiss(this.user);
-      /*this.router.navigate(['/groups/'+response.group._id]);*/
-    }
+    this.userService.updateUser(this.user._id, this.user).subscribe(response => {
+      console.log('Response recieved');
+      console.log(response);
+      this.working = false;
+      if (response && response.success) {
+        this.modalCtrl.dismiss(this.user);
+        /*this.router.navigate(['/groups/'+response.group._id]);*/
+      }
     });
   }
 

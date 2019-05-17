@@ -16,7 +16,11 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  constructor(private authService: AuthService, private router: Router, private notificationService: NotificationService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private notificationService: NotificationService
+  ) { }
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
@@ -28,8 +32,8 @@ export class LoginComponent implements OnInit {
     this.showBar = true;
     this.authService.loginUser(this.user.username, this.user.password).subscribe(response => {
 
-    
-    this.showBar = false;
+
+      this.showBar = false;
       if (response.success) {
         let role = response.msg.role;
         localStorage.setItem('admin', '');
@@ -40,10 +44,10 @@ export class LoginComponent implements OnInit {
         });
         localStorage.setItem('token', response.msg.token.replace('JWT ', ''));
         this.router.navigate(["/cups"]);
-        this.notificationService.showToast({message: `Welcome ${this.user.username}!`});
+        this.notificationService.showToast({ message: `Welcome ${this.user.username}!` });
       }
-      
+
     });
   }
-  
+
 }

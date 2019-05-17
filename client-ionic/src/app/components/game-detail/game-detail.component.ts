@@ -16,7 +16,12 @@ export class GameDetailComponent implements OnInit {
   showBar: boolean = true;
   loaded = false;
 
-  constructor(private route: ActivatedRoute, private gamesService: GamesService, private modalCtrl: ModalController, private authService: AuthService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private gamesService: GamesService,
+    private modalCtrl: ModalController,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
   }

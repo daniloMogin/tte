@@ -9,41 +9,43 @@ import { SharedService } from './shared.service';
 })
 export class UsersService {
 
-  constructor(private http: HttpClient, private shared: SharedService) {
-  }
+  constructor(
+    private http: HttpClient,
+    private shared: SharedService
+  ) { }
 
   private API_USER_URL = this.shared.API_ROOT + 'users/';
 
   getUsers(): Observable<any> {
-    return this.http.get<any>(this.API_USER_URL, {headers: this.shared.getHeaders()})
-    .pipe(
-      catchError(this.shared.handleError<any>('getUsers', {team: []}))
-    );
+    return this.http.get<any>(this.API_USER_URL, { headers: this.shared.getHeaders() })
+      .pipe(
+        catchError(this.shared.handleError<any>('getUsers', { team: [] }))
+      );
   }
 
   createUsers(user: object): Observable<any> {
-    return this.http.post<any>(this.API_USER_URL, user, {headers: this.shared.getHeaders() })
-    .pipe(
-      catchError(this.shared.handleError<any>('createUsers'))
-    );
+    return this.http.post<any>(this.API_USER_URL, user, { headers: this.shared.getHeaders() })
+      .pipe(
+        catchError(this.shared.handleError<any>('createUsers'))
+      );
 
   }
   getUserById(id: string): Observable<any> {
-    return this.http.get<any>(this.API_USER_URL + id, {headers: this.shared.getHeaders() })
-    .pipe(
-      catchError(this.shared.handleError<any>('getUserById'))
-    );
+    return this.http.get<any>(this.API_USER_URL + id, { headers: this.shared.getHeaders() })
+      .pipe(
+        catchError(this.shared.handleError<any>('getUserById'))
+      );
   }
   getUserByRole(role: string): Observable<any> {
-    return this.http.get<any>(this.API_USER_URL + 'byRole/' + role, {headers: this.shared.getHeaders() })
-    .pipe(
-      catchError(this.shared.handleError<any>('getUserByRole'))
-    );
+    return this.http.get<any>(this.API_USER_URL + 'byRole/' + role, { headers: this.shared.getHeaders() })
+      .pipe(
+        catchError(this.shared.handleError<any>('getUserByRole'))
+      );
   }
   updateUser(id: string, user: object): Observable<any> {
-    return this.http.put<any>(this.API_USER_URL + id , user, {headers: this.shared.getHeaders() })
-    .pipe(
-      catchError(this.shared.handleError<any>('updateUser'))
-    );
+    return this.http.put<any>(this.API_USER_URL + id, user, { headers: this.shared.getHeaders() })
+      .pipe(
+        catchError(this.shared.handleError<any>('updateUser'))
+      );
   }
 }
