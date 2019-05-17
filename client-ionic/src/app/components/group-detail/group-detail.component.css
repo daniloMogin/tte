@@ -1,5 +1,5 @@
 table {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 .full-width {
   display: block;
@@ -8,16 +8,18 @@ table {
 }
 
 .edit {
-    cursor: pointer;
-    font-size: 2.5em;
-  
-    padding: 10px;
-  }
-  .edit:hover {
-    transform: scale(1.25);
-  }
-  .color {
-    color: #10519c;
+  cursor: pointer;
+  font-size: 2.5em;
+
+  padding: 10px;
+}
+
+.edit:hover {
+  transform: scale(1.25);
+}
+
+.color {
+  color: #10519c;
 }
 
 .text {
@@ -53,7 +55,6 @@ tr:not(.info-description):hover a, tr:not(.info-description):hover .edit {
 }
 
 .remove-button-container {
-  /*float: right;*/
   position: absolute;
   top: 12px;
   right: 12px;
@@ -63,7 +64,6 @@ tr:not(.info-description):hover a, tr:not(.info-description):hover .edit {
 }
 
 .edit-button-container {
-  /*float: right;*/
   position: absolute;
   top: 12px;
   left: 12px;

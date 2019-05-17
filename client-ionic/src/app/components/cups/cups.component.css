@@ -1,3 +1,9 @@
+a {
+  text-decoration: none;
+}
+
+/* card */
+
 ion-card {
   min-height: 14em!important;
   height: 100%;
@@ -6,7 +12,6 @@ ion-card {
   -webkit-transition: ease-out 0.4s;
   -moz-transition: ease-out 0.4s;
   transition: ease-out 0.4s;
-  
 }
 
 ion-card:hover {
@@ -24,16 +29,14 @@ ion-card-content {
 }
 
 ion-card-title, ion-card-subtitle {
-  /*height: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;*/
   padding: 10px 20px;
 }
 
-/*ion-card-subtitle {
-  border-top: 2px solid gray;
-}*/
+.cardLogo {
+  font-size: 5em;
+}
+
+/* buttons */
 
 .add-button-container {
   cursor: pointer;
@@ -78,10 +81,3 @@ ion-icon {
   z-index: 5;
 }
 
-.cardLogo {
-  font-size: 5em;
-}
-
-a {
-  text-decoration: none;
-}
